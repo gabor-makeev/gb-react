@@ -3,10 +3,24 @@
   background-color: #525252;
   color: white;
   border-radius: 30px;
+  display: flex;
+  flex-direction: column;
 }
 
 .header {
   margin-bottom: 35px;
+}
+
+.button {
+  background-color: transparent;
+  border: none;
+  font-size: 30px;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.button-close {
+  transform: rotateZ(180deg)
 }
 
 .list {
@@ -14,6 +28,7 @@
   flex-direction: column;
   gap: 10px;
   padding: 0;
+
   &-item {
     padding: 5px;
     max-width: 100%;
