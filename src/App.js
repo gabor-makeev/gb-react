@@ -1,12 +1,20 @@
 import style from './App.module.scss'
 import {Message} from "./components/Message/Message"
+import {ContactList} from "./components/ContactList/ContactList";
 
 function App() {
   const messageContent = 'The content of a message'
+  const contacts = [
+    'John',
+    'Sam',
+    'Carl',
+    'Lisa'
+  ]
 
   return (
     <div className={style.App}>
       <Message content={messageContent} />
+      <ContactList contacts={contacts}/>
     </div>
   );
 }

@@ -1,0 +1,31 @@
+.wrapper {
+  padding: 20px;
+  background-color: #525252;
+  color: white;
+  border-radius: 30px;
+}
+
+.header {
+  margin-bottom: 35px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0;
+  &-item {
+    padding: 5px;
+    max-width: 100%;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+    border: 1px solid black;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: #777777;
+      box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+    }
+  }
+}
