@@ -1,5 +1,6 @@
 import style from './MessageForm.module.scss';
-import {useRef, useState} from 'react';
+import { AUTHORS } from '../../constants';
+import { useRef, useState } from 'react';
 
 export const MessageForm = ({ pushMessage }) => {
   const [messageContent, setMessageContent] = useState('');
@@ -9,7 +10,7 @@ export const MessageForm = ({ pushMessage }) => {
     e.preventDefault();
     pushMessage({
       text: messageContent,
-      author: 'Gabor',
+      author: AUTHORS.user,
     });
 
     setMessageContent('');
@@ -27,7 +28,12 @@ export const MessageForm = ({ pushMessage }) => {
           setMessageContent(e.target.value);
         }}
       />
-      <button className={style['message-form__button']}>Send</button>
+      <button
+        className={style['message-form__button']}
+        disabled={!messageContent}
+      >
+        Send
+      </button>
     </form>
   );
-}
+};
