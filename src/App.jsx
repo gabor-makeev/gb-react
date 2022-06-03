@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { MessageBox } from './components/MessageBox/MessageBox';
 import { MessageForm } from './components/MessageForm/MessageForm';
 
-function App() {
+export const App = () => {
   const [messageList, setMessageList] = useState([]);
 
   const pushMessage = (message) => {
@@ -34,6 +34,4 @@ function App() {
       <MessageForm pushMessage={pushMessage} />
     </div>
   );
-}
-
-export default App;
+};
