@@ -1,7 +1,6 @@
 .message-box {
-  background-color: #FF4F4F;
   flex: 0 1 300px;
-  min-width: 300px;
+  width: 300px;
   border: 1px solid black;
   box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
   border-radius: 15px;
@@ -19,7 +18,6 @@
   &__item {
     position: relative;
     text-align: right;
-    background-color: #31E865;
     padding: 15px 15px;
     border-radius: 20px;
 
