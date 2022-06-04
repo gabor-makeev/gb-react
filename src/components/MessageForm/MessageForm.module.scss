@@ -1,0 +1,33 @@
+.message-form {
+  background-color: #FF4F4F;
+  width: 300px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+  padding: 20px;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+
+  &__input {
+    padding: 15px;
+    border: none;
+    border-radius: 15px;
+  }
+
+  &__button {
+    width: 100%;
+    align-self: center;
+    padding: 10px;
+    border: none;
+    border-radius: 15px;
+    background-color: #31E865;
+    transition: 0.3s;
+
+    &:hover {
+      box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+    }
+
+    &:disabled:hover {
+      box-shadow: none;
+    }
+  }
+}
