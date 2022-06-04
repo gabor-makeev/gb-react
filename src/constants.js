@@ -8,4 +8,6 @@ export const STYLES = {
     primary: '#FF4F4F',
     secondary: '#31E865',
   },
+  border: '1px solid black',
+  borderRadius: '15px',
 };

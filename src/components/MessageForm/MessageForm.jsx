@@ -1,9 +1,19 @@
 import style from './MessageForm.module.scss';
-import { AUTHORS } from '../../constants';
+import { AUTHORS, STYLES } from '../../constants';
 import { useRef, useState } from 'react';
 
-export const MessageForm = ({ pushMessage }) => {
+export const MessageForm = ({
+  pushMessage,
+  border = STYLES.border,
+  borderRadius = STYLES.borderRadius,
+}) => {
   const [messageContent, setMessageContent] = useState('');
+
+  const messageFormStyle = {
+    border: border,
+    borderRadius: borderRadius,
+  };
+
   const input = useRef();
 
   const sendMessage = (e) => {
@@ -18,7 +28,11 @@ export const MessageForm = ({ pushMessage }) => {
   };
 
   return (
-    <form onSubmit={sendMessage} className={style['message-form']}>
+    <form
+      onSubmit={sendMessage}
+      className={style['message-form']}
+      style={messageFormStyle}
+    >
       <input
         type="text"
         value={messageContent}
