@@ -1,35 +1,17 @@
 import style from './MessageBox.module.scss';
-import { STYLES } from '../../constants';
+import { STYLES } from 'src/constants';
+
+import { MessageList } from 'components/MessageBox/components/MessageList/MessageList';
 
 export const MessageBox = ({
-  messageList,
-  primaryColor = STYLES.color.primary,
-  secondaryColor = STYLES.color.secondary,
+  messages,
+  messageBoxStyle = {
+    backgroundColor: STYLES.color.primary,
+  },
 }) => {
-  const messageBoxStyle = {
-    backgroundColor: primaryColor,
-  };
-
-  const messageBoxItemStyle = {
-    backgroundColor: secondaryColor,
-  };
-
   return (
     <div className={style['message-box']} style={messageBoxStyle}>
-      <ul className={style['message-box__list']}>
-        {messageList.map((message, idx) => (
-          <li
-            className={style['message-box__item']}
-            key={idx}
-            style={messageBoxItemStyle}
-          >
-            {message.text}
-            <span className={style['message-box__item__author']}>
-              {message.author}
-            </span>
-          </li>
-        ))}
-      </ul>
+      <MessageList messages={messages} />
     </div>
   );
 };

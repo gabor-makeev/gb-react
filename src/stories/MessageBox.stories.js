@@ -1,4 +1,4 @@
-import { MessageBox } from '../components/MessageBox/MessageBox';
+import { MessageBox } from 'components/MessageBox/MessageBox';
 import { AUTHORS } from '../constants';
 
 export default {

@@ -2,8 +2,8 @@ import style from './App.module.scss';
 import { AUTHORS } from './constants';
 import { useEffect, useState } from 'react';
 
-import { MessageBox } from './components/MessageBox/MessageBox';
-import { MessageForm } from './components/MessageForm/MessageForm';
+import { MessageBox } from 'components/MessageBox/MessageBox';
+import { MessageForm } from 'components/MessageForm/MessageForm';
 
 export const App = () => {
   const [messageList, setMessageList] = useState([]);
@@ -30,7 +30,7 @@ export const App = () => {
 
   return (
     <div className={style.App}>
-      <MessageBox messageList={messageList} />
+      <MessageBox messages={messageList} />
       <MessageForm pushMessage={pushMessage} />
     </div>
   );
