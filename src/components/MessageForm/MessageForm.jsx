@@ -1,9 +1,9 @@
 import style from './MessageForm.module.scss';
-import { AUTHORS, STYLES } from 'src/constants';
+import { AUTHORS, STYLES } from '../../constants';
 import { useState } from 'react';
 
-import { Button } from 'components/MessageForm/Button/Button';
-import { Input } from 'components/MessageForm/Input/Input';
+import { Button } from './Button/Button';
+import { Input } from './Input/Input';
 
 export const MessageForm = ({
   pushMessage,

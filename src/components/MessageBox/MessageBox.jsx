@@ -1,7 +1,7 @@
 import style from './MessageBox.module.scss';
-import { STYLES } from 'src/constants';
+import { STYLES } from '../../constants';
 
-import { MessageList } from 'components/MessageBox/components/MessageList/MessageList';
+import { MessageList } from './components/MessageList/MessageList';
 
 export const MessageBox = ({
   messages,
