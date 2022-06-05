@@ -6,8 +6,15 @@ exports[`MessageForm should render with snapshot 1`] = `
     class="message-form"
     style="border: 2px solid blue; border-radius: 25px;"
   >
+    <label
+      class="label"
+      for="input"
+    >
+      Message field
+    </label>
     <input
       class="input"
+      id="input"
       type="text"
       value=""
     />

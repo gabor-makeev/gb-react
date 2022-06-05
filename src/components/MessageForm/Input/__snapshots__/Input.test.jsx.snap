@@ -2,8 +2,15 @@
 
 exports[`Input should render with snapshot 1`] = `
 <DocumentFragment>
+  <label
+    class="label"
+    for="input"
+  >
+    Message field
+  </label>
   <input
     class="input"
+    id="input"
     placeholder="test placeholder"
     type="text"
     value="test value"
