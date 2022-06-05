@@ -10,7 +10,11 @@ export const MessageBox = ({
   },
 }) => {
   return (
-    <div className={style['message-box']} style={messageBoxStyle}>
+    <div
+      className={style['message-box']}
+      style={messageBoxStyle}
+      data-testid={'messageBox'}
+    >
       <MessageList messages={messages} />
     </div>
   );

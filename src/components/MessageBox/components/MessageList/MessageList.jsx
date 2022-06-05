@@ -2,11 +2,15 @@ import style from './MessageList.module.scss';
 import { Message } from '../Message/Message';
 
 export const MessageList = ({
-  messages,
+  messages = [],
   messageListStyle = { gap: '10px' },
 }) => {
   return (
-    <ul className={style['message_list']} style={messageListStyle}>
+    <ul
+      className={style['message_list']}
+      style={messageListStyle}
+      data-testid={'messageList'}
+    >
       {messages.map((message, idx) => (
         <Message message={message} key={idx} />
       ))}

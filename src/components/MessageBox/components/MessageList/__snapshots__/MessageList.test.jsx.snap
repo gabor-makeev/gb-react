@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MessageList should render with snapshot 1`] = `
+<DocumentFragment>
+  <ul
+    class="message_list"
+    data-testid="messageList"
+    style="gap: 10px;"
+  >
+    <li
+      class="message"
+      style="background-color: rgb(49, 232, 101);"
+    >
+      placerat duis ultricies lacus sed turpis tincidunt id aliquet risus
+      <span
+        class="message__author-sign"
+      >
+        Gabor
+      </span>
+    </li>
+    <li
+      class="message"
+      style="background-color: rgb(49, 232, 101);"
+    >
+      et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit
+      <span
+        class="message__author-sign"
+      >
+        Gabor
+      </span>
+    </li>
+    <li
+      class="message"
+      style="background-color: rgb(49, 232, 101);"
+    >
+      felis eget velit aliquet sagittis id consectetur purus ut faucibus
+      <span
+        class="message__author-sign"
+      >
+        Gabor
+      </span>
+    </li>
+  </ul>
+</DocumentFragment>
+`;
