@@ -35,7 +35,7 @@ describe('MessageList', () => {
   });
 
   it('should render with custom styles passed', () => {
-    render(<MessageList messageListStyle={{color: 'red'}} />);
+    render(<MessageList messageListStyle={{ color: 'red' }} />);
 
     expect(screen.getByTestId('messageList')).toHaveStyle('color: red');
   });

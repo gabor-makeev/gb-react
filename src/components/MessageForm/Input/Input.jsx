@@ -1,7 +1,7 @@
 import style from './Input.module.scss';
-import {useRef} from 'react';
+import { useRef } from 'react';
 
-export const Input = ({isFocused = false, placeholder, value, setValue}) => {
+export const Input = ({ isFocused = false, placeholder, value, setValue }) => {
   const element = useRef();
 
   if (isFocused) {
@@ -10,7 +10,9 @@ export const Input = ({isFocused = false, placeholder, value, setValue}) => {
 
   return (
     <>
-      <label className={style.label} htmlFor="input">Message field</label>
+      <label className={style.label} htmlFor="input">
+        Message field
+      </label>
       <input
         type="text"
         value={value}
