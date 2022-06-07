@@ -28,7 +28,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['react', 'prettier', 'react-hooks'],
+  plugins: ['react', 'prettier', 'react-hooks', 'jest'],
   rules: {
     'react/react-in-jsx-scope': 'off',
     'linebreak-style': ['error', 'unix'],

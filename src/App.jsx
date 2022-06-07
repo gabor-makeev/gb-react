@@ -30,7 +30,7 @@ export const App = () => {
 
   return (
     <div className={style.App}>
-      <MessageBox messageList={messageList} />
+      <MessageBox messages={messageList} />
       <MessageForm pushMessage={pushMessage} />
     </div>
   );
