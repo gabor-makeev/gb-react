@@ -4,26 +4,54 @@ exports[`MessageForm should render with snapshot 1`] = `
 <DocumentFragment>
   <form
     class="message-form"
-    style="border: 2px solid blue; border-radius: 25px;"
   >
-    <label
-      class="label"
-      for="input"
+    <div
+      class="MuiContainer-root MuiContainer-maxWidthLg css-qzuoh6-MuiContainer-root"
     >
-      Message field
-    </label>
-    <input
-      class="input"
-      id="input"
-      type="text"
-      value=""
-    />
-    <button
-      class="button"
-      disabled=""
-    >
-      Send
-    </button>
+      <div
+        class="MuiFormControl-root MuiTextField-root input css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
+      >
+        <label
+          class="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-root MuiFormLabel-colorPrimary Mui-focused css-1sumxir-MuiFormLabel-root-MuiInputLabel-root"
+          data-shrink="true"
+          for=":r3:"
+          id=":r3:-label"
+        >
+          Message field
+        </label>
+        <div
+          class="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary Mui-focused MuiInputBase-formControl css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root"
+        >
+          <input
+            aria-invalid="false"
+            class="MuiOutlinedInput-input MuiInputBase-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
+            id=":r3:"
+            type="text"
+            value=""
+          />
+          <fieldset
+            aria-hidden="true"
+            class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+          >
+            <legend
+              class="css-1in441m"
+            >
+              <span>
+                Message field
+              </span>
+            </legend>
+          </fieldset>
+        </div>
+      </div>
+      <button
+        class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root Mui-disabled button css-1e6y48t-MuiButtonBase-root-MuiButton-root"
+        disabled=""
+        tabindex="-1"
+        type="submit"
+      >
+        Send
+      </button>
+    </div>
   </form>
 </DocumentFragment>
 `;

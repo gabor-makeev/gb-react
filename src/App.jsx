@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 import { MessageBox } from './components/MessageBox/MessageBox';
 import { MessageForm } from './components/MessageForm/MessageForm';
+import { Container } from '@mui/material';
 
 export const App = () => {
   const [messageList, setMessageList] = useState([]);
@@ -28,10 +29,23 @@ export const App = () => {
     }
   }, [messageList, pushMessage]);
 
+  const appStyle = {
+    padding: '50px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: '20px',
+    margin: '0',
+    width: '100%',
+  };
+
   return (
     <div className={style.App}>
-      <MessageBox messages={messageList} />
-      <MessageForm pushMessage={pushMessage} />
+      <Container sx={appStyle}>
+        <MessageBox messages={messageList} />
+        <MessageForm pushMessage={pushMessage} />
+      </Container>
     </div>
   );
 };

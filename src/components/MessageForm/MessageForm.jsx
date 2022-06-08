@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import { Button } from './Button/Button';
 import { Input } from './Input/Input';
+import { Container } from '@mui/material';
 
 export const MessageForm = ({
   pushMessage,
@@ -11,11 +12,17 @@ export const MessageForm = ({
   borderRadius = STYLES.borderRadius,
 }) => {
   const [inputValue, setInputValue] = useState('');
-  const [inputFocus, setInputFocus] = useState(false);
 
-  const messageFormStyle = {
+  const formContainerStyle = {
     border: border,
     borderRadius: borderRadius,
+    backgroundColor: '#CCCCCC',
+    width: '300px',
+    boxShadow: 'rgba(0, 0, 0, 0.35) 0 5px 15px',
+    padding: '20px',
+    display: 'flex',
+    gap: '10px',
+    justifyContent: 'space-between',
   };
 
   const sendMessage = (e) => {
@@ -26,21 +33,14 @@ export const MessageForm = ({
     });
 
     setInputValue('');
-    setInputFocus(true);
   };
 
   return (
-    <form
-      onSubmit={sendMessage}
-      className={style['message-form']}
-      style={messageFormStyle}
-    >
-      <Input
-        isFocused={inputFocus}
-        value={inputValue}
-        setValue={setInputValue}
-      />
-      <Button disabled={!inputValue} />
+    <form onSubmit={sendMessage} className={style['message-form']}>
+      <Container sx={formContainerStyle}>
+        <Input value={inputValue} setValue={setInputValue} />
+        <Button disabled={!inputValue} />
+      </Container>
     </form>
   );
 };

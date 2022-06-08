@@ -3,9 +3,14 @@
 exports[`Button should render with snapshot 1`] = `
 <DocumentFragment>
   <button
-    class="button"
+    class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root button css-1e6y48t-MuiButtonBase-root-MuiButton-root"
+    tabindex="0"
+    type="submit"
   >
     Send
+    <span
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+    />
   </button>
 </DocumentFragment>
 `;

@@ -3,13 +3,11 @@
 exports[`MessageList should render with snapshot 1`] = `
 <DocumentFragment>
   <ul
-    class="message_list"
+    class="MuiList-root MuiList-padding message_list css-v2fr7u-MuiList-root"
     data-testid="messageList"
-    style="gap: 10px;"
   >
     <li
-      class="message"
-      style="background-color: rgb(49, 232, 101);"
+      class="MuiListItem-root MuiListItem-gutters MuiListItem-padding message css-1s94d1u-MuiListItem-root"
     >
       placerat duis ultricies lacus sed turpis tincidunt id aliquet risus
       <span
@@ -19,8 +17,7 @@ exports[`MessageList should render with snapshot 1`] = `
       </span>
     </li>
     <li
-      class="message"
-      style="background-color: rgb(49, 232, 101);"
+      class="MuiListItem-root MuiListItem-gutters MuiListItem-padding message css-1s94d1u-MuiListItem-root"
     >
       et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit
       <span
@@ -30,8 +27,7 @@ exports[`MessageList should render with snapshot 1`] = `
       </span>
     </li>
     <li
-      class="message"
-      style="background-color: rgb(49, 232, 101);"
+      class="MuiListItem-root MuiListItem-gutters MuiListItem-padding message css-1s94d1u-MuiListItem-root"
     >
       felis eget velit aliquet sagittis id consectetur purus ut faucibus
       <span

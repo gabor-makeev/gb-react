@@ -34,10 +34,10 @@ describe('MessageList', () => {
     expect(screen.getByTestId('messageList')).toHaveStyle('gap: 10px');
   });
 
-  it('should render with custom styles passed', () => {
-    render(<MessageList messageListStyle={{ color: 'red' }} />);
+  it('should render with custom gap style argument passed', () => {
+    render(<MessageList gap={'100px'} />);
 
-    expect(screen.getByTestId('messageList')).toHaveStyle('color: red');
+    expect(screen.getByTestId('messageList')).toHaveStyle('gap: 100px');
   });
 
   it('should render with snapshot', () => {

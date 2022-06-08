@@ -26,11 +26,11 @@ describe('MessageBox', () => {
     );
   });
 
-  it('should render with custom style from messageBoxStyle prop', () => {
-    render(<MessageBox messageBoxStyle={{ backgroundColor: 'red' }} />);
+  it('should render with custom border radius style from borderRadius prop', () => {
+    render(<MessageBox borderRadius={'100px'} />);
 
     expect(screen.getByTestId('messageBox')).toHaveStyle(
-      'background-color: red'
+      'border-radius: 100px'
     );
   });
 });

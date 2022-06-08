@@ -14,7 +14,5 @@ export const Primary = Template.bind({});
 
 export const WideMessageSpace = Template.bind({});
 WideMessageSpace.args = {
-  messageListStyle: {
-    gap: '30px',
-  },
+  gap: '30px',
 };

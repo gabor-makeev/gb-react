@@ -14,16 +14,12 @@ export const Primary = Template.bind({});
 
 export const RightAngles = Template.bind({});
 RightAngles.args = {
-  messageBoxStyle: {
-    backgroundColor: STYLES.color.primary,
-    borderRadius: '0px',
-  },
+  backgroundColor: STYLES.color.primary,
+  borderRadius: '0px',
 };
 
 export const BoldPadding = Template.bind({});
 BoldPadding.args = {
-  messageBoxStyle: {
-    backgroundColor: STYLES.color.primary,
-    padding: '50px',
-  },
+  backgroundColor: STYLES.color.primary,
+  padding: '50px',
 };

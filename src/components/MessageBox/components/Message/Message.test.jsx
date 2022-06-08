@@ -29,16 +29,11 @@ describe('Message', () => {
     );
   });
 
-  it('should use style passed in messageStyle prop', () => {
-    render(
-      <Message
-        message={dummyMessage}
-        messageStyle={{ backgroundColor: 'red' }}
-      />
-    );
+  it('should use padding style passed in padding prop', () => {
+    render(<Message message={dummyMessage} padding={'100px 100px'} />);
 
     expect(screen.getByText(dummyMessage.text)).toHaveStyle(
-      'background-color: red'
+      'padding: 100px 100px'
     );
   });
 

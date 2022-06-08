@@ -1,17 +1,3 @@
 .button {
-  max-width: 55px;
-  align-self: center;
-  padding: 10px;
-  border: none;
-  border-radius: 15px;
-  background-color: #31E865;
-  transition: 0.3s;
-
-  &:hover {
-    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
-  }
-
-  &:disabled:hover {
-    box-shadow: none;
-  }
+  //Custom styles should go here
 }

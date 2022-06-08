@@ -5,8 +5,9 @@ export const AUTHORS = {
 
 export const STYLES = {
   color: {
-    primary: '#FF4F4F',
+    primary: '#cccccc',
     secondary: '#31E865',
+    system: '#FF4F4F',
   },
   border: '1px solid black',
   borderRadius: '15px',

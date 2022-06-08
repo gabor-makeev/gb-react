@@ -1,29 +1,33 @@
 import style from './Input.module.scss';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
+import TextField from '@mui/material/TextField';
 
-export const Input = ({ isFocused = false, placeholder, value, setValue }) => {
+export const Input = ({
+  placeholder,
+  value,
+  setValue,
+  shouldAutoFocused = true,
+}) => {
   const element = useRef();
 
-  if (isFocused) {
-    element.current.focus();
-  }
+  useEffect(() => {
+    if (shouldAutoFocused) {
+      return element.current.focus();
+    }
+  });
 
   return (
-    <>
-      <label className={style.label} htmlFor="input">
-        Message field
-      </label>
-      <input
-        type="text"
-        value={value}
-        ref={element}
-        className={style.input}
-        placeholder={placeholder}
-        id={'input'}
-        onChange={(e) => {
-          setValue(e.target.value);
-        }}
-      />
-    </>
+    <TextField
+      label={'Message field'}
+      variant="outlined"
+      type="text"
+      value={value}
+      placeholder={placeholder}
+      inputRef={element}
+      className={style.input}
+      onChange={(e) => {
+        setValue(e.target.value);
+      }}
+    />
   );
 };

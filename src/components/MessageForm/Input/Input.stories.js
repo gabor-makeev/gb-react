@@ -5,7 +5,7 @@ export default {
   componenet: Input,
 };
 
-const Template = (args) => <Input {...args} />;
+const Template = (args) => <Input shouldAutoFocused={false} {...args} />;
 
 export const Primary = Template.bind({});
 
