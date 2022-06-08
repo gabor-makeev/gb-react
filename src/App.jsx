@@ -1,9 +1,10 @@
 import style from './App.module.scss';
-import { AUTHORS } from './constants';
+import { AUTHORS, DUMMY_CHATS } from './constants';
 import { useEffect, useState } from 'react';
 
 import { MessageBox } from './components/MessageBox/MessageBox';
 import { MessageForm } from './components/MessageForm/MessageForm';
+import { ChatsMenu } from './components/ChatsMenu/ChatsMenu';
 import { Container } from '@mui/material';
 
 export const App = () => {
@@ -42,6 +43,9 @@ export const App = () => {
 
   return (
     <div className={style.App}>
+      <Container>
+        <ChatsMenu chats={DUMMY_CHATS} />
+      </Container>
       <Container sx={appStyle}>
         <MessageBox messages={messageList} />
         <MessageForm pushMessage={pushMessage} />

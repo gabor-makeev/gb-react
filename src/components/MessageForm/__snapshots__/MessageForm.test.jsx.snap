@@ -4,9 +4,10 @@ exports[`MessageForm should render with snapshot 1`] = `
 <DocumentFragment>
   <form
     class="message-form"
+    style="width: 100%;"
   >
     <div
-      class="MuiContainer-root MuiContainer-maxWidthLg css-qzuoh6-MuiContainer-root"
+      class="MuiContainer-root MuiContainer-maxWidthLg css-jktrrx-MuiContainer-root"
     >
       <div
         class="MuiFormControl-root MuiTextField-root input css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
@@ -45,6 +46,7 @@ exports[`MessageForm should render with snapshot 1`] = `
       </div>
       <button
         class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root Mui-disabled button css-1e6y48t-MuiButtonBase-root-MuiButton-root"
+        data-testid="message-send-button"
         disabled=""
         tabindex="-1"
         type="submit"

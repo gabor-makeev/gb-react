@@ -7,6 +7,7 @@ export const Button = ({ disabled }) => {
       className={style.button}
       disabled={disabled}
       type={'submit'}
+      data-testid={'message-send-button'}
     >
       Send
     </MaterialButton>

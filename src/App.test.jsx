@@ -18,7 +18,7 @@ describe('App', () => {
     const input = screen.getByDisplayValue('');
 
     await userEvent.type(input, dummyMessage.text);
-    await userEvent.click(screen.getByRole('button'));
+    await userEvent.click(screen.getByTestId('message-send-button'));
 
     await waitFor(
       () => expect(screen.getByText(AUTHORS.bot)).toBeInTheDocument(),

@@ -3,7 +3,7 @@
 exports[`MessageBox should render with snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="MuiContainer-root MuiContainer-maxWidth300px message-box css-19bsf6-MuiContainer-root"
+    class="MuiContainer-root MuiContainer-maxWidth300px message-box css-lpfvbz-MuiContainer-root"
     data-testid="messageBox"
   >
     <ul

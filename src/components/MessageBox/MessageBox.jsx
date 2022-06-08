@@ -18,6 +18,7 @@ export const MessageBox = ({
     border: '1px solid black',
     boxShadow: 'rgba(0, 0, 0, 0.35) 0 5px 15px',
     padding: padding,
+    marginLeft: 'unset',
   };
 
   return (

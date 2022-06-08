@@ -23,6 +23,7 @@ export const MessageForm = ({
     display: 'flex',
     gap: '10px',
     justifyContent: 'space-between',
+    margin: '0',
   };
 
   const sendMessage = (e) => {
@@ -36,7 +37,11 @@ export const MessageForm = ({
   };
 
   return (
-    <form onSubmit={sendMessage} className={style['message-form']}>
+    <form
+      onSubmit={sendMessage}
+      className={style['message-form']}
+      style={{ width: '100%' }}
+    >
       <Container sx={formContainerStyle}>
         <Input value={inputValue} setValue={setInputValue} />
         <Button disabled={!inputValue} />
