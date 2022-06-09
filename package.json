@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack serve --mode=development --open",
     "build": "webpack --mode=production",
-    "lint": "npx eslint --ext .js,.jsx,.ts,.tsx --fix ./",
+    "lint": "npx tsc --noEmit && npx eslint --ext .js,.jsx,.ts,.tsx --fix ./",
     "predeploy": "npm run build-storybook",
     "deploy:web": "npm run build && gh-pages -d build",
     "deploy:storybook": "npm run build-storybook && gh-pages -d storybook-static",
