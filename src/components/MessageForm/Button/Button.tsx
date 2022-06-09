@@ -1,7 +1,12 @@
+import { FC } from 'react';
 import style from './Button.module.scss';
 import MaterialButton from '@mui/material/Button';
 
-export const Button = ({ disabled }) => {
+interface ButtonProps {
+  disabled?: boolean;
+}
+
+export const Button: FC<ButtonProps> = ({ disabled = false }) => {
   return (
     <MaterialButton
       className={style.button}

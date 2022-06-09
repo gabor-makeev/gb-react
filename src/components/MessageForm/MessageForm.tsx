@@ -1,12 +1,19 @@
 import style from './MessageForm.module.scss';
 import { AUTHORS, STYLES } from '../../constants';
-import { useState } from 'react';
+import { MessageItem } from '../../default-types';
+import React, { FC, useState } from 'react';
 
 import { Button } from './Button/Button';
 import { Input } from './Input/Input';
 import { Container } from '@mui/material';
 
-export const MessageForm = ({
+interface MessageFormProps {
+  pushMessage: (message: MessageItem) => void;
+  border?: string;
+  borderRadius?: string;
+}
+
+export const MessageForm: FC<MessageFormProps> = ({
   pushMessage,
   border = STYLES.border,
   borderRadius = STYLES.borderRadius,
@@ -26,7 +33,7 @@ export const MessageForm = ({
     margin: '0',
   };
 
-  const sendMessage = (e) => {
+  const sendMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     pushMessage({
       text: inputValue,

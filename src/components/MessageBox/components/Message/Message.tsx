@@ -1,8 +1,16 @@
 import style from './Message.module.scss';
 import ListItem from '@mui/material/ListItem';
 import { AUTHORS, STYLES } from '../../../../constants';
+import { FC } from 'react';
+import { MessageItem } from 'src/default-types';
 
-export const Message = ({
+interface MessageProps {
+  message: MessageItem;
+  padding?: string;
+  maxWidth?: string;
+}
+
+export const Message: FC<MessageProps> = ({
   message,
   padding = '15px 15px',
   maxWidth = '275px',

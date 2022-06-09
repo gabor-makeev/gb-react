@@ -27,7 +27,7 @@ describe('Button', () => {
 
     render(<Button />);
     const button = screen.getByRole('button');
-    button.onClick = mockHandler();
+    button.onclick = mockHandler();
 
     userEvent.click(button);
     expect(mockHandler).toBeCalledTimes(1);

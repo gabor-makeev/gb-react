@@ -1,7 +1,13 @@
 import { Menu } from './components/Menu/Menu';
 import Container from '@mui/material/Container';
+import { FC } from 'react';
+import { ChatItem } from 'src/default-types';
 
-export const ChatsMenu = ({ chats }) => {
+interface ChatsMenuProps {
+  chats: ChatItem[];
+}
+
+export const ChatsMenu: FC<ChatsMenuProps> = ({ chats }) => {
   return (
     <Container
       sx={{

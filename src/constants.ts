@@ -1,3 +1,5 @@
+import { MessageItem } from 'src/default-types';
+
 export const AUTHORS = {
   user: 'Gabor',
   bot: '🤖 Bot',
@@ -27,7 +29,7 @@ export const DUMMY_CONTENT = {
       text: 'felis eget velit aliquet sagittis id consectetur purus ut faucibus',
       author: AUTHORS.user,
     },
-  ],
+  ] as MessageItem[],
 };
 
 export const DUMMY_CHATS = [

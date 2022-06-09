@@ -3,8 +3,17 @@ import { STYLES } from '../../constants';
 
 import { MessageList } from './components/MessageList/MessageList';
 import { Container } from '@mui/material';
+import { MessageItem } from 'src/default-types';
+import { FC } from 'react';
 
-export const MessageBox = ({
+interface MessageBoxProps {
+  messages: MessageItem[];
+  backgroundColor?: string;
+  borderRadius?: string;
+  padding?: string;
+}
+
+export const MessageBox: FC<MessageBoxProps> = ({
   messages,
   backgroundColor = STYLES.color.primary,
   borderRadius = '15px',
@@ -26,7 +35,7 @@ export const MessageBox = ({
       className={style['message-box']}
       sx={messageBoxStyle}
       data-testid={'messageBox'}
-      maxWidth={messageBoxStyle.maxWidth}
+      maxWidth={false}
     >
       <MessageList messages={messages} />
     </Container>

@@ -7,24 +7,36 @@ import userEvent from '@testing-library/user-event';
 
 describe('Input', () => {
   it('should render', () => {
-    render(<Input />);
+    const mockHandler = jest.fn();
+
+    render(<Input setValue={mockHandler} />);
   });
 
   it('should render with value', () => {
-    render(<Input value={'test value'} />);
+    const mockHandler = jest.fn();
+
+    render(<Input setValue={mockHandler} value={'test value'} />);
 
     expect(screen.getByDisplayValue('test value')).toBeInTheDocument();
   });
 
   it('should render with placeholder', () => {
-    render(<Input placeholder={'test placeholder'} />);
+    const mockHandler = jest.fn();
+
+    render(<Input setValue={mockHandler} placeholder={'test placeholder'} />);
 
     expect(screen.getByPlaceholderText('test placeholder')).toBeInTheDocument();
   });
 
   it('should render with snapshot', () => {
+    const mockHandler = jest.fn();
+
     const { asFragment } = render(
-      <Input placeholder={'test placeholder'} value={'test value'} />
+      <Input
+        setValue={mockHandler}
+        placeholder={'test placeholder'}
+        value={'test value'}
+      />
     );
 
     expect(asFragment()).toMatchSnapshot();

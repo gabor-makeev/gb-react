@@ -1,16 +1,17 @@
 import style from './App.module.scss';
 import { AUTHORS, DUMMY_CHATS } from './constants';
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import { MessageBox } from './components/MessageBox/MessageBox';
 import { MessageForm } from './components/MessageForm/MessageForm';
 import { ChatsMenu } from './components/ChatsMenu/ChatsMenu';
 import { Container } from '@mui/material';
+import { MessageItem } from './default-types';
 
-export const App = () => {
-  const [messageList, setMessageList] = useState([]);
+export const App: FC = () => {
+  const [messageList, setMessageList] = useState<MessageItem[]>([]);
 
-  const pushMessage = (message) => {
+  const pushMessage = (message: MessageItem) => {
     setMessageList([...messageList, message]);
   };
 

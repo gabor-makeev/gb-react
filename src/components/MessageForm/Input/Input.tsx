@@ -1,18 +1,25 @@
 import style from './Input.module.scss';
-import { useEffect, useRef } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import TextField from '@mui/material/TextField';
 
-export const Input = ({
+interface InputProps {
+  placeholder?: string;
+  value?: string;
+  setValue: (inputValue: string) => void;
+  shouldAutoFocus?: boolean;
+}
+
+export const Input: FC<InputProps> = ({
   placeholder,
   value,
   setValue,
-  shouldAutoFocused = true,
+  shouldAutoFocus = true,
 }) => {
-  const element = useRef();
+  const element = useRef<HTMLInputElement | undefined>();
 
   useEffect(() => {
-    if (shouldAutoFocused) {
-      return element.current.focus();
+    if (shouldAutoFocus) {
+      return element.current?.focus();
     }
   });
 

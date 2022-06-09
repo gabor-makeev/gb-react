@@ -7,7 +7,7 @@ import { DUMMY_CONTENT, STYLES } from '../../constants';
 
 describe('MessageBox', () => {
   it('should render', () => {
-    render(<MessageBox />);
+    render(<MessageBox messages={DUMMY_CONTENT.messages} />);
   });
 
   it('should render with snapshot', () => {
@@ -19,7 +19,7 @@ describe('MessageBox', () => {
   });
 
   it('should render with default style from messageBoxStyle prop', () => {
-    render(<MessageBox />);
+    render(<MessageBox messages={DUMMY_CONTENT.messages} />);
 
     expect(screen.getByTestId('messageBox')).toHaveStyle(
       `background-color: ${STYLES.color.primary}`
@@ -27,7 +27,9 @@ describe('MessageBox', () => {
   });
 
   it('should render with custom border radius style from borderRadius prop', () => {
-    render(<MessageBox borderRadius={'100px'} />);
+    render(
+      <MessageBox messages={DUMMY_CONTENT.messages} borderRadius={'100px'} />
+    );
 
     expect(screen.getByTestId('messageBox')).toHaveStyle(
       'border-radius: 100px'

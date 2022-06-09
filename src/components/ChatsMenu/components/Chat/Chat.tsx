@@ -1,8 +1,14 @@
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import { ListItemButton } from '@mui/material';
+import { FC } from 'react';
+import { ChatItem } from 'src/default-types';
 
-export const Chat = ({ chat }) => {
+interface ChatProps {
+  chat: ChatItem;
+}
+
+export const Chat: FC<ChatProps> = ({ chat }) => {
   return (
     <ListItem alignItems="flex-start">
       <ListItemButton>

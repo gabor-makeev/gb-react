@@ -1,7 +1,13 @@
 import { Chat } from '../Chat/Chat';
 import List from '@mui/material/List';
+import { ChatItem } from 'src/default-types';
+import { FC } from 'react';
 
-export const Menu = ({ chats }) => {
+interface MenuProps {
+  chats: ChatItem[];
+}
+
+export const Menu: FC<MenuProps> = ({ chats }) => {
   return (
     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
       {chats.map((chat) => (

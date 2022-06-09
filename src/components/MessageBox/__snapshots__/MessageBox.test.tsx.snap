@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MessageBox should render with snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="MuiContainer-root message-box css-ymhums-MuiContainer-root"
+    data-testid="messageBox"
+  >
+    <ul
+      class="MuiList-root MuiList-padding message_list css-v2fr7u-MuiList-root"
+      data-testid="messageList"
+    >
+      <li
+        class="MuiListItem-root MuiListItem-gutters MuiListItem-padding message css-1s94d1u-MuiListItem-root"
+      >
+        placerat duis ultricies lacus sed turpis tincidunt id aliquet risus
+        <span
+          class="message__author-sign"
+        >
+          Gabor
+        </span>
+      </li>
+      <li
+        class="MuiListItem-root MuiListItem-gutters MuiListItem-padding message css-1s94d1u-MuiListItem-root"
+      >
+        et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit
+        <span
+          class="message__author-sign"
+        >
+          Gabor
+        </span>
+      </li>
+      <li
+        class="MuiListItem-root MuiListItem-gutters MuiListItem-padding message css-1s94d1u-MuiListItem-root"
+      >
+        felis eget velit aliquet sagittis id consectetur purus ut faucibus
+        <span
+          class="message__author-sign"
+        >
+          Gabor
+        </span>
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;

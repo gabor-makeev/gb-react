@@ -1,13 +1,14 @@
 import { MessageBox } from './MessageBox';
 import { DUMMY_CONTENT, STYLES } from '../../constants';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 export default {
   title: 'MessageBox',
   component: MessageBox,
-};
+} as ComponentMeta<typeof MessageBox>;
 
-const Template = (args) => (
-  <MessageBox messages={DUMMY_CONTENT.messages} {...args} />
+const Template: ComponentStory<typeof MessageBox> = (args) => (
+  <MessageBox {...args} messages={DUMMY_CONTENT.messages} />
 );
 
 export const Primary = Template.bind({});
