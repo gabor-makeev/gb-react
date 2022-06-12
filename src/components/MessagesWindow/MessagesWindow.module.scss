@@ -1,0 +1,34 @@
+.gap {
+  &-small {
+    gap: 5px;
+  }
+
+  &-medium {
+    gap: 10px;
+  }
+
+  &-big {
+    gap: 15px;
+  }
+}
+
+.angle {
+  &-roundish {
+    border-radius: 10px;
+  }
+
+  &-round {
+    border-radius: 30px;
+  }
+}
+
+.background-color {
+  &-primary {
+    background-color: #cccccc;
+  }
+
+  &-secondary {
+    background-color: #31E865;
+  }
+}
+
