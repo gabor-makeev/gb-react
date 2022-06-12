@@ -11,25 +11,24 @@ import { MessageItem } from './default-types';
 export const App: FC = () => {
   const [messageList, setMessageList] = useState<MessageItem[]>([]);
 
-  const pushMessage = (message: MessageItem) => {
-    setMessageList([...messageList, message]);
-  };
-
   useEffect(() => {
     if (
       messageList.length > 0 &&
       messageList[messageList.length - 1].author === AUTHORS.user
     ) {
       const timeout = setTimeout(() => {
-        pushMessage({
-          text: 'robot responses ',
-          author: AUTHORS.bot,
-        });
+        setMessageList([
+          ...messageList,
+          {
+            text: 'robot responses ',
+            author: AUTHORS.bot,
+          },
+        ]);
       }, 1500);
 
       return () => clearTimeout(timeout);
     }
-  }, [messageList, pushMessage]);
+  }, [messageList, setMessageList]);
 
   const appStyle = {
     padding: '50px',
@@ -49,7 +48,10 @@ export const App: FC = () => {
       </Container>
       <Container sx={appStyle}>
         <MessageBox messages={messageList} />
-        <MessageForm pushMessage={pushMessage} />
+        <MessageForm
+          setMessageList={setMessageList}
+          messageList={messageList}
+        />
       </Container>
     </div>
   );

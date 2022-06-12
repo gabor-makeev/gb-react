@@ -1,6 +1,6 @@
 import style from './MessageForm.module.scss';
-import { AUTHORS, STYLES } from '../../constants';
-import { MessageItem } from '../../default-types';
+import { AUTHORS, STYLES } from 'src/constants';
+import { MessageItem } from 'src/default-types';
 import React, { FC, useState } from 'react';
 
 import { Button } from './Button/Button';
@@ -8,13 +8,15 @@ import { Input } from './Input/Input';
 import { Container } from '@mui/material';
 
 interface MessageFormProps {
-  pushMessage: (message: MessageItem) => void;
+  setMessageList: (newMessageList: MessageItem[]) => void;
+  messageList: MessageItem[];
   border?: string;
   borderRadius?: string;
 }
 
 export const MessageForm: FC<MessageFormProps> = ({
-  pushMessage,
+  setMessageList,
+  messageList,
   border = STYLES.border,
   borderRadius = STYLES.borderRadius,
 }) => {
@@ -35,10 +37,13 @@ export const MessageForm: FC<MessageFormProps> = ({
 
   const sendMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    pushMessage({
-      text: inputValue,
-      author: AUTHORS.user,
-    });
+    setMessageList([
+      ...messageList,
+      {
+        text: inputValue,
+        author: AUTHORS.user,
+      },
+    ]);
 
     setInputValue('');
   };
