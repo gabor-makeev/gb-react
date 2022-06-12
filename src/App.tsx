@@ -32,7 +32,7 @@ export const App: FC = () => {
   }, [messageList, setMessageList]);
 
   return (
-    <div className={style.App}>
+    <div className={style.app}>
       <Container>
         <ChatsMenu chats={DUMMY_CHATS} />
       </Container>
