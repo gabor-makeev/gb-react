@@ -1,10 +1,10 @@
-import style from './MessageForm.module.scss';
-import { AUTHORS, STYLES } from 'src/constants';
+import style from './MessageSendingForm.module.scss';
+import { AUTHORS, STYLES } from '../../constants';
 import { MessageItem } from 'src/default-types';
 import React, { FC, useState } from 'react';
 
-import { Button } from './Button/Button';
-import { Input } from './Input/Input';
+import { Button } from './components/Button/Button';
+import { Input } from './components/Input/Input';
 import { Container } from '@mui/material';
 
 interface MessageFormProps {
@@ -14,7 +14,7 @@ interface MessageFormProps {
   borderRadius?: string;
 }
 
-export const MessageForm: FC<MessageFormProps> = ({
+export const MessageSendingForm: FC<MessageFormProps> = ({
   setMessageList,
   messageList,
   border = STYLES.border,

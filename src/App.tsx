@@ -2,12 +2,12 @@ import style from './App.module.scss';
 import { AUTHORS, DUMMY_CHATS } from './constants';
 import { FC, useEffect, useState } from 'react';
 
-import { MessageBox } from 'components/MessageBox/MessageBox';
-import { MessageForm } from 'components/MessageForm/MessageForm';
-import { ChatsMenu } from 'components/ChatsMenu/ChatsMenu';
+import { MessageSendingForm } from 'components/MessageSendingForm/MessageSendingForm';
+import { ChatsSelector } from 'components/ChatsSelector/ChatsSelector';
 import { Container } from '@mui/material';
-import { MessageContainer } from 'components/StyledMUIComponents/MessageContainer';
+import { MessageSectionContainer } from 'components/StyledMUIComponents/MessageSectionContainer';
 import { MessageItem } from './default-types';
+import { MessagesWindow } from 'components/MessagesWindow/MessagesWindow';
 
 export const App: FC = () => {
   const [messageList, setMessageList] = useState<MessageItem[]>([]);
@@ -34,15 +34,15 @@ export const App: FC = () => {
   return (
     <div className={style.app}>
       <Container>
-        <ChatsMenu chats={DUMMY_CHATS} />
+        <ChatsSelector chats={DUMMY_CHATS} />
       </Container>
-      <MessageContainer>
-        <MessageBox messages={messageList} />
-        <MessageForm
+      <MessageSectionContainer>
+        <MessagesWindow messages={messageList} />
+        <MessageSendingForm
           setMessageList={setMessageList}
           messageList={messageList}
         />
-      </MessageContainer>
+      </MessageSectionContainer>
     </div>
   );
 };

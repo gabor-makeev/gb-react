@@ -7,7 +7,7 @@ interface MenuProps {
   chats: ChatItem[];
 }
 
-export const Menu: FC<MenuProps> = ({ chats }) => {
+export const Selector: FC<MenuProps> = ({ chats }) => {
   return (
     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
       {chats.map((chat) => (

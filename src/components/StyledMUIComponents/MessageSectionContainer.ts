@@ -1,9 +1,7 @@
 import { Container } from '@mui/material';
 import { styled } from '@mui/material';
 
-const MessageContainer = styled(Container)({
+export const MessageSectionContainer = styled(Container)({
   display: 'flex',
   flexDirection: 'column',
 });
-
-export { MessageContainer };

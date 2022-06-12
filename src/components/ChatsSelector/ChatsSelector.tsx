@@ -1,4 +1,4 @@
-import { Menu } from './components/Menu/Menu';
+import { Selector } from './components/Selector/Selector';
 import Container from '@mui/material/Container';
 import { FC } from 'react';
 import { ChatItem } from 'src/default-types';
@@ -7,7 +7,7 @@ interface ChatsMenuProps {
   chats: ChatItem[];
 }
 
-export const ChatsMenu: FC<ChatsMenuProps> = ({ chats }) => {
+export const ChatsSelector: FC<ChatsMenuProps> = ({ chats }) => {
   return (
     <Container
       sx={{
@@ -17,7 +17,7 @@ export const ChatsMenu: FC<ChatsMenuProps> = ({ chats }) => {
         height: '100%',
       }}
     >
-      <Menu chats={chats} />
+      <Selector chats={chats} />
     </Container>
   );
 };
