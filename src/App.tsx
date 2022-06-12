@@ -2,10 +2,11 @@ import style from './App.module.scss';
 import { AUTHORS, DUMMY_CHATS } from './constants';
 import { FC, useEffect, useState } from 'react';
 
-import { MessageBox } from './components/MessageBox/MessageBox';
-import { MessageForm } from './components/MessageForm/MessageForm';
-import { ChatsMenu } from './components/ChatsMenu/ChatsMenu';
+import { MessageBox } from 'components/MessageBox/MessageBox';
+import { MessageForm } from 'components/MessageForm/MessageForm';
+import { ChatsMenu } from 'components/ChatsMenu/ChatsMenu';
 import { Container } from '@mui/material';
+import { MessageContainer } from 'components/StyledMUIComponents/MessageContainer';
 import { MessageItem } from './default-types';
 
 export const App: FC = () => {
@@ -30,29 +31,18 @@ export const App: FC = () => {
     }
   }, [messageList, setMessageList]);
 
-  const appStyle = {
-    padding: '50px',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: '20px',
-    margin: '0',
-    width: '100%',
-  };
-
   return (
     <div className={style.App}>
       <Container>
         <ChatsMenu chats={DUMMY_CHATS} />
       </Container>
-      <Container sx={appStyle}>
+      <MessageContainer>
         <MessageBox messages={messageList} />
         <MessageForm
           setMessageList={setMessageList}
           messageList={messageList}
         />
-      </Container>
+      </MessageContainer>
     </div>
   );
 };
