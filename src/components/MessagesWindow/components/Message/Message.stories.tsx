@@ -17,12 +17,10 @@ export const Primary = Template.bind({});
 
 export const Big = Template.bind({});
 Big.args = {
-  padding: '25px 15px',
-  maxWidth: '300px',
+  variant: 'big',
 };
 
 export const Small = Template.bind({});
 Small.args = {
-  padding: '15px 10px',
-  maxWidth: '250px',
+  variant: 'small',
 };

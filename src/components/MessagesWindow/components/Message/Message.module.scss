@@ -1,5 +1,29 @@
 .message {
-  //Custom styles should go here
+  &__type {
+    &-big {
+      padding: 25px 15px;
+      max-width: 300px;
+    }
+
+    &-medium {
+      padding: 15px 15px;
+      max-width: 275px;
+    }
+
+    &-small {
+      padding: 15px 10px;
+      max-width: 250px;
+    }
+  }
+
+  &__user-background {
+    background-color: #31E865;
+  }
+
+  &__system-background {
+    background-color: #FF4F4F;
+  }
+
   &__author-sign {
     position: absolute;
     left: 15px;
