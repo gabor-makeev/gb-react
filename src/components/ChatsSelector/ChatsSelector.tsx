@@ -7,9 +7,14 @@ import { ChatAddingForm } from 'components/ChatsSelector/components/ChatAddingFo
 interface ChatsMenuProps {
   chats: ChatItem[];
   addChat: (chat: ChatItem) => void;
+  deleteChat: (chat: ChatItem) => void;
 }
 
-export const ChatsSelector: FC<ChatsMenuProps> = ({ chats, addChat }) => {
+export const ChatsSelector: FC<ChatsMenuProps> = ({
+  chats,
+  addChat,
+  deleteChat,
+}) => {
   return (
     <Container
       sx={{
@@ -21,7 +26,7 @@ export const ChatsSelector: FC<ChatsMenuProps> = ({ chats, addChat }) => {
         height: '100%',
       }}
     >
-      <Selector chats={chats} />
+      <Selector chats={chats} deleteChat={deleteChat} />
       <ChatAddingForm addChat={addChat} />
     </Container>
   );

@@ -31,6 +31,13 @@ export const App: FC = () => {
     });
   };
 
+  const deleteChat = (chat: ChatItem) => {
+    const newChat = messeges;
+    delete newChat[chat.name];
+
+    setMesseges(newChat);
+  };
+
   return (
     <BrowserRouter>
       <Routes>
@@ -46,6 +53,7 @@ export const App: FC = () => {
                   addChat={addChat}
                   messages={messeges}
                   addMessage={addMessage}
+                  deleteChat={deleteChat}
                 />
               }
             />
@@ -57,6 +65,7 @@ export const App: FC = () => {
                   addChat={addChat}
                   messages={messeges}
                   addMessage={addMessage}
+                  deleteChat={deleteChat}
                   isMessageSendingActive={true}
                 />
               }

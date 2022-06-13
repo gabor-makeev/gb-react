@@ -15,6 +15,7 @@ interface MessengerProps {
   addChat: (chat: ChatItem) => void;
   messages: MessageList;
   addMessage: (chatId: string, messege: MessageItem) => void;
+  deleteChat: (chat: ChatItem) => void;
   isMessageSendingActive?: boolean;
 }
 
@@ -23,6 +24,7 @@ export const Messenger: FC<MessengerProps> = ({
   addChat,
   messages,
   addMessage,
+  deleteChat,
   isMessageSendingActive = false,
 }) => {
   const { chatId } = useParams();
@@ -61,7 +63,11 @@ export const Messenger: FC<MessengerProps> = ({
   return (
     <div className={style.app}>
       <Container>
-        <ChatsSelector chats={chats} addChat={addChat} />
+        <ChatsSelector
+          chats={chats}
+          addChat={addChat}
+          deleteChat={deleteChat}
+        />
       </Container>
       <MessageSectionContainer>
         <MessagesWindow messages={chatId ? messages[chatId] : []} />
