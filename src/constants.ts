@@ -1,5 +1,23 @@
 import { MessageItem } from 'src/default-types';
 
+export const NAVIGATION = [
+  {
+    id: 1,
+    name: 'Main',
+    path: '/',
+  },
+  {
+    id: 2,
+    name: 'Profile',
+    path: '/profile',
+  },
+  {
+    id: 3,
+    name: 'Messenger',
+    path: '/messenger',
+  },
+];
+
 export const AUTHORS = {
   user: 'Gabor',
   bot: '🤖 Bot',

@@ -1,48 +1,70 @@
-import style from './App.module.scss';
-import { AUTHORS, DUMMY_CHATS } from './constants';
-import { FC, useEffect, useState } from 'react';
-
-import { MessageSendingForm } from 'components/MessageSendingForm/MessageSendingForm';
-import { ChatsSelector } from 'components/ChatsSelector/ChatsSelector';
-import { Container } from '@mui/material';
-import { MessageSectionContainer } from 'components/StyledMUIComponents/MessageSectionContainer';
-import { MessageItem } from './default-types';
-import { MessagesWindow } from 'components/MessagesWindow/MessagesWindow';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BasePageTemplate } from 'src/templates/BasePageTemplate/BasePageTemplate';
+import { Main } from 'src/pages/Main/Main';
+import { Profile } from 'src/pages/Profile/Profile';
+import { Messenger } from 'src/pages/Messenger/Messenger';
+import { FC, useMemo, useState } from 'react';
+import { ChatItem, MessageItem, MessageList } from 'src/default-types';
+import { nanoid } from 'nanoid';
 
 export const App: FC = () => {
-  const [messageList, setMessageList] = useState<MessageItem[]>([]);
+  const [messeges, setMesseges] = useState<MessageList>({});
 
-  useEffect(() => {
-    if (
-      messageList.length > 0 &&
-      messageList[messageList.length - 1].author === AUTHORS.user
-    ) {
-      const timeout = setTimeout(() => {
-        setMessageList([
-          ...messageList,
-          {
-            text: 'robot responses ',
-            author: AUTHORS.bot,
-          },
-        ]);
-      }, 1500);
+  const chats = useMemo(() => {
+    return Object.keys(messeges).map((chatName) => ({
+      id: nanoid(),
+      name: chatName,
+    }));
+  }, [Object.keys(messeges).length]);
 
-      return () => clearTimeout(timeout);
-    }
-  }, [messageList, setMessageList]);
+  const addChat = (chat: ChatItem) => {
+    setMesseges({
+      ...messeges,
+      [chat.name]: [],
+    });
+  };
+
+  const addMessage = (chatId: string, message: MessageItem) => {
+    setMesseges({
+      ...messeges,
+      [chatId]: [...messeges[chatId], message],
+    });
+  };
 
   return (
-    <div className={style.app}>
-      <Container>
-        <ChatsSelector chats={DUMMY_CHATS} />
-      </Container>
-      <MessageSectionContainer>
-        <MessagesWindow messages={messageList} />
-        <MessageSendingForm
-          setMessageList={setMessageList}
-          messageList={messageList}
-        />
-      </MessageSectionContainer>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<BasePageTemplate />}>
+          <Route index element={<Main />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="messenger">
+            <Route
+              index
+              element={
+                <Messenger
+                  chats={chats}
+                  addChat={addChat}
+                  messages={messeges}
+                  addMessage={addMessage}
+                />
+              }
+            />
+            <Route
+              path=":chatId"
+              element={
+                <Messenger
+                  chats={chats}
+                  addChat={addChat}
+                  messages={messeges}
+                  addMessage={addMessage}
+                  isMessageSendingActive={true}
+                />
+              }
+            />
+          </Route>
+        </Route>
+        <Route path="*" element={<h2>404</h2>} />
+      </Routes>
+    </BrowserRouter>
   );
 };

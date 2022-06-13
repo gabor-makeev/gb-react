@@ -6,14 +6,14 @@ import { FC } from 'react';
 import classNames from 'classnames';
 
 interface MessageWindowProps {
-  messages?: MessageItem[];
+  messages: MessageItem[];
   gapType?: string;
   angleType?: string;
   backgroundColor?: string;
 }
 
 export const MessagesWindow: FC<MessageWindowProps> = ({
-  messages = [],
+  messages,
   gapType = 'medium',
   angleType = 'round',
   backgroundColor = 'primary',

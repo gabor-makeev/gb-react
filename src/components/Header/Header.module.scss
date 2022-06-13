@@ -1,0 +1,17 @@
+.header {
+  background-color: lightgrey;
+
+  &__ul {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1000px;
+    margin: 0 auto;
+    list-style-type: none;
+    padding: 20px 10px;
+  }
+
+  &__li {
+    background-color: #222;
+    padding: 20px;
+  }
+}
