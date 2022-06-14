@@ -32,7 +32,7 @@ export const App: FC = () => {
   };
 
   const deleteChat = (chat: ChatItem) => {
-    const newChat = messeges;
+    const newChat = { ...messeges };
     delete newChat[chat.name];
 
     setMesseges(newChat);
