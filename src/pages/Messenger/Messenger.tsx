@@ -55,7 +55,6 @@ export const Messenger: FC<MessengerProps> = ({
     [chatId, addMessage]
   );
 
-  // the code below doesn't work:
   if (chatId && !messages[chatId]) {
     return <Navigate to="/messenger" replace />;
   }
