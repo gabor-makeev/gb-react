@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 import { Message } from './Message';
-import { DUMMY_CONTENT, STYLES } from '../../../../constants';
+import { DUMMY_CONTENT } from '../../../../constants';
 
 const dummyMessage = DUMMY_CONTENT.messages[0];
 
