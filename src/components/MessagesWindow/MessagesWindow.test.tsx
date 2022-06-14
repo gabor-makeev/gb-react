@@ -19,11 +19,11 @@ describe('MessageList', () => {
   });
 
   it('should render without messages passed', () => {
-    render(<MessagesWindow />);
+    render(<MessagesWindow messages={[]} />);
   });
 
   it('should render an 1 unordered list', () => {
-    render(<MessagesWindow />);
+    render(<MessagesWindow messages={[]} />);
 
     expect(screen.getAllByTestId('messageList').length).toBe(1);
   });

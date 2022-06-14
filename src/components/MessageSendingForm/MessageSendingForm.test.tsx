@@ -8,24 +8,18 @@ import userEvent from '@testing-library/user-event';
 describe('MessageForm', () => {
   const mockHandler = jest.fn();
   it('should render', () => {
-    render(
-      <MessageSendingForm messageList={[]} setMessageList={mockHandler} />
-    );
+    render(<MessageSendingForm handleAddMessage={mockHandler} />);
   });
 
   it('should have the button disabled when no input entered', () => {
-    render(
-      <MessageSendingForm messageList={[]} setMessageList={mockHandler} />
-    );
+    render(<MessageSendingForm handleAddMessage={mockHandler} />);
 
     expect(screen.getByRole('button')).toBeDisabled();
   });
 
   it('should have clear input field after message sent', async () => {
     const mockHandler = jest.fn();
-    render(
-      <MessageSendingForm messageList={[]} setMessageList={mockHandler} />
-    );
+    render(<MessageSendingForm handleAddMessage={mockHandler} />);
     const input: HTMLInputElement = screen.getByDisplayValue('');
 
     await userEvent.type(input, 'test');
@@ -37,8 +31,7 @@ describe('MessageForm', () => {
   it('should render with snapshot', () => {
     const { asFragment } = render(
       <MessageSendingForm
-        messageList={[]}
-        setMessageList={mockHandler}
+        handleAddMessage={mockHandler}
         border={'2px solid blue'}
         borderRadius={'25px'}
       />
