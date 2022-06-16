@@ -9,5 +9,20 @@ export const Profile: FC = () => {
 
   const dispatch = useDispatch();
 
-  return <h2>Profile page</h2>;
+  return (
+    <>
+      <h2>Profile page</h2>
+      <label htmlFor={'isPublic'}>
+        Is profile public? — {isPublic ? 'Yes' : 'No'}
+      </label>
+      <p>
+        <input
+          id={'isPublic'}
+          type="checkbox"
+          checked={isPublic}
+          onChange={() => dispatch(togglePublic())}
+        />
+      </p>
+    </>
+  );
 };
