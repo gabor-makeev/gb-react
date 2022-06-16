@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/App.tsx</title>
+    <title>Code coverage report for src/Messenger.tsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">src</a> App.tsx</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">src</a> Messenger.tsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>12/12</span>
+                <span class='fraction'>9/9</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>11/11</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
@@ -111,15 +111,8 @@
 <a name='L46'></a><a href='#L46'>46</a>
 <a name='L47'></a><a href='#L47'>47</a>
 <a name='L48'></a><a href='#L48'>48</a>
-<a name='L49'></a><a href='#L49'>49</a>
-<a name='L50'></a><a href='#L50'>50</a>
-<a name='L51'></a><a href='#L51'>51</a>
-<a name='L52'></a><a href='#L52'>52</a>
-<a name='L53'></a><a href='#L53'>53</a>
-<a name='L54'></a><a href='#L54'>54</a>
-<a name='L55'></a><a href='#L55'>55</a>
-<a name='L56'></a><a href='#L56'>56</a>
-<a name='L57'></a><a href='#L57'>57</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L49'></a><a href='#L49'>49</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -133,16 +126,15 @@
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -163,34 +155,23 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import style from './App.module.scss';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import style from './Messenger.module.scss';
 import { AUTHORS, DUMMY_CHATS } from './constants';
 import { FC, useEffect, useState } from 'react';
 &nbsp;
-import { MessageBox } from './components/MessageBox/MessageBox';
-import { MessageForm } from './components/MessageForm/MessageForm';
-import { ChatsMenu } from './components/ChatsMenu/ChatsMenu';
+import { MessageSendingForm } from 'components/MessageSendingForm/MessageSendingForm';
+import { ChatsSelector } from 'components/ChatsSelector/ChatsSelector';
 import { Container } from '@mui/material';
+import { MessageSectionContainer } from 'components/StyledMUIComponents/MessageSectionContainer';
 import { MessageItem } from './default-types';
+import { MessagesWindow } from 'components/MessagesWindow/MessagesWindow';
 &nbsp;
-export const App: FC = () =&gt; {
+export const Messenger: FC = () =&gt; {
   const [messageList, setMessageList] = useState&lt;MessageItem[]&gt;([]);
-&nbsp;
-  const pushMessage = (message: MessageItem) =&gt; {
-    setMessageList([...messageList, message]);
-  };
 &nbsp;
   useEffect(() =&gt; {
     if (
@@ -198,36 +179,31 @@ export const App: FC = () =&gt; {
       messageList[messageList.length - 1].author === AUTHORS.user
     ) {
       const timeout = setTimeout(() =&gt; {
-        pushMessage({
-          text: 'robot responses ',
-          author: AUTHORS.bot,
-        });
+        setMessageList([
+          ...messageList,
+          {
+            text: 'robot responses ',
+            author: AUTHORS.bot,
+          },
+        ]);
       }, 1500);
 &nbsp;
       return () =&gt; clearTimeout(timeout);
     }
-  }, [messageList, pushMessage]);
-&nbsp;
-  const appStyle = {
-    padding: '50px',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: '20px',
-    margin: '0',
-    width: '100%',
-  };
+  }, [messageList, setMessageList]);
 &nbsp;
   return (
-    &lt;div className={style.App}&gt;
+    &lt;div className={style.app}&gt;
       &lt;Container&gt;
-        &lt;ChatsMenu chats={DUMMY_CHATS} /&gt;
+        &lt;ChatsSelector chats={DUMMY_CHATS} /&gt;
       &lt;/Container&gt;
-      &lt;Container sx={appStyle}&gt;
-        &lt;MessageBox messages={messageList} /&gt;
-        &lt;MessageForm pushMessage={pushMessage} /&gt;
-      &lt;/Container&gt;
+      &lt;MessageSectionContainer&gt;
+        &lt;MessagesWindow messages={messageList} /&gt;
+        &lt;MessageSendingForm
+          setMessageList={setMessageList}
+          messageList={messageList}
+        /&gt;
+      &lt;/MessageSectionContainer&gt;
     &lt;/div&gt;
   );
 };
@@ -238,7 +214,7 @@ export const App: FC = () =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Thu Jun 09 2022 03:01:57 GMT+0200 (Central European Summer Time)
+                at Mon Jun 13 2022 01:36:43 GMT+0200 (Central European Summer Time)
             </div>
         <script src="../prettify.js"></script>
         <script>

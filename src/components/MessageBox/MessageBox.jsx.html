@@ -134,7 +134,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import style from './MessageBox.module.scss';
 import { STYLES } from '../../constants';
 &nbsp;
-import { MessageList } from './components/MessageList/MessageList';
+import { MessagesWindow } from './components/MessagesWindow/MessagesWindow';
 import { Container } from '@mui/material';
 &nbsp;
 export const MessageBox = ({
@@ -161,7 +161,7 @@ export const MessageBox = ({
       data-testid={'messageBox'}
       maxWidth={messageBoxStyle.maxWidth}
     &gt;
-      &lt;MessageList messages={messages} /&gt;
+      &lt;MessagesWindow messages={messages} /&gt;
     &lt;/Container&gt;
   );
 };
