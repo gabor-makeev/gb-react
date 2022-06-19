@@ -4,20 +4,34 @@ import '@testing-library/jest-dom';
 
 import { MessageSendingForm } from './MessageSendingForm';
 import userEvent from '@testing-library/user-event';
+import { Provider } from 'react-redux';
+import { store } from 'src/store';
 
 describe('MessageForm', () => {
   it('should render', () => {
-    render(<MessageSendingForm />);
+    render(
+      <Provider store={store}>
+        <MessageSendingForm />
+      </Provider>
+    );
   });
 
   it('should have the button disabled when no input entered', () => {
-    render(<MessageSendingForm />);
+    render(
+      <Provider store={store}>
+        <MessageSendingForm />
+      </Provider>
+    );
 
     expect(screen.getByRole('button')).toBeDisabled();
   });
 
   it('should have clear input field after message sent', async () => {
-    render(<MessageSendingForm />);
+    render(
+      <Provider store={store}>
+        <MessageSendingForm />
+      </Provider>
+    );
     const input: HTMLInputElement = screen.getByDisplayValue('');
 
     await userEvent.type(input, 'test');
@@ -28,7 +42,9 @@ describe('MessageForm', () => {
 
   it('should render with snapshot', () => {
     const { asFragment } = render(
-      <MessageSendingForm border={'2px solid blue'} borderRadius={'25px'} />
+      <Provider store={store}>
+        <MessageSendingForm border={'2px solid blue'} borderRadius={'25px'} />
+      </Provider>
     );
 
     expect(asFragment()).toMatchSnapshot();
