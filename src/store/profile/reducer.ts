@@ -1,6 +1,6 @@
 import { Reducer } from 'redux';
-import { ProfileActions } from 'store/profile/types';
-import { CHANGE_NAME, TOGGLE_PUBLIC } from 'store/profile/actions';
+import { ProfileActions } from './types';
+import { CHANGE_NAME, TOGGLE_PUBLIC } from './actions';
 
 export interface ProfileState {
   user: {

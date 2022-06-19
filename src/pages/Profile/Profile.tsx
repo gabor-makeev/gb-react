@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeName, togglePublic } from 'store/profile/actions';
-import { selectIsPublic, selectUserName } from 'store/profile/selectors';
+import { changeName, togglePublic } from '../../store/profile/actions';
+import { selectIsPublic, selectUserName } from '../../store/profile/selectors';
 
 export const Profile: FC = () => {
   const [newNameInputValue, setNewNameInputValue] = useState<string>('');
