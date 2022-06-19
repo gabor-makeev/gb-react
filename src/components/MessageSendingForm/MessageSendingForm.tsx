@@ -1,27 +1,24 @@
 import style from './MessageSendingForm.module.scss';
-import { AUTHORS, STYLES } from '../../constants';
-import { MessageItem } from 'src/default-types';
+import { STYLES } from '../../constants';
 import React, { FC, memo, useState } from 'react';
 
 import { Button } from './components/Button/Button';
 import { Input } from './components/Input/Input';
 import { Container } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { addMessage } from '../../store/messages/actions';
 
 interface MessageFormProps {
-  handleAddMessage: (message: MessageItem) => void;
-  isMessageSendingFormActive?: boolean;
   border?: string;
   borderRadius?: string;
 }
 
 export const MessageSendingForm: FC<MessageFormProps> = memo(
-  ({
-    handleAddMessage,
-    isMessageSendingFormActive = true,
-    border = STYLES.border,
-    borderRadius = STYLES.borderRadius,
-  }) => {
+  ({ border = STYLES.border, borderRadius = STYLES.borderRadius }) => {
     const [inputValue, setInputValue] = useState('');
+    const dispatch = useDispatch();
+    const { chatId } = useParams();
 
     const formContainerStyle = {
       border: border,
@@ -38,10 +35,10 @@ export const MessageSendingForm: FC<MessageFormProps> = memo(
 
     const sendMessage = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      handleAddMessage({
-        text: inputValue,
-        author: AUTHORS.user,
-      });
+
+      if (chatId) {
+        dispatch(addMessage(chatId, inputValue));
+      }
 
       setInputValue('');
     };
@@ -54,7 +51,7 @@ export const MessageSendingForm: FC<MessageFormProps> = memo(
       >
         <Container sx={formContainerStyle}>
           <Input
-            isInputActive={isMessageSendingFormActive}
+            disabled={!chatId}
             value={inputValue}
             setValue={setInputValue}
           />

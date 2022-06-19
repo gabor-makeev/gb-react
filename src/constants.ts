@@ -1,4 +1,5 @@
-import { MessageItem } from 'src/default-types';
+import { Authors } from './default-types';
+import { MessageItem } from './store/messages/reducer';
 
 export const NAVIGATION = [
   {
@@ -16,11 +17,16 @@ export const NAVIGATION = [
     name: 'Messenger',
     path: '/messenger',
   },
+  {
+    id: 4,
+    name: 'About',
+    path: '/about',
+  },
 ];
 
 export const AUTHORS = {
-  user: 'Gabor',
-  bot: '🤖 Bot',
+  user: Authors.USER,
+  bot: Authors.BOT,
 };
 
 export const STYLES = {
