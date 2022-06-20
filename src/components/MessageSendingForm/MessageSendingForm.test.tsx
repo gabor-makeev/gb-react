@@ -3,7 +3,6 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 import { MessageSendingForm } from './MessageSendingForm';
-import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
 import { store } from 'src/store';
 
@@ -24,20 +23,6 @@ describe('MessageForm', () => {
     );
 
     expect(screen.getByRole('button')).toBeDisabled();
-  });
-
-  it('should have clear input field after message sent', async () => {
-    render(
-      <Provider store={store}>
-        <MessageSendingForm />
-      </Provider>
-    );
-    const input: HTMLInputElement = screen.getByDisplayValue('');
-
-    await userEvent.type(input, 'test');
-    await userEvent.click(screen.getByRole('button'));
-
-    expect(input.value).toBe('');
   });
 
   it('should render with snapshot', () => {
