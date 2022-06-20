@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">63.63% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>7/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>2/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">63.63% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>7/11</span>
             </div>
         
             
@@ -126,10 +126,7 @@
 <a name='L61'></a><a href='#L61'>61</a>
 <a name='L62'></a><a href='#L62'>62</a>
 <a name='L63'></a><a href='#L63'>63</a>
-<a name='L64'></a><a href='#L64'>64</a>
-<a name='L65'></a><a href='#L65'>65</a>
-<a name='L66'></a><a href='#L66'>66</a>
-<a name='L67'></a><a href='#L67'>67</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L64'></a><a href='#L64'>64</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -147,15 +144,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -167,17 +160,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -196,29 +190,26 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import style from './MessageSendingForm.module.scss';
-import { AUTHORS, STYLES } from '../../constants';
-import { MessageItem } from 'src/default-types';
+import { STYLES } from '../../constants';
 import React, { FC, memo, useState } from 'react';
 &nbsp;
 import { Button } from './components/Button/Button';
 import { Input } from './components/Input/Input';
 import { Container } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { addMessage } from '../../store/messages/actions';
 &nbsp;
 interface MessageFormProps {
-  handleAddMessage: (message: MessageItem) =&gt; void;
-  isMessageSendingFormActive?: boolean;
   border?: string;
   borderRadius?: string;
 }
 &nbsp;
 export const MessageSendingForm: FC&lt;MessageFormProps&gt; = memo(
-  ({
-    handleAddMessage,
-    isMessageSendingFormActive = true,
-    border = STYLES.border,
-    borderRadius = STYLES.borderRadius,
-  }) =&gt; {
+  ({ border = STYLES.border, borderRadius = STYLES.borderRadius }) =&gt; {
     const [inputValue, setInputValue] = useState('');
+    const dispatch = useDispatch();
+    const { chatId } = useParams();
 &nbsp;
     const formContainerStyle = {
       border: border,
@@ -233,14 +224,14 @@ export const MessageSendingForm: FC&lt;MessageFormProps&gt; = memo(
       margin: '0',
     };
 &nbsp;
-    const sendMessage = (e: React.FormEvent&lt;HTMLFormElement&gt;) =&gt; {
-      e.preventDefault();
-      handleAddMessage({
-        text: inputValue,
-        author: AUTHORS.user,
-      });
+    const sendMessage = <span class="fstat-no" title="function not covered" >(e</span>: React.FormEvent&lt;HTMLFormElement&gt;) =&gt; {
+<span class="cstat-no" title="statement not covered" >      e.preventDefault();</span>
 &nbsp;
-      setInputValue('');
+<span class="cstat-no" title="statement not covered" >      if (chatId) {</span>
+<span class="cstat-no" title="statement not covered" >        dispatch(addMessage(chatId, inputValue));</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      setInputValue('');</span>
     };
 &nbsp;
     return (
@@ -251,7 +242,7 @@ export const MessageSendingForm: FC&lt;MessageFormProps&gt; = memo(
       &gt;
         &lt;Container sx={formContainerStyle}&gt;
           &lt;Input
-            isInputActive={isMessageSendingFormActive}
+            disabled={!chatId}
             value={inputValue}
             setValue={setInputValue}
           /&gt;
@@ -268,7 +259,7 @@ export const MessageSendingForm: FC&lt;MessageFormProps&gt; = memo(
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Thu Jun 16 2022 17:23:30 GMT+0200 (Central European Summer Time)
+                at Mon Jun 20 2022 13:30:21 GMT+0200 (Central European Summer Time)
             </div>
         <script src="../../../prettify.js"></script>
         <script>

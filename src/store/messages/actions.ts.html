@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/components/MessagesWindow/components/Message/Message.tsx</title>
+    <title>Code coverage report for src/store/messages/actions.ts</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../../../../prettify.css" />
-    <link rel="stylesheet" href="../../../../../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../../../../../favicon.png" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../../../../../sort-arrow-sprite.png);
+            background-image: url(../../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../../../index.html">All files</a> / <a href="index.html">src/components/MessagesWindow/components/Message</a> Message.tsx</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/store/messages</a> actions.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.33% </span>
-                <span class="quiet">Statements</span>
-                <span class='fraction'>5/6</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
                 <span class="strong">66.66% </span>
-                <span class="quiet">Branches</span>
-                <span class='fraction'>2/3</span>
+                <span class="quiet">Statements</span>
+                <span class='fraction'>6/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
-                <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.33% </span>
+                <span class="strong">0% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>0/3</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/6</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
@@ -84,69 +84,48 @@
 <a name='L19'></a><a href='#L19'>19</a>
 <a name='L20'></a><a href='#L20'>20</a>
 <a name='L21'></a><a href='#L21'>21</a>
-<a name='L22'></a><a href='#L22'>22</a>
-<a name='L23'></a><a href='#L23'>23</a>
-<a name='L24'></a><a href='#L24'>24</a>
-<a name='L25'></a><a href='#L25'>25</a>
-<a name='L26'></a><a href='#L26'>26</a>
-<a name='L27'></a><a href='#L27'>27</a>
-<a name='L28'></a><a href='#L28'>28</a>
-<a name='L29'></a><a href='#L29'>29</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L22'></a><a href='#L22'>22</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import style from './Message.module.scss';
-import { AUTHORS } from '../../../../constants';
-import { FC } from 'react';
-import { MessageListItem } from '../../../StyledMUIComponents/MessageListItem';
-import classNames from 'classnames';
-import { MessageItem } from '../../../../store/messages/reducer';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { AddChat, AddMessage, DeleteChat } from './types';
 &nbsp;
-interface MessageProps {
-  message: MessageItem;
-  variant?: string;
-}
+export const ADD_CHAT = 'MESSAGES::ADD_CHAT';
+export const DELETE_CHAT = 'MESSAGES::DELETE_CHAT';
+export const ADD_MESSAGE = 'MESSAGES::ADD_MESSAGE';
 &nbsp;
-export const Message: FC&lt;MessageProps&gt; = ({ message, variant = 'medium' }) =&gt; {
-  let MessageListItemClasses = classNames(style[`message__type-${variant}`]);
+export const addChat: AddChat = <span class="fstat-no" title="function not covered" >(c</span>hatName) =&gt; (<span class="cstat-no" title="statement not covered" >{</span>
+  type: ADD_CHAT,
+  chatName,
+});
 &nbsp;
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (message.author === AUTHORS.bot) {
-<span class="cstat-no" title="statement not covered" >    MessageListItemClasses += ` ${style['message__system-background']}`;</span>
-  } else {
-    MessageListItemClasses += ` ${style['message__user-background']}`;
-  }
+export const deleteChat: DeleteChat = <span class="fstat-no" title="function not covered" >(c</span>hatName) =&gt; (<span class="cstat-no" title="statement not covered" >{</span>
+  type: DELETE_CHAT,
+  chatName,
+});
 &nbsp;
-  return (
-    &lt;MessageListItem className={MessageListItemClasses} disablePadding={true}&gt;
-      {message.text}
-      &lt;span className={style['message__author-sign']}&gt;{message.author}&lt;/span&gt;
-    &lt;/MessageListItem&gt;
-  );
-};
+export const addMessage: AddMessage = <span class="fstat-no" title="function not covered" >(c</span>hatName, text) =&gt; (<span class="cstat-no" title="statement not covered" >{</span>
+  type: ADD_MESSAGE,
+  chatName,
+  text,
+});
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -156,14 +135,14 @@ export const Message: FC&lt;MessageProps&gt; = ({ message, variant = 'medium' })
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
                 at Mon Jun 20 2022 13:30:21 GMT+0200 (Central European Summer Time)
             </div>
-        <script src="../../../../../prettify.js"></script>
+        <script src="../../../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../../../../../sorter.js"></script>
-        <script src="../../../../../block-navigation.js"></script>
+        <script src="../../../sorter.js"></script>
+        <script src="../../../block-navigation.js"></script>
     </body>
 </html>
     
