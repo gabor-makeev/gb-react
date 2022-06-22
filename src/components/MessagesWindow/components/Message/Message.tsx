@@ -3,7 +3,7 @@ import { AUTHORS } from '../../../../constants';
 import { FC } from 'react';
 import { MessageListItem } from '../../../StyledMUIComponents/MessageListItem';
 import classNames from 'classnames';
-import { MessageItem } from '../../../../store/messages/reducer';
+import { MessageItem } from 'src/default-types';
 
 interface MessageProps {
   message: MessageItem;

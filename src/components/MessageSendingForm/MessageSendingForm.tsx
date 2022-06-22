@@ -7,7 +7,9 @@ import { Input } from './components/Input/Input';
 import { Container } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { addMessage } from '../../store/messages/actions';
+import { addMessageWithBotReply } from '../../store/messages/actions';
+import { Authors } from 'src/default-types';
+import { ThunkDispatch } from 'redux-thunk';
 
 interface MessageFormProps {
   border?: string;
@@ -17,7 +19,7 @@ interface MessageFormProps {
 export const MessageSendingForm: FC<MessageFormProps> = memo(
   ({ border = STYLES.border, borderRadius = STYLES.borderRadius }) => {
     const [inputValue, setInputValue] = useState('');
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<ThunkDispatch<any, void, any>>();
     const { chatId } = useParams();
 
     const formContainerStyle = {
@@ -37,7 +39,12 @@ export const MessageSendingForm: FC<MessageFormProps> = memo(
       e.preventDefault();
 
       if (chatId) {
-        dispatch(addMessage(chatId, inputValue));
+        dispatch(
+          addMessageWithBotReply(chatId, {
+            author: Authors.USER,
+            text: inputValue,
+          })
+        );
       }
 
       setInputValue('');

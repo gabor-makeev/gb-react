@@ -14,24 +14,6 @@ export const Messenger: FC = () => {
   const { chatId } = useParams();
   const messages = useSelector(selectMessages, shallowEqual);
 
-  // The following function will be recreated within the next lesson:
-  // useEffect(() => {
-  //   if (
-  //     chatId &&
-  //     messages[chatId]?.length > 0 &&
-  //     messages[chatId][messages[chatId].length - 1].author === AUTHORS.user
-  //   ) {
-  //     const timeout = setTimeout(() => {
-  //       addMessage(chatId, {
-  //         text: 'robot responses ',
-  //         author: AUTHORS.bot,
-  //       });
-  //     }, 1500);
-  //
-  //     return () => clearTimeout(timeout);
-  //   }
-  // }, [chatId, messages]);
-
   if (chatId && !messages[chatId]) {
     return <Navigate to="/messenger" replace />;
   }

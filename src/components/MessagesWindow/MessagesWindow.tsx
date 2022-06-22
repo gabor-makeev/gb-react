@@ -3,7 +3,7 @@ import { MessageList } from '../StyledMUIComponents/MessageList';
 import { Message } from './components/Message/Message';
 import { FC } from 'react';
 import classNames from 'classnames';
-import { MessageItem } from '../../store/messages/reducer';
+import { MessageItem } from 'src/default-types';
 
 interface MessageWindowProps {
   messages: MessageItem[];

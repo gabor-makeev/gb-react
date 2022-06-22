@@ -9,6 +9,11 @@ export interface ChatItem {
   id: string;
 }
 
+export interface MessageItem {
+  text: string;
+  author: Authors;
+}
+
 export enum Authors {
   USER = 'Gabor',
   BOT = '🤖 Bot',

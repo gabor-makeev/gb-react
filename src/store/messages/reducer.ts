@@ -2,17 +2,12 @@ import { Reducer } from 'redux';
 import { MessagesActions } from './types';
 import { ADD_CHAT, ADD_MESSAGE, DELETE_CHAT } from './actions';
 import { nanoid } from 'nanoid';
-import { AUTHORS } from '../../constants';
-import { Authors } from '../../default-types';
+import { MessageItem } from '../../default-types';
 
-export interface MessageItem {
-  id: string;
-  text: string;
-  author: Authors;
-}
+type MessageItemWithId = { id: string } & MessageItem;
 
 export interface MessageState {
-  [key: string]: MessageItem[];
+  [key: string]: MessageItemWithId[];
 }
 
 const initialState: MessageState = {};
@@ -39,8 +34,8 @@ export const messagesReducer: Reducer<MessageState, MessagesActions> = (
           ...state[action.chatName],
           {
             id: nanoid(),
-            author: AUTHORS.user,
-            text: action.text,
+            author: action.message.author,
+            text: action.message.text,
           },
         ],
       };

@@ -1,5 +1,4 @@
-import { Authors } from './default-types';
-import { MessageItem } from './store/messages/reducer';
+import { Authors, MessageItem } from './default-types';
 
 export const NAVIGATION = [
   {
