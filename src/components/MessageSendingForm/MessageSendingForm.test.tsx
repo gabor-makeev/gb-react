@@ -3,38 +3,33 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 import { MessageSendingForm } from './MessageSendingForm';
-import userEvent from '@testing-library/user-event';
+import { Provider } from 'react-redux';
+import { store } from 'src/store';
 
 describe('MessageForm', () => {
-  const mockHandler = jest.fn();
   it('should render', () => {
-    render(<MessageSendingForm handleAddMessage={mockHandler} />);
+    render(
+      <Provider store={store}>
+        <MessageSendingForm />
+      </Provider>
+    );
   });
 
   it('should have the button disabled when no input entered', () => {
-    render(<MessageSendingForm handleAddMessage={mockHandler} />);
+    render(
+      <Provider store={store}>
+        <MessageSendingForm />
+      </Provider>
+    );
 
     expect(screen.getByRole('button')).toBeDisabled();
   });
 
-  it('should have clear input field after message sent', async () => {
-    const mockHandler = jest.fn();
-    render(<MessageSendingForm handleAddMessage={mockHandler} />);
-    const input: HTMLInputElement = screen.getByDisplayValue('');
-
-    await userEvent.type(input, 'test');
-    await userEvent.click(screen.getByRole('button'));
-
-    expect(input.value).toBe('');
-  });
-
   it('should render with snapshot', () => {
     const { asFragment } = render(
-      <MessageSendingForm
-        handleAddMessage={mockHandler}
-        border={'2px solid blue'}
-        borderRadius={'25px'}
-      />
+      <Provider store={store}>
+        <MessageSendingForm border={'2px solid blue'} borderRadius={'25px'} />
+      </Provider>
     );
 
     expect(asFragment()).toMatchSnapshot();

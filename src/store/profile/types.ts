@@ -1,4 +1,4 @@
-import { CHANGE_NAME, TOGGLE_PUBLIC } from 'store/profile/actions';
+import { CHANGE_NAME, TOGGLE_PUBLIC } from './actions';
 
 export type ProfileActions = ChangeName | TogglePublic;
 

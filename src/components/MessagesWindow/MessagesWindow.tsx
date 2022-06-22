@@ -1,9 +1,9 @@
 import style from './MessagesWindow.module.scss';
 import { MessageList } from '../StyledMUIComponents/MessageList';
 import { Message } from './components/Message/Message';
-import { MessageItem } from 'src/default-types';
 import { FC } from 'react';
 import classNames from 'classnames';
+import { MessageItem } from '../../store/messages/reducer';
 
 interface MessageWindowProps {
   messages: MessageItem[];

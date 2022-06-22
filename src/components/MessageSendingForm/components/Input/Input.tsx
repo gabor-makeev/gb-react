@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 
 interface InputProps {
   placeholder?: string;
-  isInputActive?: boolean;
+  disabled?: boolean;
   value?: string;
   setValue: (inputValue: string) => void;
   shouldAutoFocus?: boolean;
@@ -12,7 +12,7 @@ interface InputProps {
 
 export const Input: FC<InputProps> = ({
   placeholder,
-  isInputActive = true,
+  disabled = false,
   value,
   setValue,
   shouldAutoFocus = true,
@@ -31,7 +31,7 @@ export const Input: FC<InputProps> = ({
       variant="outlined"
       type="text"
       value={value}
-      disabled={!isInputActive}
+      disabled={disabled}
       placeholder={placeholder}
       inputRef={element}
       className={style.input}

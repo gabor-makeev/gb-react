@@ -1,59 +1,36 @@
 import style from './Messenger.module.scss';
-import { AUTHORS } from '../../constants';
-import { FC, useCallback, useEffect } from 'react';
+import { FC } from 'react';
 
 import { MessageSendingForm } from 'components/MessageSendingForm/MessageSendingForm';
 import { ChatsSelector } from 'components/ChatsSelector/ChatsSelector';
 import { Container } from '@mui/material';
 import { MessageSectionContainer } from 'components/StyledMUIComponents/MessageSectionContainer';
 import { MessagesWindow } from 'components/MessagesWindow/MessagesWindow';
-import { ChatItem, MessageItem, MessageList } from 'src/default-types';
 import { Navigate, useParams } from 'react-router-dom';
+import { shallowEqual, useSelector } from 'react-redux';
+import { selectMessages } from '../../store/messages/selectors';
 
-interface MessengerProps {
-  chats: ChatItem[];
-  addChat: (chat: ChatItem) => void;
-  messages: MessageList;
-  addMessage: (chatId: string, messege: MessageItem) => void;
-  deleteChat: (chat: ChatItem) => void;
-  isMessageSendingActive?: boolean;
-}
-
-export const Messenger: FC<MessengerProps> = ({
-  chats,
-  addChat,
-  messages,
-  addMessage,
-  deleteChat,
-  isMessageSendingActive = false,
-}) => {
+export const Messenger: FC = () => {
   const { chatId } = useParams();
+  const messages = useSelector(selectMessages, shallowEqual);
 
-  useEffect(() => {
-    if (
-      chatId &&
-      messages[chatId]?.length > 0 &&
-      messages[chatId][messages[chatId].length - 1].author === AUTHORS.user
-    ) {
-      const timeout = setTimeout(() => {
-        addMessage(chatId, {
-          text: 'robot responses ',
-          author: AUTHORS.bot,
-        });
-      }, 1500);
-
-      return () => clearTimeout(timeout);
-    }
-  }, [chatId, messages]);
-
-  const handleAddMessage = useCallback(
-    (message: MessageItem) => {
-      if (chatId) {
-        addMessage(chatId, message);
-      }
-    },
-    [chatId, addMessage]
-  );
+  // The following function will be recreated within the next lesson:
+  // useEffect(() => {
+  //   if (
+  //     chatId &&
+  //     messages[chatId]?.length > 0 &&
+  //     messages[chatId][messages[chatId].length - 1].author === AUTHORS.user
+  //   ) {
+  //     const timeout = setTimeout(() => {
+  //       addMessage(chatId, {
+  //         text: 'robot responses ',
+  //         author: AUTHORS.bot,
+  //       });
+  //     }, 1500);
+  //
+  //     return () => clearTimeout(timeout);
+  //   }
+  // }, [chatId, messages]);
 
   if (chatId && !messages[chatId]) {
     return <Navigate to="/messenger" replace />;
@@ -62,18 +39,11 @@ export const Messenger: FC<MessengerProps> = ({
   return (
     <div className={style.app}>
       <Container>
-        <ChatsSelector
-          chats={chats}
-          addChat={addChat}
-          deleteChat={deleteChat}
-        />
+        <ChatsSelector />
       </Container>
       <MessageSectionContainer>
         <MessagesWindow messages={chatId ? messages[chatId] : []} />
-        <MessageSendingForm
-          handleAddMessage={handleAddMessage}
-          isMessageSendingFormActive={isMessageSendingActive}
-        />
+        <MessageSendingForm />
       </MessageSectionContainer>
     </div>
   );

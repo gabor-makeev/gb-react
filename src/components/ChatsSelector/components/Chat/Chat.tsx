@@ -1,21 +1,20 @@
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import { FC } from 'react';
-import { ChatItem } from 'src/default-types';
 import { Link } from 'react-router-dom';
 
 interface ChatProps {
-  chat: ChatItem;
-  deleteChat: (chat: ChatItem) => void;
+  chatName: string;
+  deleteChat: (chatName: string) => void;
 }
 
-export const Chat: FC<ChatProps> = ({ chat, deleteChat }) => {
+export const Chat: FC<ChatProps> = ({ chatName, deleteChat }) => {
   return (
     <ListItem alignItems="flex-start">
-      <Link to={`/messenger/${chat.name}`}>
-        <ListItemText primary={chat.name} />
+      <Link to={`/messenger/${chatName}`}>
+        <ListItemText primary={chatName} />
       </Link>
-      <button onClick={() => deleteChat(chat)}>x</button>
+      <button onClick={() => deleteChat(chatName)}>x</button>
     </ListItem>
   );
 };

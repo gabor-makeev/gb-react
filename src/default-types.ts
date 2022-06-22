@@ -1,12 +1,3 @@
-export interface MessageItem {
-  text: string;
-  author: string;
-}
-
-export interface MessageList {
-  [key: string]: MessageItem[];
-}
-
 export interface NavigationItem {
   id: number;
   name: string;
@@ -16,4 +7,9 @@ export interface NavigationItem {
 export interface ChatItem {
   name: string;
   id: string;
+}
+
+export enum Authors {
+  USER = 'Gabor',
+  BOT = '🤖 Bot',
 }
