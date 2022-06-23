@@ -166,7 +166,7 @@ import { FC, useEffect, useState } from 'react';
 import { MessageSendingForm } from 'components/MessageSendingForm/MessageSendingForm';
 import { ChatsSelector } from 'components/ChatsSelector/ChatsSelector';
 import { Container } from '@mui/material';
-import { MessageSectionContainer } from 'components/StyledMUIComponents/MessageSectionContainer';
+import { MUIStyledMessageSectionContainer } from 'components/StyledMUIComponents/MUIStyledMessageSectionContainer';
 import { MessageItem } from './default-types';
 import { MessagesWindow } from 'components/MessagesWindow/MessagesWindow';
 &nbsp;
@@ -197,13 +197,13 @@ export const Messenger: FC = () =&gt; {
       &lt;Container&gt;
         &lt;ChatsSelector chats={DUMMY_CHATS} /&gt;
       &lt;/Container&gt;
-      &lt;MessageSectionContainer&gt;
+      &lt;MUIStyledMessageSectionContainer&gt;
         &lt;MessagesWindow messages={messageList} /&gt;
         &lt;MessageSendingForm
           setMessageList={setMessageList}
           messageList={messageList}
         /&gt;
-      &lt;/MessageSectionContainer&gt;
+      &lt;/MUIStyledMessageSectionContainer&gt;
     &lt;/div&gt;
   );
 };

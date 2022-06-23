@@ -132,8 +132,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import style from './MessagesWindow.module.scss';
-import { MessageList } from 'components/StyledMUIComponents/MessageList';
-import { Message } from './components/Message/Message';
+import { MUIStyledMessageList } from 'components/StyledMUIComponents/MUIStyledMessageList';
+import { MessageItem } from './components/MessageItem/MessageItem';
 import { MessageItem } from 'src/default-types';
 import { FC } from 'react';
 import classNames from 'classnames';
@@ -158,11 +158,11 @@ export const MessagesWindow: FC&lt;MessageWindowProps&gt; = ({
   );
 &nbsp;
   return (
-    &lt;MessageList className={classes} data-testid={'messageList'}&gt;
+    &lt;MUIStyledMessageList className={classes} data-testid={'messageList'}&gt;
       {messages.map((message, idx) =&gt; (
-        &lt;Message message={message} key={idx} /&gt;
+        &lt;MessageItem message={message} key={idx} /&gt;
       ))}
-    &lt;/MessageList&gt;
+    &lt;/MUIStyledMessageList&gt;
   );
 };
 &nbsp;</pre></td></tr></table></pre>

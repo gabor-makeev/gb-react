@@ -115,7 +115,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import style from './MessagesWindow.module.scss';
 import List from '@mui/material/List';
-import { Message } from '../Message/Message';
+import { MessageItem } from '../MessageItem/MessageItem';
 &nbsp;
 export const MessagesWindow = ({ messages = [], gap = '10px' }) =&gt; {
   const messageListStyle = {
@@ -133,7 +133,7 @@ export const MessagesWindow = ({ messages = [], gap = '10px' }) =&gt; {
       data-testid={'messageList'}
     &gt;
       {messages.map((message, idx) =&gt; (
-        &lt;Message message={message} key={idx} /&gt;
+        &lt;MessageItem message={message} key={idx} /&gt;
       ))}
     &lt;/List&gt;
   );

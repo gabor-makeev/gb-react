@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/components/ChatsSelector/components/Selector/Selector.tsx</title>
+    <title>Code coverage report for src/components/ChatsSelector/components/ChatList/ChatList.tsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../../../prettify.css" />
     <link rel="stylesheet" href="../../../../../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../../../index.html">All files</a> / <a href="index.html">src/components/ChatsSelector/components/Selector</a> Selector.tsx</h1>
+        <h1><a href="../../../../../index.html">All files</a> / <a href="index.html">src/components/ChatsSelector/components/ChatList</a> ChatList.tsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -99,7 +99,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Chat } from '../Chat/Chat';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { ChatItem } from '../ChatItem/ChatItem';
 import List from '@mui/material/List';
 import { ChatItem } from 'src/default-types';
 import { FC } from 'react';
@@ -108,11 +108,11 @@ interface MenuProps {
   chats: ChatItem[];
 }
 &nbsp;
-export const Selector: FC&lt;MenuProps&gt; = ({ chats }) =&gt; {
+export const ChatList: FC&lt;MenuProps&gt; = ({ chats }) =&gt; {
   return (
     &lt;List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}&gt;
       {chats.map((chat) =&gt; (
-        &lt;Chat chat={chat} key={chat.id} /&gt;
+        &lt;ChatItem chat={chat} key={chat.id} /&gt;
       ))}
     &lt;/List&gt;
   );
