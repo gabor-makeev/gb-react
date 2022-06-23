@@ -5,26 +5,29 @@ import { Profile } from 'src/pages/Profile/Profile';
 import { Messenger } from 'src/pages/Messenger/Messenger';
 import { FC } from 'react';
 import { Provider } from 'react-redux';
-import { store } from 'src/store';
+import { store, persistor } from 'src/store';
 import { AboutWithConnect } from 'src/pages/About/About';
+import { PersistGate } from 'redux-persist/integration/react';
 
 export const App: FC = () => {
   return (
     <Provider store={store}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<BasePageTemplate />}>
-            <Route index element={<Main />} />
-            <Route path="profile" element={<Profile />} />
-            <Route path="about" element={<AboutWithConnect />} />
-            <Route path="messenger">
-              <Route index element={<Messenger />} />
-              <Route path=":chatId" element={<Messenger />} />
+      <PersistGate persistor={persistor}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<BasePageTemplate />}>
+              <Route index element={<Main />} />
+              <Route path="profile" element={<Profile />} />
+              <Route path="about" element={<AboutWithConnect />} />
+              <Route path="messenger">
+                <Route index element={<Messenger />} />
+                <Route path=":chatId" element={<Messenger />} />
+              </Route>
             </Route>
-          </Route>
-          <Route path="*" element={<h2>404</h2>} />
-        </Routes>
-      </BrowserRouter>
+            <Route path="*" element={<h2>404</h2>} />
+          </Routes>
+        </BrowserRouter>
+      </PersistGate>
     </Provider>
   );
 };
