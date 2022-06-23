@@ -1,6 +1,11 @@
 import { Reducer } from 'redux';
 import { MessagesActions } from './types';
-import { ADD_CHAT, ADD_MESSAGE, DELETE_CHAT } from './actions';
+import {
+  ADD_CHAT,
+  ADD_MESSAGE,
+  ADD_MESSAGE_WITH_BOT_REPLY,
+  DELETE_CHAT,
+} from './actions';
 import { nanoid } from 'nanoid';
 import { Message } from '../../default-types';
 
@@ -39,6 +44,8 @@ export const messagesReducer: Reducer<MessageState, MessagesActions> = (
           },
         ],
       };
+    case ADD_MESSAGE_WITH_BOT_REPLY:
+      return { ...state };
     default:
       return state;
   }

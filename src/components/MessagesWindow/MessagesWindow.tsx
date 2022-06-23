@@ -4,7 +4,6 @@ import { MUIStyledMessageSectionContainer } from 'components/MUIStyledComponents
 import { MessageSendingForm } from 'components/MessagesWindow/components/MessageSendingForm/MessageSendingForm';
 import { MessageList } from 'components/MessagesWindow/components/MessageList/MessageList';
 import { useDispatch } from 'react-redux';
-import { ThunkDispatch } from 'redux-thunk';
 import { useParams } from 'react-router-dom';
 import { addMessageWithBotReply } from 'store/messages/actions';
 
@@ -15,7 +14,7 @@ interface MessageWindowProps {
 export const MessagesWindow: FC<MessageWindowProps> = ({ messages }) => {
   const [messageSendingFormInputValue, setMessageSendingFormInputValue] =
     useState('');
-  const dispatch = useDispatch<ThunkDispatch<any, void, any>>();
+  const dispatch = useDispatch();
   const { chatId } = useParams();
 
   const onSendMessage = (e: React.FormEvent<HTMLFormElement>) => {

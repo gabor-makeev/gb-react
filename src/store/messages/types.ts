@@ -1,10 +1,16 @@
-import { ADD_CHAT, DELETE_CHAT, ADD_MESSAGE } from './actions';
+import {
+  ADD_CHAT,
+  DELETE_CHAT,
+  ADD_MESSAGE,
+  ADD_MESSAGE_WITH_BOT_REPLY,
+} from './actions';
 import { Message } from 'src/default-types';
 
 export type MessagesActions =
   | ReturnType<AddChat>
   | ReturnType<DeleteChat>
-  | ReturnType<AddMessage>;
+  | ReturnType<AddMessage>
+  | ReturnType<AddMessageWithBotReply>;
 
 export type AddChat = (chatName: string) => {
   type: typeof ADD_CHAT;
@@ -21,6 +27,15 @@ export type AddMessage = (
   message: Message
 ) => {
   type: typeof ADD_MESSAGE;
+  chatName: string;
+  message: Message;
+};
+
+export type AddMessageWithBotReply = (
+  chatName: string,
+  message: Message
+) => {
+  type: typeof ADD_MESSAGE_WITH_BOT_REPLY;
   chatName: string;
   message: Message;
 };
