@@ -1,5 +1,5 @@
 import { AddChat, AddMessage, DeleteChat } from './types';
-import { Authors, MessageItem } from 'src/default-types';
+import { Authors, Message } from '../../default-types';
 import { Dispatch } from 'redux';
 
 export const ADD_CHAT = 'MESSAGES::ADD_CHAT';
@@ -25,7 +25,7 @@ export const addMessage: AddMessage = (chatName, message) => ({
 let timeout: NodeJS.Timeout;
 
 export const addMessageWithBotReply =
-  (chatName: string, message: MessageItem) => (dispatch: Dispatch) => {
+  (chatName: string, message: Message) => (dispatch: Dispatch) => {
     dispatch(addMessage(chatName, message));
 
     if (message.author !== Authors.BOT) {

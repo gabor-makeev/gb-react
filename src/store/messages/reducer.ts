@@ -2,9 +2,9 @@ import { Reducer } from 'redux';
 import { MessagesActions } from './types';
 import { ADD_CHAT, ADD_MESSAGE, DELETE_CHAT } from './actions';
 import { nanoid } from 'nanoid';
-import { MessageItem } from '../../default-types';
+import { Message } from '../../default-types';
 
-type MessageItemWithId = { id: string } & MessageItem;
+type MessageItemWithId = { id: string } & Message;
 
 export interface MessageState {
   [key: string]: MessageItemWithId[];

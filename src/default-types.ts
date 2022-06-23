@@ -4,12 +4,12 @@ export interface NavigationItem {
   path: string;
 }
 
-export interface ChatItem {
+export interface Chat {
   name: string;
   id: string;
 }
 
-export interface MessageItem {
+export interface Message {
   text: string;
   author: Authors;
 }

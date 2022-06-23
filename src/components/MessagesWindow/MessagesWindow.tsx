@@ -1,34 +1,47 @@
-import style from './MessagesWindow.module.scss';
-import { MessageList } from '../StyledMUIComponents/MessageList';
-import { Message } from './components/Message/Message';
-import { FC } from 'react';
-import classNames from 'classnames';
-import { MessageItem } from 'src/default-types';
+import React, { FC, useState } from 'react';
+import { Authors, Message } from 'src/default-types';
+import { MUIStyledMessageSectionContainer } from 'components/MUIStyledComponents/MUIStyledMessageSectionContainer';
+import { MessageSendingForm } from 'components/MessagesWindow/components/MessageSendingForm/MessageSendingForm';
+import { MessageList } from 'components/MessagesWindow/components/MessageList/MessageList';
+import { useDispatch } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { useParams } from 'react-router-dom';
+import { addMessageWithBotReply } from 'store/messages/actions';
 
 interface MessageWindowProps {
-  messages: MessageItem[];
-  gapType?: string;
-  angleType?: string;
-  backgroundColor?: string;
+  messages: Message[];
 }
 
-export const MessagesWindow: FC<MessageWindowProps> = ({
-  messages,
-  gapType = 'medium',
-  angleType = 'round',
-  backgroundColor = 'primary',
-}) => {
-  const classes = classNames(
-    style[`gap-${gapType}`],
-    style[`angle-${angleType}`],
-    style[`background-color-${backgroundColor}`]
-  );
+export const MessagesWindow: FC<MessageWindowProps> = ({ messages }) => {
+  const [messageSendingFormInputValue, setMessageSendingFormInputValue] =
+    useState('');
+  const dispatch = useDispatch<ThunkDispatch<any, void, any>>();
+  const { chatId } = useParams();
+
+  const onSendMessage = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (chatId) {
+      dispatch(
+        addMessageWithBotReply(chatId, {
+          author: Authors.USER,
+          text: messageSendingFormInputValue,
+        })
+      );
+    }
+
+    setMessageSendingFormInputValue('');
+  };
 
   return (
-    <MessageList className={classes} data-testid={'messageList'}>
-      {messages.map((message, idx) => (
-        <Message message={message} key={idx} />
-      ))}
-    </MessageList>
+    <MUIStyledMessageSectionContainer>
+      <MessageList messages={messages} />
+      <MessageSendingForm
+        isInputDisabled={!chatId}
+        onSendMessage={onSendMessage}
+        inputValue={messageSendingFormInputValue}
+        setInputValue={setMessageSendingFormInputValue}
+      />
+    </MUIStyledMessageSectionContainer>
   );
 };
