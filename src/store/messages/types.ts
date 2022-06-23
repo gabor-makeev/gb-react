@@ -4,7 +4,7 @@ import {
   ADD_MESSAGE,
   ADD_MESSAGE_WITH_BOT_REPLY,
 } from './actions';
-import { Message } from 'src/default-types';
+import { Message } from '../../default-types';
 
 export type MessagesActions =
   | ReturnType<AddChat>

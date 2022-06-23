@@ -1,7 +1,7 @@
 import { delay, put, takeLatest } from 'redux-saga/effects';
-import { Authors } from 'src/default-types';
-import { ADD_MESSAGE_WITH_BOT_REPLY, addMessage } from 'store/messages/actions';
-import { AddMessage } from 'store/messages/types';
+import { Authors } from '../default-types';
+import { ADD_MESSAGE_WITH_BOT_REPLY, addMessage } from './messages/actions';
+import { AddMessage } from './messages/types';
 
 export function* addMessageWithBotReply(action: ReturnType<AddMessage>) {
   yield put(addMessage(action.chatName, action.message));

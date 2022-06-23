@@ -6,7 +6,7 @@ import {
   DELETE_CHAT,
   deleteChat,
 } from 'store/messages/actions';
-import { Authors } from 'src/default-types';
+import { Authors } from '../../default-types';
 
 describe('messages/actions', () => {
   it('should return AddChat action return object', () => {
