@@ -4,7 +4,7 @@ exports[`Button should render with snapshot 1`] = `
 <DocumentFragment>
   <button
     class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root button css-1e6y48t-MuiButtonBase-root-MuiButton-root"
-    data-testid="message-send-button"
+    data-testid="messageSendingFormButton"
     tabindex="0"
     type="submit"
   >

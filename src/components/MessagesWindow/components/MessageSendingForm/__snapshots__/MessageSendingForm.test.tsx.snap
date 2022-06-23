@@ -7,12 +7,13 @@ exports[`MessageForm should render with snapshot 1`] = `
   >
     <div
       class="MuiFormControl-root MuiTextField-root input css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
+      data-testid="messageSendingFormInput"
     >
       <label
         class="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-root MuiFormLabel-colorPrimary Mui-focused css-1sumxir-MuiFormLabel-root-MuiInputLabel-root"
         data-shrink="true"
-        for=":r2:"
-        id=":r2:-label"
+        for=":r3:"
+        id=":r3:-label"
       >
         Message
       </label>
@@ -22,7 +23,7 @@ exports[`MessageForm should render with snapshot 1`] = `
         <input
           aria-invalid="false"
           class="MuiOutlinedInput-input MuiInputBase-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
-          id=":r2:"
+          id=":r3:"
           type="text"
           value=""
         />
@@ -42,7 +43,7 @@ exports[`MessageForm should render with snapshot 1`] = `
     </div>
     <button
       class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root Mui-disabled button css-1e6y48t-MuiButtonBase-root-MuiButton-root"
-      data-testid="message-send-button"
+      data-testid="messageSendingFormButton"
       disabled=""
       tabindex="-1"
       type="submit"

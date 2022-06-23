@@ -38,6 +38,7 @@ export const Input: FC<InputProps> = ({
       onChange={(e) => {
         setValue(e.target.value);
       }}
+      data-testid={'messageSendingFormInput'}
     />
   );
 };

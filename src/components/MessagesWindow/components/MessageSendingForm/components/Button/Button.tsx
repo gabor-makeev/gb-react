@@ -12,7 +12,7 @@ export const Button: FC<ButtonProps> = ({ disabled = false }) => {
       className={style.button}
       disabled={disabled}
       type={'submit'}
-      data-testid={'message-send-button'}
+      data-testid={'messageSendingFormButton'}
     >
       Send
     </MaterialButton>

@@ -4,6 +4,7 @@ exports[`Input should render with snapshot 1`] = `
 <DocumentFragment>
   <div
     class="MuiFormControl-root MuiTextField-root input css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
+    data-testid="messageSendingFormInput"
   >
     <label
       class="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-root MuiFormLabel-colorPrimary MuiFormLabel-filled Mui-focused css-1sumxir-MuiFormLabel-root-MuiInputLabel-root"

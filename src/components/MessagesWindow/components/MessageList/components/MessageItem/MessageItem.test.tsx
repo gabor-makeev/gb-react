@@ -4,6 +4,7 @@ import '@testing-library/jest-dom';
 
 import { MessageItem } from './MessageItem';
 import { DUMMY_CONTENT } from '../../../../../../constants';
+import { Authors, Message } from 'src/default-types';
 
 const dummyMessage = DUMMY_CONTENT.messages[0];
 
@@ -22,24 +23,18 @@ describe('Message', () => {
     expect(screen.getByText(dummyMessage.author)).toBeInTheDocument();
   });
 
-  // the code displayed below has to be deleted as soon as there is no way to test non-inline styles with jest:
+  it('should have system message classname applied for bot message', () => {
+    const message: Message = {
+      author: Authors.BOT,
+      text: 'test',
+    };
 
-  // it('should use default messageStyle property when such not passed', () => {
-  //   render(<MessageItem message={dummyMessage} />);
-  //   expect(screen.getByText(dummyMessage.text)).toHaveStyle(
-  //     `background-color: ${STYLES.color.secondary}`
-  //   );
-  // });
+    render(<MessageItem message={message} />);
 
-  // the code displayed below has to be deleted as soon as there is no way to test non-inline styles with jest:
+    const messageItem = screen.getByTestId('messageItem');
 
-  // it('should use padding style passed in padding prop', () => {
-  //   render(<MessageItem message={dummyMessage} padding={'100px 100px'} />);
-  //
-  //   expect(screen.getByText(dummyMessage.text)).toHaveStyle(
-  //     'padding: 100px 100px'
-  //   );
-  // });
+    expect(messageItem).toHaveClass('message__system-background');
+  });
 
   it('should render with snapshot', () => {
     const { asFragment } = render(<MessageItem message={dummyMessage} />);

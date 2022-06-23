@@ -26,6 +26,7 @@ export const MessageItem: FC<MessageItemProps> = ({
     <MUIStyledMessageListItem
       className={MessageListItemClasses}
       disablePadding={true}
+      data-testid={'messageItem'}
     >
       {message.text}
       <span className={style['message__author-sign']}>{message.author}</span>
