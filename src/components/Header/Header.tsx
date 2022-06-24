@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { NavigationItem } from '../../default-types';
+import { NavigationItem } from 'src/default-types';
 import { NavLink } from 'react-router-dom';
 import style from './Header.module.scss';
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
-import { AUTHORS, DUMMY_CONTENT } from '../../../../constants';
+import { AUTHORS, DUMMY_CONTENT } from 'src/constants';
 import { MessageList } from 'components/MessagesWindow/components/MessageList/MessageList';
 
 describe('MessageList', () => {

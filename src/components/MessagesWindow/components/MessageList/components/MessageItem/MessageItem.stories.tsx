@@ -1,5 +1,5 @@
 import { MessageItem } from './MessageItem';
-import { DUMMY_CONTENT } from '../../../../../../constants';
+import { DUMMY_CONTENT } from 'src/constants';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 export default {

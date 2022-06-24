@@ -1,7 +1,7 @@
 import { MessageSendingForm } from './MessageSendingForm';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Provider } from 'react-redux';
-import { store } from '../../../../store';
+import { store } from 'src/store';
 
 export default {
   title: 'MessageSendingForm',

@@ -7,7 +7,7 @@ import {
   DELETE_CHAT,
 } from './actions';
 import { nanoid } from 'nanoid';
-import { Message } from '../../default-types';
+import { Message } from 'src/default-types';
 
 type MessageItemWithId = { id: string } & Message;
 
