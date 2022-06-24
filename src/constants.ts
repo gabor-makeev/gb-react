@@ -1,5 +1,4 @@
-import { Authors } from './default-types';
-import { MessageItem } from './store/messages/reducer';
+import { Authors, Message } from './default-types';
 
 export const NAVIGATION = [
   {
@@ -35,8 +34,6 @@ export const STYLES = {
     secondary: '#31E865',
     system: '#FF4F4F',
   },
-  border: '1px solid black',
-  borderRadius: '15px',
 };
 
 export const DUMMY_CONTENT = {
@@ -53,7 +50,7 @@ export const DUMMY_CONTENT = {
       text: 'felis eget velit aliquet sagittis id consectetur purus ut faucibus',
       author: AUTHORS.user,
     },
-  ] as MessageItem[],
+  ] as Message[],
 };
 
 export const DUMMY_CHATS = [

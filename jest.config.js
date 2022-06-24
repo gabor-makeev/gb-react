@@ -90,6 +90,7 @@ module.exports = {
     '\\.(css|scss)$': 'identity-obj-proxy',
     '^components/(.*)': '<rootDir>/src/components/$1',
     '^src/(.*)': '<rootDir>/src/$1',
+    '^store(.*)$': '<rootDir>/src/store$1',
     '^nanoid$': require.resolve('nanoid'),
   },
 
