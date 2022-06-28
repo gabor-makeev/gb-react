@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import { store, persistor } from 'src/store';
 import { AboutWithConnect } from 'src/pages/About/About';
 import { PersistGate } from 'redux-persist/integration/react';
+import { Articles } from 'src/pages/Articles/Articles';
 
 export const App: FC = () => {
   return (
@@ -19,6 +20,7 @@ export const App: FC = () => {
               <Route index element={<Main />} />
               <Route path="profile" element={<Profile />} />
               <Route path="about" element={<AboutWithConnect />} />
+              <Route path="articles" element={<Articles />} />
               <Route path="messenger">
                 <Route index element={<Messenger />} />
                 <Route path=":chatId" element={<Messenger />} />
