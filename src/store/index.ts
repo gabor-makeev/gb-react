@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import { profileReducer } from './profile/reducer';
-import { messagesReducer } from './messages/reducer';
+import { profileReducer } from './profile/slice';
+import { messagesReducer } from './messages/slice';
 import storage from 'redux-persist/lib/storage';
 import { persistStore, persistReducer } from 'redux-persist';
 import createSagaMiddleware from 'redux-saga';

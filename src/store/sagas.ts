@@ -1,25 +1,35 @@
 import { delay, put, takeLatest } from 'redux-saga/effects';
-import { Authors } from '../default-types';
-import { ADD_MESSAGE_WITH_BOT_REPLY, addMessage } from './messages/actions';
-import { AddMessage } from './messages/types';
+import { Authors, Message } from '../default-types';
+import { addMessage, addMessageWithSaga } from './messages/slice';
+import { PayloadAction } from '@reduxjs/toolkit';
 
-export function* addMessageWithBotReply(action: ReturnType<AddMessage>) {
-  yield put(addMessage(action.chatName, action.message));
+export function* addMessageWithBotReply(
+  action: PayloadAction<{ chatName: string; message: Message }>
+) {
+  yield put(
+    addMessage({
+      chatName: action.payload.chatName,
+      message: action.payload.message,
+    })
+  );
 
-  if (action.message.author !== Authors.BOT) {
+  if (action.payload.message.author !== Authors.BOT) {
     yield delay(1500);
 
     yield put(
-      addMessage(action.chatName, {
-        author: Authors.BOT,
-        text: 'Bot response',
+      addMessage({
+        chatName: action.payload.chatName,
+        message: {
+          author: Authors.BOT,
+          text: 'Bot response',
+        },
       })
     );
   }
 }
 
 function* mySaga() {
-  yield takeLatest(ADD_MESSAGE_WITH_BOT_REPLY, addMessageWithBotReply);
+  yield takeLatest(addMessageWithSaga.type, addMessageWithBotReply);
 }
 
 export default mySaga;
