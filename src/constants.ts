@@ -1,5 +1,7 @@
 import { Authors, Message } from './default-types';
 
+export const api = 'https://api.spaceflightnewsapi.net/v3/articles';
+
 export const NAVIGATION = [
   {
     id: 1,
