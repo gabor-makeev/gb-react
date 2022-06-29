@@ -5,6 +5,7 @@ export interface ProfileState {
     name: string;
   };
   isPublic: boolean;
+  isAuth: boolean;
 }
 
 const initialState: ProfileState = {
@@ -12,6 +13,7 @@ const initialState: ProfileState = {
     name: 'Unknown user',
   },
   isPublic: false,
+  isAuth: false,
 };
 
 export const profileSlice = createSlice({
@@ -24,8 +26,11 @@ export const profileSlice = createSlice({
     togglePublic: (state) => {
       state.isPublic = !state.isPublic;
     },
+    setAuth: (state, action: PayloadAction<boolean>) => {
+      state.isAuth = action.payload;
+    },
   },
 });
 
-export const { changeName, togglePublic } = profileSlice.actions;
+export const { changeName, togglePublic, setAuth } = profileSlice.actions;
 export const profileReducer = profileSlice.reducer;
