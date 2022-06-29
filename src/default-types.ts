@@ -18,3 +18,8 @@ export enum Authors {
   USER = 'Gabor',
   BOT = '🤖 Bot',
 }
+
+export interface Article {
+  id: number;
+  title: string;
+}
