@@ -11,6 +11,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { Articles } from 'src/pages/Articles/Articles';
 import { SignIn } from 'src/pages/SignIn/SignIn';
 import { PrivateRoute } from 'components/PrivateRoute';
+import { PublicRoute } from 'components/PublicRoute';
 
 export const App: FC = () => {
   return (
@@ -26,7 +27,10 @@ export const App: FC = () => {
               />
               <Route path="about" element={<AboutWithConnect />} />
               <Route path="articles" element={<Articles />} />
-              <Route path="signin" element={<SignIn />} />
+              <Route
+                path="signin"
+                element={<PublicRoute component={<SignIn />} />}
+              />
               <Route path="messenger" element={<PrivateRoute />}>
                 <Route index element={<Messenger />} />
                 <Route path=":chatId" element={<Messenger />} />
