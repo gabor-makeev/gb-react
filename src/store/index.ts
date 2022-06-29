@@ -13,7 +13,7 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
-} from 'redux-persist/es/constants';
+} from 'redux-persist';
 
 export type StoreState = ReturnType<typeof rootReducer>;
 
