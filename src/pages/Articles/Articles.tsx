@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { api } from 'src/constants';
 import { Article } from 'src/default-types';
+import style from './Articles.module.scss';
 
 export const Articles: FC = () => {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -35,11 +36,25 @@ export const Articles: FC = () => {
       {loading && <p>Loading</p>}
       {error && <p>Error: {error}</p>}
       {!loading && (
-        <ul>
-          {articles.map((article) => (
-            <li key={article.id}>{article.title}</li>
-          ))}
-        </ul>
+        <div className={style.wrapper}>
+          <ul className={style['articles-list']}>
+            {articles.map((article) => (
+              <li key={article.id} className={style['articles-list__item']}>
+                <h3 className={style['articles-list__item__header']}>
+                  {article.title}
+                </h3>
+                <img
+                  src={article.imageUrl}
+                  alt={article.title}
+                  className={style['articles-list__item__img']}
+                />
+                <p className={style['articles-list__item__summary']}>
+                  {article.summary}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </>
   );
