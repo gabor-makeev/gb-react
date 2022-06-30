@@ -1,38 +1,28 @@
-import { FC, useEffect, useState } from 'react';
-import { api } from 'src/constants';
-import { Article } from 'src/default-types';
+import { FC, useEffect } from 'react';
 import style from './Articles.module.scss';
+import { fetchArticles } from 'store/articles/slice';
+import { useDispatch, useSelector } from 'react-redux';
+
+import {
+  selectArticles,
+  selectError,
+  selectLoading,
+} from 'store/articles/selectors';
 
 export const Articles: FC = () => {
-  const [articles, setArticles] = useState<Article[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-
-  const fetchArticles = async () => {
-    setLoading(true);
-    setError('');
-
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    try {
-      const res = await fetch(api);
-      const data = await res.json();
-      setArticles(data);
-    } catch (err) {
-      setError((err as Error).message);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const dispatch = useDispatch() as any;
+  const articles = useSelector(selectArticles);
+  const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
 
   useEffect(() => {
-    fetchArticles();
+    dispatch(fetchArticles());
   }, []);
 
   return (
     <>
       <h2>Articles</h2>
-      <button onClick={fetchArticles}>Get articles</button>
+      <button onClick={() => dispatch(fetchArticles())}>Get articles</button>
       {loading && <p>Loading</p>}
       {error && <p>Error: {error}</p>}
       {!loading && (

@@ -14,6 +14,7 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
+import { articlesReducer } from 'store/articles/slice';
 
 export type StoreState = ReturnType<typeof rootReducer>;
 
@@ -25,6 +26,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   profile: profileReducer,
   messages: messagesReducer,
+  articles: articlesReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
