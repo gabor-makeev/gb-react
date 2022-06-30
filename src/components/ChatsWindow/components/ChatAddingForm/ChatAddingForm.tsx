@@ -21,9 +21,12 @@ export const ChatAddingForm: FC<ChatAddingFormProps> = ({
         variant="outlined"
         type="text"
         value={inputValue}
+        data-testid={'ChatAddingFormTextField'}
         onChange={(e) => setInputValue(e.target.value)}
       />
-      <Button type={'submit'}>Add chat</Button>
+      <Button data-testid={'ChatAddingFormButton'} type={'submit'}>
+        Add chat
+      </Button>
     </form>
   );
 };
