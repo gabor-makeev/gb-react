@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Articles should render with snapshot 1`] = `
+<DocumentFragment>
+  <h2>
+    Articles
+  </h2>
+  <button>
+    Get articles
+  </button>
+  <p>
+    Loading
+  </p>
+</DocumentFragment>
+`;
