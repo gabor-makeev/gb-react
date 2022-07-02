@@ -4,7 +4,7 @@ import { FC } from 'react';
 import { MessagesWindow } from 'components/MessagesWindow/MessagesWindow';
 import { Navigate, useParams } from 'react-router-dom';
 import { shallowEqual, useSelector } from 'react-redux';
-import { selectMessages } from '../../store/messages/selectors';
+import { selectMessages } from 'store/messages/selectors';
 import { ChatsWindow } from 'components/ChatsWindow/ChatsWindow';
 
 export const Messenger: FC = () => {

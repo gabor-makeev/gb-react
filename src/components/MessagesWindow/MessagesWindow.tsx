@@ -5,7 +5,7 @@ import { MessageSendingForm } from 'components/MessagesWindow/components/Message
 import { MessageList } from 'components/MessagesWindow/components/MessageList/MessageList';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { addMessageWithBotReply } from 'store/messages/actions';
+import { addMessageWithSaga } from 'store/messages/slice';
 
 interface MessageWindowProps {
   messages: Message[];
@@ -22,9 +22,12 @@ export const MessagesWindow: FC<MessageWindowProps> = ({ messages }) => {
 
     if (chatId) {
       dispatch(
-        addMessageWithBotReply(chatId, {
-          author: Authors.USER,
-          text: messageSendingFormInputValue,
+        addMessageWithSaga({
+          chatName: chatId,
+          message: {
+            author: Authors.USER,
+            text: messageSendingFormInputValue,
+          },
         })
       );
     }

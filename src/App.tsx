@@ -8,6 +8,10 @@ import { Provider } from 'react-redux';
 import { store, persistor } from 'src/store';
 import { AboutWithConnect } from 'src/pages/About/About';
 import { PersistGate } from 'redux-persist/integration/react';
+import { Articles } from 'src/pages/Articles/Articles';
+import { SignIn } from 'src/pages/SignIn/SignIn';
+import { PrivateRoute } from 'components/PrivateRoute';
+import { PublicRoute } from 'components/PublicRoute';
 
 export const App: FC = () => {
   return (
@@ -17,9 +21,17 @@ export const App: FC = () => {
           <Routes>
             <Route path="/" element={<BasePageTemplate />}>
               <Route index element={<Main />} />
-              <Route path="profile" element={<Profile />} />
+              <Route
+                path="profile"
+                element={<PrivateRoute component={<Profile />} />}
+              />
               <Route path="about" element={<AboutWithConnect />} />
-              <Route path="messenger">
+              <Route path="articles" element={<Articles />} />
+              <Route
+                path="signin"
+                element={<PublicRoute component={<SignIn />} />}
+              />
+              <Route path="messenger" element={<PrivateRoute />}>
                 <Route index element={<Messenger />} />
                 <Route path=":chatId" element={<Messenger />} />
               </Route>

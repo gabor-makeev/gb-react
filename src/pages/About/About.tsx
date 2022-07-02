@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { StoreState } from 'src/store';
 import { Dispatch } from 'redux';
-import { togglePublic } from 'store/profile/actions';
+import { togglePublic } from 'store/profile/slice';
 import { connect } from 'react-redux';
 
 interface AboutProps {

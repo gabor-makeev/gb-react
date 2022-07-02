@@ -1,7 +1,7 @@
 import style from './MessageItem.module.scss';
-import { AUTHORS } from '../../../../../../constants';
+import { AUTHORS } from 'src/constants';
 import { FC } from 'react';
-import { MUIStyledMessageListItem } from '../../../../../MUIStyledComponents/MUIStyledMessageListItem';
+import { MUIStyledMessageListItem } from 'components/MUIStyledComponents/MUIStyledMessageListItem';
 import classNames from 'classnames';
 import { Message } from 'src/default-types';
 

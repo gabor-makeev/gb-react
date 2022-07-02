@@ -1,13 +1,20 @@
-import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
-import { profileReducer } from './profile/reducer';
-import { messagesReducer } from './messages/reducer';
+import { combineReducers } from 'redux';
+import { profileReducer } from './profile/slice';
+import { messagesReducer } from './messages/slice';
 import storage from 'redux-persist/lib/storage';
 import { persistStore, persistReducer } from 'redux-persist';
 import createSagaMiddleware from 'redux-saga';
 import mySaga from './sagas';
-
-export const composeEnhancers =
-  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+import { configureStore } from '@reduxjs/toolkit';
+import {
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
+import { articlesReducer } from 'store/articles/slice';
 
 export type StoreState = ReturnType<typeof rootReducer>;
 
@@ -19,16 +26,23 @@ const persistConfig = {
 const rootReducer = combineReducers({
   profile: profileReducer,
   messages: messagesReducer,
+  articles: articlesReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const sagaMiddleware = createSagaMiddleware();
 
-export const store = createStore(
-  persistedReducer,
-  composeEnhancers(applyMiddleware(sagaMiddleware))
-);
+export const store = configureStore({
+  reducer: persistedReducer,
+  devTools: process.env.NODE_ENV !== 'production',
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }).concat(sagaMiddleware),
+});
 
 sagaMiddleware.run(mySaga);
 

@@ -3,7 +3,7 @@ import { ChatList } from 'components/ChatsWindow/components/ChatList/ChatList';
 import { ChatAddingForm } from 'components/ChatsWindow/components/ChatAddingForm/ChatAddingForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectChats } from 'store/messages/selectors';
-import { addChat, deleteChat } from 'store/messages/actions';
+import { addChat, deleteChat } from 'store/messages/slice';
 import { MUIStyledChatSectionContainer } from '../MUIStyledComponents/MUIStyledChatSectionContainer';
 
 export const ChatsWindow: FC = () => {
@@ -21,7 +21,7 @@ export const ChatsWindow: FC = () => {
     e.preventDefault();
 
     if (inputValue) {
-      dispatch(addChat(inputValue));
+      dispatch(addChat({ chatName: inputValue }));
     }
 
     setChatAddingFormInputValue('');
@@ -31,7 +31,7 @@ export const ChatsWindow: FC = () => {
     <MUIStyledChatSectionContainer>
       <ChatList
         chats={chats}
-        deleteChat={(chatName) => dispatch(deleteChat(chatName))}
+        deleteChat={(chatName) => dispatch(deleteChat({ chatName }))}
       />
       <ChatAddingForm
         onAddChat={onAddChat}
