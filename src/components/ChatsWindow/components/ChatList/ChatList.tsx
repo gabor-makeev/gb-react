@@ -5,7 +5,7 @@ import { Chat } from 'src/default-types';
 
 interface ChatListProps {
   chats: Chat[];
-  deleteChat: (chatName: string) => void;
+  deleteChat: (chatId: string) => void;
 }
 
 export const ChatList: FC<ChatListProps> = ({ chats, deleteChat }) => {
@@ -20,7 +20,11 @@ export const ChatList: FC<ChatListProps> = ({ chats, deleteChat }) => {
       }}
     >
       {chats.map((chat) => (
-        <ChatItem chatName={chat.name} key={chat.id} deleteChat={deleteChat} />
+        <ChatItem
+          chatName={chat.name}
+          key={chat.id}
+          deleteChat={() => deleteChat(chat.name)}
+        />
       ))}
     </List>
   );

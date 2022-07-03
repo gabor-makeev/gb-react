@@ -1,35 +1,48 @@
-import React, { FC, useState } from 'react';
-import { Authors, Message } from 'src/default-types';
+import React, { FC, useEffect, useState } from 'react';
 import { MUIStyledMessageSectionContainer } from 'components/MUIStyledComponents/MUIStyledMessageSectionContainer';
 import { MessageSendingForm } from 'components/MessagesWindow/components/MessageSendingForm/MessageSendingForm';
 import { MessageList } from 'components/MessagesWindow/components/MessageList/MessageList';
-import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { addMessageWithSaga } from 'store/messages/slice';
+import { onValue, push } from 'firebase/database';
+import { getMessagesByChatName } from 'src/services/firebase';
+import { Authors, Message } from 'src/default-types';
 
-interface MessageWindowProps {
-  messages: Message[];
-}
-
-export const MessagesWindow: FC<MessageWindowProps> = ({ messages }) => {
+export const MessagesWindow: FC = () => {
+  const [messages, setMessages] = useState<Message[]>([]);
   const [messageSendingFormInputValue, setMessageSendingFormInputValue] =
     useState('');
-  const dispatch = useDispatch();
   const { chatId } = useParams();
+
+  useEffect(() => {
+    if (chatId) {
+      const unsubscribe = onValue(getMessagesByChatName(chatId), (snapshot) => {
+        if (snapshot.val()) {
+          const firebaseMessagesData = Object.entries(snapshot.val());
+
+          const messagesArray = firebaseMessagesData.map((message: any) => ({
+            id: message[0],
+            text: message[1].text,
+            author: message[1].author,
+          }));
+
+          setMessages(messagesArray);
+        } else {
+          setMessages([]);
+        }
+      });
+
+      return unsubscribe;
+    }
+  }, [chatId]);
 
   const onSendMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (chatId) {
-      dispatch(
-        addMessageWithSaga({
-          chatName: chatId,
-          message: {
-            author: Authors.USER,
-            text: messageSendingFormInputValue,
-          },
-        })
-      );
+      push(getMessagesByChatName(chatId), {
+        text: messageSendingFormInputValue,
+        author: Authors.USER,
+      });
     }
 
     setMessageSendingFormInputValue('');

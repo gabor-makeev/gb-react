@@ -4,9 +4,15 @@ export interface NavigationItem {
   path: string;
 }
 
+export interface FirebaseChats {
+  [id: string]: {
+    createdAt: string;
+  };
+}
+
 export interface Chat {
-  name: string;
   id: string;
+  name: string;
 }
 
 export interface Message {
