@@ -1,8 +1,8 @@
 import React, { FC, useState } from 'react';
+import { signUp } from 'src/services/firebase';
 import { useNavigate } from 'react-router-dom';
-import { logIn } from 'src/services/firebase';
 
-export const SignIn: FC = () => {
+export const SignUp: FC = () => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
@@ -16,18 +16,17 @@ export const SignIn: FC = () => {
     try {
       setLoading(true);
       setError('');
-      await logIn(email, password);
-      navigate('/messenger', { replace: true });
+      await signUp(email, password);
+      navigate('/signin', { replace: true });
     } catch (err) {
       setError((err as Error).message);
     } finally {
       setLoading(false);
     }
   };
-
   return (
     <>
-      <h2>Sign in</h2>
+      <h2>Sign Up</h2>
       {loading && <p>Loading</p>}
       {error && <p>{error}</p>}
       <form onSubmit={handleSubmit}>
@@ -47,7 +46,7 @@ export const SignIn: FC = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </label>
-        <button>Log in</button>
+        <button>Sign up</button>
       </form>
     </>
   );
