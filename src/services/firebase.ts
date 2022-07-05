@@ -37,3 +37,5 @@ export const getChatRefById = (chatName: string) =>
 
 export const getMessagesByChatName = (chatName: string) =>
   ref(database, `chats/${chatName}/messages`);
+
+export const profileRef = ref(database, 'profile');

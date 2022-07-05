@@ -10,17 +10,17 @@ const dummyMessage = DUMMY_CONTENT.messages[0];
 
 describe('Message', () => {
   it('should render', () => {
-    render(<MessageItem message={dummyMessage} />);
+    render(<MessageItem message={dummyMessage} userName={'Test user'} />);
   });
 
   it('should render text in <li>-tag', () => {
-    render(<MessageItem message={dummyMessage} />);
+    render(<MessageItem message={dummyMessage} userName={'Test user'} />);
     expect(screen.getByText(dummyMessage.text)).toBeInTheDocument();
   });
 
   it('should render text in <span>-tag', () => {
-    render(<MessageItem message={dummyMessage} />);
-    expect(screen.getByText(dummyMessage.author)).toBeInTheDocument();
+    render(<MessageItem message={dummyMessage} userName={'Test user'} />);
+    expect(screen.getByText('Test user')).toBeInTheDocument();
   });
 
   it('should have system message classname applied for bot message', () => {
@@ -29,7 +29,7 @@ describe('Message', () => {
       text: 'test',
     };
 
-    render(<MessageItem message={message} />);
+    render(<MessageItem message={message} userName={'Test user'} />);
 
     const messageItem = screen.getByTestId('messageItem');
 
@@ -37,7 +37,9 @@ describe('Message', () => {
   });
 
   it('should render with snapshot', () => {
-    const { asFragment } = render(<MessageItem message={dummyMessage} />);
+    const { asFragment } = render(
+      <MessageItem message={dummyMessage} userName={'Test user'} />
+    );
 
     expect(asFragment()).toMatchSnapshot();
   });

@@ -10,7 +10,7 @@ exports[`Message should render with snapshot 1`] = `
     <span
       class="message__author-sign"
     >
-      Gabor
+      Test user
     </span>
   </li>
 </DocumentFragment>

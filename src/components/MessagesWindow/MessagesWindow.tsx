@@ -5,9 +5,13 @@ import { MessageList } from 'components/MessagesWindow/components/MessageList/Me
 import { useParams } from 'react-router-dom';
 import { onValue, push } from 'firebase/database';
 import { getMessagesByChatName } from 'src/services/firebase';
-import { Authors, Message } from 'src/default-types';
+import { Message } from 'src/default-types';
 
-export const MessagesWindow: FC = () => {
+interface MessagesWindowProps {
+  userName: string;
+}
+
+export const MessagesWindow: FC<MessagesWindowProps> = ({ userName }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [messageSendingFormInputValue, setMessageSendingFormInputValue] =
     useState('');
@@ -41,7 +45,7 @@ export const MessagesWindow: FC = () => {
     if (chatId) {
       push(getMessagesByChatName(chatId), {
         text: messageSendingFormInputValue,
-        author: Authors.USER,
+        author: userName,
       });
     }
 
@@ -50,7 +54,7 @@ export const MessagesWindow: FC = () => {
 
   return (
     <MUIStyledMessageSectionContainer>
-      <MessageList messages={messages} />
+      <MessageList messages={messages} userName={userName} />
       <MessageSendingForm
         isInputDisabled={!chatId}
         onSendMessage={onSendMessage}

@@ -1,21 +1,26 @@
 import React, { FC, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { changeName, togglePublic } from 'store/profile/slice';
-import { selectIsPublic, selectUserName } from 'store/profile/selectors';
 
-export const Profile: FC = () => {
+interface ProfileProps {
+  userProfile: {
+    name: string;
+    isPublic: boolean;
+  };
+  toggleUserIsPublic: () => void;
+  changeUserName: (newUserName: string) => void;
+}
+
+export const Profile: FC<ProfileProps> = ({
+  userProfile,
+  toggleUserIsPublic,
+  changeUserName,
+}) => {
   const [newNameInputValue, setNewNameInputValue] = useState<string>('');
-
-  const name = useSelector(selectUserName);
-  const isPublic = useSelector(selectIsPublic);
-
-  const dispatch = useDispatch();
 
   const handleChangeName = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
     if (newNameInputValue) {
-      dispatch(changeName(newNameInputValue));
+      changeUserName(newNameInputValue);
       setNewNameInputValue('');
     }
   };
@@ -24,17 +29,17 @@ export const Profile: FC = () => {
     <>
       <h2>Profile page</h2>
       <label htmlFor={'isPublic'}>
-        Is profile public? — {isPublic ? 'Yes' : 'No'}
+        Is profile public? — {userProfile.isPublic ? 'Yes' : 'No'}
       </label>
       <p>
         <input
           id={'isPublic'}
           type="checkbox"
-          checked={isPublic}
-          onChange={() => dispatch(togglePublic())}
+          checked={userProfile.isPublic}
+          onChange={toggleUserIsPublic}
         />
       </p>
-      <h3>The user&apos;s name: {name}</h3>
+      <h3>The user&apos;s name: {userProfile.name}</h3>
       <form onSubmit={handleChangeName}>
         <label>
           Enter new name:

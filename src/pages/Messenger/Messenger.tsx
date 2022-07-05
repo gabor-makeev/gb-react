@@ -6,7 +6,11 @@ import { Navigate, useParams } from 'react-router-dom';
 import { ChatsWindow } from 'components/ChatsWindow/ChatsWindow';
 import { getMessagesByChatName } from 'src/services/firebase';
 
-export const Messenger: FC = () => {
+interface MessengerProps {
+  userName: string;
+}
+
+export const Messenger: FC<MessengerProps> = ({ userName }) => {
   const { chatId } = useParams();
 
   if (chatId && !getMessagesByChatName(chatId)) {
@@ -16,7 +20,7 @@ export const Messenger: FC = () => {
   return (
     <div className={style.app}>
       <ChatsWindow />
-      <MessagesWindow />
+      <MessagesWindow userName={userName} />
     </div>
   );
 };
