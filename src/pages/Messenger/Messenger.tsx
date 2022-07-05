@@ -3,22 +3,24 @@ import { FC } from 'react';
 
 import { MessagesWindow } from 'components/MessagesWindow/MessagesWindow';
 import { Navigate, useParams } from 'react-router-dom';
-import { shallowEqual, useSelector } from 'react-redux';
-import { selectMessages } from 'store/messages/selectors';
 import { ChatsWindow } from 'components/ChatsWindow/ChatsWindow';
+import { getMessagesByChatName } from 'src/services/firebase';
 
-export const Messenger: FC = () => {
+interface MessengerProps {
+  userName: string;
+}
+
+export const Messenger: FC<MessengerProps> = ({ userName }) => {
   const { chatId } = useParams();
-  const messages = useSelector(selectMessages, shallowEqual);
 
-  if (chatId && !messages[chatId]) {
+  if (chatId && !getMessagesByChatName(chatId)) {
     return <Navigate to="/messenger" replace />;
   }
 
   return (
     <div className={style.app}>
       <ChatsWindow />
-      <MessagesWindow messages={chatId ? messages[chatId] : []} />
+      <MessagesWindow userName={userName} />
     </div>
   );
 };

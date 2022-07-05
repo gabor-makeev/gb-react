@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 interface ChatItemProps {
   chatName: string;
-  deleteChat: (chatName: string) => void;
+  deleteChat: () => void;
 }
 
 export const ChatItem: FC<ChatItemProps> = ({ chatName, deleteChat }) => {
@@ -17,7 +17,7 @@ export const ChatItem: FC<ChatItemProps> = ({ chatName, deleteChat }) => {
       <Link to={`/messenger/${chatName}`}>
         <ListItemText primary={chatName} />
       </Link>
-      <button onClick={() => deleteChat(chatName)}>x</button>
+      <button onClick={deleteChat}>x</button>
     </ListItem>
   );
 };

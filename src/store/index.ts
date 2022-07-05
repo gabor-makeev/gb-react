@@ -1,27 +1,12 @@
 import { combineReducers } from 'redux';
 import { profileReducer } from './profile/slice';
 import { messagesReducer } from './messages/slice';
-import storage from 'redux-persist/lib/storage';
-import { persistStore, persistReducer } from 'redux-persist';
 import createSagaMiddleware from 'redux-saga';
 import mySaga from './sagas';
 import { configureStore } from '@reduxjs/toolkit';
-import {
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from 'redux-persist';
 import { articlesReducer } from 'store/articles/slice';
 
 export type StoreState = ReturnType<typeof rootReducer>;
-
-const persistConfig = {
-  key: 'root',
-  storage,
-};
 
 const rootReducer = combineReducers({
   profile: profileReducer,
@@ -29,21 +14,14 @@ const rootReducer = combineReducers({
   articles: articlesReducer,
 });
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
 const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer: rootReducer,
   devTools: process.env.NODE_ENV !== 'production',
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }).concat(sagaMiddleware),
+    getDefaultMiddleware().concat(sagaMiddleware),
 });
 
-sagaMiddleware.run(mySaga);
-
-export const persistor = persistStore(store);
+// TODO: saga disabled until adjusted to work with firebase, has to be covered
+// sagaMiddleware.run(mySaga);

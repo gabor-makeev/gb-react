@@ -10,10 +10,12 @@ interface MessageListProps {
   gapType?: string;
   angleType?: string;
   backgroundColor?: string;
+  userName: string;
 }
 
 export const MessageList: FC<MessageListProps> = ({
   messages,
+  userName,
   gapType = 'medium',
   angleType = 'round',
   backgroundColor = 'primary',
@@ -27,7 +29,7 @@ export const MessageList: FC<MessageListProps> = ({
   return (
     <MUIStyledMessageList className={classes} data-testid={'messageList'}>
       {messages.map((message, idx) => (
-        <MessageItem message={message} key={idx} />
+        <MessageItem message={message} userName={userName} key={idx} />
       ))}
     </MUIStyledMessageList>
   );
