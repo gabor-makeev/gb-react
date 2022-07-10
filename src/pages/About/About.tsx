@@ -1,8 +1,10 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { StoreState } from 'src/store';
-// import { togglePublic } from 'store/profile/slice';
-import { connect } from 'react-redux';
-import { setIsPublicWithFirebase } from 'store/profile/slice';
+import { connect, useDispatch } from 'react-redux';
+import {
+  initProfileTracking,
+  setIsPublicWithFirebase,
+} from 'store/profile/slice';
 
 interface AboutProps {
   name: string;
@@ -11,6 +13,12 @@ interface AboutProps {
 }
 
 export const About: FC<AboutProps> = (props) => {
+  const dispatch = useDispatch() as any;
+
+  useEffect(() => {
+    dispatch(initProfileTracking());
+  }, []);
+
   return (
     <>
       <h2>About page</h2>

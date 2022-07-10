@@ -12,10 +12,10 @@ import { PrivateRoute } from 'components/PrivateRoute';
 import { PublicRoute } from 'components/PublicRoute';
 import { SignUp } from 'src/pages/SignUp/SignUp';
 import { firebaseAuth } from 'src/services/firebase';
-import { initProfileTracking, setAuth } from 'store/profile/slice';
+import { setAuth } from 'store/profile/slice';
 
 export const App: FC = () => {
-  const dispatch = useDispatch<any>();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const unsubscribe = firebaseAuth.onAuthStateChanged((user) => {
@@ -28,10 +28,6 @@ export const App: FC = () => {
 
     return unsubscribe;
   }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(initProfileTracking());
-  }, []);
 
   return (
     <BrowserRouter>

@@ -6,8 +6,9 @@ import { useParams } from 'react-router-dom';
 import { onValue, push } from 'firebase/database';
 import { getMessagesByChatName } from 'src/services/firebase';
 import { Message } from 'src/default-types';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectUserName } from 'store/profile/selectors';
+import { initProfileTracking } from 'store/profile/slice';
 
 export const MessagesWindow: FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -15,8 +16,10 @@ export const MessagesWindow: FC = () => {
     useState('');
   const userName = useSelector(selectUserName);
   const { chatId } = useParams();
+  const dispatch = useDispatch() as any;
 
   useEffect(() => {
+    dispatch(initProfileTracking());
     if (chatId) {
       const unsubscribe = onValue(getMessagesByChatName(chatId), (snapshot) => {
         if (snapshot.val()) {

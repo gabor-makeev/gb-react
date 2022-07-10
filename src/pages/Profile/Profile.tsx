@@ -1,7 +1,8 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   changeUserNameWithFirebase,
+  initProfileTracking,
   setIsPublicWithFirebase,
 } from 'store/profile/slice';
 import { selectIsPublic, selectUserName } from 'store/profile/selectors';
@@ -12,6 +13,10 @@ export const Profile: FC = () => {
   const userName = useSelector(selectUserName);
 
   const dispatch = useDispatch() as any;
+
+  useEffect(() => {
+    dispatch(initProfileTracking());
+  }, []);
 
   const changeName = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
