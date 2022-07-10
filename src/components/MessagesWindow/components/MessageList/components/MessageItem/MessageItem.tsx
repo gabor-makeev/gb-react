@@ -1,6 +1,6 @@
 import style from './MessageItem.module.scss';
 import { AUTHORS } from 'src/constants';
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import { MUIStyledMessageListItem } from 'components/MUIStyledComponents/MUIStyledMessageListItem';
 import classNames from 'classnames';
 import { Message } from 'src/default-types';

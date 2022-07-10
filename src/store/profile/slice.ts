@@ -1,6 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { onValue, set } from 'firebase/database';
+import { getProfileChildRef, profileRef } from 'src/services/firebase';
+import { Dispatch } from 'redux';
 
-export interface ProfileState {
+interface ProfileState {
   user: {
     name: string;
   };
@@ -20,17 +23,42 @@ export const profileSlice = createSlice({
   name: 'profile',
   initialState,
   reducers: {
-    changeName: (state, action: PayloadAction<string>) => {
-      state.user.name = action.payload;
-    },
-    togglePublic: (state) => {
-      state.isPublic = !state.isPublic;
-    },
     setAuth: (state, action: PayloadAction<boolean>) => {
       state.isAuth = action.payload;
+    },
+    setProfile: (state, action) => {
+      state.user = action.payload.user;
+      state.isPublic = action.payload.isPublic;
     },
   },
 });
 
-export const { changeName, togglePublic, setAuth } = profileSlice.actions;
+export const changeUserNameWithFirebase = (newUserName: string) => async () => {
+  set(getProfileChildRef('user'), {
+    name: newUserName,
+  });
+};
+
+export const setIsPublicWithFirebase = (isPublic: boolean) => async () => {
+  set(getProfileChildRef('isPublic'), isPublic);
+};
+
+export const initProfileTracking = () => (dispatch: Dispatch) => {
+  onValue(profileRef, async (snapshot) => {
+    const snapshotVal = await snapshot.val();
+
+    if (!snapshotVal) {
+      set(profileRef, {
+        user: initialState.user,
+        isPublic: initialState.isPublic,
+      });
+
+      return;
+    }
+
+    dispatch(profileSlice.actions.setProfile(snapshotVal));
+  });
+};
+
+export const { setAuth } = profileSlice.actions;
 export const profileReducer = profileSlice.reducer;

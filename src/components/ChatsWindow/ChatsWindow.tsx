@@ -18,7 +18,9 @@ export const ChatsWindow: FC = () => {
   ) => {
     set(chatsRef, {
       ...prevFirebaseChats,
-      [newChatName]: { createdAt: Date.now() },
+      [newChatName]: {
+        createdAt: Date.now(),
+      },
     });
   };
 
@@ -29,6 +31,9 @@ export const ChatsWindow: FC = () => {
       firebaseChatsObject[chat.name] = {
         createdAt: chat.id,
       };
+      if (chat.messages) {
+        firebaseChatsObject[chat.name].messages = chat.messages;
+      }
     });
 
     return firebaseChatsObject;
@@ -41,6 +46,7 @@ export const ChatsWindow: FC = () => {
 
         const chatsArray = firebaseChatsData.map((chat: any) => ({
           name: chat[0],
+          messages: chat[1].messages,
           id: nanoid(),
         }));
 

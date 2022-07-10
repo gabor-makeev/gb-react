@@ -4,14 +4,20 @@ import '@testing-library/jest-dom';
 
 import { MessageSendingForm } from './MessageSendingForm';
 import { Provider } from 'react-redux';
-import { store } from 'src/store';
 import userEvent from '@testing-library/user-event';
+import { configureStore } from '@reduxjs/toolkit';
+import { messagesReducer } from 'store/messages/slice';
 
 describe('MessageForm', () => {
+  const storeMock = configureStore({
+    reducer: { messages: messagesReducer },
+  });
+
+  const mockHandler = jest.fn();
+
   it('should render', () => {
-    const mockHandler = jest.fn();
     render(
-      <Provider store={store}>
+      <Provider store={storeMock}>
         <MessageSendingForm
           onSendMessage={mockHandler}
           setInputValue={mockHandler}
@@ -21,9 +27,8 @@ describe('MessageForm', () => {
   });
 
   it('should have the button disabled when no input entered', () => {
-    const mockHandler = jest.fn();
     render(
-      <Provider store={store}>
+      <Provider store={storeMock}>
         <MessageSendingForm
           onSendMessage={mockHandler}
           setInputValue={mockHandler}
@@ -41,7 +46,7 @@ describe('MessageForm', () => {
       const [inputValue, setInputValue] = useState('');
 
       return (
-        <Provider store={store}>
+        <Provider store={storeMock}>
           <MessageSendingForm
             onSendMessage={onSendMessageMock}
             setInputValue={setInputValue}
@@ -63,9 +68,8 @@ describe('MessageForm', () => {
   });
 
   it('should render with snapshot', () => {
-    const mockHandler = jest.fn();
     const { asFragment } = render(
-      <Provider store={store}>
+      <Provider store={storeMock}>
         <MessageSendingForm
           onSendMessage={mockHandler}
           setInputValue={mockHandler}
