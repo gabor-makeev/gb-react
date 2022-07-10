@@ -1,13 +1,13 @@
 import { FC } from 'react';
 import { StoreState } from 'src/store';
-import { Dispatch } from 'redux';
-import { togglePublic } from 'store/profile/slice';
+// import { togglePublic } from 'store/profile/slice';
 import { connect } from 'react-redux';
+import { setIsPublicWithFirebase } from 'store/profile/slice';
 
 interface AboutProps {
   name: string;
   isPublic: boolean;
-  toggle: () => void;
+  toggle: (isPublic: boolean) => void;
 }
 
 export const About: FC<AboutProps> = (props) => {
@@ -23,7 +23,7 @@ export const About: FC<AboutProps> = (props) => {
           id={'isPublic'}
           type="checkbox"
           checked={props.isPublic}
-          onChange={() => props.toggle()}
+          onChange={() => props.toggle(!props.isPublic)}
         />
       </p>
     </>
@@ -35,8 +35,8 @@ const mapStateToProps = (state: StoreState) => ({
   isPublic: state.profile.isPublic,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  toggle: () => dispatch(togglePublic()),
+const mapDispatchToProps = (dispatch: any) => ({
+  toggle: (isPublic: boolean) => dispatch(setIsPublicWithFirebase(isPublic)),
 });
 
 export const AboutWithConnect = connect(

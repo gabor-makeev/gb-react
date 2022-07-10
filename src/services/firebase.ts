@@ -18,6 +18,8 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
+// Auth
+
 export const firebaseAuth = getAuth(app);
 
 export const signUp = async (email: string, password: string) =>
@@ -30,6 +32,8 @@ export const logOut = async () => await signOut(firebaseAuth);
 
 export const database = getDatabase(app);
 
+// Chats
+
 export const chatsRef = ref(database, 'chats');
 
 export const getChatRefById = (chatName: string) =>
@@ -38,4 +42,9 @@ export const getChatRefById = (chatName: string) =>
 export const getMessagesByChatName = (chatName: string) =>
   ref(database, `chats/${chatName}/messages`);
 
+// Profile
+
 export const profileRef = ref(database, 'profile');
+
+export const getProfileChildRef = (child: string) =>
+  ref(database, `profile/${child}`);

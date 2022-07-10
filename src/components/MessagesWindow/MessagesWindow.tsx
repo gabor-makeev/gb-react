@@ -6,15 +6,14 @@ import { useParams } from 'react-router-dom';
 import { onValue, push } from 'firebase/database';
 import { getMessagesByChatName } from 'src/services/firebase';
 import { Message } from 'src/default-types';
+import { useSelector } from 'react-redux';
+import { selectUserName } from 'store/profile/selectors';
 
-interface MessagesWindowProps {
-  userName: string;
-}
-
-export const MessagesWindow: FC<MessagesWindowProps> = ({ userName }) => {
+export const MessagesWindow: FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [messageSendingFormInputValue, setMessageSendingFormInputValue] =
     useState('');
+  const userName = useSelector(selectUserName);
   const { chatId } = useParams();
 
   useEffect(() => {

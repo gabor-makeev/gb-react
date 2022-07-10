@@ -7,12 +7,18 @@ export interface NavigationItem {
 export interface FirebaseChats {
   [id: string]: {
     createdAt: string;
+    messages?: {
+      [id: string]: Message;
+    };
   };
 }
 
 export interface Chat {
   id: string;
   name: string;
+  messages?: {
+    [id: string]: Message;
+  };
 }
 
 export interface Message {

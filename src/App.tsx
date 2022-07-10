@@ -3,7 +3,7 @@ import { BasePageTemplate } from 'src/templates/BasePageTemplate/BasePageTemplat
 import { Main } from 'src/pages/Main/Main';
 import { Profile } from 'src/pages/Profile/Profile';
 import { Messenger } from 'src/pages/Messenger/Messenger';
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { AboutWithConnect } from 'src/pages/About/About';
 import { Articles } from 'src/pages/Articles/Articles';
@@ -11,17 +11,11 @@ import { SignIn } from 'src/pages/SignIn/SignIn';
 import { PrivateRoute } from 'components/PrivateRoute';
 import { PublicRoute } from 'components/PublicRoute';
 import { SignUp } from 'src/pages/SignUp/SignUp';
-import { firebaseAuth, profileRef } from 'src/services/firebase';
-import { setAuth } from 'store/profile/slice';
-import { onValue, set } from 'firebase/database';
+import { firebaseAuth } from 'src/services/firebase';
+import { initProfileTracking, setAuth } from 'store/profile/slice';
 
 export const App: FC = () => {
-  const dispatch = useDispatch();
-
-  const [userProfile, setUserProfile] = useState<{
-    name: string;
-    isPublic: boolean;
-  }>({ name: 'Unknown', isPublic: false });
+  const dispatch = useDispatch<any>();
 
   useEffect(() => {
     const unsubscribe = firebaseAuth.onAuthStateChanged((user) => {
@@ -35,44 +29,9 @@ export const App: FC = () => {
     return unsubscribe;
   }, [dispatch]);
 
-  const createInitialProfile = () => {
-    const profile = {
-      name: 'Unknown',
-      isPublic: false,
-    };
-
-    set(profileRef, profile);
-    setUserProfile(profile);
-  };
-
   useEffect(() => {
-    onValue(profileRef, (snapshot) => {
-      if (snapshot.val()) {
-        const { name, isPublic } = snapshot.val();
-
-        setUserProfile({
-          name,
-          isPublic,
-        });
-      } else {
-        createInitialProfile();
-      }
-    });
+    dispatch(initProfileTracking());
   }, []);
-
-  const toggleUserIsPublic = () => {
-    set(profileRef, {
-      name: userProfile.name,
-      isPublic: !userProfile.isPublic,
-    });
-  };
-
-  const changeUserName = (newUserName: string) => {
-    set(profileRef, {
-      name: newUserName,
-      isPublic: userProfile.isPublic,
-    });
-  };
 
   return (
     <BrowserRouter>
@@ -81,17 +40,7 @@ export const App: FC = () => {
           <Route index element={<Main />} />
           <Route
             path="profile"
-            element={
-              <PrivateRoute
-                component={
-                  <Profile
-                    userProfile={userProfile}
-                    toggleUserIsPublic={toggleUserIsPublic}
-                    changeUserName={changeUserName}
-                  />
-                }
-              />
-            }
+            element={<PrivateRoute component={<Profile />} />}
           />
           <Route path="about" element={<AboutWithConnect />} />
           <Route path="articles" element={<Articles />} />
@@ -104,11 +53,8 @@ export const App: FC = () => {
             element={<PublicRoute component={<SignUp />} />}
           />
           <Route path="messenger" element={<PrivateRoute />}>
-            <Route index element={<Messenger userName={userProfile.name} />} />
-            <Route
-              path=":chatId"
-              element={<Messenger userName={userProfile.name} />}
-            />
+            <Route index element={<Messenger />} />
+            <Route path=":chatId" element={<Messenger />} />
           </Route>
         </Route>
         <Route path="*" element={<h2>404</h2>} />
