@@ -13,18 +13,32 @@ export interface FirebaseChats {
   };
 }
 
-export interface Chat {
-  id: string;
-  name: string;
-  messages?: {
-    [id: string]: Message;
-  };
-}
-
 export interface Message {
   text: string;
-  author: Authors;
+  author: string;
 }
+
+export type MessageItemWithId = { id: string } & Message;
+
+export type FirebaseMessage = [string, { text: string; author: string }];
+
+export interface Chat {
+  messages?: MessageItemWithId[];
+}
+
+export interface Chats {
+  [key: string]: Chat;
+}
+
+export type FirebaseChat = [
+  string,
+  {
+    createdAt: string;
+    messages: {
+      [key: string]: Message;
+    };
+  }
+];
 
 export enum Authors {
   USER = 'Gabor',

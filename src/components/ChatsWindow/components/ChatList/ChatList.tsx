@@ -1,10 +1,9 @@
 import { ChatItem } from './components/ChatItem/ChatItem';
 import List from '@mui/material/List';
 import { FC } from 'react';
-import { Chat } from 'src/default-types';
 
 interface ChatListProps {
-  chats: Chat[];
+  chats: string[];
   deleteChat: (chatId: string) => void;
 }
 
@@ -21,9 +20,9 @@ export const ChatList: FC<ChatListProps> = ({ chats, deleteChat }) => {
     >
       {chats.map((chat) => (
         <ChatItem
-          chatName={chat.name}
-          key={chat.id}
-          deleteChat={() => deleteChat(chat.name)}
+          chatName={chat}
+          key={chat}
+          deleteChat={() => deleteChat(chat)}
         />
       ))}
     </List>
