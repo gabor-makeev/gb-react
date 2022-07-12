@@ -1,62 +1,22 @@
 import React, { FC, useEffect, useState } from 'react';
-import { onValue, set, remove } from 'firebase/database';
-import { chatsRef, getChatRefById } from 'src/services/firebase';
-import { Chat, FirebaseChats } from 'src/default-types';
-import { nanoid } from 'nanoid';
+import { remove } from 'firebase/database';
+import { getChatRefById } from 'src/services/firebase';
 
 import { ChatList } from 'components/ChatsWindow/components/ChatList/ChatList';
 import { ChatAddingForm } from 'components/ChatsWindow/components/ChatAddingForm/ChatAddingForm';
 import { MUIStyledChatSectionContainer } from '../MUIStyledComponents/MUIStyledChatSectionContainer';
+import { useDispatch, useSelector } from 'react-redux';
+import { addChat, deleteChat, initChatsTracking } from 'store/chats/slice';
+import { selectChats } from 'store/chats/selectors';
 
 export const ChatsWindow: FC = () => {
   const [chatAddingFormInputValue, setChatAddingFormInputValue] = useState('');
-  const [chats, setChats] = useState<Chat[]>([]);
+  const chats = Object.keys(useSelector(selectChats));
 
-  const setFirebaseChats = (
-    prevFirebaseChats: FirebaseChats,
-    newChatName: string
-  ) => {
-    set(chatsRef, {
-      ...prevFirebaseChats,
-      [newChatName]: {
-        createdAt: Date.now(),
-      },
-    });
-  };
-
-  const getFirebaseChatsObjectFromChats = (): FirebaseChats => {
-    const firebaseChatsObject: FirebaseChats = {};
-
-    chats.forEach((chat) => {
-      firebaseChatsObject[chat.name] = {
-        createdAt: chat.id,
-      };
-      if (chat.messages) {
-        firebaseChatsObject[chat.name].messages = chat.messages;
-      }
-    });
-
-    return firebaseChatsObject;
-  };
+  const dispatch = useDispatch<any>();
 
   useEffect(() => {
-    const unsubscribe = onValue(chatsRef, (snapshot) => {
-      if (snapshot.val()) {
-        const firebaseChatsData = Object.entries(snapshot.val());
-
-        const chatsArray = firebaseChatsData.map((chat: any) => ({
-          name: chat[0],
-          messages: chat[1].messages,
-          id: nanoid(),
-        }));
-
-        setChats(chatsArray);
-      } else {
-        setChats([]);
-      }
-    });
-
-    return unsubscribe;
+    dispatch(initChatsTracking());
   }, []);
 
   const onAddChat = (
@@ -66,14 +26,14 @@ export const ChatsWindow: FC = () => {
     e.preventDefault();
 
     if (inputValue) {
-      setFirebaseChats(getFirebaseChatsObjectFromChats(), inputValue);
+      dispatch(addChat(inputValue));
     }
 
     setChatAddingFormInputValue('');
   };
 
   const onDeleteChat = (chatName: string) => {
-    remove(getChatRefById(chatName));
+    dispatch(deleteChat(chatName));
   };
 
   return (

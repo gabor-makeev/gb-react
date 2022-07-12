@@ -1,16 +1,21 @@
 import React, { FC, useState } from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import userEvent from '@testing-library/user-event';
+import { configureStore, createSlice } from '@reduxjs/toolkit';
+import { Provider } from 'react-redux';
 
 import { MessageSendingForm } from './MessageSendingForm';
-import { Provider } from 'react-redux';
-import userEvent from '@testing-library/user-event';
-import { configureStore } from '@reduxjs/toolkit';
-import { messagesReducer } from 'store/messages/slice';
 
 describe('MessageForm', () => {
+  const mockSlice = createSlice({
+    name: 'mock',
+    initialState: {},
+    reducers: {},
+  });
+
   const storeMock = configureStore({
-    reducer: { messages: messagesReducer },
+    reducer: { articles: mockSlice.reducer },
   });
 
   const mockHandler = jest.fn();
