@@ -66,6 +66,11 @@ export const addMessage = (chatId: string, message: Message) => async () => {
   push(getMessagesByChatName(chatId), message);
 };
 
+export const sendMessageWithBotReply = createAction<{
+  chatId: string;
+  message: Message;
+}>('chats/sendMessageWithBotReply');
+
 export const initChatsTracking = () => (dispatch: Dispatch) => {
   onValue(chatsRef, async (snapshot) => {
     const snapshotVal = await snapshot.val();

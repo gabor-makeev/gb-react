@@ -1,35 +1,45 @@
-import { delay, put, takeLatest } from 'redux-saga/effects';
+import { call, takeLatest } from 'redux-saga/effects';
 import { Authors, Message } from '../default-types';
-import { addMessage, addMessageWithSaga } from './chats/slice';
+import { addMessage, sendMessageWithBotReply } from './chats/slice';
 import { PayloadAction } from '@reduxjs/toolkit';
+import { store } from 'store/index';
 
-// export function* addMessageWithBotReply(
-//   action: PayloadAction<{ chatName: string; message: Message }>
-// ) {
-//   yield put(
-//     addMessage({
-//       chatName: action.payload.chatName,
-//       message: action.payload.message,
-//     })
-//   );
-//
-//   if (action.payload.message.author !== Authors.BOT) {
-//     yield delay(1500);
-//
-//     yield put(
-//       addMessage({
-//         chatName: action.payload.chatName,
-//         message: {
-//           author: Authors.BOT,
-//           text: 'Bot response',
-//         },
-//       })
-//     );
-//   }
-// }
+export function* addMessageWithBotReply(
+  action: PayloadAction<{ chatId: string; message: Message }>
+) {
+  yield call(
+    asyncAddMessageWithBotReply,
+    action.payload.chatId,
+    action.payload.message
+  );
+}
 
-// function* mySaga() {
-//   yield takeLatest(addMessageWithSaga.type, addMessageWithBotReply);
-// }
-//
-// export default mySaga;
+let timeout: NodeJS.Timeout;
+
+const asyncAddMessageWithBotReply = async (
+  chatId: string,
+  message: Message
+) => {
+  clearTimeout(timeout);
+
+  store.dispatch(addMessage(chatId, message));
+
+  if (message.author !== Authors.BOT) {
+    timeout = setTimeout(
+      () =>
+        store.dispatch(
+          addMessage(chatId, {
+            author: Authors.BOT,
+            text: 'Bot response',
+          })
+        ),
+      1500
+    );
+  }
+};
+
+function* mySaga() {
+  yield takeLatest(sendMessageWithBotReply.type, addMessageWithBotReply);
+}
+
+export default mySaga;
