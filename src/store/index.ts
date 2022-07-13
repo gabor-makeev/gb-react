@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { profileReducer } from './profile/slice';
 import { chatsReducer } from './chats/slice';
 import createSagaMiddleware from 'redux-saga';
-// import mySaga from './sagas';
+import mySaga from './sagas';
 import { configureStore } from '@reduxjs/toolkit';
 import { articlesReducer } from 'store/articles/slice';
 
@@ -23,5 +23,4 @@ export const store = configureStore({
     getDefaultMiddleware().concat(sagaMiddleware),
 });
 
-// TODO: saga disabled until adjusted to work with firebase, has to be covered
-// sagaMiddleware.run(mySaga);
+sagaMiddleware.run(mySaga);

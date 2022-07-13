@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectUserName } from 'store/profile/selectors';
 import { selectChats } from 'store/chats/selectors';
 import { initProfileTracking } from 'store/profile/slice';
-import { addMessage, initChatsTracking } from 'store/chats/slice';
+import { initChatsTracking, sendMessageWithBotReply } from 'store/chats/slice';
 import { MUIStyledMessageSectionContainer } from 'components/MUIStyledComponents/MUIStyledMessageSectionContainer';
 import { MessageSendingForm } from 'components/MessagesWindow/components/MessageSendingForm/MessageSendingForm';
 import { MessageList } from 'components/MessagesWindow/components/MessageList/MessageList';
@@ -35,9 +35,12 @@ export const MessagesWindow: FC = () => {
 
     if (chatId) {
       dispatch(
-        addMessage(chatId, {
-          author: userName,
-          text: messageSendingFormInputValue,
+        sendMessageWithBotReply({
+          chatId,
+          message: {
+            author: userName,
+            text: messageSendingFormInputValue,
+          },
         })
       );
     }
