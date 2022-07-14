@@ -23,24 +23,11 @@ export const NAVIGATION = [
     name: 'About',
     path: '/about',
   },
-  {
-    id: 5,
-    name: 'Articles',
-    path: '/articles',
-  },
 ];
 
 export const AUTHORS = {
   user: Authors.USER,
   bot: Authors.BOT,
-};
-
-export const STYLES = {
-  color: {
-    primary: '#cccccc',
-    secondary: '#31E865',
-    system: '#FF4F4F',
-  },
 };
 
 export const DUMMY_CONTENT = {
@@ -59,30 +46,3 @@ export const DUMMY_CONTENT = {
     },
   ] as Message[],
 };
-
-export const DUMMY_CHATS = [
-  {
-    name: 'Garrett',
-    id: 1,
-  },
-  {
-    name: 'Jonathan',
-    id: 2,
-  },
-  {
-    name: 'Terry',
-    id: 3,
-  },
-  {
-    name: 'Rupert',
-    id: 4,
-  },
-  {
-    name: 'Laura',
-    id: 5,
-  },
-  {
-    name: 'Ellen',
-    id: 6,
-  },
-];

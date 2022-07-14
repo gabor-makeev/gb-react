@@ -6,7 +6,6 @@ import { Messenger } from 'src/pages/Messenger/Messenger';
 import { FC, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { AboutWithConnect } from 'src/pages/About/About';
-import { Articles } from 'src/pages/Articles/Articles';
 import { SignIn } from 'src/pages/SignIn/SignIn';
 import { PrivateRoute } from 'components/PrivateRoute';
 import { PublicRoute } from 'components/PublicRoute';
@@ -39,7 +38,6 @@ export const App: FC = () => {
             element={<PrivateRoute component={<Profile />} />}
           />
           <Route path="about" element={<AboutWithConnect />} />
-          <Route path="articles" element={<Articles />} />
           <Route
             path="signin"
             element={<PublicRoute component={<SignIn />} />}
