@@ -50,4 +50,5 @@ export interface Article {
   title: string;
   summary: string;
   imageUrl: string;
+  publishedAt: string;
 }

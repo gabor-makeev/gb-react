@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Lancelot&family=Lato:wght@300;700&display=swap');
+
+.card {
+  display: flex;
+  min-height: 358px;
+
+  &-headline {
+    font-family: 'Lato', sans-serif;
+    max-width: 857px;
+    margin: 25px 48px 25px 25px;
+    padding: 60px 0 20px 0;
+    position: relative;
+
+    &__date {
+      background-color: #6B5023;
+      padding: 13px 10px;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 14px;
+      text-align: center;
+      color: #FFFEFB;
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+    &__title {
+      font-family: 'Lancelot', cursive;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 61px;
+      line-height: 65px;
+      color: #000000;
+      margin-bottom: 20px;
+    }
+    &__summary {
+      font-style: normal;
+      font-weight: 300;
+      font-size: 20px;
+      line-height: 28px;
+      color: #3C3C3C;
+      margin-bottom: 15px;
+    }
+    &__button {
+      font-style: normal;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 28px;
+      color: #3C3C3C;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+    }
+  }
+  &-image {
+
+
+    & > img {
+      width: 455px;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
