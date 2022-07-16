@@ -27,16 +27,21 @@ export const NewsContainer: FC = () => {
 
   return (
     <Container>
-      <h2>News</h2>
-      {loading && <CircularProgress />}
-      {error && (
-        <Alert severity="error">
-          <AlertTitle>Error</AlertTitle>
-          Please try again
-          <Button type="submit" onClick={() => dispatch(fetchArticles())}>
-            Load articles
-          </Button>
-        </Alert>
+      {(loading || error) && (
+        <Container
+          sx={{ display: 'flex', justifyContent: 'center', padding: '50px' }}
+        >
+          {loading && <CircularProgress />}
+          {error && (
+            <Alert severity="error">
+              <AlertTitle>Error</AlertTitle>
+              Please try again
+              <Button type="submit" onClick={() => dispatch(fetchArticles())}>
+                Load articles
+              </Button>
+            </Alert>
+          )}
+        </Container>
       )}
       {!loading &&
         articles.map((article) => (
