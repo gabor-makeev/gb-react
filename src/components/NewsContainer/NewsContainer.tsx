@@ -26,7 +26,7 @@ export const NewsContainer: FC = () => {
   }, []);
 
   return (
-    <Container>
+    <Container maxWidth={false} sx={{ maxWidth: '1385px' }}>
       {(loading || error) && (
         <Container
           sx={{ display: 'flex', justifyContent: 'center', padding: '50px' }}

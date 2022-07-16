@@ -27,6 +27,7 @@ export const NewsArticle: FC<NewsArticleProps> = ({ article }) => {
         <h3 className={style['card-headline__title']}>{article.title}</h3>
         <p className={style['card-headline__summary']}>{article.summary}</p>
         <button className={style['card-headline__button']}>Read More...</button>
+        <hr className={style['card-headline__hr']} />
       </div>
       <div className={style['card-image']}>
         <img src={article.imageUrl} alt={article.title} />
