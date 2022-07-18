@@ -6,6 +6,7 @@ import {
   CircularProgress,
   Container,
 } from '@mui/material';
+import style from './NewsContainer.module.scss';
 import {
   articleVariant,
   NewsArticle,
@@ -29,7 +30,7 @@ export const NewsContainer: FC = () => {
   }, []);
 
   return (
-    <Container maxWidth={false} sx={{ maxWidth: '1385px' }}>
+    <div className={style.wrapper}>
       {(loading || error) && (
         <Container
           sx={{ display: 'flex', justifyContent: 'center', padding: '50px' }}
@@ -47,9 +48,17 @@ export const NewsContainer: FC = () => {
         </Container>
       )}
       {!loading &&
-        articles.map((article) => (
-          <NewsArticle key={article.id} article={article} />
+        articles.map((article, idx) => (
+          <NewsArticle
+            key={article.id}
+            article={article}
+            variant={
+              idx === 0 || idx % 2 === 0
+                ? articleVariant.alternative
+                : articleVariant.default
+            }
+          />
         ))}
-    </Container>
+    </div>
   );
 };

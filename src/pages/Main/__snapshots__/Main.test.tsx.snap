@@ -3,7 +3,7 @@
 exports[`Articles should render with snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="MuiContainer-root css-1bn5flo-MuiContainer-root"
+    class="wrapper"
   >
     <div
       class="MuiContainer-root MuiContainer-maxWidthLg css-dpfov2-MuiContainer-root"
