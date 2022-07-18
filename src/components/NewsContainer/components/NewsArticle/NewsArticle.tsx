@@ -1,12 +1,26 @@
 import { FC } from 'react';
 import style from './NewsArticle.module.scss';
 import { Article } from 'src/default-types';
+import classNames from 'classnames';
+
+export enum articleVariant {
+  default = 'default',
+  alternative = 'alternative',
+}
 
 interface NewsArticleProps {
   article: Article;
+  variant?: articleVariant;
 }
 
-export const NewsArticle: FC<NewsArticleProps> = ({ article }) => {
+export const NewsArticle: FC<NewsArticleProps> = ({
+  article,
+  variant = '',
+}) => {
+  const cardClassNames = classNames(style.card, {
+    [style['card__alternative']]: variant === 'alternative',
+  });
+
   const publishedAtDate = new Date(article.publishedAt);
   const publishedAtDay =
     publishedAtDate.getUTCDate().toString().length === 1
@@ -19,7 +33,7 @@ export const NewsArticle: FC<NewsArticleProps> = ({ article }) => {
       : publishedAtDate.getUTCMonth();
 
   return (
-    <div className={style['card']}>
+    <div className={cardClassNames}>
       <div className={style['card-headline']}>
         <div className={style['card-headline__date']}>
           {`${publishedAtDay}-${publishedAtMonth}-${publishedAtDate.getFullYear()}`}

@@ -1,12 +1,15 @@
 import { FC, useEffect } from 'react';
 import {
-  Container,
-  CircularProgress,
   Alert,
   AlertTitle,
   Button,
+  CircularProgress,
+  Container,
 } from '@mui/material';
-import { NewsArticle } from 'components/NewsContainer/components/NewsArticle/NewsArticle';
+import {
+  articleVariant,
+  NewsArticle,
+} from 'components/NewsContainer/components/NewsArticle/NewsArticle';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectArticles,
