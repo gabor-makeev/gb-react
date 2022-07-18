@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Lancelot&family=Lato:wght@300;700&display=swap');
+
+// default news article variant
+.card {
+  display: flex;
+  min-height: 358px;
+  background-color: #fff;
+
+  &-headline {
+    font-family: 'Lato', sans-serif;
+    padding: 85px 48px 45px 25px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 0 1 100%;
+    align-items: flex-start;
+
+    &__date {
+      background-color: #6B5023;
+      padding: 13px 10px;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 14px;
+      text-align: center;
+      color: #FFFEFB;
+      position: absolute;
+      top: 25px;
+      right: 48px;
+    }
+    &__title {
+      font-family: 'Lancelot', cursive;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 61px;
+      line-height: 65px;
+      color: #000000;
+      margin-bottom: 20px;
+    }
+    &__summary {
+      font-style: normal;
+      font-weight: 300;
+      font-size: 20px;
+      line-height: 28px;
+      color: #3C3C3C;
+      margin-bottom: 15px;
+    }
+    &__button {
+      font-style: normal;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 28px;
+      color: #3C3C3C;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      margin-bottom: 15px;
+    }
+    &__hr {
+      border: 1px solid #D9D9D9;
+      width: 100%;
+    }
+  }
+  &-image {
+    & > img {
+      width: 455px;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  // alternative news article variant
+  &__alternative {
+    min-height: 474px;
+
+    & > .card-image {
+      order: -1;
+      flex: 0 1 100%;
+
+      & > img {
+        width: 100%;
+      }
+    }
+
+    & > .card-headline {
+      flex: 0 0 455px;
+      padding: 90px 30px 45px 31px;
+      //width: 455px;
+
+      & > .card-headline__title {
+        order: -1;
+      }
+
+      & > .card-headline__hr {
+        order: -1;
+        margin-bottom: 20px;
+      }
+
+      & > .card-headline__button {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
