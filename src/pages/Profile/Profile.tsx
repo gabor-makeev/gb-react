@@ -1,16 +1,18 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  changeUserNameWithFirebase,
   initProfileTracking,
   setIsPublicWithFirebase,
 } from 'store/profile/slice';
-import { selectIsPublic, selectUserName } from 'store/profile/selectors';
+import { selectIsPublic } from 'store/profile/selectors';
+import { getAuth, updateProfile } from 'firebase/auth';
 
 export const Profile: FC = () => {
   const [newNameInputValue, setNewNameInputValue] = useState<string>('');
+
+  const user = getAuth().currentUser;
   const isPublic = useSelector(selectIsPublic);
-  const userName = useSelector(selectUserName);
+  const userName = user?.displayName;
 
   const dispatch = useDispatch() as any;
 
@@ -18,11 +20,16 @@ export const Profile: FC = () => {
     dispatch(initProfileTracking());
   }, []);
 
-  const changeName = (e: React.FormEvent<HTMLFormElement>): void => {
+  const changeName = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
 
-    if (newNameInputValue) {
-      dispatch(changeUserNameWithFirebase(newNameInputValue));
+    if (newNameInputValue && user) {
+      await updateProfile(user, {
+        displayName: newNameInputValue,
+      });
+
       setNewNameInputValue('');
     }
   };
@@ -45,7 +52,14 @@ export const Profile: FC = () => {
           onChange={toggleIsPublic}
         />
       </p>
-      <h3>The user&apos;s name: {userName}</h3>
+      <h3>
+        The user&apos;s name:{' '}
+        {userName ? (
+          userName
+        ) : (
+          <span style={{ color: 'red' }}>No name provided</span>
+        )}
+      </h3>
       <form onSubmit={changeName}>
         <label>
           Enter new name:

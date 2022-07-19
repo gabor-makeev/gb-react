@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  updateProfile,
 } from 'firebase/auth';
 import { getDatabase, ref } from 'firebase/database';
 
@@ -22,8 +23,17 @@ const app = initializeApp(firebaseConfig);
 
 export const firebaseAuth = getAuth(app);
 
-export const signUp = async (email: string, password: string) =>
-  await createUserWithEmailAndPassword(firebaseAuth, email, password);
+export const signUp = async (name: string, email: string, password: string) => {
+  const operation = await createUserWithEmailAndPassword(
+    firebaseAuth,
+    email,
+    password
+  );
+
+  await updateProfile(operation.user, {
+    displayName: name,
+  });
+};
 
 export const logIn = async (email: string, password: string) =>
   await signInWithEmailAndPassword(firebaseAuth, email, password);
