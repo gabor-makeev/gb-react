@@ -52,7 +52,14 @@ export const Profile: FC = () => {
           onChange={toggleIsPublic}
         />
       </p>
-      <h3>The user&apos;s name: {userName}</h3>
+      <h3>
+        The user&apos;s name:{' '}
+        {userName ? (
+          userName
+        ) : (
+          <span style={{ color: 'red' }}>No name provided</span>
+        )}
+      </h3>
       <form onSubmit={changeName}>
         <label>
           Enter new name:
