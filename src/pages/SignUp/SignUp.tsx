@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 export const SignUp: FC = () => {
   const navigate = useNavigate();
 
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -16,7 +17,7 @@ export const SignUp: FC = () => {
     try {
       setLoading(true);
       setError('');
-      await signUp(email, password);
+      await signUp(name, email, password);
       navigate('/signin', { replace: true });
     } catch (err) {
       setError((err as Error).message);
@@ -30,6 +31,14 @@ export const SignUp: FC = () => {
       {loading && <p>Loading</p>}
       {error && <p>{error}</p>}
       <form onSubmit={handleSubmit}>
+        <label>
+          <p>Name:</p>
+          <input
+            type="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </label>
         <label>
           <p>Email:</p>
           <input
