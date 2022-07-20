@@ -10,7 +10,7 @@ import { SignIn } from 'src/pages/SignIn/SignIn';
 import { PrivateRoute } from 'components/PrivateRoute';
 import { PublicRoute } from 'components/PublicRoute';
 import { SignUp } from 'src/pages/SignUp/SignUp';
-import { firebaseAuth } from 'src/services/firebase';
+import { firebaseAuth } from 'src/services/auth';
 import { setAuth } from 'store/profile/slice';
 
 export const App: FC = () => {

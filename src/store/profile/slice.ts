@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { onValue, set } from 'firebase/database';
-import { getProfileChildRef, profileRef } from 'src/services/firebase';
+import { getProfileChildRef, profileRef } from 'src/services/refs';
 import { Dispatch } from 'redux';
 
 interface ProfileState {

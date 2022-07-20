@@ -6,7 +6,7 @@ import {
   chatsRef,
   getChatRefById,
   getMessagesByChatName,
-} from 'src/services/firebase';
+} from 'src/services/refs';
 
 interface ChatsContent {
   [key: string]: {

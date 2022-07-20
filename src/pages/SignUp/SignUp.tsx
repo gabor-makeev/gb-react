@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { signUp } from 'src/services/firebase';
+import { signUp } from 'src/services/auth';
 import { useNavigate } from 'react-router-dom';
 
 export const SignUp: FC = () => {
