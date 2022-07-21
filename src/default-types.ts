@@ -4,6 +4,11 @@ export interface NavigationItem {
   path: string;
 }
 
+export interface UserProperties {
+  createdAt: number;
+  isPublic: boolean;
+}
+
 export interface FirebaseChats {
   [id: string]: {
     createdAt: string;

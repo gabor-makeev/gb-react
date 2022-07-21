@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import style from './Header.module.scss';
 import { useSelector } from 'react-redux';
 import { selectIsAuth } from 'store/profile/selectors';
-import { logOut } from 'src/services/firebase';
+import { logOut } from 'src/services/auth';
 
 interface HeaderProps {
   navigations: NavigationItem[];

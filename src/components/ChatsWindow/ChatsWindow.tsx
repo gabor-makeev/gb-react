@@ -1,6 +1,4 @@
 import React, { FC, useEffect, useState } from 'react';
-import { remove } from 'firebase/database';
-import { getChatRefById } from 'src/services/firebase';
 
 import { ChatList } from 'components/ChatsWindow/components/ChatList/ChatList';
 import { ChatAddingForm } from 'components/ChatsWindow/components/ChatAddingForm/ChatAddingForm';

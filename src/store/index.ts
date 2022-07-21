@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { profileReducer } from './profile/slice';
+import { authReducer } from './profile/slice';
 import { chatsReducer } from './chats/slice';
 import createSagaMiddleware from 'redux-saga';
 import mySaga from './sagas';
@@ -9,7 +9,7 @@ import { articlesReducer } from 'store/articles/slice';
 export type StoreState = ReturnType<typeof rootReducer>;
 
 const rootReducer = combineReducers({
-  profile: profileReducer,
+  auth: authReducer,
   chats: chatsReducer,
   articles: articlesReducer,
 });

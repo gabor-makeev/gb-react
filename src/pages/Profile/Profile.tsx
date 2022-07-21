@@ -1,23 +1,34 @@
 import React, { FC, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  initProfileTracking,
-  setIsPublicWithFirebase,
-} from 'store/profile/slice';
-import { selectIsPublic } from 'store/profile/selectors';
 import { getAuth, updateProfile } from 'firebase/auth';
+import { onValue, set } from 'firebase/database';
+import {
+  getUserPropertiesByEmail,
+  getUserPropertyByEmailAndPropertyName,
+} from 'src/services/refs';
+import { UserProperties } from 'src/default-types';
 
 export const Profile: FC = () => {
   const [newNameInputValue, setNewNameInputValue] = useState<string>('');
+  const [userProperties, setUserProperties] = useState<UserProperties>({
+    createdAt: Date.now(),
+    isPublic: false,
+  });
 
   const user = getAuth().currentUser;
-  const isPublic = useSelector(selectIsPublic);
   const userName = user?.displayName;
 
-  const dispatch = useDispatch() as any;
-
   useEffect(() => {
-    dispatch(initProfileTracking());
+    if (user?.email) {
+      const unsubscribe = onValue(
+        getUserPropertiesByEmail(user.email),
+        async (snapshot) => {
+          const userProperties = await snapshot.val();
+          setUserProperties(userProperties);
+        }
+      );
+
+      return unsubscribe;
+    }
   }, []);
 
   const changeName = async (
@@ -35,20 +46,25 @@ export const Profile: FC = () => {
   };
 
   const toggleIsPublic = () => {
-    dispatch(setIsPublicWithFirebase(!isPublic));
+    if (user?.email) {
+      set(
+        getUserPropertyByEmailAndPropertyName(user?.email, 'isPublic'),
+        !userProperties.isPublic
+      );
+    }
   };
 
   return (
     <>
       <h2>Profile page</h2>
       <label htmlFor={'isPublic'}>
-        Is profile public? — {isPublic ? 'Yes' : 'No'}
+        Is profile public? — {userProperties.isPublic ? 'Yes' : 'No'}
       </label>
       <p>
         <input
           id={'isPublic'}
           type="checkbox"
-          checked={isPublic}
+          checked={userProperties.isPublic}
           onChange={toggleIsPublic}
         />
       </p>
