@@ -25,7 +25,10 @@ export const getProfileChildRef = (child: string) =>
 
 export const usersRef = ref(database, 'users');
 
-export const getUserByEmail = (email: string) => {
-  const firebaseEmail = createFirebaseEmail(email);
-  return ref(database, `users/${firebaseEmail}`);
-};
+export const getUserPropertiesByEmail = (email: string) =>
+  ref(database, `users/${createFirebaseEmail(email)}`);
+
+export const getUserPropertyByEmailAndPropertyName = (
+  email: string,
+  property: string
+) => ref(database, `users/${createFirebaseEmail(email)}/${property}`);
