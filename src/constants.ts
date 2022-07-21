@@ -18,11 +18,6 @@ export const NAVIGATION = [
     name: 'Messenger',
     path: '/messenger',
   },
-  {
-    id: 4,
-    name: 'About',
-    path: '/about',
-  },
 ];
 
 export const AUTHORS = {
