@@ -2,7 +2,6 @@ import React, { FC, useEffect, useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectChats } from 'store/chats/selectors';
-import { initProfileTracking } from 'store/profile/slice';
 import { initChatsTracking, sendMessageWithBotReply } from 'store/chats/slice';
 import { MUIStyledMessageSectionContainer } from 'components/MUIStyledComponents/MUIStyledMessageSectionContainer';
 import { MessageSendingForm } from 'components/MessagesWindow/components/MessageSendingForm/MessageSendingForm';
@@ -21,7 +20,6 @@ export const MessagesWindow: FC = () => {
   const { chatId } = useParams();
 
   useEffect(() => {
-    dispatch(initProfileTracking());
     if (chatId) {
       dispatch(initChatsTracking());
     }

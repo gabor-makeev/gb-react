@@ -1,6 +1,4 @@
 import React, { FC, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { initProfileTracking } from 'store/profile/slice';
 import { getAuth, updateProfile } from 'firebase/auth';
 import { onValue, set } from 'firebase/database';
 import {
@@ -19,11 +17,7 @@ export const Profile: FC = () => {
   const user = getAuth().currentUser;
   const userName = user?.displayName;
 
-  const dispatch = useDispatch() as any;
-
   useEffect(() => {
-    dispatch(initProfileTracking());
-
     if (user?.email) {
       const unsubscribe = onValue(
         getUserPropertiesByEmail(user.email),
