@@ -29,15 +29,15 @@ export const DUMMY_CONTENT = {
   messages: [
     {
       text: 'placerat duis ultricies lacus sed turpis tincidunt id aliquet risus',
-      author: AUTHORS.user,
+      userId: AUTHORS.user,
     },
     {
       text: 'et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit',
-      author: AUTHORS.user,
+      userId: AUTHORS.user,
     },
     {
       text: 'felis eget velit aliquet sagittis id consectetur purus ut faucibus',
-      author: AUTHORS.user,
+      userId: AUTHORS.user,
     },
   ] as Message[],
 };

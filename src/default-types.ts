@@ -20,12 +20,12 @@ export interface FirebaseChats {
 
 export interface Message {
   text: string;
-  author: string;
+  userId: string;
 }
 
 export type MessageItemWithId = { id: string } & Message;
 
-export type FirebaseMessage = [string, { text: string; author: string }];
+export type FirebaseMessage = [string, { text: string; userId: string }];
 
 export interface Chat {
   messages?: MessageItemWithId[];

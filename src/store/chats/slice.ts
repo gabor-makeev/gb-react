@@ -37,7 +37,7 @@ const parseFirebaseMessages = (firebaseMessages: {
     return Object.entries(firebaseMessages).map((message: FirebaseMessage) => ({
       id: message[0],
       text: message[1].text,
-      author: message[1].author,
+      userId: message[1].userId,
     }));
   }
 
