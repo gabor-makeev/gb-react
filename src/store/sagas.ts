@@ -24,12 +24,12 @@ const asyncAddMessageWithBotReply = async (
 
   store.dispatch(addMessage(chatId, message));
 
-  if (message.author !== Authors.BOT) {
+  if (message.userId !== Authors.BOT) {
     timeout = setTimeout(
       () =>
         store.dispatch(
           addMessage(chatId, {
-            author: Authors.BOT,
+            userId: Authors.BOT,
             text: 'Bot response',
           })
         ),

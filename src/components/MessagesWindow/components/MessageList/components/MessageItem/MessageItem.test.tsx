@@ -25,7 +25,7 @@ describe('Message', () => {
 
   it('should have system message classname applied for bot message', () => {
     const message: Message = {
-      author: Authors.BOT,
+      userId: Authors.BOT,
       text: 'test',
     };
 

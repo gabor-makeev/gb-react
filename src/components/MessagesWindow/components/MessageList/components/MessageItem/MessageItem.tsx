@@ -19,7 +19,7 @@ export const MessageItem: FC<MessageItemProps> = ({
   let isBotMessage = false;
   let MessageListItemClasses = classNames(style[`message__type-${variant}`]);
 
-  if (message.author === AUTHORS.bot) {
+  if (message.userId === AUTHORS.bot) {
     isBotMessage = !isBotMessage;
     MessageListItemClasses += ` ${style['message__system-background']}`;
   } else {
@@ -34,7 +34,7 @@ export const MessageItem: FC<MessageItemProps> = ({
     >
       {message.text}
       <span className={style['message__author-sign']}>
-        {isBotMessage ? message.author : userName}
+        {isBotMessage ? message.userId : userName}
       </span>
     </MUIStyledMessageListItem>
   );

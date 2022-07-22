@@ -32,12 +32,12 @@ export const MessagesWindow: FC = () => {
   const onSendMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (chatId) {
+    if (chatId && user) {
       dispatch(
         sendMessageWithBotReply({
           chatId,
           message: {
-            author: userName,
+            userId: user?.uid,
             text: messageSendingFormInputValue,
           },
         })
