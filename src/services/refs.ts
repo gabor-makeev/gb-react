@@ -1,34 +1,32 @@
-import { app } from './firebase';
-import { getDatabase, ref } from 'firebase/database';
+import { realtimeDatabase } from './firebase';
+import { ref } from 'firebase/database';
 import { createFirebaseEmail } from 'src/services/users';
-
-export const database = getDatabase(app);
 
 // Chats
 
-export const chatsRef = ref(database, 'chats');
+export const chatsRef = ref(realtimeDatabase, 'chats');
 
 export const getChatRefById = (chatName: string) =>
-  ref(database, `chats/${chatName}`);
+  ref(realtimeDatabase, `chats/${chatName}`);
 
 export const getMessagesByChatName = (chatName: string) =>
-  ref(database, `chats/${chatName}/messages`);
+  ref(realtimeDatabase, `chats/${chatName}/messages`);
 
 // Profile
 
-export const profileRef = ref(database, 'profile');
+export const profileRef = ref(realtimeDatabase, 'profile');
 
 export const getProfileChildRef = (child: string) =>
-  ref(database, `profile/${child}`);
+  ref(realtimeDatabase, `profile/${child}`);
 
 // Users
 
-export const usersRef = ref(database, 'users');
+export const usersRef = ref(realtimeDatabase, 'users');
 
 export const getUserPropertiesByEmail = (email: string) =>
-  ref(database, `users/${createFirebaseEmail(email)}`);
+  ref(realtimeDatabase, `users/${createFirebaseEmail(email)}`);
 
 export const getUserPropertyByEmailAndPropertyName = (
   email: string,
   property: string
-) => ref(database, `users/${createFirebaseEmail(email)}/${property}`);
+) => ref(realtimeDatabase, `users/${createFirebaseEmail(email)}/${property}`);
