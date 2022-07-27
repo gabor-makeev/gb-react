@@ -1,3 +1,5 @@
+import { Timestamp } from 'firebase/firestore';
+
 export interface NavigationItem {
   id: number;
   name: string;
@@ -9,14 +11,17 @@ export interface UserProperties {
   isPublic: boolean;
 }
 
-export interface FirebaseChats {
-  [id: string]: {
-    createdAt: string;
-    messages?: {
-      [id: string]: Message;
-    };
-  };
+export interface FirebaseChat {
+  name: string;
+  createdAt: Timestamp;
+  id: string;
 }
+
+export type FirebaseChats = FirebaseChat[];
+
+export type Chat = { messages?: MessageItemWithId[] } & FirebaseChat;
+
+export type Chats = Chat[];
 
 export interface Message {
   text: string;
@@ -26,24 +31,6 @@ export interface Message {
 export type MessageItemWithId = { id: string } & Message;
 
 export type FirebaseMessage = [string, { text: string; userId: string }];
-
-export interface Chat {
-  messages?: MessageItemWithId[];
-}
-
-export interface Chats {
-  [key: string]: Chat;
-}
-
-export type FirebaseChat = [
-  string,
-  {
-    createdAt: string;
-    messages: {
-      [key: string]: Message;
-    };
-  }
-];
 
 export enum Authors {
   USER = 'Gabor',

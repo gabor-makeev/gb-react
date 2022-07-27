@@ -76,10 +76,10 @@ export const initChatsTracking = () => (dispatch: Dispatch) => {
     const snapshotVal = await snapshot.val();
 
     if (snapshotVal) {
-      const chatsArray: FirebaseChat[] = Object.entries(snapshotVal);
+      const chatsArray = Object.entries(snapshotVal);
       const chatsObject: ChatsContent = {};
 
-      chatsArray.forEach((chat: FirebaseChat) => {
+      chatsArray.forEach((chat: any) => {
         chatsObject[chat[0]] = {
           messages: parseFirebaseMessages(chat[1].messages),
         };
