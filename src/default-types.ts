@@ -1,5 +1,3 @@
-import { Timestamp } from 'firebase/firestore';
-
 export interface NavigationItem {
   id: number;
   name: string;
@@ -13,7 +11,7 @@ export interface UserProperties {
 
 export interface FirebaseChat {
   name: string;
-  createdAt: Timestamp;
+  createdAt: number;
   id: string;
 }
 

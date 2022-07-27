@@ -25,7 +25,11 @@ export const MessagesWindow: FC = () => {
     }
   }, [chatId]);
 
-  if (chatId && !chats[chatId]) {
+  // if (chatId && !chats[chatId]) {
+  //   return <Navigate to="/messenger" replace />;
+  // }
+
+  if (chatId) {
     return <Navigate to="/messenger" replace />;
   }
 
@@ -50,7 +54,8 @@ export const MessagesWindow: FC = () => {
   return (
     <MUIStyledMessageSectionContainer>
       <MessageList
-        messages={chatId ? chats[chatId].messages : []}
+        // messages={chatId ? chats[chatId].messages : []}
+        messages={[]}
         userName={userName}
       />
       <MessageSendingForm

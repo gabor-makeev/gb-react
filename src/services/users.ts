@@ -1,5 +1,6 @@
 import { getUserDocRef } from 'src/services/refs';
-import { setDoc, Timestamp } from 'firebase/firestore';
+import { getDoc, setDoc, Timestamp } from 'firebase/firestore';
+import { FirebaseChat, FirebaseChats } from 'src/default-types';
 
 export const addUser = async (userEmail: string) => {
   await setDoc(getUserDocRef(userEmail), {
@@ -7,4 +8,47 @@ export const addUser = async (userEmail: string) => {
     isPublic: false,
     chats: [],
   });
+};
+
+export const getUserChats = async (
+  userEmail: string
+): Promise<FirebaseChats> => {
+  const userDoc = await getDoc(getUserDocRef(userEmail));
+  return await userDoc.data()?.chats;
+};
+
+export const addUserChat = async (
+  userEmail: string,
+  targetChat: FirebaseChat
+) => {
+  const chats = await getUserChats(userEmail);
+
+  setDoc(
+    getUserDocRef(userEmail),
+    {
+      chats: [...chats, targetChat],
+    },
+    { merge: true }
+  );
+};
+
+export const removeUserChat = async (
+  userEmail: string,
+  targetChat: FirebaseChat
+) => {
+  const chats = await getUserChats(userEmail);
+
+  chats.forEach((chat, idx) => {
+    if (chat.id === targetChat.id) {
+      chats.splice(idx, 1);
+    }
+  });
+
+  setDoc(
+    getUserDocRef(userEmail),
+    {
+      chats,
+    },
+    { merge: true }
+  );
 };

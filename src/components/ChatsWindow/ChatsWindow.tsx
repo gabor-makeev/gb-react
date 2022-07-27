@@ -6,10 +6,11 @@ import { MUIStyledChatSectionContainer } from '../MUIStyledComponents/MUIStyledC
 import { useDispatch, useSelector } from 'react-redux';
 import { addChat, deleteChat, initChatsTracking } from 'store/chats/slice';
 import { selectChats } from 'store/chats/selectors';
+import { Chat } from 'src/default-types';
 
 export const ChatsWindow: FC = () => {
   const [chatAddingFormInputValue, setChatAddingFormInputValue] = useState('');
-  const chats = Object.keys(useSelector(selectChats));
+  const chats = useSelector(selectChats);
 
   const dispatch = useDispatch<any>();
 
@@ -30,13 +31,13 @@ export const ChatsWindow: FC = () => {
     setChatAddingFormInputValue('');
   };
 
-  const onDeleteChat = (chatName: string) => {
-    dispatch(deleteChat(chatName));
+  const onDeleteChat = (chat: Chat) => {
+    dispatch(deleteChat(chat));
   };
 
   return (
     <MUIStyledChatSectionContainer>
-      <ChatList chats={chats} deleteChat={(chatId) => onDeleteChat(chatId)} />
+      <ChatList chats={chats} deleteChat={onDeleteChat} />
       <ChatAddingForm
         onAddChat={onAddChat}
         inputValue={chatAddingFormInputValue}

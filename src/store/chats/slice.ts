@@ -1,65 +1,58 @@
-import { FirebaseChat, FirebaseMessage, Message } from 'src/default-types';
+import {
+  Chat,
+  Chats,
+  FirebaseChat,
+  FirebaseChats,
+  Message,
+} from 'src/default-types';
 import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Dispatch } from 'redux';
-import { onValue, get, push, set, remove } from 'firebase/database';
-import {
-  chatsRef,
-  getChatRefById,
-  getMessagesByChatName,
-} from 'src/services/refs';
-
-interface ChatsContent {
-  [key: string]: {
-    messages: Message[];
-  };
-}
+import { push } from 'firebase/database';
+import { onSnapshot, Timestamp } from 'firebase/firestore';
+import { getMessagesByChatName, getUserDocRef } from 'src/services/refs';
+import { getAuth } from 'firebase/auth';
+import { nanoid } from 'nanoid';
+import { addUserChat, removeUserChat } from 'src/services/users';
 
 interface ChatsState {
-  content: ChatsContent;
+  content: Chats;
 }
 
-const initialState: ChatsState = { content: {} };
+const initialState: ChatsState = { content: [] };
 
 export const chatsSlice = createSlice({
   name: 'chats',
   initialState,
   reducers: {
-    setChats: (state, action: PayloadAction<ChatsContent>) => {
+    setChats: (state, action: PayloadAction<FirebaseChats>) => {
       state.content = action.payload;
     },
   },
 });
 
-const parseFirebaseMessages = (firebaseMessages: {
-  [key: string]: Message;
-}) => {
-  if (firebaseMessages) {
-    return Object.entries(firebaseMessages).map((message: FirebaseMessage) => ({
-      id: message[0],
-      text: message[1].text,
-      userId: message[1].userId,
-    }));
-  }
-
-  return [];
+const createFirebaseChatObject = (chatName: string): FirebaseChat => {
+  return {
+    name: chatName,
+    createdAt: Timestamp.now().toMillis(),
+    id: nanoid(),
+  };
 };
 
 export const addChat = (chatName: string) => async () => {
-  const chats = await get(chatsRef);
-  const chatsVal = await chats.val();
+  const user = getAuth().currentUser;
+  const newChat = createFirebaseChatObject(chatName);
 
-  const prevChats = chatsVal ? chatsVal : {};
-  const nextChats = Object.assign(prevChats, {
-    [chatName]: {
-      createdAt: Date.now(),
-    },
-  });
-
-  set(chatsRef, nextChats);
+  if (user?.email) {
+    await addUserChat(user.email, newChat);
+  }
 };
 
-export const deleteChat = (chatName: string) => async () => {
-  remove(getChatRefById(chatName));
+export const deleteChat = (chat: Chat) => async () => {
+  const user = getAuth().currentUser;
+
+  if (user?.email) {
+    await removeUserChat(user?.email, chat);
+  }
 };
 
 export const addMessage = (chatId: string, message: Message) => async () => {
@@ -72,24 +65,17 @@ export const sendMessageWithBotReply = createAction<{
 }>('chats/sendMessageWithBotReply');
 
 export const initChatsTracking = () => (dispatch: Dispatch) => {
-  onValue(chatsRef, async (snapshot) => {
-    const snapshotVal = await snapshot.val();
+  const user = getAuth().currentUser;
 
-    if (snapshotVal) {
-      const chatsArray = Object.entries(snapshotVal);
-      const chatsObject: ChatsContent = {};
+  if (user?.email) {
+    onSnapshot(getUserDocRef(user?.email), async (doc) => {
+      const dataSnapshot = await doc.data();
 
-      chatsArray.forEach((chat: any) => {
-        chatsObject[chat[0]] = {
-          messages: parseFirebaseMessages(chat[1].messages),
-        };
-      });
-
-      dispatch(chatsSlice.actions.setChats(chatsObject));
-    } else {
-      dispatch(chatsSlice.actions.setChats({}));
-    }
-  });
+      if (dataSnapshot) {
+        dispatch(chatsSlice.actions.setChats(dataSnapshot.chats));
+      }
+    });
+  }
 };
 
 export const addMessageWithSaga = createAction<{
