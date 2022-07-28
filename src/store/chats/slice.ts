@@ -55,13 +55,13 @@ export const deleteChat = (chat: Chat) => async () => {
   }
 };
 
-export const addMessage = (chatId: string, message: Message) => async () => {
+export const addMessage = (chatId: string, message: any) => async () => {
   push(getMessagesByChatName(chatId), message);
 };
 
 export const sendMessageWithBotReply = createAction<{
   chatId: string;
-  message: Message;
+  message: any;
 }>('chats/sendMessageWithBotReply');
 
 export const initChatsTracking = () => (dispatch: Dispatch) => {

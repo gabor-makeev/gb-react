@@ -39,5 +39,5 @@ export const DUMMY_CONTENT = {
       text: 'felis eget velit aliquet sagittis id consectetur purus ut faucibus',
       userId: AUTHORS.user,
     },
-  ] as Message[],
+  ] as any[],
 };

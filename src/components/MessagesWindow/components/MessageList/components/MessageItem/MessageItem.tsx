@@ -3,10 +3,9 @@ import { AUTHORS } from 'src/constants';
 import { FC } from 'react';
 import { MUIStyledMessageListItem } from 'components/MUIStyledComponents/MUIStyledMessageListItem';
 import classNames from 'classnames';
-import { Message } from 'src/default-types';
 
 interface MessageItemProps {
-  message: Message;
+  message: any;
   variant?: string;
   userName: string;
 }

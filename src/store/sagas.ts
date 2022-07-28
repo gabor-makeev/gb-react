@@ -16,10 +16,7 @@ export function* addMessageWithBotReply(
 
 let timeout: NodeJS.Timeout;
 
-const asyncAddMessageWithBotReply = async (
-  chatId: string,
-  message: Message
-) => {
+const asyncAddMessageWithBotReply = async (chatId: string, message: any) => {
   clearTimeout(timeout);
 
   store.dispatch(addMessage(chatId, message));
