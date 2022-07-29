@@ -25,9 +25,14 @@ export interface FirebaseMessage {
   createdAt: number;
   body: string;
   chatId: string;
+  userEmail?: string;
 }
 
+export type FirebaseMessages = FirebaseMessage[];
+
 export type Message = { id: string } & FirebaseMessage;
+
+export type Messages = Message[];
 
 export enum Authors {
   USER = 'Gabor',

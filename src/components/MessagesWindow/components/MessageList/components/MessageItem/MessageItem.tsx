@@ -3,9 +3,10 @@ import { AUTHORS } from 'src/constants';
 import { FC } from 'react';
 import { MUIStyledMessageListItem } from 'components/MUIStyledComponents/MUIStyledMessageListItem';
 import classNames from 'classnames';
+import { Message } from 'src/default-types';
 
 interface MessageItemProps {
-  message: any;
+  message: Message;
   variant?: string;
   userName: string;
 }
@@ -18,7 +19,7 @@ export const MessageItem: FC<MessageItemProps> = ({
   let isBotMessage = false;
   let MessageListItemClasses = classNames(style[`message__type-${variant}`]);
 
-  if (message.userId === AUTHORS.bot) {
+  if (message.userEmail === AUTHORS.bot) {
     isBotMessage = !isBotMessage;
     MessageListItemClasses += ` ${style['message__system-background']}`;
   } else {
@@ -31,9 +32,9 @@ export const MessageItem: FC<MessageItemProps> = ({
       disablePadding={true}
       data-testid={'messageItem'}
     >
-      {message.text}
+      {message.body}
       <span className={style['message__author-sign']}>
-        {isBotMessage ? message.userId : userName}
+        {isBotMessage ? message.userEmail : userName}
       </span>
     </MUIStyledMessageListItem>
   );

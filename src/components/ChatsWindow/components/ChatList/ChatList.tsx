@@ -21,7 +21,7 @@ export const ChatList: FC<ChatListProps> = ({ chats, deleteChat }) => {
     >
       {chats.map((chat) => (
         <ChatItem
-          chatName={chat.name}
+          chat={chat}
           key={chat.id}
           deleteChat={() => deleteChat(chat)}
         />

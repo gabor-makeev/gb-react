@@ -4,7 +4,7 @@ import '@testing-library/jest-dom';
 
 import { MessageItem } from './MessageItem';
 import { DUMMY_CONTENT } from 'src/constants';
-import { Authors } from 'src/default-types';
+import { Authors, Message } from 'src/default-types';
 
 const dummyMessage = DUMMY_CONTENT.messages[0];
 
@@ -15,7 +15,7 @@ describe('Message', () => {
 
   it('should render text in <li>-tag', () => {
     render(<MessageItem message={dummyMessage} userName={'Test user'} />);
-    expect(screen.getByText(dummyMessage.text)).toBeInTheDocument();
+    expect(screen.getByText(dummyMessage.body)).toBeInTheDocument();
   });
 
   it('should render text in <span>-tag', () => {
@@ -24,9 +24,12 @@ describe('Message', () => {
   });
 
   it('should have system message classname applied for bot message', () => {
-    const message = {
-      userId: Authors.BOT,
-      text: 'test',
+    const message: Message = {
+      userEmail: Authors.BOT,
+      body: 'test',
+      id: '1',
+      chatId: '1',
+      createdAt: 1,
     };
 
     render(<MessageItem message={message} userName={'Test user'} />);
