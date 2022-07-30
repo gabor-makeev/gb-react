@@ -4,13 +4,12 @@ import { MUIStyledMessageSectionContainer } from 'components/MUIStyledComponents
 import { MessageSendingForm } from 'components/MessagesWindow/components/MessageSendingForm/MessageSendingForm';
 import { MessageList } from 'components/MessagesWindow/components/MessageList/MessageList';
 import { getAuth } from 'firebase/auth';
-import {
-  addMessage,
-  getMessagesQueryByChatId,
-} from 'src/services/firebase/messages';
+import { getMessagesQueryByChatId } from 'src/services/firebase/messages';
 import { onSnapshot, Timestamp } from 'firebase/firestore';
 import { FirebaseMessage, Messages } from 'src/default-types';
 import { getUserChatByChatId } from 'src/services/firebase/users';
+import { sendMessageWithBotReply } from 'store/chats/slice';
+import { useDispatch } from 'react-redux';
 
 export const MessagesWindow: FC = () => {
   const [messages, setMessages] = useState<Messages>([]);
@@ -21,19 +20,25 @@ export const MessagesWindow: FC = () => {
   const userName = user?.displayName ? user.displayName : 'Unknown user';
 
   const { chatId } = useParams();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (chatId) {
-      onSnapshot(getMessagesQueryByChatId(chatId), (querySnapshot) => {
-        const messages: Messages = [];
-        querySnapshot.forEach((message) => {
-          const firebaseMessage = message.data() as FirebaseMessage;
-          messages.push(Object.assign(firebaseMessage, { id: message.id }));
-        });
+      const unsubscribe = onSnapshot(
+        getMessagesQueryByChatId(chatId),
+        (querySnapshot) => {
+          const messages: Messages = [];
+          querySnapshot.forEach((message) => {
+            const firebaseMessage = message.data() as FirebaseMessage;
+            messages.push(Object.assign(firebaseMessage, { id: message.id }));
+          });
 
-        setMessages(messages);
-      });
+          setMessages(messages);
+        }
+      );
+
+      return unsubscribe;
     }
   }, [chatId]);
 
@@ -49,12 +54,14 @@ export const MessagesWindow: FC = () => {
     e.preventDefault();
 
     if (chatId && user?.email) {
-      addMessage({
-        createdAt: Timestamp.now().toMillis(),
-        body: messageSendingFormInputValue,
-        chatId: chatId,
-        userEmail: user.email,
-      });
+      dispatch(
+        sendMessageWithBotReply({
+          createdAt: Timestamp.now().toMillis(),
+          body: messageSendingFormInputValue,
+          chatId: chatId,
+          userEmail: user.email,
+        })
+      );
     }
 
     setMessageSendingFormInputValue('');

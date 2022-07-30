@@ -1,37 +1,31 @@
 import { call, takeLatest } from 'redux-saga/effects';
-import { Authors, Message } from '../default-types';
-import { addMessage, sendMessageWithBotReply } from './chats/slice';
+import { FirebaseMessage } from '../default-types';
+import { sendMessageWithBotReply } from './chats/slice';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { store } from 'store/index';
+import { addMessage } from 'src/services/firebase/messages';
+import { Timestamp } from 'firebase/firestore';
 
 export function* addMessageWithBotReply(
-  action: PayloadAction<{ chatId: string; message: Message }>
+  action: PayloadAction<FirebaseMessage>
 ) {
-  yield call(
-    asyncAddMessageWithBotReply,
-    action.payload.chatId,
-    action.payload.message
-  );
+  yield call(asyncAddMessageWithBotReply, action.payload);
 }
 
 let timeout: NodeJS.Timeout;
 
-const asyncAddMessageWithBotReply = async (chatId: string, message: any) => {
+const asyncAddMessageWithBotReply = async (message: FirebaseMessage) => {
   clearTimeout(timeout);
 
-  store.dispatch(addMessage(chatId, message));
+  await addMessage(message);
 
-  if (message.userId !== Authors.BOT) {
-    timeout = setTimeout(
-      () =>
-        store.dispatch(
-          addMessage(chatId, {
-            userId: Authors.BOT,
-            text: 'Bot response',
-          })
-        ),
-      1500
-    );
+  if (message.userEmail) {
+    timeout = setTimeout(async () => {
+      await addMessage({
+        createdAt: Timestamp.now().toMillis(),
+        body: 'Messaging is not available...',
+        chatId: message.chatId,
+      });
+    }, 1500);
   }
 };
 

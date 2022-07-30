@@ -3,16 +3,12 @@ import {
   Chats,
   FirebaseChat,
   FirebaseChats,
-  Message,
+  FirebaseMessage,
 } from 'src/default-types';
 import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Dispatch } from 'redux';
-import { push } from 'firebase/database';
 import { onSnapshot, Timestamp } from 'firebase/firestore';
-import {
-  getMessagesByChatName,
-  getUserDocRef,
-} from 'src/services/firebase/refs';
+import { getUserDocRef } from 'src/services/firebase/refs';
 import { getAuth } from 'firebase/auth';
 import { nanoid } from 'nanoid';
 import { addUserChat, removeUserChat } from 'src/services/firebase/users';
@@ -58,14 +54,9 @@ export const deleteChat = (chat: Chat) => async () => {
   }
 };
 
-export const addMessage = (chatId: string, message: any) => async () => {
-  push(getMessagesByChatName(chatId), message);
-};
-
-export const sendMessageWithBotReply = createAction<{
-  chatId: string;
-  message: any;
-}>('chats/sendMessageWithBotReply');
+export const sendMessageWithBotReply = createAction<FirebaseMessage>(
+  'chats/sendMessageWithBotReply'
+);
 
 export const initChatsTracking = () => (dispatch: Dispatch) => {
   const user = getAuth().currentUser;
@@ -80,11 +71,6 @@ export const initChatsTracking = () => (dispatch: Dispatch) => {
     });
   }
 };
-
-export const addMessageWithSaga = createAction<{
-  chatName: string;
-  message: Message;
-}>('chats/addMessageWithSaga');
 
 export const { setChats } = chatsSlice.actions;
 export const chatsReducer = chatsSlice.reducer;

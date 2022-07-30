@@ -4,7 +4,7 @@ import '@testing-library/jest-dom';
 
 import { MessageItem } from './MessageItem';
 import { DUMMY_CONTENT } from 'src/constants';
-import { Authors, Message } from 'src/default-types';
+import { Message } from 'src/default-types';
 
 const dummyMessage = DUMMY_CONTENT.messages[0];
 
@@ -25,7 +25,6 @@ describe('Message', () => {
 
   it('should have system message classname applied for bot message', () => {
     const message: Message = {
-      userEmail: Authors.BOT,
       body: 'test',
       id: '1',
       chatId: '1',
