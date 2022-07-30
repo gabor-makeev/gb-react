@@ -1,6 +1,7 @@
 import { getUserDocRef } from 'src/services/firebase/refs';
 import { getDoc, setDoc, Timestamp } from 'firebase/firestore';
 import { FirebaseChat, FirebaseChats } from 'src/default-types';
+import { removeMessagesByChat } from 'src/services/firebase/messages';
 
 export const addUser = async (userEmail: string) => {
   await setDoc(getUserDocRef(userEmail), {
@@ -69,4 +70,6 @@ export const removeUserChat = async (
     },
     { merge: true }
   );
+
+  removeMessagesByChat(targetChat);
 };
