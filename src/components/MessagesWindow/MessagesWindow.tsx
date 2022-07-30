@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { MUIStyledMessageSectionContainer } from 'components/MUIStyledComponents/MUIStyledMessageSectionContainer';
 import { MessageSendingForm } from 'components/MessagesWindow/components/MessageSendingForm/MessageSendingForm';
 import { MessageList } from 'components/MessagesWindow/components/MessageList/MessageList';
@@ -7,6 +7,7 @@ import { getAuth } from 'firebase/auth';
 import { addMessage, getMessagesQueryByChatId } from 'src/services/messages';
 import { onSnapshot, Timestamp } from 'firebase/firestore';
 import { FirebaseMessage, Messages } from 'src/default-types';
+import { getUserChatByChatId } from 'src/services/users';
 
 export const MessagesWindow: FC = () => {
   const [messages, setMessages] = useState<Messages>([]);
@@ -17,6 +18,7 @@ export const MessagesWindow: FC = () => {
   const userName = user?.displayName ? user.displayName : 'Unknown user';
 
   const { chatId } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (chatId) {
@@ -31,6 +33,14 @@ export const MessagesWindow: FC = () => {
       });
     }
   }, [chatId]);
+
+  if (user?.email && chatId) {
+    getUserChatByChatId(user.email, chatId).then((data) => {
+      if (!data) {
+        navigate('/messenger', { replace: true });
+      }
+    });
+  }
 
   const onSendMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

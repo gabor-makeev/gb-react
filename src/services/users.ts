@@ -17,6 +17,24 @@ export const getUserChats = async (
   return await userDoc.data()?.chats;
 };
 
+export const getUserChatByChatId = async (
+  userEmail: string,
+  chatId: string
+) => {
+  const userDoc = await getDoc(getUserDocRef(userEmail));
+  const chats = (await userDoc.data()?.chats) as FirebaseChats;
+
+  let targetChat = null;
+
+  chats.forEach((chat) => {
+    if (chat.id === chatId) {
+      targetChat = chat;
+    }
+  });
+
+  return targetChat;
+};
+
 export const addUserChat = async (
   userEmail: string,
   targetChat: FirebaseChat
