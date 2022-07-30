@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { getAuth, updateProfile } from 'firebase/auth';
 import { onSnapshot, setDoc } from 'firebase/firestore';
-import { getUserDocRef } from 'src/services/refs';
+import { getUserDocRef } from 'src/services/firebase/refs';
 import { UserProperties } from 'src/default-types';
 
 export const Profile: FC = () => {

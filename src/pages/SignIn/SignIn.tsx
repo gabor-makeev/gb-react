@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { logIn } from 'src/services/auth';
+import { logIn } from 'src/services/firebase/auth';
 
 export const SignIn: FC = () => {
   const navigate = useNavigate();

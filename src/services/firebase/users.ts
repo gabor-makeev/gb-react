@@ -1,4 +1,4 @@
-import { getUserDocRef } from 'src/services/refs';
+import { getUserDocRef } from 'src/services/firebase/refs';
 import { getDoc, setDoc, Timestamp } from 'firebase/firestore';
 import { FirebaseChat, FirebaseChats } from 'src/default-types';
 

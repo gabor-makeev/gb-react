@@ -4,10 +4,13 @@ import { MUIStyledMessageSectionContainer } from 'components/MUIStyledComponents
 import { MessageSendingForm } from 'components/MessagesWindow/components/MessageSendingForm/MessageSendingForm';
 import { MessageList } from 'components/MessagesWindow/components/MessageList/MessageList';
 import { getAuth } from 'firebase/auth';
-import { addMessage, getMessagesQueryByChatId } from 'src/services/messages';
+import {
+  addMessage,
+  getMessagesQueryByChatId,
+} from 'src/services/firebase/messages';
 import { onSnapshot, Timestamp } from 'firebase/firestore';
 import { FirebaseMessage, Messages } from 'src/default-types';
-import { getUserChatByChatId } from 'src/services/users';
+import { getUserChatByChatId } from 'src/services/firebase/users';
 
 export const MessagesWindow: FC = () => {
   const [messages, setMessages] = useState<Messages>([]);

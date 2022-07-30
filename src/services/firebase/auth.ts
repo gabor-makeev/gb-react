@@ -6,7 +6,7 @@ import {
   signOut,
   updateProfile,
 } from 'firebase/auth';
-import { addUser } from 'src/services/users';
+import { addUser } from 'src/services/firebase/users';
 
 export const firebaseAuth = getAuth(app);
 

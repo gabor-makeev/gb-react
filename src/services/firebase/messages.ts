@@ -1,5 +1,5 @@
 import { query, collection, where, addDoc, orderBy } from 'firebase/firestore';
-import { firestoreDatabase } from 'src/services/firebase';
+import { firestoreDatabase } from 'src/services/firebase/firebase';
 import { FirebaseMessage } from 'src/default-types';
 
 export const messagesRef = collection(firestoreDatabase, 'messages');

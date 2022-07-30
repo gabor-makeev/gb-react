@@ -9,10 +9,13 @@ import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Dispatch } from 'redux';
 import { push } from 'firebase/database';
 import { onSnapshot, Timestamp } from 'firebase/firestore';
-import { getMessagesByChatName, getUserDocRef } from 'src/services/refs';
+import {
+  getMessagesByChatName,
+  getUserDocRef,
+} from 'src/services/firebase/refs';
 import { getAuth } from 'firebase/auth';
 import { nanoid } from 'nanoid';
-import { addUserChat, removeUserChat } from 'src/services/users';
+import { addUserChat, removeUserChat } from 'src/services/firebase/users';
 
 interface ChatsState {
   content: Chats;
