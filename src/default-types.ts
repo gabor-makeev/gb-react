@@ -9,41 +9,30 @@ export interface UserProperties {
   isPublic: boolean;
 }
 
-export interface FirebaseChats {
-  [id: string]: {
-    createdAt: string;
-    messages?: {
-      [id: string]: Message;
-    };
-  };
+export interface FirebaseChat {
+  name: string;
+  createdAt: number;
+  id: string;
 }
 
-export interface Message {
-  text: string;
-  userId: string;
+export type FirebaseChats = FirebaseChat[];
+
+export type Chat = { messages?: Message[] } & FirebaseChat;
+
+export type Chats = Chat[];
+
+export interface FirebaseMessage {
+  createdAt: number;
+  body: string;
+  chatId: string;
+  userEmail?: string;
 }
 
-export type MessageItemWithId = { id: string } & Message;
+export type FirebaseMessages = FirebaseMessage[];
 
-export type FirebaseMessage = [string, { text: string; userId: string }];
+export type Message = { id: string } & FirebaseMessage;
 
-export interface Chat {
-  messages?: MessageItemWithId[];
-}
-
-export interface Chats {
-  [key: string]: Chat;
-}
-
-export type FirebaseChat = [
-  string,
-  {
-    createdAt: string;
-    messages: {
-      [key: string]: Message;
-    };
-  }
-];
+export type Messages = Message[];
 
 export enum Authors {
   USER = 'Gabor',

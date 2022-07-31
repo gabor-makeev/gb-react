@@ -1,45 +1,65 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Navigate, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectChats } from 'store/chats/selectors';
-import { initChatsTracking, sendMessageWithBotReply } from 'store/chats/slice';
+import { useNavigate, useParams } from 'react-router-dom';
 import { MUIStyledMessageSectionContainer } from 'components/MUIStyledComponents/MUIStyledMessageSectionContainer';
 import { MessageSendingForm } from 'components/MessagesWindow/components/MessageSendingForm/MessageSendingForm';
 import { MessageList } from 'components/MessagesWindow/components/MessageList/MessageList';
 import { getAuth } from 'firebase/auth';
+import { getMessagesQueryByChatId } from 'src/services/firebase/messages';
+import { onSnapshot, Timestamp } from 'firebase/firestore';
+import { FirebaseMessage, Messages } from 'src/default-types';
+import { getUserChatByChatId } from 'src/services/firebase/users';
+import { sendMessageWithBotReply } from 'store/chats/slice';
+import { useDispatch } from 'react-redux';
 
 export const MessagesWindow: FC = () => {
+  const [messages, setMessages] = useState<Messages>([]);
   const [messageSendingFormInputValue, setMessageSendingFormInputValue] =
     useState('');
 
-  const chats = useSelector(selectChats);
   const user = getAuth().currentUser;
   const userName = user?.displayName ? user.displayName : 'Unknown user';
 
-  const dispatch = useDispatch() as any;
   const { chatId } = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (chatId) {
-      dispatch(initChatsTracking());
+      const unsubscribe = onSnapshot(
+        getMessagesQueryByChatId(chatId),
+        (querySnapshot) => {
+          const messages: Messages = [];
+          querySnapshot.forEach((message) => {
+            const firebaseMessage = message.data() as FirebaseMessage;
+            messages.push(Object.assign(firebaseMessage, { id: message.id }));
+          });
+
+          setMessages(messages);
+        }
+      );
+
+      return unsubscribe;
     }
   }, [chatId]);
 
-  if (chatId && !chats[chatId]) {
-    return <Navigate to="/messenger" replace />;
+  if (user?.email && chatId) {
+    getUserChatByChatId(user.email, chatId).then((data) => {
+      if (!data) {
+        navigate('/messenger', { replace: true });
+      }
+    });
   }
 
   const onSendMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (chatId && user) {
+    if (chatId && user?.email) {
       dispatch(
         sendMessageWithBotReply({
-          chatId,
-          message: {
-            userId: user?.uid,
-            text: messageSendingFormInputValue,
-          },
+          createdAt: Timestamp.now().toMillis(),
+          body: messageSendingFormInputValue,
+          chatId: chatId,
+          userEmail: user.email,
         })
       );
     }
@@ -49,10 +69,7 @@ export const MessagesWindow: FC = () => {
 
   return (
     <MUIStyledMessageSectionContainer>
-      <MessageList
-        messages={chatId ? chats[chatId].messages : []}
-        userName={userName}
-      />
+      <MessageList messages={messages ? messages : []} userName={userName} />
       <MessageSendingForm
         isInputDisabled={!chatId}
         onSendMessage={onSendMessage}

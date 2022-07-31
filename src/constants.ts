@@ -1,4 +1,4 @@
-import { Authors, Message } from './default-types';
+import { Authors, Messages } from './default-types';
 
 export const api = 'https://api.spaceflightnewsapi.net/v3/articles';
 
@@ -28,16 +28,16 @@ export const AUTHORS = {
 export const DUMMY_CONTENT = {
   messages: [
     {
-      text: 'placerat duis ultricies lacus sed turpis tincidunt id aliquet risus',
-      userId: AUTHORS.user,
+      body: 'placerat duis ultricies lacus sed turpis tincidunt id aliquet risus',
+      userEmail: AUTHORS.user,
     },
     {
-      text: 'et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit',
-      userId: AUTHORS.user,
+      body: 'et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit',
+      userEmail: AUTHORS.user,
     },
     {
-      text: 'felis eget velit aliquet sagittis id consectetur purus ut faucibus',
-      userId: AUTHORS.user,
+      body: 'felis eget velit aliquet sagittis id consectetur purus ut faucibus',
+      userEmail: AUTHORS.user,
     },
-  ] as Message[],
+  ] as Messages,
 };

@@ -1,10 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { getAuth, updateProfile } from 'firebase/auth';
-import { onValue, set } from 'firebase/database';
-import {
-  getUserPropertiesByEmail,
-  getUserPropertyByEmailAndPropertyName,
-} from 'src/services/refs';
+import { onSnapshot, setDoc } from 'firebase/firestore';
+import { getUserDocRef } from 'src/services/firebase/refs';
 import { UserProperties } from 'src/default-types';
 
 export const Profile: FC = () => {
@@ -19,13 +16,12 @@ export const Profile: FC = () => {
 
   useEffect(() => {
     if (user?.email) {
-      const unsubscribe = onValue(
-        getUserPropertiesByEmail(user.email),
-        async (snapshot) => {
-          const userProperties = await snapshot.val();
-          setUserProperties(userProperties);
+      const unsubscribe = onSnapshot(getUserDocRef(user.email), async (doc) => {
+        const dataSnapshot = await doc.data();
+        if (dataSnapshot) {
+          setUserProperties(dataSnapshot as UserProperties);
         }
-      );
+      });
 
       return unsubscribe;
     }
@@ -47,9 +43,12 @@ export const Profile: FC = () => {
 
   const toggleIsPublic = () => {
     if (user?.email) {
-      set(
-        getUserPropertyByEmailAndPropertyName(user?.email, 'isPublic'),
-        !userProperties.isPublic
+      setDoc(
+        getUserDocRef(user.email),
+        {
+          isPublic: !userProperties.isPublic,
+        },
+        { merge: true }
       );
     }
   };
