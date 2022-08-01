@@ -3,12 +3,18 @@ import { getDoc, setDoc, Timestamp } from 'firebase/firestore';
 import { FirebaseChat, FirebaseChats } from 'src/default-types';
 import { removeMessagesByChat } from 'src/services/firebase/messages';
 
-export const addUser = async (userEmail: string) => {
+export const addUser = async (userEmail: string, name: string) => {
   await setDoc(getUserDocRef(userEmail), {
+    name,
     createdAt: Timestamp.now(),
     isPublic: false,
     chats: [],
   });
+};
+
+export const getUserProperties = async (userEmail: string) => {
+  const userDoc = await getDoc(getUserDocRef(userEmail));
+  return userDoc.data();
 };
 
 export const getUserChats = async (

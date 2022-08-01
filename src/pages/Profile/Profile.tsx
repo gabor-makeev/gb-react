@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { getAuth, updateProfile } from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 import { onSnapshot, setDoc } from 'firebase/firestore';
 import { getUserDocRef } from 'src/services/firebase/refs';
 import { UserProperties } from 'src/default-types';
@@ -7,12 +7,12 @@ import { UserProperties } from 'src/default-types';
 export const Profile: FC = () => {
   const [newNameInputValue, setNewNameInputValue] = useState<string>('');
   const [userProperties, setUserProperties] = useState<UserProperties>({
+    name: '',
     createdAt: Date.now(),
     isPublic: false,
   });
 
   const user = getAuth().currentUser;
-  const userName = user?.displayName;
 
   useEffect(() => {
     if (user?.email) {
@@ -32,10 +32,14 @@ export const Profile: FC = () => {
   ): Promise<void> => {
     e.preventDefault();
 
-    if (newNameInputValue && user) {
-      await updateProfile(user, {
-        displayName: newNameInputValue,
-      });
+    if (newNameInputValue && user?.email) {
+      setDoc(
+        getUserDocRef(user.email),
+        {
+          name: newNameInputValue,
+        },
+        { merge: true }
+      );
 
       setNewNameInputValue('');
     }
@@ -69,8 +73,8 @@ export const Profile: FC = () => {
       </p>
       <h3>
         The user&apos;s name:{' '}
-        {userName ? (
-          userName
+        {userProperties.name ? (
+          userProperties.name
         ) : (
           <span style={{ color: 'red' }}>No name provided</span>
         )}

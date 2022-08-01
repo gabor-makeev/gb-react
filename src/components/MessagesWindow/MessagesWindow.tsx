@@ -7,21 +7,31 @@ import { getAuth } from 'firebase/auth';
 import { getMessagesQueryByChatId } from 'src/services/firebase/messages';
 import { onSnapshot, Timestamp } from 'firebase/firestore';
 import { FirebaseMessage, Messages } from 'src/default-types';
-import { getUserChatByChatId } from 'src/services/firebase/users';
+import {
+  getUserChatByChatId,
+  getUserProperties,
+} from 'src/services/firebase/users';
 import { sendMessageWithBotReply } from 'store/chats/slice';
 import { useDispatch } from 'react-redux';
 
 export const MessagesWindow: FC = () => {
   const [messages, setMessages] = useState<Messages>([]);
+  const [userName, setUserName] = useState<string>('');
   const [messageSendingFormInputValue, setMessageSendingFormInputValue] =
     useState('');
 
   const user = getAuth().currentUser;
-  const userName = user?.displayName ? user.displayName : 'Unknown user';
-
   const { chatId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user?.email) {
+      getUserProperties(user?.email).then((data) => {
+        setUserName(data?.name);
+      });
+    }
+  }, []);
 
   useEffect(() => {
     if (chatId) {

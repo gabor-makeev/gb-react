@@ -5,6 +5,7 @@ export interface NavigationItem {
 }
 
 export interface UserProperties {
+  name: string;
   createdAt: number;
   isPublic: boolean;
 }
