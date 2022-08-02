@@ -1,8 +1,9 @@
 import React, { FC, useEffect, useState } from 'react';
 import { getAuth } from 'firebase/auth';
-import { onSnapshot, setDoc } from 'firebase/firestore';
+import { setDoc } from 'firebase/firestore';
 import { getUserDocRef } from 'src/services/firebase/refs';
 import { UserProperties } from 'src/default-types';
+import { subscribeToUserProperties } from 'src/services/firebase/users';
 
 export const Profile: FC = () => {
   const [newNameInputValue, setNewNameInputValue] = useState<string>('');
@@ -12,19 +13,10 @@ export const Profile: FC = () => {
     isPublic: false,
   });
 
-  const user = getAuth().currentUser;
+  const userEmail = getAuth().currentUser?.email as string;
 
   useEffect(() => {
-    if (user?.email) {
-      const unsubscribe = onSnapshot(getUserDocRef(user.email), async (doc) => {
-        const dataSnapshot = await doc.data();
-        if (dataSnapshot) {
-          setUserProperties(dataSnapshot as UserProperties);
-        }
-      });
-
-      return unsubscribe;
-    }
+    return subscribeToUserProperties(setUserProperties);
   }, []);
 
   const changeName = async (
@@ -32,9 +24,9 @@ export const Profile: FC = () => {
   ): Promise<void> => {
     e.preventDefault();
 
-    if (newNameInputValue && user?.email) {
+    if (newNameInputValue) {
       setDoc(
-        getUserDocRef(user.email),
+        getUserDocRef(userEmail),
         {
           name: newNameInputValue,
         },
@@ -46,15 +38,13 @@ export const Profile: FC = () => {
   };
 
   const toggleIsPublic = () => {
-    if (user?.email) {
-      setDoc(
-        getUserDocRef(user.email),
-        {
-          isPublic: !userProperties.isPublic,
-        },
-        { merge: true }
-      );
-    }
+    setDoc(
+      getUserDocRef(userEmail),
+      {
+        isPublic: !userProperties.isPublic,
+      },
+      { merge: true }
+    );
   };
 
   return (

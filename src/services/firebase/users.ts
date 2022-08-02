@@ -1,7 +1,8 @@
 import { getUserDocRef } from 'src/services/firebase/refs';
-import { getDoc, setDoc, Timestamp } from 'firebase/firestore';
-import { FirebaseChat, FirebaseChats } from 'src/default-types';
+import { getDoc, onSnapshot, setDoc, Timestamp } from 'firebase/firestore';
+import { FirebaseChat, FirebaseChats, UserProperties } from 'src/default-types';
 import { removeMessagesByChat } from 'src/services/firebase/messages';
+import { getAuth } from 'firebase/auth';
 
 export const addUser = async (userEmail: string, name: string) => {
   await setDoc(getUserDocRef(userEmail), {
@@ -15,6 +16,20 @@ export const addUser = async (userEmail: string, name: string) => {
 export const getUserProperties = async (userEmail: string) => {
   const userDoc = await getDoc(getUserDocRef(userEmail));
   return userDoc.data();
+};
+
+export const subscribeToUserProperties = (
+  cb: (userProperties: UserProperties) => void
+) => {
+  return onSnapshot(
+    getUserDocRef(getAuth().currentUser?.email as string),
+    async (doc) => {
+      const dataSnapshot = await doc.data();
+      if (dataSnapshot) {
+        cb(dataSnapshot as UserProperties);
+      }
+    }
+  );
 };
 
 export const getUserChats = async (
