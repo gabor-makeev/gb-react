@@ -8,6 +8,7 @@ import {
   setDoc,
   Timestamp,
   where,
+  documentId,
 } from 'firebase/firestore';
 import { FirebaseChat, FirebaseChats, UserProperties } from 'src/default-types';
 import { removeMessagesByChat } from 'src/services/firebase/messages';
@@ -24,10 +25,16 @@ export const addUser = async (userEmail: string, name: string) => {
 };
 
 export const getUsersByName = async (name: string) => {
+  const authUserEmail = getAuth().currentUser?.email;
   const usersRef = collection(firestoreDatabase, 'users');
-  const usersQuery = query(usersRef, where('name', '==', name));
-  const users: any = [];
 
+  const usersQuery = query(
+    usersRef,
+    where('name', '==', name),
+    where(documentId(), '!=', authUserEmail)
+  );
+
+  const users: any = [];
   const usersDocs = await getDocs(usersQuery);
 
   usersDocs.forEach((usersDoc) => {
@@ -74,6 +81,24 @@ export const getUserChatByChatId = async (
 
   chats.forEach((chat) => {
     if (chat.id === chatId) {
+      targetChat = chat;
+    }
+  });
+
+  return targetChat;
+};
+
+export const getUserChatByToUserEmail = async (
+  userEmail: string,
+  toUserEmail: string
+) => {
+  const userDoc = await getDoc(getUserDocRef(userEmail));
+  const chats = (await userDoc.data()?.chats) as FirebaseChats;
+
+  let targetChat = null;
+
+  chats.forEach((chat) => {
+    if (chat.toUserEmail === toUserEmail) {
       targetChat = chat;
     }
   });

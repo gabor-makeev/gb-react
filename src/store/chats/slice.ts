@@ -7,10 +7,9 @@ import {
 } from 'src/default-types';
 import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Dispatch } from 'redux';
-import { onSnapshot, Timestamp } from 'firebase/firestore';
+import { onSnapshot } from 'firebase/firestore';
 import { getUserDocRef } from 'src/services/firebase/refs';
 import { getAuth } from 'firebase/auth';
-import { nanoid } from 'nanoid';
 import { addUserChat, removeUserChat } from 'src/services/firebase/users';
 
 interface ChatsState {
@@ -29,20 +28,11 @@ export const chatsSlice = createSlice({
   },
 });
 
-const createFirebaseChatObject = (chatName: string): FirebaseChat => {
-  return {
-    name: chatName,
-    createdAt: Timestamp.now().toMillis(),
-    id: nanoid(),
-  };
-};
-
-export const addChat = (chatName: string) => async () => {
+export const addChat = (chat: FirebaseChat) => async () => {
   const user = getAuth().currentUser;
-  const newChat = createFirebaseChatObject(chatName);
 
   if (user?.email) {
-    await addUserChat(user.email, newChat);
+    await addUserChat(user.email, chat);
   }
 };
 

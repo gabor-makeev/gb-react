@@ -1,7 +1,15 @@
 import React, { FC, useState } from 'react';
 import style from './ChatsAddingForm.module.scss';
 import { Button } from '@mui/material';
-import { getUsersByName } from 'src/services/firebase/users';
+import {
+  getUserChatByToUserEmail,
+  getUsersByName,
+} from 'src/services/firebase/users';
+import { useDispatch } from 'react-redux';
+import { addChat } from 'store/chats/slice';
+import { Timestamp } from 'firebase/firestore';
+import { nanoid } from 'nanoid';
+import { getAuth } from 'firebase/auth';
 
 interface ChatsAddingFormProps {
   toggleIsChatsAddingFormVisible: () => void;
@@ -13,9 +21,25 @@ export const ChatsAddingForm: FC<ChatsAddingFormProps> = ({
   const [input, setInput] = useState('');
   const [contacts, setContacts] = useState<any[]>([]);
 
+  const dispatch = useDispatch<any>();
+  const userEmail = getAuth().currentUser?.email as string;
+
   const handleInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
     setContacts(await getUsersByName(e.target.value));
+  };
+
+  const onContactClick = async (contact: any) => {
+    if (!(await getUserChatByToUserEmail(userEmail, contact.email))) {
+      dispatch(
+        addChat({
+          name: contact.name,
+          toUserEmail: contact.email,
+          createdAt: Timestamp.now().toMillis(),
+          id: nanoid(),
+        })
+      );
+    }
   };
 
   return (
@@ -32,7 +56,11 @@ export const ChatsAddingForm: FC<ChatsAddingFormProps> = ({
         </label>
         <ul>
           {contacts.map((contact) => (
-            <li key={contact.email} title={contact.email}>
+            <li
+              key={contact.email}
+              title={contact.email}
+              onClick={() => onContactClick(contact)}
+            >
               <a>{contact.name}</a>
             </li>
           ))}

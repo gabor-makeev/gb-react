@@ -12,6 +12,7 @@ export interface UserProperties {
 
 export interface FirebaseChat {
   name: string;
+  toUserEmail: string;
   createdAt: number;
   id: string;
 }
