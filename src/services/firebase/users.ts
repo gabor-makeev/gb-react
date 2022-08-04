@@ -1,8 +1,18 @@
 import { getUserDocRef } from 'src/services/firebase/refs';
-import { getDoc, onSnapshot, setDoc, Timestamp } from 'firebase/firestore';
+import {
+  collection,
+  getDoc,
+  getDocs,
+  onSnapshot,
+  query,
+  setDoc,
+  Timestamp,
+  where,
+} from 'firebase/firestore';
 import { FirebaseChat, FirebaseChats, UserProperties } from 'src/default-types';
 import { removeMessagesByChat } from 'src/services/firebase/messages';
 import { getAuth } from 'firebase/auth';
+import { firestoreDatabase } from 'src/services/firebase/firebase';
 
 export const addUser = async (userEmail: string, name: string) => {
   await setDoc(getUserDocRef(userEmail), {
@@ -11,6 +21,20 @@ export const addUser = async (userEmail: string, name: string) => {
     isPublic: false,
     chats: [],
   });
+};
+
+export const getUsersByName = async (name: string) => {
+  const usersRef = collection(firestoreDatabase, 'users');
+  const usersQuery = query(usersRef, where('name', '==', name));
+  const users: any = [];
+
+  const usersDocs = await getDocs(usersQuery);
+
+  usersDocs.forEach((usersDoc) => {
+    users.push(Object.assign(usersDoc.data(), { email: usersDoc.id }));
+  });
+
+  return users;
 };
 
 export const getUserProperties = async (userEmail: string) => {
