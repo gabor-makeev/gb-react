@@ -1,30 +1,24 @@
 import React, { FC, useEffect, useState } from 'react';
-import { getAuth, updateProfile } from 'firebase/auth';
-import { onSnapshot, setDoc } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
+import { setDoc, Timestamp } from 'firebase/firestore';
 import { getUserDocRef } from 'src/services/firebase/refs';
 import { UserProperties } from 'src/default-types';
+import { subscribeToUserProperties } from 'src/services/firebase/users';
 
 export const Profile: FC = () => {
   const [newNameInputValue, setNewNameInputValue] = useState<string>('');
   const [userProperties, setUserProperties] = useState<UserProperties>({
-    createdAt: Date.now(),
+    chats: [],
+    createdAt: Timestamp.now(),
     isPublic: false,
+    name: '',
+    email: '',
   });
 
-  const user = getAuth().currentUser;
-  const userName = user?.displayName;
+  const userEmail = getAuth().currentUser?.email as string;
 
   useEffect(() => {
-    if (user?.email) {
-      const unsubscribe = onSnapshot(getUserDocRef(user.email), async (doc) => {
-        const dataSnapshot = await doc.data();
-        if (dataSnapshot) {
-          setUserProperties(dataSnapshot as UserProperties);
-        }
-      });
-
-      return unsubscribe;
-    }
+    return subscribeToUserProperties(setUserProperties);
   }, []);
 
   const changeName = async (
@@ -32,25 +26,27 @@ export const Profile: FC = () => {
   ): Promise<void> => {
     e.preventDefault();
 
-    if (newNameInputValue && user) {
-      await updateProfile(user, {
-        displayName: newNameInputValue,
-      });
+    if (newNameInputValue) {
+      setDoc(
+        getUserDocRef(userEmail),
+        {
+          name: newNameInputValue,
+        },
+        { merge: true }
+      );
 
       setNewNameInputValue('');
     }
   };
 
   const toggleIsPublic = () => {
-    if (user?.email) {
-      setDoc(
-        getUserDocRef(user.email),
-        {
-          isPublic: !userProperties.isPublic,
-        },
-        { merge: true }
-      );
-    }
+    setDoc(
+      getUserDocRef(userEmail),
+      {
+        isPublic: !userProperties.isPublic,
+      },
+      { merge: true }
+    );
   };
 
   return (
@@ -69,8 +65,8 @@ export const Profile: FC = () => {
       </p>
       <h3>
         The user&apos;s name:{' '}
-        {userName ? (
-          userName
+        {userProperties.name ? (
+          userProperties.name
         ) : (
           <span style={{ color: 'red' }}>No name provided</span>
         )}
