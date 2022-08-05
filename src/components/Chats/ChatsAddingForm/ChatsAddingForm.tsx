@@ -10,6 +10,7 @@ import { addChat } from 'store/chats/slice';
 import { Timestamp } from 'firebase/firestore';
 import { nanoid } from 'nanoid';
 import { getAuth } from 'firebase/auth';
+import { UserProperties } from 'src/default-types';
 
 interface ChatsAddingFormProps {
   toggleIsChatsAddingFormVisible: () => void;
@@ -19,7 +20,7 @@ export const ChatsAddingForm: FC<ChatsAddingFormProps> = ({
   toggleIsChatsAddingFormVisible,
 }) => {
   const [input, setInput] = useState('');
-  const [contacts, setContacts] = useState<any[]>([]);
+  const [contacts, setContacts] = useState<UserProperties[]>([]);
 
   const dispatch = useDispatch<any>();
   const userEmail = getAuth().currentUser?.email as string;
@@ -29,7 +30,7 @@ export const ChatsAddingForm: FC<ChatsAddingFormProps> = ({
     setContacts(await getUsersByName(e.target.value));
   };
 
-  const onContactClick = async (contact: any) => {
+  const onContactClick = async (contact: UserProperties) => {
     if (!(await getUserChatByToUserEmail(userEmail, contact.email))) {
       dispatch(
         addChat({

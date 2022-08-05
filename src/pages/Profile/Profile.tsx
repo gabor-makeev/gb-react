@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import { getAuth } from 'firebase/auth';
-import { setDoc } from 'firebase/firestore';
+import { setDoc, Timestamp } from 'firebase/firestore';
 import { getUserDocRef } from 'src/services/firebase/refs';
 import { UserProperties } from 'src/default-types';
 import { subscribeToUserProperties } from 'src/services/firebase/users';
@@ -8,9 +8,11 @@ import { subscribeToUserProperties } from 'src/services/firebase/users';
 export const Profile: FC = () => {
   const [newNameInputValue, setNewNameInputValue] = useState<string>('');
   const [userProperties, setUserProperties] = useState<UserProperties>({
-    name: '',
-    createdAt: Date.now(),
+    chats: [],
+    createdAt: Timestamp.now(),
     isPublic: false,
+    name: '',
+    email: '',
   });
 
   const userEmail = getAuth().currentUser?.email as string;

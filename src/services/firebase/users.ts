@@ -34,11 +34,13 @@ export const getUsersByName = async (name: string) => {
     where(documentId(), '!=', authUserEmail)
   );
 
-  const users: any = [];
+  const users: UserProperties[] = [];
   const usersDocs = await getDocs(usersQuery);
 
   usersDocs.forEach((usersDoc) => {
-    users.push(Object.assign(usersDoc.data(), { email: usersDoc.id }));
+    users.push(
+      Object.assign(usersDoc.data(), { email: usersDoc.id }) as UserProperties
+    );
   });
 
   return users;
