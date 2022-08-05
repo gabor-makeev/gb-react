@@ -20,24 +20,19 @@ export const NAVIGATION = [
   },
 ];
 
-export const AUTHORS = {
-  user: Authors.USER,
-  bot: Authors.BOT,
-};
-
 export const DUMMY_CONTENT = {
   messages: [
     {
       body: 'placerat duis ultricies lacus sed turpis tincidunt id aliquet risus',
-      userEmail: AUTHORS.user,
+      userEmail: Authors.USER,
     },
     {
       body: 'et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit',
-      userEmail: AUTHORS.user,
+      userEmail: Authors.USER,
     },
     {
       body: 'felis eget velit aliquet sagittis id consectetur purus ut faucibus',
-      userEmail: AUTHORS.user,
+      userEmail: Authors.USER,
     },
   ] as Messages,
 };
