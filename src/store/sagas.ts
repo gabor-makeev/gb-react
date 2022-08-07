@@ -1,5 +1,5 @@
 import { call, takeLatest } from 'redux-saga/effects';
-import { FirebaseMessage } from '../default-types';
+import { Authors, FirebaseMessage } from '../default-types';
 import { sendMessageWithBotReply } from './chats/slice';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { addMessage } from 'src/services/firebase/messages';
@@ -24,6 +24,7 @@ const asyncAddMessageWithBotReply = async (message: FirebaseMessage) => {
         createdAt: Timestamp.now().toMillis(),
         body: 'Messaging is not available...',
         chatId: message.chatId,
+        userName: Authors.BOT,
       });
     }, 1500);
   }

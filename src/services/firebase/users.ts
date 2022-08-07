@@ -75,7 +75,7 @@ export const getUserChats = async (
 export const getUserChatByChatId = async (
   userEmail: string,
   chatId: string
-) => {
+): Promise<FirebaseChat | null> => {
   const userDoc = await getDoc(getUserDocRef(userEmail));
   const chats = (await userDoc.data()?.chats) as FirebaseChats;
 

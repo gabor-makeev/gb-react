@@ -1,17 +1,17 @@
+import { getAuth } from 'firebase/auth';
 import {
-  query,
-  collection,
-  where,
   addDoc,
-  orderBy,
-  getDocs,
+  collection,
   deleteDoc,
+  getDocs,
   onSnapshot,
+  orderBy,
+  query,
   Timestamp,
+  where,
 } from 'firebase/firestore';
 import { firestoreDatabase } from 'src/services/firebase/firebase';
 import { FirebaseChat, FirebaseMessage, Messages } from 'src/default-types';
-import { getAuth } from 'firebase/auth';
 
 export const messagesRef = collection(firestoreDatabase, 'messages');
 
@@ -25,12 +25,14 @@ export const getMessagesQueryByChatId = (chatId: string) => {
 
 export const createFirebaseMessageObject = (
   chatId: string,
-  messageBody: string
+  body: string,
+  userName: string
 ): FirebaseMessage => {
   return {
+    body,
+    chatId,
+    userName,
     createdAt: Timestamp.now().toMillis(),
-    body: messageBody,
-    chatId: chatId,
     userEmail: getAuth().currentUser?.email as string,
   };
 };
@@ -48,6 +50,17 @@ export const subscribeToMessagesByChatId = (
 
     cb(messages);
   });
+};
+
+export const getMessagesByChatId = async (chatId: string) => {
+  const messages: FirebaseMessage[] = [];
+  const firestoreMessages = await getDocs(getMessagesQueryByChatId(chatId));
+
+  firestoreMessages.forEach((firestoreMessage) => {
+    messages.push(firestoreMessage.data() as FirebaseMessage);
+  });
+
+  return messages;
 };
 
 export const addMessage = async (message: FirebaseMessage) => {

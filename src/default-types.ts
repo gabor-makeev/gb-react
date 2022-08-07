@@ -23,6 +23,7 @@ export interface FirebaseMessage {
   createdAt: number;
   body: string;
   chatId: string;
+  userName: string;
   userEmail?: string;
 }
 
