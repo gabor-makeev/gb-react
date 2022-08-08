@@ -31,13 +31,25 @@ export const ChatsAddingForm: FC<ChatsAddingFormProps> = ({
   };
 
   const onContactClick = async (contact: UserProperties) => {
-    if (!(await getUserChatByToUserEmail(userEmail, contact.email))) {
+    const authUserChatWithContact = await getUserChatByToUserEmail(
+      userEmail,
+      contact.email
+    );
+
+    const contactChatWithAuthUser = await getUserChatByToUserEmail(
+      contact.email,
+      userEmail
+    );
+
+    const newChatId = nanoid();
+
+    if (!authUserChatWithContact) {
       dispatch(
         addChat({
           name: contact.name,
           toUserEmail: contact.email,
           createdAt: Timestamp.now().toMillis(),
-          id: nanoid(),
+          id: contactChatWithAuthUser ? contactChatWithAuthUser.id : newChatId,
         })
       );
     }

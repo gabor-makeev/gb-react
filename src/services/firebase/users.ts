@@ -46,9 +46,11 @@ export const getUsersByName = async (name: string) => {
   return users;
 };
 
-export const getUserProperties = async (userEmail: string) => {
+export const getUserProperties = async (
+  userEmail: string
+): Promise<UserProperties> => {
   const userDoc = await getDoc(getUserDocRef(userEmail));
-  return userDoc.data();
+  return userDoc.data() as UserProperties;
 };
 
 export const subscribeToUserProperties = (
@@ -93,7 +95,7 @@ export const getUserChatByChatId = async (
 export const getUserChatByToUserEmail = async (
   userEmail: string,
   toUserEmail: string
-) => {
+): Promise<FirebaseChat | null> => {
   const userDoc = await getDoc(getUserDocRef(userEmail));
   const chats = (await userDoc.data()?.chats) as FirebaseChats;
 
@@ -112,15 +114,19 @@ export const addUserChat = async (
   userEmail: string,
   targetChat: FirebaseChat
 ) => {
-  const chats = await getUserChats(userEmail);
+  const targetChatExists = await getUserChatByChatId(userEmail, targetChat.id);
 
-  setDoc(
-    getUserDocRef(userEmail),
-    {
-      chats: [...chats, targetChat],
-    },
-    { merge: true }
-  );
+  if (!targetChatExists) {
+    const chats = await getUserChats(userEmail);
+
+    setDoc(
+      getUserDocRef(userEmail),
+      {
+        chats: [...chats, targetChat],
+      },
+      { merge: true }
+    );
+  }
 };
 
 export const removeUserChat = async (

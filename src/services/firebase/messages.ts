@@ -12,6 +12,11 @@ import {
 } from 'firebase/firestore';
 import { firestoreDatabase } from 'src/services/firebase/firebase';
 import { FirebaseChat, FirebaseMessage, Messages } from 'src/default-types';
+import {
+  addUserChat,
+  getUserChatByChatId,
+  getUserProperties,
+} from 'src/services/firebase/users';
 
 export const messagesRef = collection(firestoreDatabase, 'messages');
 
@@ -64,6 +69,19 @@ export const getMessagesByChatId = async (chatId: string) => {
 };
 
 export const addMessage = async (message: FirebaseMessage) => {
+  const authUserEmail = getAuth().currentUser?.email as string;
+  const authUserProperties = await getUserProperties(authUserEmail);
+  const chat = await getUserChatByChatId(authUserEmail, message.chatId);
+
+  if (chat && !(await getMessagesByChatId(chat.id)).length) {
+    await addUserChat(chat.toUserEmail, {
+      name: authUserProperties.name,
+      toUserEmail: authUserEmail,
+      createdAt: Timestamp.now().toMillis(),
+      id: chat.id,
+    });
+  }
+
   await addDoc(messagesRef, message);
 };
 

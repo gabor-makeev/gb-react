@@ -1,20 +1,17 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getAuth } from 'firebase/auth';
-import { Timestamp } from 'firebase/firestore';
 import { MUIStyledMessageSectionContainer } from 'components/MUIStyledComponents/MUIStyledMessageSectionContainer';
 import { MessageSendingForm } from 'components/MessagesWindow/components/MessageSendingForm/MessageSendingForm';
 import { MessageList } from 'components/MessagesWindow/components/MessageList/MessageList';
 import { Messages } from 'src/default-types';
 import {
-  addUserChat,
   getUserChatByChatId,
   getUserProperties,
 } from 'src/services/firebase/users';
 import {
   addMessage,
   createFirebaseMessageObject,
-  getMessagesByChatId,
   subscribeToMessagesByChatId,
 } from 'src/services/firebase/messages';
 
@@ -53,17 +50,6 @@ export const MessagesWindow: FC = () => {
 
     if (chatId) {
       setMessageSendingFormInputValue('');
-
-      const chat = await getUserChatByChatId(userEmail, chatId);
-
-      if (!(await getMessagesByChatId(chatId)).length && chat) {
-        await addUserChat(chat?.toUserEmail, {
-          name: userName,
-          toUserEmail: userEmail,
-          createdAt: Timestamp.now().toMillis(),
-          id: chat.id,
-        });
-      }
 
       await addMessage(
         createFirebaseMessageObject(
