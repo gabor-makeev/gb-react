@@ -6,16 +6,16 @@ import classNames from 'classnames';
 import { MUIStyledMessageList } from '../../../MUIStyledComponents/MUIStyledMessageList';
 
 interface MessageListProps {
+  userEmail: string;
   messages: Message[];
   gapType?: string;
   angleType?: string;
   backgroundColor?: string;
-  userName: string;
 }
 
 export const MessageList: FC<MessageListProps> = ({
+  userEmail,
   messages,
-  userName,
   gapType = 'medium',
   angleType = 'round',
   backgroundColor = 'primary',
@@ -29,7 +29,7 @@ export const MessageList: FC<MessageListProps> = ({
   return (
     <MUIStyledMessageList className={classes} data-testid={'messageList'}>
       {messages.map((message, idx) => (
-        <MessageItem message={message} userName={userName} key={idx} />
+        <MessageItem message={message} userEmail={userEmail} key={idx} />
       ))}
     </MUIStyledMessageList>
   );

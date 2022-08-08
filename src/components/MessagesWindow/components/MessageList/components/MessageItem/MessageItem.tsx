@@ -1,27 +1,26 @@
-import style from './MessageItem.module.scss';
 import { FC } from 'react';
-import { MUIStyledMessageListItem } from 'components/MUIStyledComponents/MUIStyledMessageListItem';
 import classNames from 'classnames';
-import { Authors, Message } from 'src/default-types';
+import style from './MessageItem.module.scss';
+import { Message } from 'src/default-types';
+import { MUIStyledMessageListItem } from 'components/MUIStyledComponents/MUIStyledMessageListItem';
 
 interface MessageItemProps {
+  userEmail: string;
   message: Message;
   variant?: string;
-  userName: string;
 }
 
 export const MessageItem: FC<MessageItemProps> = ({
+  userEmail,
   message,
   variant = 'medium',
-  userName,
 }) => {
-  let MessageListItemClasses = classNames(style[`message__type-${variant}`]);
-
-  if (!message.userEmail) {
-    MessageListItemClasses += ` ${style['message__system-background']}`;
-  } else {
-    MessageListItemClasses += ` ${style['message__user-background']}`;
-  }
+  const MessageListItemClasses = classNames(style[`message__type-${variant}`], {
+    [style['message__system-background']]: !message.userEmail,
+    [style['message__user-background']]: message.userEmail,
+    [style['message__other-user']]:
+      message.userEmail && message.userEmail !== userEmail,
+  });
 
   return (
     <MUIStyledMessageListItem
@@ -30,9 +29,7 @@ export const MessageItem: FC<MessageItemProps> = ({
       data-testid={'messageItem'}
     >
       {message.body}
-      <span className={style['message__author-sign']}>
-        {message.userEmail ? userName : Authors.BOT}
-      </span>
+      <span className={style['message__author-sign']}>{message.userName}</span>
     </MUIStyledMessageListItem>
   );
 };
