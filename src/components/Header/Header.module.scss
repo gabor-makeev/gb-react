@@ -1,17 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
 .header {
-  background-color: lightgrey;
+  position: fixed;
+  width: 100%;
+  height: 116px;
+  background-color: #131313;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+
+  &__container {
+    max-width: 1240px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 25px;
+  }
+
+  &__logo {
+    width: 65px;
+    height: 65px;
+    fill: white;
+  }
 
   &__ul {
     display: flex;
-    justify-content: space-between;
-    max-width: 1000px;
-    margin: 0 auto;
     list-style-type: none;
-    padding: 20px 10px;
+    gap: 52px;
   }
 
-  &__li {
-    background-color: #222;
-    padding: 20px;
+  &__navlink {
+    color: grey;
+    text-decoration: none;
+    transition: 0.3s;
+
+    &:hover {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    &-active {
+      color: white;
+    }
+  }
+
+  &__account-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 25px 10px 10px;
+    background-color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: 0.3s;
+
+    svg {
+      fill: white;
+      background-color: #131313;
+      padding: 10px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50px;
+    }
+
+    span {
+      color: #131313;
+    }
+    
+    &:hover {
+      background-color: #131313;
+      outline: 1px solid white;
+
+      & svg {
+        fill: #131313;
+        background-color: white;
+      }
+
+      & span {
+        color: white;
+      }
+    }
   }
 }
