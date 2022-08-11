@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useRef, useState } from 'react';
 import style from './Menu.module.scss';
 import { NavLink } from 'react-router-dom';
 import { NavigationItem } from 'src/default-types';
@@ -10,10 +10,7 @@ interface MenuProps {
 
 export const Menu: FC<MenuProps> = ({ navigations }) => {
   const [mobileMenuState, setMobileMenuState] = useState(false);
-
-  const mobileMenuClasslist = classNames(style['nav__menu'], {
-    [style['nav__menu__mobile-active']]: mobileMenuState,
-  });
+  const navMenuRef = useRef<HTMLUListElement>(null);
 
   const mobileMenuButtonClasslist = classNames(style['nav__menu-button'], {
     [style['nav__menu-button__mobile-active']]: mobileMenuState,
@@ -25,15 +22,35 @@ export const Menu: FC<MenuProps> = ({ navigations }) => {
     });
   };
 
+  const handleMenuButtonClick = () => {
+    const navMenuClasslist = navMenuRef.current?.classList;
+
+    if (mobileMenuState) {
+      navMenuClasslist?.remove(style['nav__menu__mobile-active']);
+
+      setTimeout(() => {
+        navMenuClasslist?.remove(style['nav__menu__mobile-before-active']);
+      }, 100);
+    } else if (!mobileMenuState) {
+      navMenuClasslist?.add(style['nav__menu__mobile-before-active']);
+
+      setTimeout(() => {
+        navMenuClasslist?.add(style['nav__menu__mobile-active']);
+      }, 0);
+    }
+
+    setMobileMenuState(!mobileMenuState);
+  };
+
   return (
     <nav className={style['nav']}>
       <button
         className={mobileMenuButtonClasslist}
-        onClick={() => setMobileMenuState(!mobileMenuState)}
+        onClick={() => handleMenuButtonClick()}
       >
         Menu
       </button>
-      <ul className={mobileMenuClasslist}>
+      <ul className={style['nav__menu']} ref={navMenuRef}>
         {navigations.map((navigation) => (
           <li key={navigation.id} className={style['nav__menu__item']}>
             <NavLink
