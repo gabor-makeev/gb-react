@@ -1,0 +1,43 @@
+.profile-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 25px 10px 10px;
+  background-color: white;
+  text-decoration: none;
+  border-radius: 50px;
+  transition: 0.3s;
+
+  svg {
+    fill: white;
+    background-color: #131313;
+    padding: 10px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+  }
+
+  span {
+    color: #131313;
+  }
+
+  &:hover {
+    background-color: #131313;
+    outline: 1px solid white;
+
+    & svg {
+      fill: #131313;
+      background-color: white;
+    }
+
+    & span {
+      color: white;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-link {
+    display: none;
+  }
+}
