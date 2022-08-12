@@ -6,7 +6,7 @@ export const BasePageTemplate = () => {
   return (
     <>
       <Header navigations={NAVIGATION} />
-      <main>
+      <main style={{ paddingTop: '116px' }}>
         <Outlet />
       </main>
     </>
