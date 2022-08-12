@@ -22,7 +22,7 @@ export const Menu: FC<MenuProps> = ({ navigations }) => {
     });
   };
 
-  const handleMenuButtonClick = () => {
+  const toggleMobileMenu = () => {
     const navMenuClasslist = navMenuRef.current?.classList;
 
     if (mobileMenuState) {
@@ -46,7 +46,7 @@ export const Menu: FC<MenuProps> = ({ navigations }) => {
     <nav className={style['nav']}>
       <button
         className={mobileMenuButtonClasslist}
-        onClick={() => handleMenuButtonClick()}
+        onClick={() => toggleMobileMenu()}
       >
         Menu
       </button>
@@ -55,7 +55,7 @@ export const Menu: FC<MenuProps> = ({ navigations }) => {
           <li key={navigation.id} className={style['nav__menu__item']}>
             <NavLink
               to={navigation.path}
-              onClick={() => setMobileMenuState(false)}
+              onClick={() => toggleMobileMenu()}
               className={({ isActive }) => getNavLinkClasslist(isActive)}
             >
               {navigation.name}
