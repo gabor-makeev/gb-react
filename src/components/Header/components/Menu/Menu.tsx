@@ -1,4 +1,4 @@
-import { FC, useRef, useState } from 'react';
+import { FC, useEffect, useRef, useState, useCallback } from 'react';
 import style from './Menu.module.scss';
 import { NavLink } from 'react-router-dom';
 import { NavigationItem } from 'src/default-types';
@@ -26,7 +26,7 @@ export const Menu: FC<MenuProps> = ({ navigations }) => {
     );
   };
 
-  const toggleMobileMenu = () => {
+  const toggleMobileMenu = useCallback(() => {
     const navMenuClasslist = navMenuRef.current?.classList;
 
     if (mobileMenuState) {
@@ -44,7 +44,15 @@ export const Menu: FC<MenuProps> = ({ navigations }) => {
     }
 
     setMobileMenuState(!mobileMenuState);
-  };
+  }, [mobileMenuState]);
+
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768 && mobileMenuState) {
+        toggleMobileMenu();
+      }
+    });
+  }, [mobileMenuState, toggleMobileMenu]);
 
   return (
     <nav className={style['nav']}>
