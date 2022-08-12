@@ -17,6 +17,10 @@
         &-active {
           color: white;
         }
+
+        &-profile {
+          display: none;
+        }
       }
     }
 
@@ -63,6 +67,10 @@
 
       &__mobile-active {
         transform: scaleY(1);
+      }
+
+      &__item__navlink-profile {
+        display: inline;
       }
 
       &-button {

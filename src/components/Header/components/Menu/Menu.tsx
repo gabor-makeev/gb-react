@@ -16,10 +16,14 @@ export const Menu: FC<MenuProps> = ({ navigations }) => {
     [style['nav__menu-button__mobile-active']]: mobileMenuState,
   });
 
-  const getNavLinkClasslist = (isActive = false) => {
-    return classNames(style['nav__menu__item__navlink'], {
-      [style['nav__menu__item__navlink-active']]: isActive,
-    });
+  const getNavLinkClasslist = (linkName: string, isActive = false) => {
+    return classNames(
+      style['nav__menu__item__navlink'],
+      style[`nav__menu__item__navlink-${linkName.toLowerCase()}`],
+      {
+        [style['nav__menu__item__navlink-active']]: isActive,
+      }
+    );
   };
 
   const toggleMobileMenu = () => {
@@ -56,7 +60,9 @@ export const Menu: FC<MenuProps> = ({ navigations }) => {
             <NavLink
               to={navigation.path}
               onClick={() => toggleMobileMenu()}
-              className={({ isActive }) => getNavLinkClasslist(isActive)}
+              className={({ isActive }) =>
+                getNavLinkClasslist(navigation.name, isActive)
+              }
             >
               {navigation.name}
             </NavLink>
