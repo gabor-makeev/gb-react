@@ -1,5 +1,5 @@
+import style from './ChatList.module.scss';
 import { ChatItem } from './components/ChatItem/ChatItem';
-import List from '@mui/material/List';
 import { FC } from 'react';
 import { Chat, Chats } from 'src/default-types';
 
@@ -10,15 +10,7 @@ interface ChatListProps {
 
 export const ChatList: FC<ChatListProps> = ({ chats, deleteChat }) => {
   return (
-    <List
-      sx={{
-        width: '300px',
-        flex: '0 1 300px',
-        maxWidth: 360,
-        bgcolor: 'background.paper',
-        padding: '25px',
-      }}
-    >
+    <ul className={style.list}>
       {chats.map((chat) => (
         <ChatItem
           chat={chat}
@@ -26,6 +18,6 @@ export const ChatList: FC<ChatListProps> = ({ chats, deleteChat }) => {
           deleteChat={() => deleteChat(chat)}
         />
       ))}
-    </List>
+    </ul>
   );
 };
