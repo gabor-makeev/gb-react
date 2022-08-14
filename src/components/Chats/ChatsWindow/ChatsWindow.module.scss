@@ -3,6 +3,7 @@
 .container {
   display: grid;
   grid-template-rows: 1fr 10fr 1fr;
+  gap: 5px;
   flex-shrink: 0;
   width: 334px;
   padding: 24px 16px 16px 16px;
