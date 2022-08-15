@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import style from './MessagesWindow.module.scss';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { getAuth } from 'firebase/auth';
-import { MUIStyledMessageSectionContainer } from 'components/MUIStyledComponents/MUIStyledMessageSectionContainer';
 import { MessageSendingForm } from 'components/MessagesWindow/components/MessageSendingForm/MessageSendingForm';
 import { MessageList } from 'components/MessagesWindow/components/MessageList/MessageList';
 import { Messages } from 'src/default-types';
@@ -14,6 +14,7 @@ import {
   createFirebaseMessageObject,
   subscribeToMessagesByChatId,
 } from 'src/services/firebase/messages';
+import classNames from 'classnames';
 
 export const MessagesWindow: FC = () => {
   const [messages, setMessages] = useState<Messages>([]);
@@ -21,9 +22,13 @@ export const MessagesWindow: FC = () => {
   const [messageSendingFormInputValue, setMessageSendingFormInputValue] =
     useState('');
 
-  const userEmail = getAuth().currentUser?.email as string;
   const { chatId } = useParams();
   const navigate = useNavigate();
+  const userEmail = getAuth().currentUser?.email as string;
+
+  const messagesWindowClasslist = classNames(style['messages-window'], {
+    [style['active-messaging__messages-window']]: !!chatId,
+  });
 
   useEffect(() => {
     getUserProperties(userEmail).then((data) => {
@@ -62,7 +67,13 @@ export const MessagesWindow: FC = () => {
   };
 
   return (
-    <MUIStyledMessageSectionContainer>
+    <div className={messagesWindowClasslist}>
+      <NavLink
+        to={'/messenger'}
+        className={style['messages-window__backward-link']}
+      >
+        back
+      </NavLink>
       <MessageList messages={messages ? messages : []} userEmail={userEmail} />
       <MessageSendingForm
         isInputDisabled={!chatId}
@@ -70,6 +81,6 @@ export const MessagesWindow: FC = () => {
         inputValue={messageSendingFormInputValue}
         setInputValue={setMessageSendingFormInputValue}
       />
-    </MUIStyledMessageSectionContainer>
+    </div>
   );
 };

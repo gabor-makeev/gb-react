@@ -36,3 +36,13 @@
     background-color: #131313;
   }
 }
+
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+  }
+
+  .active-messaging__container {
+    display: none;
+  }
+}
