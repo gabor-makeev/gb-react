@@ -54,40 +54,56 @@ export const ChatsAddingForm: FC<ChatsAddingFormProps> = ({
     }
   };
 
+  const handleContainerClick = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    const { target } = e;
+    if ((target as HTMLElement).classList.contains(style.container)) {
+      toggleIsChatsAddingFormVisible();
+    }
+  };
+
   return (
-    <div className={style.container}>
+    <div className={style.container} onClick={(e) => handleContainerClick(e)}>
       <form className={style.form}>
-        <label>
+        <label className={style['form__search-field']}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="currentColor"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="feather feather-search"
           >
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
           <input
             type="text"
+            placeholder={'Enter the name of the user'}
             onChange={(e) => handleInputChange(e)}
             value={input}
           />
         </label>
-        <ul>
-          {contacts.map((contact) => (
-            <li
-              key={contact.email}
-              title={contact.email}
-              onClick={() => onContactClick(contact)}
-            >
-              <a>{contact.name}</a>
-            </li>
-          ))}
-        </ul>
+        {!!contacts.length && (
+          <ul className={style['form__search-results']}>
+            {contacts.map((contact) => (
+              <li
+                key={contact.email}
+                title={contact.email}
+                className={style['form__search-results__contact']}
+                onClick={() => onContactClick(contact)}
+              >
+                <div className={style['form__search-results__contact__icon']}>
+                  {contact.name[0]}
+                </div>
+                <a className={style['form__search-results__contact__name']}>
+                  {contact.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
       </form>
     </div>
   );
