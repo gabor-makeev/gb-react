@@ -10,6 +10,7 @@ import { Timestamp } from 'firebase/firestore';
 import { nanoid } from 'nanoid';
 import { getAuth } from 'firebase/auth';
 import { UserProperties } from 'src/default-types';
+import { SearchField } from 'components/Chats/ChatsAddingForm/components/SearchField/SearchField';
 
 interface ChatsAddingFormProps {
   toggleIsChatsAddingFormVisible: () => void;
@@ -66,25 +67,10 @@ export const ChatsAddingForm: FC<ChatsAddingFormProps> = ({
   return (
     <div className={style.container} onClick={(e) => handleContainerClick(e)}>
       <form className={style.form}>
-        <label className={style['form__search-field']}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-          <input
-            type="text"
-            placeholder={'Enter the name of the user'}
-            onChange={(e) => handleInputChange(e)}
-            value={input}
-          />
-        </label>
+        <SearchField
+          inputValue={input}
+          handleInputValueChange={handleInputChange}
+        />
         {!!contacts.length && (
           <ul className={style['form__search-results']}>
             {contacts.map((contact) => (
