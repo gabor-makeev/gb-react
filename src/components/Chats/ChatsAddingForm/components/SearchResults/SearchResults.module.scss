@@ -6,33 +6,4 @@
   border-radius: 10px;
   list-style-type: none;
   font-weight: 400;
-
-  &__contact {
-    transition: 0.3s;
-    width: 100%;
-    cursor: pointer;
-    padding: 15px 12px;
-    display: flex;
-    align-items: center;
-    gap: 18px;
-
-    &:hover {
-      background-color: #C4C4C4;
-    }
-
-    &:active {
-      background-color: transparent;
-    }
-
-    &__icon {
-      width: 64px;
-      height: 64px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 2px solid #A6A6A6;
-      border-radius: 32px;
-      font-size: 28px;
-    }
-  }
 }

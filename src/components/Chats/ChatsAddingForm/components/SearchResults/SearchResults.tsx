@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import style from './SearchResults.module.scss';
 import { UserProperties } from 'src/default-types';
+import { SearchResult } from 'components/Chats/ChatsAddingForm/components/SearchResults/components/SearchResult/SearchResult';
 
 interface SearchResultsProps {
   contacts: UserProperties[];
@@ -14,19 +15,11 @@ export const SearchResults: FC<SearchResultsProps> = ({
   return (
     <ul className={style['search-results']}>
       {contacts.map((contact) => (
-        <li
+        <SearchResult
+          contact={contact}
+          onContactClick={onContactClick}
           key={contact.email}
-          title={contact.email}
-          className={style['search-results__contact']}
-          onClick={() => onContactClick(contact)}
-        >
-          <div className={style['search-results__contact__icon']}>
-            {contact.name[0]}
-          </div>
-          <a className={style['search-results__contact__name']}>
-            {contact.name}
-          </a>
-        </li>
+        />
       ))}
     </ul>
   );
