@@ -11,6 +11,7 @@ import { nanoid } from 'nanoid';
 import { getAuth } from 'firebase/auth';
 import { UserProperties } from 'src/default-types';
 import { SearchField } from 'components/Chats/ChatsAddingForm/components/SearchField/SearchField';
+import { SearchResults } from 'components/Chats/ChatsAddingForm/components/SearchResults/SearchResults';
 
 interface ChatsAddingFormProps {
   toggleIsChatsAddingFormVisible: () => void;
@@ -72,23 +73,7 @@ export const ChatsAddingForm: FC<ChatsAddingFormProps> = ({
           handleInputValueChange={handleInputChange}
         />
         {!!contacts.length && (
-          <ul className={style['form__search-results']}>
-            {contacts.map((contact) => (
-              <li
-                key={contact.email}
-                title={contact.email}
-                className={style['form__search-results__contact']}
-                onClick={() => onContactClick(contact)}
-              >
-                <div className={style['form__search-results__contact__icon']}>
-                  {contact.name[0]}
-                </div>
-                <a className={style['form__search-results__contact__name']}>
-                  {contact.name}
-                </a>
-              </li>
-            ))}
-          </ul>
+          <SearchResults contacts={contacts} onContactClick={onContactClick} />
         )}
       </form>
     </div>
