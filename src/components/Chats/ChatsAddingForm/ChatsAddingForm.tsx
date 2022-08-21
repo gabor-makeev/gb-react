@@ -1,6 +1,5 @@
 import React, { FC, useState } from 'react';
 import style from './ChatsAddingForm.module.scss';
-import { Button } from '@mui/material';
 import {
   getUserChatByToUserEmail,
   getUsersByName,
@@ -11,6 +10,8 @@ import { Timestamp } from 'firebase/firestore';
 import { nanoid } from 'nanoid';
 import { getAuth } from 'firebase/auth';
 import { UserProperties } from 'src/default-types';
+import { SearchField } from 'components/Chats/ChatsAddingForm/components/SearchField/SearchField';
+import { SearchResults } from 'components/Chats/ChatsAddingForm/components/SearchResults/SearchResults';
 
 interface ChatsAddingFormProps {
   toggleIsChatsAddingFormVisible: () => void;
@@ -55,30 +56,25 @@ export const ChatsAddingForm: FC<ChatsAddingFormProps> = ({
     }
   };
 
+  const handleContainerClick = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    const { target } = e;
+    if ((target as HTMLElement).classList.contains(style.container)) {
+      toggleIsChatsAddingFormVisible();
+    }
+  };
+
   return (
-    <div className={style.container}>
+    <div className={style.container} onClick={(e) => handleContainerClick(e)}>
       <form className={style.form}>
-        <p>Chats adding form</p>
-        <label>
-          Enter contact name
-          <input
-            type="text"
-            onChange={(e) => handleInputChange(e)}
-            value={input}
-          />
-        </label>
-        <ul>
-          {contacts.map((contact) => (
-            <li
-              key={contact.email}
-              title={contact.email}
-              onClick={() => onContactClick(contact)}
-            >
-              <a>{contact.name}</a>
-            </li>
-          ))}
-        </ul>
-        <Button onClick={toggleIsChatsAddingFormVisible}>X</Button>
+        <SearchField
+          inputValue={input}
+          handleInputValueChange={handleInputChange}
+        />
+        {!!contacts.length && (
+          <SearchResults contacts={contacts} onContactClick={onContactClick} />
+        )}
       </form>
     </div>
   );

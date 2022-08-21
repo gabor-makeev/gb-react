@@ -1,0 +1,22 @@
+.messages-window {
+  display: flex;
+  flex-direction: column;
+
+  &__backward-link {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .messages-window {
+    display: none;
+
+    &__backward-link {
+      display: block;
+    }
+  }
+
+  .active-messaging__messages-window {
+    display: flex;
+  }
+}
