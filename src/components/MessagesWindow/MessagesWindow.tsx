@@ -68,19 +68,24 @@ export const MessagesWindow: FC = () => {
 
   return (
     <div className={messagesWindowClasslist}>
-      <NavLink
-        to={'/messenger'}
-        className={style['messages-window__backward-link']}
-      >
-        back
-      </NavLink>
-      <MessageList messages={messages ? messages : []} userEmail={userEmail} />
-      <MessageSendingForm
-        isInputDisabled={!chatId}
-        onSendMessage={onSendMessage}
-        inputValue={messageSendingFormInputValue}
-        setInputValue={setMessageSendingFormInputValue}
-      />
+      <div className={style['messages-window__container']}>
+        <NavLink
+          to={'/messenger'}
+          className={style['messages-window__backward-link']}
+        >
+          back
+        </NavLink>
+        <MessageList
+          messages={messages ? messages : []}
+          userEmail={userEmail}
+        />
+        <MessageSendingForm
+          isInputDisabled={!chatId}
+          onSendMessage={onSendMessage}
+          inputValue={messageSendingFormInputValue}
+          setInputValue={setMessageSendingFormInputValue}
+        />
+      </div>
     </div>
   );
 };
