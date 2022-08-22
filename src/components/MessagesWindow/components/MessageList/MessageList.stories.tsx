@@ -23,11 +23,6 @@ BigGaps.args = {
   gapType: 'big',
 };
 
-export const RoundishAndle = Template.bind({});
-RoundishAndle.args = {
-  angleType: 'roundish',
-};
-
 export const SecondaryBackgroundColor = Template.bind({});
 SecondaryBackgroundColor.args = {
   backgroundColor: 'secondary',

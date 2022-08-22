@@ -9,7 +9,6 @@ interface MessageListProps {
   userEmail: string;
   messages: Message[];
   gapType?: string;
-  angleType?: string;
   backgroundColor?: string;
 }
 
@@ -17,12 +16,10 @@ export const MessageList: FC<MessageListProps> = ({
   userEmail,
   messages,
   gapType = 'medium',
-  angleType = 'round',
   backgroundColor = 'primary',
 }) => {
   const classes = classNames(
     style[`gap-${gapType}`],
-    style[`angle-${angleType}`],
     style[`background-color-${backgroundColor}`]
   );
 

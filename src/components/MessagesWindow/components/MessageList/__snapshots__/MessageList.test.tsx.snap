@@ -3,7 +3,7 @@
 exports[`MessageList should render with snapshot 1`] = `
 <DocumentFragment>
   <ul
-    class="MuiList-root MuiList-padding gap-medium angle-round background-color-primary css-li95ps-MuiList-root"
+    class="MuiList-root MuiList-padding gap-medium background-color-primary css-rtwcuh-MuiList-root"
     data-testid="messageList"
   >
     <li
