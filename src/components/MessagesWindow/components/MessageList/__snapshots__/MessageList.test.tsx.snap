@@ -2,43 +2,48 @@
 
 exports[`MessageList should render with snapshot 1`] = `
 <DocumentFragment>
-  <ul
-    class="MuiList-root MuiList-padding gap-medium background-color-primary css-rtwcuh-MuiList-root"
-    data-testid="messageList"
+  <div
+    class="message-list__container"
   >
-    <li
-      class="MuiListItem-root MuiListItem-gutters message__type-medium message__user-background message__other-user css-hvpmgr-MuiListItem-root"
-      data-testid="messageItem"
+    <ul
+      class="MuiList-root MuiList-padding gap-medium background-color-primary css-1quc2qb-MuiList-root"
+      data-testid="messageList"
     >
-      placerat duis ultricies lacus sed turpis tincidunt id aliquet risus
-      <span
-        class="message__author-sign"
+      <li
+        class="MuiListItem-root MuiListItem-gutters message__type-medium message__user-background message__other-user css-hvpmgr-MuiListItem-root"
+        data-testid="messageItem"
       >
-        Gabor
-      </span>
-    </li>
-    <li
-      class="MuiListItem-root MuiListItem-gutters message__type-medium message__user-background message__other-user css-hvpmgr-MuiListItem-root"
-      data-testid="messageItem"
-    >
-      et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit
-      <span
-        class="message__author-sign"
+        placerat duis ultricies lacus sed turpis tincidunt id aliquet risus
+        <span
+          class="message__author-sign"
+        >
+          Gabor
+        </span>
+      </li>
+      <li
+        class="MuiListItem-root MuiListItem-gutters message__type-medium message__user-background message__other-user css-hvpmgr-MuiListItem-root"
+        data-testid="messageItem"
       >
-        Gabor
-      </span>
-    </li>
-    <li
-      class="MuiListItem-root MuiListItem-gutters message__type-medium message__user-background message__other-user css-hvpmgr-MuiListItem-root"
-      data-testid="messageItem"
-    >
-      felis eget velit aliquet sagittis id consectetur purus ut faucibus
-      <span
-        class="message__author-sign"
+        et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit
+        <span
+          class="message__author-sign"
+        >
+          Gabor
+        </span>
+      </li>
+      <li
+        class="MuiListItem-root MuiListItem-gutters message__type-medium message__user-background message__other-user css-hvpmgr-MuiListItem-root"
+        data-testid="messageItem"
       >
-        Gabor
-      </span>
-    </li>
-  </ul>
+        felis eget velit aliquet sagittis id consectetur purus ut faucibus
+        <span
+          class="message__author-sign"
+        >
+          Gabor
+        </span>
+      </li>
+      <div />
+    </ul>
+  </div>
 </DocumentFragment>
 `;

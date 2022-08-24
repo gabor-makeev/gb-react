@@ -9,6 +9,7 @@ import { Authors } from 'src/default-types';
 const testUserEmail = 'test@test.com';
 
 describe('MessageList', () => {
+  window.HTMLElement.prototype.scrollIntoView = jest.fn();
   it('should render', () => {
     render(
       <MessageList
