@@ -22,9 +22,11 @@
 @media (max-width: 768px) {
   .messages-window {
     display: none;
+    padding: 0;
 
     &__container {
       width: 100%;
+      border-radius: 0;
     }
   }
 
