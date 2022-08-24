@@ -1,0 +1,13 @@
+.messages-window-header {
+  &__backward-link {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .messages-window-header {
+    &__backward-link {
+      display: block;
+    }
+  }
+}
