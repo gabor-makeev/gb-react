@@ -36,7 +36,6 @@ export const MessagesWindowHeader: FC<MessagesWindowHeaderProps> = ({
       <span className={style['messages-window-header__chat-name']}>
         {chatName}
       </span>
-      <hr />
     </div>
   );
 };

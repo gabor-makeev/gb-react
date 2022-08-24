@@ -1,6 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 .messages-window {
   width: 100%;
   padding: 45px 35px;
+  font-family: 'Roboto', sans-serif;
+
   &__container {
     display: flex;
     flex-direction: column;
