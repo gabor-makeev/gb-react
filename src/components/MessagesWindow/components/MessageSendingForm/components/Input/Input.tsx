@@ -1,6 +1,5 @@
 import style from './Input.module.scss';
 import { FC, useEffect, useRef } from 'react';
-import TextField from '@mui/material/TextField';
 
 interface InputProps {
   placeholder?: string;
@@ -17,7 +16,7 @@ export const Input: FC<InputProps> = ({
   setValue,
   shouldAutoFocus = true,
 }) => {
-  const element = useRef<HTMLInputElement | undefined>();
+  const element = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (shouldAutoFocus) {
@@ -26,14 +25,12 @@ export const Input: FC<InputProps> = ({
   });
 
   return (
-    <TextField
-      label={'Message'}
-      variant="outlined"
+    <input
       type="text"
       value={value}
       disabled={disabled}
       placeholder={placeholder}
-      inputRef={element}
+      ref={element}
       className={style.input}
       onChange={(e) => {
         setValue(e.target.value);
