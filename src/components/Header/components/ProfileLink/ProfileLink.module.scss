@@ -1,37 +1,34 @@
+@import "src/styles/variables/colors";
+
 .profile-link {
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 10px 25px 10px 10px;
-  background-color: white;
+  background-color: $cadetGrey;
   text-decoration: none;
   border-radius: 50px;
   transition: 0.3s;
 
   svg {
-    fill: white;
-    background-color: #131313;
+    fill: $cadetGrey;
+    background-color: $policeBlue;
     padding: 10px;
     width: 60px;
     height: 60px;
     border-radius: 50px;
+    transition: 0.3s;
   }
 
   span {
-    color: #131313;
+    color: $policeBlue;
   }
 
   &:hover {
-    background-color: #131313;
-    outline: 1px solid white;
+    background-color: $pastelBlue;
 
     & svg {
-      fill: #131313;
-      background-color: white;
-    }
-
-    & span {
-      color: white;
+      fill: $pastelBlue;
     }
   }
 }

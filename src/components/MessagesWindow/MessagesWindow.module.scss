@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import "src/styles/variables/colors";
 
 .messages-window {
   width: 100%;
@@ -12,8 +13,8 @@
     max-width: 1000px;
     margin: 0 auto;
     height: 100%;
-    box-shadow: 0 0 5px 2px #131313;
-    background-color: #1E1E1E;
+    box-shadow: 0 0 5px 2px $policeBlue;
+    background-color: $policeBlue;
     border-radius: 25px;
     padding: 30px 44px;
   }

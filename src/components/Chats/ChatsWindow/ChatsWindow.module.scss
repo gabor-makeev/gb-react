@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap');
+@import "src/styles/variables/colors";
 
 .container {
   display: grid;
@@ -7,9 +8,10 @@
   flex-shrink: 0;
   width: 334px;
   padding: 24px 16px 16px 16px;
-  background-color: #1E1E1E;
+  background-color: $steelTeal;
+  border-right: 1px solid $policeBlue;
   font-family: 'Roboto', sans-serif;
-  color: #F1F2F3;
+  color: $pastelBlue;
 }
 
 .title {
@@ -20,26 +22,27 @@
 
 .button {
   justify-self: flex-end;
-  color: inherit;
+  color: $policeBlue;
   width: 100%;
-  background-color: #131313;
+  background-color: $cadetGrey;
   border: none;
   cursor: pointer;
   border-radius: 8px;
   transition: 0.3s;
   
   &:hover {
-    background-color: #0D0D0D;
+    background-color: $pastelBlue;
   }
 
   &:active {
-    background-color: #131313;
+    background-color: $cadetGrey;
   }
 }
 
 @media (max-width: 768px) {
   .container {
     width: 100%;
+    border-right: none;
   }
 
   .active-messaging__container {

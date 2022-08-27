@@ -1,18 +1,22 @@
+@import "src/styles/variables/colors";
+
 .contact {
   transition: 0.3s;
+  outline: 1px solid transparent;
   width: 100%;
   cursor: pointer;
   padding: 15px 12px;
   display: flex;
   align-items: center;
   gap: 18px;
+  border-radius: 25px;
 
   &:hover {
-    background-color: #C4C4C4;
+    outline: 1px solid $policeBlue
   }
 
   &:active {
-    background-color: transparent;
+    outline: 1px solid transparent;
   }
 
   &__icon {
@@ -21,7 +25,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid #A6A6A6;
+    border: 2px solid $policeBlue;
     border-radius: 32px;
     font-size: 28px;
   }

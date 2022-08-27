@@ -1,3 +1,5 @@
+@import "src/styles/variables/colors";
+
 .message-form {
   max-width: 762px;
   width: 100%;
@@ -8,11 +10,11 @@
 }
 
 .border-normal {
-  border: 1px solid black;
+  border: 1px solid $policeBlue;
 }
 
 .border-bold {
-  border: 5px solid black;
+  border: 5px solid $policeBlue;
 }
 
 .angle-roundish {
