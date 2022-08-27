@@ -7,5 +7,5 @@ export const MUIStyledMessageList = styled(List)({
   display: 'flex',
   flexDirection: 'column',
   gap: '10px',
-  overflowY: 'scroll',
+  overflowY: 'auto',
 });
