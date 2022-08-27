@@ -3,7 +3,7 @@
 exports[`Message should render with snapshot 1`] = `
 <DocumentFragment>
   <li
-    class="MuiListItem-root MuiListItem-gutters message__type-medium message__user-background message__other-user css-hvpmgr-MuiListItem-root"
+    class="message__type-medium message message__user-background message__other-user"
     data-testid="messageItem"
   >
     placerat duis ultricies lacus sed turpis tincidunt id aliquet risus

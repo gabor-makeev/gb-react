@@ -1,6 +1,12 @@
 @import "src/styles/variables/colors";
 
 .message {
+  display: flex;
+  align-self: flex-end;
+  justify-content: flex-end;
+  margin-left: 36%;
+  position: relative;
+
   &__type {
     &-big {
       padding: 25px 15px;
@@ -39,5 +45,9 @@
   &__other-user {
     background-color: $steelTeal;
     color: $darkSeaGreen;
+    align-self: flex-start;
+    justify-content: flex-start;
+    margin-left: 0;
+    margin-right: 36%;
   }
 }
