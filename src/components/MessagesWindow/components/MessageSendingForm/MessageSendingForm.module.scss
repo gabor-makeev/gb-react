@@ -2,9 +2,11 @@
 
 .message-form {
   max-width: 762px;
+  height: 79px;
+  flex-shrink: 0;
   width: 100%;
   display: flex;
-  gap: 10px;
+  gap: 24px;
   justify-content: space-between;
   margin: 0;
 }

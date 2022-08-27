@@ -3,7 +3,7 @@
 exports[`Input should render with snapshot 1`] = `
 <DocumentFragment>
   <input
-    class="input"
+    class="input input-active"
     data-testid="messageSendingFormInput"
     placeholder="test placeholder"
     type="text"

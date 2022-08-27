@@ -1,3 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import "src/styles/variables/colors";
+
 .input {
-  //Custom styles should go here
+  width: 100%;
+  background-color: $cadetGrey;
+  outline: none;
+  padding: 0 22px;
+  border: none;
+  border-radius: 25px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 28px;
+  letter-spacing: 0.05em;
+  color: $policeBlue;
+
+  &::placeholder {
+    color: $steelTeal;
+  }
+
+  &-active {
+    background-color: $pastelBlue;
+  }
 }
