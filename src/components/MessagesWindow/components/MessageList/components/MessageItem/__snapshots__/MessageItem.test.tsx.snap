@@ -3,14 +3,13 @@
 exports[`Message should render with snapshot 1`] = `
 <DocumentFragment>
   <li
-    class="message message__user-background message__other-user"
+    class="message message__other-user"
     data-testid="messageItem"
   >
-    placerat duis ultricies lacus sed turpis tincidunt id aliquet risus
     <span
-      class="message__author-sign"
+      class="message__content"
     >
-      Gabor
+      placerat duis ultricies lacus sed turpis tincidunt id aliquet risus
     </span>
   </li>
 </DocumentFragment>

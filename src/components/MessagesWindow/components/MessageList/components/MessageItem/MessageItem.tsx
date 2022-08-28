@@ -11,15 +11,15 @@ interface MessageItemProps {
 export const MessageItem: FC<MessageItemProps> = ({ userEmail, message }) => {
   const MessageListItemClasses = classNames(style.message, {
     [style['message__system-background']]: !message.userEmail,
-    [style['message__user-background']]: message.userEmail,
+    [style['message__auth-user']]:
+      message.userEmail && message.userEmail === userEmail,
     [style['message__other-user']]:
       message.userEmail && message.userEmail !== userEmail,
   });
 
   return (
     <li className={MessageListItemClasses} data-testid={'messageItem'}>
-      {message.body}
-      <span className={style['message__author-sign']}>{message.userName}</span>
+      <span className={style['message__content']}>{message.body}</span>
     </li>
   );
 };

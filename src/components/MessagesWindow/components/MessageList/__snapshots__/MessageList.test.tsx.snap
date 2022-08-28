@@ -10,36 +10,33 @@ exports[`MessageList should render with snapshot 1`] = `
       data-testid="messageList"
     >
       <li
-        class="message message__user-background message__other-user"
+        class="message message__other-user"
         data-testid="messageItem"
       >
-        placerat duis ultricies lacus sed turpis tincidunt id aliquet risus
         <span
-          class="message__author-sign"
+          class="message__content"
         >
-          Gabor
+          placerat duis ultricies lacus sed turpis tincidunt id aliquet risus
         </span>
       </li>
       <li
-        class="message message__user-background message__other-user"
+        class="message message__other-user"
         data-testid="messageItem"
       >
-        et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit
         <span
-          class="message__author-sign"
+          class="message__content"
         >
-          Gabor
+          et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit
         </span>
       </li>
       <li
-        class="message message__user-background message__other-user"
+        class="message message__other-user"
         data-testid="messageItem"
       >
-        felis eget velit aliquet sagittis id consectetur purus ut faucibus
         <span
-          class="message__author-sign"
+          class="message__content"
         >
-          Gabor
+          felis eget velit aliquet sagittis id consectetur purus ut faucibus
         </span>
       </li>
       <div />

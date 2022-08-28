@@ -1,36 +1,64 @@
 @import "src/styles/variables/colors";
 
 .message {
-  display: flex;
   align-self: flex-end;
-  justify-content: flex-end;
   margin-left: 36%;
   position: relative;
 
-  &__user-background {
-    background-color: $darkSeaGreen;
-    color: $policeBlue;
+  & > .message__content {
+    display: block;
+    padding: 15px 50px 18px;
+    border-radius: 25px;
+    font-size: 26px;
+    line-height: 30px;
+    letter-spacing: 0.05em;
   }
 
-  &__system-background {
-    background-color: $regularRed;
-    color: $policeBlue;
-  }
-
-  &__author-sign {
-    color: $policeBlue;
-    position: absolute;
-    left: 15px;
-    top: 5px;
-    font-size: 12px;
+  &__auth-user {
+    padding-right: 21px;
+    &:after {
+      content: '';
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 18px;
+      height: 18px;
+      border-radius: 9px;
+      background-color: $darkSeaGreen;
+    }
+    & > .message__content {
+      background-color: $darkSeaGreen;
+      color: $policeBlue;
+      margin-bottom: 7px;
+    }
   }
 
   &__other-user {
-    background-color: $steelTeal;
-    color: $darkSeaGreen;
     align-self: flex-start;
-    justify-content: flex-start;
     margin-left: 0;
     margin-right: 36%;
+    padding-left: 14px;
+    &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 18px;
+      height: 18px;
+      border-radius: 9px;
+      background-color: $steelTeal;
+    }
+    & > .message__content {
+      background-color: $steelTeal;
+      color: $darkSeaGreen;
+      margin-bottom: 10px;
+    }
+  }
+
+  &__system-background {
+    & > .message__content {
+      background-color: $regularRed;
+      color: $policeBlue;
+    }
   }
 }
