@@ -6,24 +6,15 @@ import { Message } from 'src/default-types';
 interface MessageItemProps {
   userEmail: string;
   message: Message;
-  variant?: string;
 }
 
-export const MessageItem: FC<MessageItemProps> = ({
-  userEmail,
-  message,
-  variant = 'medium',
-}) => {
-  const MessageListItemClasses = classNames(
-    style[`message__type-${variant}`],
-    style.message,
-    {
-      [style['message__system-background']]: !message.userEmail,
-      [style['message__user-background']]: message.userEmail,
-      [style['message__other-user']]:
-        message.userEmail && message.userEmail !== userEmail,
-    }
-  );
+export const MessageItem: FC<MessageItemProps> = ({ userEmail, message }) => {
+  const MessageListItemClasses = classNames(style.message, {
+    [style['message__system-background']]: !message.userEmail,
+    [style['message__user-background']]: message.userEmail,
+    [style['message__other-user']]:
+      message.userEmail && message.userEmail !== userEmail,
+  });
 
   return (
     <li className={MessageListItemClasses} data-testid={'messageItem'}>
