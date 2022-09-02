@@ -19,6 +19,24 @@ export class DateTimeFormatter {
     return this.getDMYDate();
   }
 
+  get amPmTimeString() {
+    const hours = this.date.getHours();
+    const minutes = this.date.getMinutes();
+
+    if (hours >= 12) {
+      if (hours === 12) {
+        return `${hours}:${minutes}pm`;
+      }
+      return `${hours % 12}:${minutes}pm`;
+    }
+
+    if (hours === 0) {
+      return `12:${minutes}am`;
+    }
+
+    return `${hours}:${minutes}am`;
+  }
+
   getDMYDate() {
     const day = this.getDayOrMonthWithZero(this.date.getDate());
     const month = this.getDayOrMonthWithZero(this.date.getMonth() + 1);
