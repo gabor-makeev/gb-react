@@ -21,7 +21,10 @@ export class DateTimeFormatter {
 
   get amPmTimeString() {
     const hours = this.date.getHours();
-    const minutes = this.date.getMinutes();
+    const minutes =
+      this.date.getMinutes().toString().length === 1
+        ? `0${this.date.getMinutes()}`
+        : this.date.getMinutes();
 
     if (hours >= 12) {
       if (hours === 12) {
