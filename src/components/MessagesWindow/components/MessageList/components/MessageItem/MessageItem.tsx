@@ -2,7 +2,7 @@ import { FC } from 'react';
 import classNames from 'classnames';
 import style from './MessageItem.module.scss';
 import { Message } from 'src/default-types';
-import { DateTimeFormatter } from 'src/utils/DateTimeFormatter';
+import { DateTimeFormatter } from 'src/utils/DateTimeFormatter/DateTimeFormatter';
 
 interface MessageItemProps {
   userEmail: string;
