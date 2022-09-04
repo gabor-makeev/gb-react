@@ -1,9 +1,20 @@
 @import "src/styles/variables/colors";
 
+@mixin messageDot {
+  content: '';
+  position: absolute;
+  bottom: 25px;
+  width: 18px;
+  height: 18px;
+  border-radius: 9px;
+}
+
 .message {
   align-self: flex-end;
   margin-left: 36%;
   position: relative;
+  display: flex;
+  flex-direction: column;
 
   & > .message__content {
     display: block;
@@ -12,46 +23,55 @@
     font-size: 26px;
     line-height: 30px;
     letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+
+  & > .message__date-time {
+    display: inline-block;
+    width: 100%;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 23px;
+    letter-spacing: 0.05em;
+    color: $cadetGrey;
   }
 
   &__auth-user {
     padding-right: 21px;
+    align-items: flex-end;
     &:after {
-      content: '';
-      position: absolute;
+      @include messageDot;
       right: 0;
-      bottom: 0;
-      width: 18px;
-      height: 18px;
-      border-radius: 9px;
       background-color: $darkSeaGreen;
     }
     & > .message__content {
       background-color: $darkSeaGreen;
       color: $policeBlue;
-      margin-bottom: 7px;
+    }
+    & > .message__date-time {
+      text-align: right;
+      padding-right: 20px;
     }
   }
 
   &__other-user {
     align-self: flex-start;
+    align-items: flex-start;
     margin-left: 0;
     margin-right: 36%;
-    padding-left: 14px;
+    padding-left: 16px;
     &:before {
-      content: '';
-      position: absolute;
+      @include messageDot;
       left: 0;
-      bottom: 0;
-      width: 18px;
-      height: 18px;
-      border-radius: 9px;
       background-color: $steelTeal;
     }
     & > .message__content {
       background-color: $steelTeal;
       color: $darkSeaGreen;
-      margin-bottom: 10px;
+    }
+    & > .message__date-time {
+      text-align: left;
+      padding-left: 20px;
     }
   }
 

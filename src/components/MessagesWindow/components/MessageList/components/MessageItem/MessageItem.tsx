@@ -23,6 +23,10 @@ export const MessageItem: FC<MessageItemProps> = ({ userEmail, message }) => {
   return (
     <li className={MessageListItemClasses} data-testid={'messageItem'}>
       <span className={style['message__content']}>{message.body}</span>
+      <span className={style['message__date-time']}>
+        {messageDateFormatter.formattedDate},{' '}
+        {messageDateFormatter.amPmTimeString}
+      </span>
     </li>
   );
 };
