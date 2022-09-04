@@ -1,0 +1,111 @@
+/*
+  Font sizes
+*/
+
+// Laptop (1024px and more)
+$laptopTitleFontSize: 40px;
+$laptopSubtitleFontSize: 30px;
+$laptopLargeTextFontSize: 18px;
+$laptopSmallTextFontSize: 16px;
+$laptopButtonFontSize: 18px;
+$laptopInputFontSize: 16px;
+
+// Tablet (768px and more — until laptop)
+$tabletTitleFontSize: 30px;
+$tabletSubtitleFontSize: 24px;
+$tabletLargeTextFontSize: 16px;
+$tabletSmallTextFontSize: 14px;
+$tabletButtonFontSize: 16px;
+$tabletInputFontSize: 14px;
+
+// Mobile (375px and more — until tablet)
+$mobileTitleFontSize: 24px;
+$mobileSubtitleFontSize: 18px;
+$mobileLargeTextFontSize: 14px;
+$mobileSmallTextFontSize: 12px;
+$mobileButtonFontSize: 14px;
+$mobileInputFontSize: 14px;
+
+/*
+  Font weight
+*/
+
+// Laptop
+$laptopTitleFontWeight: 600;
+$laptopSubtitleFontWeight: 600;
+$laptopLargeTextFontWeight: 500;
+$laptopSmallTextFontWeight: 500;
+$laptopButtonFontWeight: 600;
+$laptopInputFontWeight: 500;
+
+// Tablet
+$tabletTitleFontWeight: 600;
+$tabletSubtitleFontWeight: 600;
+$tabletLargeTextFontWeight: 500;
+$tabletSmallTextFontWeight: 500;
+$tabletButtonFontWeight: 600;
+$tabletInputFontWeight: 500;
+
+// Mobile
+$mobileTitleFontWeight: 600;
+$mobileSubtitleFontWeight: 600;
+$mobileLargeTextFontWeight: 500;
+$mobileSmallTextFontWeight: 500;
+$mobileButtonFontWeight: 600;
+$mobileInputFontWeight: 500;
+
+/*
+  Line height
+*/
+
+// Laptop
+$laptopTitleLineHeight: 64px;
+$laptopSubtitleLineHeight: 48px;
+$laptopLargeTextLineHeight: 24px;
+$laptopSmallTextLineHeight: 24px;
+$laptopButtonLineHeight: 24px;
+$laptopInputLineHeight: 24px;
+
+// Tablet
+$tabletTitleLineHeight: 48px;
+$tabletSubtitleLineHeight: 32px;
+$tabletLargeTextLineHeight: 24px;
+$tabletSmallTextLineHeight: 20px;
+$tabletButtonLineHeight: 24px;
+$tabletInputLineHeight: 24px;
+
+// Mobile
+$mobileTitleLineHeight: 32px;
+$mobileSubtitleLineHeight: 24px;
+$mobileLargeTextLineHeight: 20px;
+$mobileSmallTextLineHeight: 18px;
+$mobileButtonLineHeight: 24px;
+$mobileInputLineHeight: 24px;
+
+/*
+  Letter spacing
+*/
+
+// Laptop
+$laptopTitleLetterSpacing: -1.5px;
+$laptopSubtitleLetterSpacing: -1.5px;
+$laptopLargeTextLetterSpacing: -0.5px;
+$laptopSmallTextLetterSpacing: -0.5px;
+$laptopButtonLetterSpacing: -0.5px;
+$laptopInputLetterSpacing: -0.5px;
+
+// Tablet
+$tabletTitleLetterSpacing: -1.5px;
+$tabletSubtitleLetterSpacing: -1px;
+$tabletLargeTextLetterSpacing: -0.5px;
+$tabletSmallTextLetterSpacing: -0.5px;
+$tabletButtonLetterSpacing: -0.5px;
+$tabletInputLetterSpacing: -0.5px;
+
+// Mobile
+$mobileTitleLetterSpacing: -1px;
+$mobileSubtitleLetterSpacing: -0.5px;
+$mobileLargeTextLetterSpacing: -0.5px;
+$mobileSmallTextLetterSpacing: -0.5px;
+$mobileButtonLetterSpacing: -0.5px;
+$mobileInputLetterSpacing: -0.5px;
