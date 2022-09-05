@@ -1,3 +1,6 @@
+@import "src/styles/mixins/fonts";
+@import "src/styles/variables/fonts";
+@import "src/styles/variables/screenSizes";
 @import "src/styles/variables/colors";
 
 .contact {
@@ -20,6 +23,7 @@
   }
 
   &__icon {
+    @include fontProperties($laptopTitleFontSize, $laptopTitleFontWeight, $laptopTitleLineHeight, $laptopTitleLetterSpacing);
     width: 64px;
     height: 64px;
     display: flex;
@@ -27,6 +31,21 @@
     justify-content: center;
     border: 2px solid $policeBlue;
     border-radius: 32px;
-    font-size: 28px;
+  }
+}
+
+@media (max-width: $laptopScreenSize) {
+  .contact {
+    &__icon {
+      @include fontProperties($tabletTitleFontSize, $tabletTitleFontWeight, $tabletTitleLineHeight, $tabletTitleLetterSpacing);
+    }
+  }
+}
+
+@media (max-width: $tabletScreenSize) {
+  .contact {
+    &__icon {
+      @include fontProperties($mobileTitleFontSize, $mobileTitleFontWeight, $mobileTitleLineHeight, $mobileTitleLetterSpacing);
+    }
   }
 }

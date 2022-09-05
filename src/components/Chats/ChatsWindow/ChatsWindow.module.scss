@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap');
+@import "src/styles/mixins/fonts";
+@import "src/styles/variables/fonts";
+@import "src/styles/variables/screenSizes";
 @import "src/styles/variables/colors";
 
 .container {
@@ -15,12 +18,11 @@
 }
 
 .title {
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 28px;
+  @include fontProperties($laptopTitleFontSize, $laptopTitleFontWeight, $laptopTitleLineHeight, $laptopTitleLetterSpacing);
 }
 
 .button {
+  @include fontProperties($laptopButtonFontSize, $laptopButtonFontWeight, $laptopButtonLineHeight, $laptopButtonLetterSpacing);
   justify-self: flex-end;
   color: $policeBlue;
   width: 100%;
@@ -39,7 +41,25 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $laptopScreenSize) {
+  .title {
+    @include fontProperties($tabletTitleFontSize, $tabletTitleFontWeight, $tabletTitleLineHeight, $tabletTitleLetterSpacing);
+  }
+
+  .button {
+    @include fontProperties($tabletButtonFontSize, $tabletButtonFontWeight, $tabletButtonLineHeight, $tabletButtonLetterSpacing);
+  }
+}
+
+@media (max-width: $tabletScreenSize) {
+  .title {
+    @include fontProperties($mobileTitleFontSize, $mobileTitleFontWeight, $mobileTitleLineHeight, $mobileTitleLetterSpacing);
+  }
+
+  .button {
+    @include fontProperties($mobileButtonFontSize, $mobileButtonFontWeight, $mobileButtonLineHeight, $mobileButtonLetterSpacing);
+  }
+
   .container {
     width: 100%;
     border-right: none;

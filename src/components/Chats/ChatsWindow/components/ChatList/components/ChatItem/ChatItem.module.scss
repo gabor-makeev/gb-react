@@ -1,3 +1,6 @@
+@import "src/styles/mixins/fonts";
+@import "src/styles/variables/fonts";
+@import "src/styles/variables/screenSizes";
 @import "src/styles/variables/colors";
 
 .contact-card {
@@ -26,6 +29,7 @@
     }
 
     &__user-icon {
+      @include fontProperties($laptopTitleFontSize, $laptopTitleFontWeight, $laptopTitleLineHeight, $laptopTitleLetterSpacing);
       width: 64px;
       height: 64px;
       display: flex;
@@ -33,7 +37,6 @@
       justify-content: center;
       border: 2px solid $policeBlue;
       border-radius: 32px;
-      font-size: 28px;
     }
     &__user-name {
       margin: 13px 0 0 0;
@@ -56,6 +59,26 @@
 
       &:hover {
         fill: $darkRed;
+      }
+    }
+  }
+}
+
+@media (max-width: $laptopScreenSize) {
+  .contact-card {
+    &__link {
+      &__user-icon {
+        @include fontProperties($tabletTitleFontSize, $tabletTitleFontWeight, $tabletTitleLineHeight, $tabletTitleLetterSpacing);
+      }
+    }
+  }
+}
+
+@media (max-width: $tabletScreenSize) {
+  .contact-card {
+    &__link {
+      &__user-icon {
+        @include fontProperties($mobileTitleFontSize, $mobileTitleFontWeight, $mobileTitleLineHeight, $mobileTitleLetterSpacing);
       }
     }
   }

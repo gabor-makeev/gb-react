@@ -1,3 +1,6 @@
+@import "src/styles/mixins/fonts";
+@import "src/styles/variables/screenSizes";
+@import "src/styles/variables/fonts";
 @import "src/styles/variables/colors";
 
 .search-field {
@@ -17,19 +20,32 @@
   }
 
   & > input {
+    @include fontProperties($laptopLargeTextFontSize, $laptopLargeTextFontWeight, $laptopLargeTextLineHeight, $laptopLargeTextLetterSpacing);
     width: 100%;
     border: none;
     background-color: transparent;
     font-family: inherit;
-    font-weight: 700;
-    font-style: inherit;
-    font-size: inherit;
-    line-height: inherit;
     outline: none;
     color: $policeBlue;
 
     &::placeholder {
       color: $steelTeal;
+    }
+  }
+}
+
+@media (max-width: $laptopScreenSize) {
+  .search-field {
+    & > input {
+      @include fontProperties($tabletLargeTextFontSize, $tabletLargeTextFontWeight, $tabletLargeTextLineHeight, $tabletLargeTextLetterSpacing);
+    }
+  }
+}
+
+@media (max-width: $tabletScreenSize) {
+  .search-field {
+    & > input {
+      @include fontProperties($mobileLargeTextFontSize, $mobileLargeTextFontWeight, $mobileLargeTextLineHeight, $mobileLargeTextLetterSpacing);
     }
   }
 }
