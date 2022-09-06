@@ -1,3 +1,21 @@
+@import "src/styles/variables/colors";
+
 .button {
-  //Custom styles should go here
+  border-radius: 20px;
+  flex: 0 0 0;
+  padding: 20px;
+  border: none;
+  cursor: pointer;
+  background-color: $cadetGrey;
+  transition: 0.3s;
+
+  &-active {
+    background-color: $pastelBlue;
+  }
+
+  & > svg {
+    width: 38px;
+    height: 38px;
+    stroke: $policeBlue;
+  }
 }

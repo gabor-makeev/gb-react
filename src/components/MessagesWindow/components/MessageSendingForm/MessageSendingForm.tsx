@@ -20,14 +20,13 @@ export const MessageSendingForm: FC<MessageFormProps> = memo(
     setInputValue,
     onSendMessage,
     isInputDisabled = false,
-    borderType = 'normal',
-    angleType = 'roundish',
+    borderType,
+    angleType,
   }) => {
-    const classes = classNames(
-      style['message-form'],
-      style[`border-${borderType}`],
-      style[`angle-${angleType}`]
-    );
+    const classes = classNames(style['message-form'], {
+      [style[`border-${borderType}`]]: borderType,
+      [style[`angle-${angleType}`]]: angleType,
+    });
 
     return (
       <form onSubmit={(e) => onSendMessage(e)} className={classes}>

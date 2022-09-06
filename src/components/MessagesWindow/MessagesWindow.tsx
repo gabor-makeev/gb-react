@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import style from './MessagesWindow.module.scss';
-import { NavLink, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getAuth } from 'firebase/auth';
 import { MessageSendingForm } from 'components/MessagesWindow/components/MessageSendingForm/MessageSendingForm';
 import { MessageList } from 'components/MessagesWindow/components/MessageList/MessageList';
@@ -15,10 +15,12 @@ import {
   subscribeToMessagesByChatId,
 } from 'src/services/firebase/messages';
 import classNames from 'classnames';
+import { MessagesWindowHeader } from 'components/MessagesWindow/components/MessagesWindowHeader/MessagesWindowHeader';
 
 export const MessagesWindow: FC = () => {
   const [messages, setMessages] = useState<Messages>([]);
-  const [userName, setUserName] = useState<string>('');
+  const [userName, setUserName] = useState('');
+  const [chatName, setChatName] = useState('');
   const [messageSendingFormInputValue, setMessageSendingFormInputValue] =
     useState('');
 
@@ -38,9 +40,13 @@ export const MessagesWindow: FC = () => {
 
   useEffect(() => {
     if (chatId) {
+      getUserChatByChatId(userEmail, chatId).then((data) => {
+        setChatName(data ? data.name : chatName);
+      });
+
       return subscribeToMessagesByChatId(chatId, setMessages);
     }
-  }, [chatId]);
+  }, [chatId, chatName, userEmail]);
 
   if (chatId) {
     getUserChatByChatId(userEmail, chatId).then((data?) => {
@@ -68,19 +74,19 @@ export const MessagesWindow: FC = () => {
 
   return (
     <div className={messagesWindowClasslist}>
-      <NavLink
-        to={'/messenger'}
-        className={style['messages-window__backward-link']}
-      >
-        back
-      </NavLink>
-      <MessageList messages={messages ? messages : []} userEmail={userEmail} />
-      <MessageSendingForm
-        isInputDisabled={!chatId}
-        onSendMessage={onSendMessage}
-        inputValue={messageSendingFormInputValue}
-        setInputValue={setMessageSendingFormInputValue}
-      />
+      <div className={style['messages-window__container']}>
+        {chatName && <MessagesWindowHeader chatName={chatName} />}
+        <MessageList
+          messages={messages ? messages : []}
+          userEmail={userEmail}
+        />
+        <MessageSendingForm
+          isInputDisabled={!chatId}
+          onSendMessage={onSendMessage}
+          inputValue={messageSendingFormInputValue}
+          setInputValue={setMessageSendingFormInputValue}
+        />
+      </div>
     </div>
   );
 };

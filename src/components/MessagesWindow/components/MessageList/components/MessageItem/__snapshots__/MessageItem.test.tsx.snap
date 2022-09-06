@@ -3,14 +3,18 @@
 exports[`Message should render with snapshot 1`] = `
 <DocumentFragment>
   <li
-    class="MuiListItem-root MuiListItem-gutters message__type-medium message__user-background message__other-user css-hvpmgr-MuiListItem-root"
+    class="message message__other-user"
     data-testid="messageItem"
   >
-    placerat duis ultricies lacus sed turpis tincidunt id aliquet risus
     <span
-      class="message__author-sign"
+      class="message__content"
     >
-      Gabor
+      placerat duis ultricies lacus sed turpis tincidunt id aliquet risus
+    </span>
+    <span
+      class="message__date-time"
+    >
+      26/09/1997, 9:00pm
     </span>
   </li>
 </DocumentFragment>

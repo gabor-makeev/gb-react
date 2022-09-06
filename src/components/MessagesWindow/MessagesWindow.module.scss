@@ -1,9 +1,34 @@
-.messages-window {
-  display: flex;
-  flex-direction: column;
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import "src/styles/variables/screenSizes";
+@import "src/styles/variables/colors";
 
-  &__backward-link {
-    display: none;
+.messages-window {
+  width: 100%;
+  padding: 45px 35px;
+  font-family: 'Roboto', sans-serif;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    height: 100%;
+    box-shadow: 0 0 5px 2px $policeBlue;
+    background-color: $policeBlue;
+    border-radius: 25px;
+    padding: 30px 44px;
+  }
+}
+
+@media (max-width: $laptopLScreenSize) {
+  .messages-window {
+    padding: 0;
+
+    &__container {
+      max-width: unset;
+      border-radius: 0;
+    }
   }
 }
 
@@ -11,8 +36,8 @@
   .messages-window {
     display: none;
 
-    &__backward-link {
-      display: block;
+    &__container {
+      width: 100%;
     }
   }
 

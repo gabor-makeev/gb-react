@@ -1,3 +1,13 @@
+@import "src/styles/variables/colors";
+
+.message-list__container {
+  width: 100%;
+  height: 100%;
+  overflow-y: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
 .gap {
   &-small {
     gap: 5px;
@@ -12,23 +22,13 @@
   }
 }
 
-.angle {
-  &-roundish {
-    border-radius: 10px;
-  }
-
-  &-round {
-    border-radius: 30px;
-  }
-}
-
 .background-color {
   &-primary {
-    background-color: #cccccc;
+    background-color: transparent;
   }
 
   &-secondary {
-    background-color: #31E865;
+    background-color: $deepAquamarine;
   }
 }
 

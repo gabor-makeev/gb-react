@@ -14,13 +14,3 @@ const Template: ComponentStory<typeof MessageItem> = (args) => (
 );
 
 export const Primary = Template.bind({});
-
-export const Big = Template.bind({});
-Big.args = {
-  variant: 'big',
-};
-
-export const Small = Template.bind({});
-Small.args = {
-  variant: 'small',
-};

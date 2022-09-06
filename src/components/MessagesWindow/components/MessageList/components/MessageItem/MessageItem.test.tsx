@@ -19,11 +19,6 @@ describe('Message', () => {
     expect(screen.getByText(dummyMessage.body)).toBeInTheDocument();
   });
 
-  it('should render text in <span>-tag', () => {
-    render(<MessageItem message={dummyMessage} userEmail={testUserEmail} />);
-    expect(screen.getByText(dummyMessage.userName)).toBeInTheDocument();
-  });
-
   it('should have system message classname applied for bot message', () => {
     const message: Message = {
       body: 'test',

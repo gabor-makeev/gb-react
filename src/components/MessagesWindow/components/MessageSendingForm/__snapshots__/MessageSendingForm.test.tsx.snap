@@ -5,50 +5,37 @@ exports[`MessageForm should render with snapshot 1`] = `
   <form
     class="message-form border-normal angle-roundish"
   >
-    <div
-      class="MuiFormControl-root MuiTextField-root input css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
+    <input
+      class="input input-active"
       data-testid="messageSendingFormInput"
-    >
-      <label
-        class="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-root MuiFormLabel-colorPrimary Mui-focused css-1sumxir-MuiFormLabel-root-MuiInputLabel-root"
-        data-shrink="true"
-        for=":r3:"
-        id=":r3:-label"
-      >
-        Message
-      </label>
-      <div
-        class="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary Mui-focused MuiInputBase-formControl css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root"
-      >
-        <input
-          aria-invalid="false"
-          class="MuiOutlinedInput-input MuiInputBase-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
-          id=":r3:"
-          type="text"
-          value=""
-        />
-        <fieldset
-          aria-hidden="true"
-          class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
-        >
-          <legend
-            class="css-1in441m"
-          >
-            <span>
-              Message
-            </span>
-          </legend>
-        </fieldset>
-      </div>
-    </div>
+      placeholder="Message"
+      type="text"
+      value=""
+    />
     <button
-      class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root Mui-disabled button css-1e6y48t-MuiButtonBase-root-MuiButton-root"
+      class="button"
       data-testid="messageSendingFormButton"
       disabled=""
-      tabindex="-1"
       type="submit"
     >
-      Send
+      <svg
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <line
+          x1="22"
+          x2="11"
+          y1="2"
+          y2="13"
+        />
+        <polygon
+          points="22 2 15 22 11 13 2 9 22 2"
+        />
+      </svg>
     </button>
   </form>
 </DocumentFragment>

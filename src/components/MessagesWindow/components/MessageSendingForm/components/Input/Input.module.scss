@@ -1,3 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import "src/styles/mixins/fonts";
+@import "src/styles/variables/screenSizes";
+@import "src/styles/variables/fonts";
+@import "src/styles/variables/colors";
+
 .input {
-  //Custom styles should go here
+  @include fontProperties($laptopInputFontSize, $laptopInputFontWeight, $laptopInputLineHeight, $laptopInputLetterSpacing);
+  width: 100%;
+  background-color: $cadetGrey;
+  outline: none;
+  padding: 0 22px;
+  border: none;
+  border-radius: 25px;
+  font-family: 'Roboto', sans-serif;
+  color: $policeBlue;
+
+  &::placeholder {
+    color: $steelTeal;
+  }
+
+  &-active {
+    background-color: $pastelBlue;
+  }
+}
+
+@media (max-width: $laptopScreenSize) {
+  .input {
+    @include fontProperties($tabletInputFontSize, $tabletInputFontWeight, $tabletInputLineHeight, $tabletInputLetterSpacing);
+  }
+}
+
+@media (max-width: $tabletScreenSize) {
+  .input {
+    @include fontProperties($mobileInputFontSize, $mobileInputFontWeight, $mobileInputLineHeight, $mobileInputLetterSpacing);
+  }
 }

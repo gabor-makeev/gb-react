@@ -1,9 +1,27 @@
+@import "src/styles/mixins/fonts";
+@import "src/styles/variables/screenSizes";
+@import "src/styles/variables/fonts";
+@import "src/styles/variables/colors";
+
 .search-results {
+  @include fontProperties($laptopLargeTextFontSize, $laptopLargeTextFontWeight, $laptopLargeTextLineHeight, $laptopLargeTextLetterSpacing);
   max-height: 339px;
   overflow-y: auto;
   padding: 41px 25px;
-  background-color: #F1F2F3;
+  background-color: $pastelBlue;
+  color: $policeBlue;
   border-radius: 10px;
   list-style-type: none;
-  font-weight: 400;
+}
+
+@media (max-width: $laptopScreenSize) {
+  .search-results {
+    @include fontProperties($tabletLargeTextFontSize, $tabletLargeTextFontWeight, $tabletLargeTextLineHeight, $tabletLargeTextLetterSpacing);
+  }
+}
+
+@media (max-width: $tabletScreenSize) {
+  .search-results {
+    @include fontProperties($mobileLargeTextFontSize, $mobileLargeTextFontWeight, $mobileLargeTextLineHeight, $mobileLargeTextLetterSpacing);
+  }
 }

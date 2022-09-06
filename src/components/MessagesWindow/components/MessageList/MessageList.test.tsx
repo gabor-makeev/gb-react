@@ -4,11 +4,11 @@ import '@testing-library/jest-dom';
 
 import { DUMMY_CONTENT } from 'src/constants';
 import { MessageList } from 'components/MessagesWindow/components/MessageList/MessageList';
-import { Authors } from 'src/default-types';
 
 const testUserEmail = 'test@test.com';
 
 describe('MessageList', () => {
+  window.HTMLElement.prototype.scrollIntoView = jest.fn();
   it('should render', () => {
     render(
       <MessageList
@@ -26,7 +26,7 @@ describe('MessageList', () => {
       />
     );
 
-    expect(screen.getAllByText(Authors.USER).length).toBe(
+    expect(screen.getAllByTestId('messageItem').length).toBe(
       DUMMY_CONTENT.messages.length
     );
   });

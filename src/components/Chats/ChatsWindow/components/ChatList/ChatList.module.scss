@@ -1,8 +1,26 @@
+@import "src/styles/mixins/fonts";
+@import "src/styles/variables/fonts";
+@import "src/styles/variables/screenSizes";
+@import "src/styles/variables/colors";
+
 .list {
+  @include fontProperties($laptopLargeTextFontSize, $laptopLargeTextFontWeight, $laptopLargeTextLineHeight, $laptopLargeTextLetterSpacing);
   max-width: 100%;
   display: flex;
   flex-direction: column;
   gap: 4px;
   overflow-y: auto;
   padding: 0 10px;
+}
+
+@media (max-width: $laptopScreenSize) {
+  .list {
+    @include fontProperties($tabletLargeTextFontSize, $tabletLargeTextFontWeight, $tabletLargeTextLineHeight, $tabletLargeTextLetterSpacing);
+  }
+}
+
+@media (max-width: $tabletScreenSize) {
+  .list {
+    @include fontProperties($mobileLargeTextFontSize, $mobileLargeTextFontWeight, $mobileLargeTextLineHeight, $mobileLargeTextLetterSpacing);
+  }
 }
