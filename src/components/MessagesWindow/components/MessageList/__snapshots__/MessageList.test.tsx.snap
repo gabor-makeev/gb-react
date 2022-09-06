@@ -21,7 +21,7 @@ exports[`MessageList should render with snapshot 1`] = `
         <span
           class="message__date-time"
         >
-          NaN/NaN/NaN, NaN:NaNam
+          26/09/1997, 9:00pm
         </span>
       </li>
       <li
@@ -36,7 +36,7 @@ exports[`MessageList should render with snapshot 1`] = `
         <span
           class="message__date-time"
         >
-          NaN/NaN/NaN, NaN:NaNam
+          26/09/1997, 9:00pm
         </span>
       </li>
       <li
@@ -51,7 +51,7 @@ exports[`MessageList should render with snapshot 1`] = `
         <span
           class="message__date-time"
         >
-          NaN/NaN/NaN, NaN:NaNam
+          26/09/1997, 9:00pm
         </span>
       </li>
       <div />
