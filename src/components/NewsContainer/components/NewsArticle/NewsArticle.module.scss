@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lancelot&family=Lato:wght@300;700&display=swap');
+@import "src/styles/mixins/fonts";
+@import "src/styles/variables/screenSizes";
+@import "src/styles/variables/fonts";
 @import "src/styles/variables/colors";
 
 // default news article variant
@@ -17,12 +20,9 @@
     align-items: flex-start;
 
     &__date {
+      @include fontProperties($laptopSmallTextFontSize, $laptopSmallTextFontWeight, $laptopSmallTextLineHeight, $laptopSmallTextLetterSpacing);
       background-color: $policeBlue;
       padding: 13px 10px;
-      font-style: normal;
-      font-weight: 500;
-      font-size: 12px;
-      line-height: 14px;
       text-align: center;
       color: $pastelBlue;
       position: absolute;
@@ -30,27 +30,18 @@
       right: 48px;
     }
     &__title {
+      @include fontProperties($laptopTitleFontSize, $laptopTitleFontWeight, $laptopTitleLineHeight, $laptopTitleLetterSpacing);
       font-family: 'Lancelot', cursive;
-      font-style: normal;
-      font-weight: 400;
-      font-size: 61px;
-      line-height: 65px;
       color: $policeBlue;
       margin-bottom: 20px;
     }
     &__summary {
-      font-style: normal;
-      font-weight: 300;
-      font-size: 20px;
-      line-height: 28px;
+      @include fontProperties($laptopLargeTextFontSize, $laptopLargeTextFontWeight, $laptopLargeTextLineHeight, $laptopLargeTextLetterSpacing);
       color: $policeBlue;
       margin-bottom: 15px;
     }
     &__button {
-      font-style: normal;
-      font-weight: 700;
-      font-size: 18px;
-      line-height: 28px;
+      @include fontProperties($laptopButtonFontSize, $laptopButtonFontWeight, $laptopButtonLineHeight, $laptopButtonLetterSpacing);
       color: $policeBlue;
       border: none;
       background-color: transparent;
@@ -99,6 +90,44 @@
 
       & > .card-headline__button {
         margin-bottom: 0;
+      }
+    }
+  }
+}
+
+@media (max-width: $laptopScreenSize) {
+  .card {
+    &-headline {
+      &__date {
+        @include fontProperties($tabletSmallTextFontSize, $tabletSmallTextFontWeight, $tabletSmallTextLineHeight, $tabletSmallTextLetterSpacing);
+      }
+      &__title {
+        @include fontProperties($tabletTitleFontSize, $tabletTitleFontWeight, $tabletTitleLineHeight, $tabletTitleLetterSpacing);
+      }
+      &__summary {
+        @include fontProperties($tabletLargeTextFontSize, $tabletLargeTextFontWeight, $tabletLargeTextLineHeight, $tabletLargeTextLetterSpacing);
+      }
+      &__button {
+        @include fontProperties($tabletButtonFontSize, $tabletButtonFontWeight, $tabletButtonLineHeight, $tabletButtonLetterSpacing);
+      }
+    }
+  }
+}
+
+@media (max-width: $tabletScreenSize) {
+  .card {
+    &-headline {
+      &__date {
+        @include fontProperties($mobileSmallTextFontSize, $mobileSmallTextFontWeight, $mobileSmallTextLineHeight, $mobileSmallTextLetterSpacing);
+      }
+      &__title {
+        @include fontProperties($mobileTitleFontSize, $mobileTitleFontWeight, $mobileTitleLineHeight, $mobileTitleLetterSpacing);
+      }
+      &__summary {
+        @include fontProperties($mobileLargeTextFontSize, $mobileLargeTextFontWeight, $mobileLargeTextLineHeight, $mobileLargeTextLetterSpacing);
+      }
+      &__button {
+        @include fontProperties($mobileButtonFontSize, $mobileButtonFontWeight, $mobileButtonLineHeight, $mobileButtonLetterSpacing);
       }
     }
   }
