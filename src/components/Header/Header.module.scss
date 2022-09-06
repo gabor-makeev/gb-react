@@ -1,15 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+@import "src/styles/mixins/fonts";
+@import "src/styles/variables/screenSizes";
+@import "src/styles/variables/fonts";
 @import "src/styles/variables/colors";
 
 .header {
+  @include fontProperties($laptopLargeTextFontSize, $laptopLargeTextFontWeight, $laptopLargeTextLineHeight, $laptopLargeTextLetterSpacing);
   position: fixed;
   width: 100%;
   height: 116px;
   background-color: $policeBlue;
   font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 19px;
   z-index: 1;
 
   &__container {
@@ -20,5 +21,17 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 25px;
+  }
+}
+
+@media (max-width: $laptopScreenSize) {
+  .header {
+    @include fontProperties($tabletLargeTextFontSize, $tabletLargeTextFontWeight, $tabletLargeTextLineHeight, $tabletLargeTextLetterSpacing);
+ }
+}
+
+@media (max-width: $tabletScreenSize) {
+  .header {
+    @include fontProperties($mobileLargeTextFontSize, $mobileLargeTextFontWeight, $mobileLargeTextLineHeight, $mobileLargeTextLetterSpacing);
   }
 }
