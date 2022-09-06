@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import "src/styles/variables/screenSizes";
 @import "src/styles/variables/colors";
 
 .messages-window {
@@ -20,14 +21,23 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $laptopLScreenSize) {
   .messages-window {
-    display: none;
     padding: 0;
 
     &__container {
-      width: 100%;
+      max-width: unset;
       border-radius: 0;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .messages-window {
+    display: none;
+
+    &__container {
+      width: 100%;
     }
   }
 
