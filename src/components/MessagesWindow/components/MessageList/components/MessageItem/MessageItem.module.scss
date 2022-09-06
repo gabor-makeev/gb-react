@@ -1,3 +1,6 @@
+@import "src/styles/mixins/fonts";
+@import "src/styles/variables/screenSizes";
+@import "src/styles/variables/fonts";
 @import "src/styles/variables/colors";
 
 @mixin messageDot {
@@ -17,22 +20,17 @@
   flex-direction: column;
 
   & > .message__content {
+    @include fontProperties($laptopLargeTextFontSize, $laptopLargeTextFontWeight, $laptopLargeTextLineHeight, $laptopLargeTextLetterSpacing);
     display: block;
     padding: 15px 50px 18px;
     border-radius: 25px;
-    font-size: 26px;
-    line-height: 30px;
-    letter-spacing: 0.05em;
     margin-bottom: 8px;
   }
 
   & > .message__date-time {
+    @include fontProperties($laptopSmallTextFontSize, $laptopSmallTextFontWeight, $laptopSmallTextLineHeight, $laptopSmallTextLetterSpacing);
     display: inline-block;
     width: 100%;
-    font-weight: 300;
-    font-size: 20px;
-    line-height: 23px;
-    letter-spacing: 0.05em;
     color: $cadetGrey;
   }
 
@@ -79,6 +77,30 @@
     & > .message__content {
       background-color: $regularRed;
       color: $policeBlue;
+    }
+  }
+}
+
+@media (max-width: $laptopScreenSize) {
+  .message {
+    & > .message__content {
+      @include fontProperties($tabletLargeTextFontSize, $tabletLargeTextFontWeight, $tabletLargeTextLineHeight, $tabletLargeTextLetterSpacing);
+    }
+
+    & > .message__date-time {
+      @include fontProperties($tabletSmallTextFontSize, $tabletSmallTextFontWeight, $tabletSmallTextLineHeight, $tabletSmallTextLetterSpacing);
+    }
+  }
+}
+
+@media (max-width: $tabletScreenSize) {
+  .message {
+    & > .message__content {
+      @include fontProperties($mobileLargeTextFontSize, $mobileLargeTextFontWeight, $mobileLargeTextLineHeight, $mobileLargeTextLetterSpacing);
+    }
+
+    & > .message__date-time {
+      @include fontProperties($mobileSmallTextFontSize, $mobileSmallTextFontWeight, $mobileSmallTextLineHeight, $mobileSmallTextLetterSpacing);
     }
   }
 }

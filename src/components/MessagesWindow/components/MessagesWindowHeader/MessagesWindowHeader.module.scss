@@ -1,3 +1,6 @@
+@import "src/styles/mixins/fonts";
+@import "src/styles/variables/screenSizes";
+@import "src/styles/variables/fonts";
 @import "src/styles/variables/colors";
 
 .messages-window-header {
@@ -12,6 +15,7 @@
   position: relative;
 
   &__chat-icon {
+    @include fontProperties($laptopTitleFontSize, $laptopTitleFontWeight, $laptopTitleLineHeight, $laptopTitleLetterSpacing);
     width: 75px;
     height: 75px;
     display: flex;
@@ -19,14 +23,10 @@
     justify-content: center;
     background-color: $steelTeal;
     border-radius: 38px;
-    font-size: 28px;
   }
 
   &__chat-name {
-    font-weight: 600;
-    font-size: 32px;
-    line-height: 38px;
-    letter-spacing: 0.05em;
+    @include fontProperties($laptopSubtitleFontSize, $laptopSubtitleFontWeight, $laptopSubtitleLineHeight, $laptopSubtitleLetterSpacing);
   }
 
   &__backward-link {
@@ -43,11 +43,28 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $laptopScreenSize) {
+  .messages-window-header {
+    &__chat-icon {
+      @include fontProperties($tabletTitleFontSize, $tabletTitleFontWeight, $tabletTitleLineHeight, $tabletTitleLetterSpacing);
+    }
+
+    &__chat-name {
+      @include fontProperties($tabletSubtitleFontSize, $tabletSubtitleFontWeight, $tabletSubtitleLineHeight, $tabletSubtitleLetterSpacing);
+    }
+  }
+}
+
+@media (max-width: $tabletScreenSize) {
   .messages-window-header {
     justify-content: flex-end;
 
+    &__chat-icon {
+      @include fontProperties($mobileTitleFontSize, $mobileTitleFontWeight, $mobileTitleLineHeight, $mobileTitleLetterSpacing);
+    }
+
     &__chat-name {
+      @include fontProperties($mobileSubtitleFontSize, $mobileSubtitleFontWeight, $mobileSubtitleLineHeight, $mobileSubtitleLetterSpacing);
       order: -1;
     }
 
