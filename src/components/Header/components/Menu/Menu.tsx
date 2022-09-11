@@ -1,8 +1,8 @@
 import { FC, useEffect, useRef, useState, useCallback } from 'react';
 import style from './Menu.module.scss';
-import { NavLink } from 'react-router-dom';
 import { NavigationItem } from 'src/default-types';
 import classNames from 'classnames';
+import { NavMenuItem } from 'components/Header/components/Menu/components/NavMenuItem/NavMenuItem';
 
 interface MenuProps {
   navigations: NavigationItem[];
@@ -15,16 +15,6 @@ export const Menu: FC<MenuProps> = ({ navigations }) => {
   const mobileMenuButtonClasslist = classNames(style['nav__menu-button'], {
     [style['nav__menu-button__mobile-active']]: mobileMenuState,
   });
-
-  const getNavLinkClasslist = (linkName: string, isActive = false) => {
-    return classNames(
-      style['nav__menu__item__navlink'],
-      style[`nav__menu__item__navlink-${linkName.toLowerCase()}`],
-      {
-        [style['nav__menu__item__navlink-active']]: isActive,
-      }
-    );
-  };
 
   const toggleMobileMenu = useCallback(() => {
     const navMenuClasslist = navMenuRef.current?.classList;
@@ -64,17 +54,11 @@ export const Menu: FC<MenuProps> = ({ navigations }) => {
       </button>
       <ul className={style['nav__menu']} ref={navMenuRef}>
         {navigations.map((navigation) => (
-          <li key={navigation.id} className={style['nav__menu__item']}>
-            <NavLink
-              to={navigation.path}
-              onClick={() => toggleMobileMenu()}
-              className={({ isActive }) =>
-                getNavLinkClasslist(navigation.name, isActive)
-              }
-            >
-              {navigation.name}
-            </NavLink>
-          </li>
+          <NavMenuItem
+            navigation={navigation}
+            handleClick={toggleMobileMenu}
+            key={navigation.id}
+          />
         ))}
       </ul>
     </nav>
