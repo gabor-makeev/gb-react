@@ -1,9 +1,7 @@
 import { NavLink } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const Link = styled(NavLink).attrs((props) => ({
-  to: props.to,
-}))`
+export const Link = styled(NavLink)`
   display: flex;
   align-items: center;
   gap: 10px;
@@ -16,7 +14,24 @@ export const Link = styled(NavLink).attrs((props) => ({
     background-color: #b5c7cc;
 
     & svg {
-      fill: #b5c7cc;
+      ${({
+        $svgStroked,
+        $svgFilled,
+      }: {
+        $svgStroked: boolean;
+        $svgFilled: boolean;
+      }) => {
+        let styles = '';
+        if ($svgStroked) {
+          styles += 'stroke: #b5c7cc;';
+        }
+        if ($svgFilled) {
+          styles += 'fill: #b5c7cc;';
+        }
+        return css`
+          ${styles}
+        `;
+      }}
     }
   }
 

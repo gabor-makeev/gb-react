@@ -7,12 +7,22 @@ interface LinkWithSvgProps {
   to: string;
   svg: JSX.Element;
   children: React.ReactNode;
+  svgStroked?: boolean;
+  svgFilled?: boolean;
 }
 
-export const LinkWithSvg: FC<LinkWithSvgProps> = ({ to, svg, children }) => {
+export const LinkWithSvg: FC<LinkWithSvgProps> = ({
+  to,
+  svg,
+  children,
+  svgStroked = false,
+  svgFilled = false,
+}) => {
   return (
-    <Link to={to}>
-      <Svg {...svg.props}>{svg.props.children}</Svg>
+    <Link to={to} $svgStroked={svgStroked} $svgFilled={svgFilled}>
+      <Svg {...svg.props} filled={svgFilled} stroked={svgStroked}>
+        {svg.props.children}
+      </Svg>
       <Text>{children}</Text>
     </Link>
   );
