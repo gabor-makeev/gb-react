@@ -1,6 +1,7 @@
 import { NavigationItem } from 'src/default-types';
 import { FC } from 'react';
-import { Link } from 'components/Header/components/Menu/components/NavMenuItem/components/Link';
+import { Link } from 'components/Header/components/Menu/components/NavMenuItem/components/Link/Link';
+import { ListItem } from 'components/Header/components/Menu/components/NavMenuItem/components/ListItem/ListItem';
 
 interface NavMenuItemProps {
   navigation: NavigationItem;
@@ -12,10 +13,10 @@ export const NavMenuItem: FC<NavMenuItemProps> = ({
   handleClick,
 }) => {
   return (
-    <li
+    <ListItem
       key={navigation.id}
-      className={'list-item'}
       onClick={() => handleClick()}
+      $name={navigation.name.toLowerCase()}
     >
       <Link
         to={navigation.path}
@@ -24,6 +25,6 @@ export const NavMenuItem: FC<NavMenuItemProps> = ({
       >
         {navigation.name}
       </Link>
-    </li>
+    </ListItem>
   );
 };

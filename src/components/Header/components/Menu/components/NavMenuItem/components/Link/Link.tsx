@@ -15,7 +15,7 @@ export const Link = styled(NavLink)`
   }
 
   ${(props: { $name: string }) => {
-    if (props.$name === 'profile') {
+    if (props.$name === 'profile' || props.$name === 'log in') {
       return css`
         display: none;
       `;
@@ -24,7 +24,7 @@ export const Link = styled(NavLink)`
 
   @media (max-width: 768px) {
     ${(props: { $name: string }) => {
-      if (props.$name === 'profile') {
+      if (props.$name === 'profile' || props.$name === 'log in') {
         return css`
           display: inline;
         `;

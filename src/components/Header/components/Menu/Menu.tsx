@@ -3,6 +3,8 @@ import style from './Menu.module.scss';
 import { NavigationItem } from 'src/default-types';
 import classNames from 'classnames';
 import { NavMenuItem } from 'components/Header/components/Menu/components/NavMenuItem/NavMenuItem';
+import { useSelector } from 'react-redux';
+import { selectIsAuth } from 'store/profile/selectors';
 
 interface MenuProps {
   navigations: NavigationItem[];
@@ -10,6 +12,7 @@ interface MenuProps {
 
 export const Menu: FC<MenuProps> = ({ navigations }) => {
   const [mobileMenuState, setMobileMenuState] = useState(false);
+  const isAuth = useSelector(selectIsAuth);
   const navMenuRef = useRef<HTMLUListElement>(null);
 
   const mobileMenuButtonClasslist = classNames(style['nav__menu-button'], {
@@ -53,13 +56,21 @@ export const Menu: FC<MenuProps> = ({ navigations }) => {
         Menu
       </button>
       <ul className={style['nav__menu']} ref={navMenuRef}>
-        {navigations.map((navigation) => (
-          <NavMenuItem
-            navigation={navigation}
-            handleClick={toggleMobileMenu}
-            key={navigation.id}
-          />
-        ))}
+        {navigations.map((navigation) => {
+          if (
+            (navigation.name.toLowerCase() === 'profile' && !isAuth) ||
+            (navigation.name.toLowerCase() === 'log in' && isAuth)
+          ) {
+            return;
+          }
+          return (
+            <NavMenuItem
+              navigation={navigation}
+              handleClick={toggleMobileMenu}
+              key={navigation.id}
+            />
+          );
+        })}
       </ul>
     </nav>
   );

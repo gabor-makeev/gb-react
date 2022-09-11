@@ -18,6 +18,11 @@ export const NAVIGATION = [
     name: 'Messenger',
     path: '/messenger',
   },
+  {
+    id: 4,
+    name: 'Log in',
+    path: '/signin',
+  },
 ];
 
 export const DUMMY_CONTENT = {
