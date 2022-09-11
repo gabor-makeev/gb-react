@@ -4,6 +4,7 @@ import { setDoc, Timestamp } from 'firebase/firestore';
 import { getUserDocRef } from 'src/services/firebase/refs';
 import { UserProperties } from 'src/default-types';
 import { subscribeToUserProperties } from 'src/services/firebase/users';
+import { logOut } from 'src/services/firebase/auth';
 
 export const Profile: FC = () => {
   const [newNameInputValue, setNewNameInputValue] = useState<string>('');
@@ -81,6 +82,7 @@ export const Profile: FC = () => {
           />
         </label>
         <button>Change name</button>
+        <button onClick={() => logOut()}>Sign out</button>
       </form>
     </>
   );
