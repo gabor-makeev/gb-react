@@ -6,26 +6,6 @@
     list-style-type: none;
     gap: 52px;
 
-    &__item {
-      &__navlink {
-        color: $cadetGrey;
-        text-decoration: none;
-        transition: 0.3s;
-
-        &:hover {
-          color: $pastelBlue;
-        }
-
-        &-active {
-          color: $pastelBlue;
-        }
-
-        &-profile {
-          display: none;
-        }
-      }
-    }
-
     &-button {
       color: $pastelBlue;
       padding: 10px 24px;
@@ -69,10 +49,6 @@
 
       &__mobile-active {
         transform: scaleY(1);
-      }
-
-      &__item__navlink-profile {
-        display: inline;
       }
 
       &-button {
