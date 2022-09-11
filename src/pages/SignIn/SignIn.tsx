@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
 import { logIn } from 'src/services/firebase/auth';
 
 export const SignIn: FC = () => {
@@ -49,6 +49,10 @@ export const SignIn: FC = () => {
         </label>
         <button>Log in</button>
       </form>
+      <span>
+        Do not have an account? —{' '}
+        <NavLink to="/signup">Create an account</NavLink>
+      </span>
     </>
   );
 };
