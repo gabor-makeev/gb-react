@@ -2,7 +2,7 @@ import { FieldContainer } from 'components/global/Input/components/FieldContaine
 import { Svg } from 'components/global/Input/components/Svg/Svg';
 import { Field } from 'components/global/Input/components/Field/Field';
 import { Container } from 'components/global/Input/components/Container/Container';
-import { FC } from 'react';
+import { FC, InputHTMLAttributes } from 'react';
 
 export enum InputTypes {
   text = 'text',
@@ -12,6 +12,8 @@ export enum InputTypes {
 
 interface InputProps {
   inputType?: InputTypes;
+  inputValue?: string;
+  changeHandler?: (value: string) => void;
   labelText?: string;
   svg?: JSX.Element;
   placeholder?: string;
@@ -19,10 +21,23 @@ interface InputProps {
 
 export const Input: FC<InputProps> = ({
   inputType = InputTypes.text,
+  inputValue,
+  changeHandler,
   labelText,
   svg,
   placeholder,
 }) => {
+  const fieldProps: InputHTMLAttributes<HTMLInputElement> = {
+    id: 'field',
+    type: inputType,
+    placeholder,
+    value: inputValue,
+  };
+
+  if (changeHandler) {
+    fieldProps.onChange = (e) => changeHandler(e.target.value);
+  }
+
   return (
     <Container>
       {labelText && <label htmlFor={'field'}>{labelText}</label>}
@@ -32,7 +47,7 @@ export const Input: FC<InputProps> = ({
             <Svg {...svg.props}>{svg.props.children}</Svg>
           </label>
         )}
-        <Field id={'field'} type={inputType} placeholder={placeholder} />
+        <Field {...fieldProps} />
       </FieldContainer>
     </Container>
   );
