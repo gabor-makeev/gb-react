@@ -3,6 +3,7 @@ import { Svg } from 'components/global/Input/components/Svg/Svg';
 import { Field } from 'components/global/Input/components/Field/Field';
 import { Container } from 'components/global/Input/components/Container/Container';
 import { FC, InputHTMLAttributes } from 'react';
+import { nanoid } from 'nanoid';
 
 export enum InputTypes {
   text = 'text',
@@ -27,8 +28,10 @@ export const Input: FC<InputProps> = ({
   svg,
   placeholder,
 }) => {
+  const uniqueInputId = nanoid();
+
   const fieldProps: InputHTMLAttributes<HTMLInputElement> = {
-    id: 'field',
+    id: uniqueInputId,
     type: inputType,
     placeholder,
     value: inputValue,
@@ -40,10 +43,10 @@ export const Input: FC<InputProps> = ({
 
   return (
     <Container>
-      {labelText && <label htmlFor={'field'}>{labelText}</label>}
+      {labelText && <label htmlFor={uniqueInputId}>{labelText}</label>}
       <FieldContainer>
         {svg && (
-          <label htmlFor={'field'}>
+          <label htmlFor={uniqueInputId}>
             <Svg {...svg.props}>{svg.props.children}</Svg>
           </label>
         )}
