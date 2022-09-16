@@ -15,6 +15,7 @@ import { emailInputSvg } from 'svg/emailInputSvg';
 import { Button } from 'components/global/Button/Button';
 import { Link } from 'components/global/Link/Link';
 import { Loader } from 'components/global/Loader/Loader';
+import { ErrorNotification } from 'components/global/ErrorNotification/ErrorNotification';
 
 export const SignUp: FC = () => {
   const navigate = useNavigate();
@@ -35,6 +36,10 @@ export const SignUp: FC = () => {
       navigate('/signin', { replace: true });
     } catch (err) {
       setError((err as Error).message);
+
+      setTimeout(() => {
+        setError('');
+      }, 3000);
     } finally {
       setLoading(false);
     }
@@ -42,6 +47,7 @@ export const SignUp: FC = () => {
   return (
     <>
       {loading && <Loader />}
+      {error && <ErrorNotification>{error}</ErrorNotification>}
       <Container>
         <SignUpFormContainer>
           <Heading>Sign up!</Heading>
