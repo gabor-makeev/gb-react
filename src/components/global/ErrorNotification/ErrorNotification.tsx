@@ -6,6 +6,8 @@ export const ErrorNotification = styled.div`
   right: 4%;
   top: 50px;
   background-color: #de6564;
+  font-family: 'Inter', sans-serif;
+  color: #244c66;
   padding: 20px;
 
   @media (max-width: 375px) {
