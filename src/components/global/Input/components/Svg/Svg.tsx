@@ -1,5 +1,5 @@
 import styled from 'styled-components';
 
 export const Svg = styled.svg`
-  fill: #244c66;
+  // SVG element styles should be placed here
 `;
