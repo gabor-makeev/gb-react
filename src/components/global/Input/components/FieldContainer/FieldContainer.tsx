@@ -13,7 +13,7 @@ export const FieldContainer = styled.div`
   transition: 0.3s;
 
   &:hover {
-    border-color: #8ba1ad;
+    border-color: #587b89;
   }
 
   & label {
