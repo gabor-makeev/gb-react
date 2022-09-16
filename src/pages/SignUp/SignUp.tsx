@@ -14,6 +14,7 @@ import { passwordInputSvg } from 'svg/passwordInputSvg';
 import { emailInputSvg } from 'svg/emailInputSvg';
 import { Button } from 'components/global/Button/Button';
 import { Link } from 'components/global/Link/Link';
+import { Loader } from 'components/global/Loader/Loader';
 
 export const SignUp: FC = () => {
   const navigate = useNavigate();
@@ -40,6 +41,7 @@ export const SignUp: FC = () => {
   };
   return (
     <>
+      {loading && <Loader />}
       <Container>
         <SignUpFormContainer>
           <Heading>Sign up!</Heading>
