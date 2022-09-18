@@ -1,6 +1,8 @@
 import React, { FC, useState } from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { logIn } from 'src/services/firebase/auth';
+import { Loader } from 'components/global/Loader/Loader';
+import { ErrorNotification } from 'components/global/ErrorNotification/ErrorNotification';
 
 export const SignIn: FC = () => {
   const navigate = useNavigate();
@@ -27,9 +29,9 @@ export const SignIn: FC = () => {
 
   return (
     <>
+      {loading && <Loader />}
+      {error && <ErrorNotification>{error}</ErrorNotification>}
       <h2>Sign in</h2>
-      {loading && <p>Loading</p>}
-      {error && <p>{error}</p>}
       <form onSubmit={handleSubmit}>
         <label>
           <p>Email:</p>
