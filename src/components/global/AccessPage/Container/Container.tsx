@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const FormPageContainer = styled.div`
+export const Container = styled.div`
   min-height: calc(100vh - 116px);
   padding: 20px 0;
   display: flex;

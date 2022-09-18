@@ -1,13 +1,13 @@
 import React, { FC, useState } from 'react';
 import { signUp } from 'src/services/firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { FormPageContainer } from 'components/global/FormPageContainer/FormPageContainer';
-import { SignUpForm } from 'components/SignUp/components/SignUpForm/SignUpForm';
+import { Container } from 'components/global/AccessPage/Container/Container';
+import { Form } from 'components/global/AccessPage/Form/Form';
 import { Heading } from 'components/global/Heading/Heading';
 import { Text } from 'components/global/Text/Text';
 import { BoldHighlightedText } from 'components/global/Text/BoldText/BoldHighlightedText/BoldHighlightedText';
 import { BoldText } from 'components/global/Text/BoldText/BoldText';
-import { SignUpFormContainer } from 'components/SignUp/components/SignUpFormContainer/SignUpFormContainer';
+import { FormContainer } from 'components/global/AccessPage/FormContainer/FormContainer';
 import { Input, InputTypes } from 'components/global/Input/Input';
 import { nameInputSvg } from 'svg/nameInputSvg';
 import { passwordInputSvg } from 'svg/passwordInputSvg';
@@ -48,15 +48,15 @@ export const SignUp: FC = () => {
     <>
       {loading && <Loader />}
       {error && <ErrorNotification>{error}</ErrorNotification>}
-      <FormPageContainer>
-        <SignUpFormContainer>
+      <Container>
+        <FormContainer>
           <Heading>Sign up!</Heading>
           <Text>
             Create an <BoldHighlightedText>account</BoldHighlightedText> to
             access a <BoldText>chat application</BoldText> that is not much
             different from any other <BoldText>chat application</BoldText>
           </Text>
-          <SignUpForm onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit}>
             <Input
               inputType={InputTypes.text}
               inputValue={name}
@@ -86,9 +86,9 @@ export const SignUp: FC = () => {
               <Text>Already have an account?</Text>
               <Link to={'/signin'}>Log in</Link>
             </span>
-          </SignUpForm>
-        </SignUpFormContainer>
-      </FormPageContainer>
+          </Form>
+        </FormContainer>
+      </Container>
     </>
   );
 };
