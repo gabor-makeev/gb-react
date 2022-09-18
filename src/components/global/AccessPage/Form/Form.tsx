@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Button } from 'components/global/Button/Button';
 
-export const SignUpForm = styled.form`
+export const Form = styled.form`
   margin-top: 40px;
 
   & > div {

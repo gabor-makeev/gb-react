@@ -1,6 +1,19 @@
 import React, { FC, useState } from 'react';
-import { useNavigate, NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { logIn } from 'src/services/firebase/auth';
+import { Loader } from 'components/global/Loader/Loader';
+import { ErrorNotification } from 'components/global/ErrorNotification/ErrorNotification';
+import { Container } from 'components/global/AccessPage/Container/Container';
+import { FormContainer } from 'components/global/AccessPage/FormContainer/FormContainer';
+import { Form } from 'components/global/AccessPage/Form/Form';
+import { Input, InputTypes } from 'components/global/Input/Input';
+import { emailInputSvg } from 'svg/emailInputSvg';
+import { passwordInputSvg } from 'svg/passwordInputSvg';
+import { Button } from 'components/global/Button/Button';
+import { Heading } from 'components/global/Heading/Heading';
+import { Text } from 'components/global/Text/Text';
+import { BoldText } from 'components/global/Text/BoldText/BoldText';
+import { Link } from 'components/global/Link/Link';
 
 export const SignIn: FC = () => {
   const navigate = useNavigate();
@@ -27,32 +40,41 @@ export const SignIn: FC = () => {
 
   return (
     <>
-      <h2>Sign in</h2>
-      {loading && <p>Loading</p>}
-      {error && <p>{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <label>
-          <p>Email:</p>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </label>
-        <label>
-          <p>Password:</p>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
-        <button>Log in</button>
-      </form>
-      <span>
-        Do not have an account? —{' '}
-        <NavLink to="/signup">Create an account</NavLink>
-      </span>
+      {loading && <Loader />}
+      {error && <ErrorNotification>{error}</ErrorNotification>}
+      <Container>
+        <FormContainer>
+          <Heading>Sign in!</Heading>
+          <Text>
+            Sign in to access a <BoldText>chat application</BoldText> that is
+            not much different from any other{' '}
+            <BoldText>chat application</BoldText>
+          </Text>
+          <Form onSubmit={handleSubmit}>
+            <Input
+              inputType={InputTypes.email}
+              inputValue={email}
+              labelText={'Email'}
+              placeholder={'Enter your email'}
+              changeHandler={setEmail}
+              svg={emailInputSvg}
+            />
+            <Input
+              inputType={InputTypes.password}
+              inputValue={password}
+              labelText={'Password'}
+              placeholder={'Enter your password'}
+              changeHandler={setPassword}
+              svg={passwordInputSvg}
+            />
+            <Button>Sign in</Button>
+            <span>
+              <Text>Don’t have an account?</Text>
+              <Link to={'/signup'}>Sign up</Link>
+            </span>
+          </Form>
+        </FormContainer>
+      </Container>
     </>
   );
 };
