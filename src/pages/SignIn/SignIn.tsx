@@ -33,6 +33,10 @@ export const SignIn: FC = () => {
       navigate('/messenger', { replace: true });
     } catch (err) {
       setError((err as Error).message);
+
+      setTimeout(() => {
+        setError('');
+      }, 3000);
     } finally {
       setLoading(false);
     }
