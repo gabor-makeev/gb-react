@@ -11,4 +11,8 @@ export const Container = styled.div`
   @media (max-width: 768px) {
     padding: 0;
   }
+
+  @media (max-width: 425px) {
+    align-items: stretch;
+  }
 `;
