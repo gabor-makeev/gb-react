@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { signUp } from 'src/services/firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { Container } from 'components/SignUp/components/Container/Container';
+import { FormPageContainer } from 'components/global/FormPageContainer/FormPageContainer';
 import { SignUpForm } from 'components/SignUp/components/SignUpForm/SignUpForm';
 import { Heading } from 'components/global/Heading/Heading';
 import { Text } from 'components/global/Text/Text';
@@ -48,7 +48,7 @@ export const SignUp: FC = () => {
     <>
       {loading && <Loader />}
       {error && <ErrorNotification>{error}</ErrorNotification>}
-      <Container>
+      <FormPageContainer>
         <SignUpFormContainer>
           <Heading>Sign up!</Heading>
           <Text>
@@ -88,7 +88,7 @@ export const SignUp: FC = () => {
             </span>
           </SignUpForm>
         </SignUpFormContainer>
-      </Container>
+      </FormPageContainer>
     </>
   );
 };
