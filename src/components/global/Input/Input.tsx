@@ -4,6 +4,7 @@ import { Field } from 'components/global/Input/components/Field/Field';
 import { Container } from 'components/global/Input/components/Container/Container';
 import { FC, InputHTMLAttributes } from 'react';
 import { nanoid } from 'nanoid';
+import { Label } from 'components/global/Label/Label';
 
 export enum InputTypes {
   text = 'text',
@@ -45,7 +46,7 @@ export const Input: FC<InputProps> = ({
 
   return (
     <Container className={className}>
-      {labelText && <label htmlFor={uniqueInputId}>{labelText}</label>}
+      {labelText && <Label htmlFor={uniqueInputId}>{labelText}</Label>}
       <FieldContainer>
         {svg && (
           <label htmlFor={uniqueInputId}>
