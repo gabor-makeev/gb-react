@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { Container } from 'components/ProfileWindow/components/Container/Container';
 import { Form } from 'components/ProfileWindow/components/Form/Form';
 import { Button } from 'components/global/Button/Button';
@@ -17,7 +17,13 @@ import { FormHeader } from 'components/ProfileWindow/components/FormHeader/FormH
 import { StyledInput } from 'components/ProfileWindow/components/StyledInput/StyledInput';
 import { getUserDocRef } from 'src/services/firebase/refs';
 
-export const ProfileWindow: FC = () => {
+interface ProfileWindowProps {
+  toggleProfileWindowState: () => void;
+}
+
+export const ProfileWindow: FC<ProfileWindowProps> = ({
+  toggleProfileWindowState,
+}) => {
   const [nameInput, setNameInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [userProperties, setUserProperties] = useState<UserProperties>({
@@ -28,6 +34,7 @@ export const ProfileWindow: FC = () => {
     email: '',
   });
 
+  const containerRef = useRef<HTMLDivElement>(null);
   const isAuth = useSelector(selectIsAuth);
   const userEmail = getAuth().currentUser?.email as string;
 
@@ -58,8 +65,14 @@ export const ProfileWindow: FC = () => {
     }
   };
 
+  const handleContainerClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === containerRef.current) {
+      toggleProfileWindowState();
+    }
+  };
+
   return (
-    <Container>
+    <Container ref={containerRef} onClick={(e) => handleContainerClick(e)}>
       {loading && <Loader />}
       {!loading && (
         <Form onSubmit={handleSubmit}>
