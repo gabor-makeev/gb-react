@@ -16,6 +16,7 @@ import { Loader } from 'components/global/Loader/Loader';
 import { FormHeader } from 'components/ProfileWindow/components/FormHeader/FormHeader';
 import { StyledInput } from 'components/ProfileWindow/components/StyledInput/StyledInput';
 import { getUserDocRef } from 'src/services/firebase/refs';
+import { Checkbox } from 'components/global/Checkbox/Checkbox';
 
 interface ProfileWindowProps {
   toggleProfileWindowState: () => void;
@@ -25,6 +26,7 @@ export const ProfileWindow: FC<ProfileWindowProps> = ({
   toggleProfileWindowState,
 }) => {
   const [nameInput, setNameInput] = useState('');
+  const [isPublicInput, setIsPublicInput] = useState(false);
   const [loading, setLoading] = useState(false);
   const [userProperties, setUserProperties] = useState<UserProperties>({
     chats: [],
@@ -40,6 +42,7 @@ export const ProfileWindow: FC<ProfileWindowProps> = ({
 
   const handleSetUserProperties = (userProperties: UserProperties) => {
     setLoading(false);
+    setIsPublicInput(userProperties.isPublic);
     setUserProperties(userProperties);
   };
 
@@ -62,6 +65,16 @@ export const ProfileWindow: FC<ProfileWindowProps> = ({
         { merge: true }
       );
       setNameInput('');
+    }
+
+    if (isPublicInput !== userProperties.isPublic) {
+      setDoc(
+        getUserDocRef(userEmail),
+        {
+          isPublic: isPublicInput,
+        },
+        { merge: true }
+      );
     }
   };
 
@@ -94,6 +107,11 @@ export const ProfileWindow: FC<ProfileWindowProps> = ({
             svg={nameInputSvg}
             labelText={'Name'}
             placeholder={userProperties.name}
+          />
+          <Checkbox
+            labelText={'Public'}
+            isChecked={isPublicInput}
+            tickHandler={() => setIsPublicInput(!isPublicInput)}
           />
           <Button>Save</Button>
         </Form>
