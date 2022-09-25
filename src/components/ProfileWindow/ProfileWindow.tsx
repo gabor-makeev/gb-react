@@ -14,9 +14,9 @@ import { useSelector } from 'react-redux';
 import { selectIsAuth } from 'store/profile/selectors';
 import { Loader } from 'components/global/Loader/Loader';
 import { FormHeader } from 'components/ProfileWindow/components/FormHeader/FormHeader';
-import { StyledInput } from 'components/ProfileWindow/components/StyledInput/StyledInput';
 import { getUserDocRef } from 'src/services/firebase/refs';
-import { Checkbox } from 'components/global/Checkbox/Checkbox';
+import { StyledInput } from 'components/ProfileWindow/components/StyledInput/StyledInput';
+import { StyledCheckbox } from 'components/ProfileWindow/components/StyledCheckbox/StyledCheckbox';
 
 interface ProfileWindowProps {
   toggleProfileWindowState: () => void;
@@ -108,7 +108,7 @@ export const ProfileWindow: FC<ProfileWindowProps> = ({
             labelText={'Name'}
             placeholder={userProperties.name}
           />
-          <Checkbox
+          <StyledCheckbox
             labelText={'Public'}
             isChecked={isPublicInput}
             tickHandler={() => setIsPublicInput(!isPublicInput)}

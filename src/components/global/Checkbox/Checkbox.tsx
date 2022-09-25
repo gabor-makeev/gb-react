@@ -7,15 +7,17 @@ interface CheckboxProps {
   labelText?: string;
   isChecked?: boolean;
   tickHandler: () => void;
+  className?: string;
 }
 
 export const Checkbox: FC<CheckboxProps> = ({
   labelText,
   isChecked = false,
   tickHandler,
+  className,
 }) => {
   return (
-    <Container>
+    <Container className={className}>
       {labelText && (
         <CheckboxLabel
           htmlFor={'checkbox'}
