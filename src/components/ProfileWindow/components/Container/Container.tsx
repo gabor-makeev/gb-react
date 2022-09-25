@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { StyledInput } from 'components/ProfileWindow/components/StyledInput/StyledInput';
 import { FormHeader } from 'components/ProfileWindow/components/FormHeader/FormHeader';
 import { StyledCheckbox } from 'components/ProfileWindow/components/StyledCheckbox/StyledCheckbox';
+import { SignOutButton } from 'components/ProfileWindow/components/SignOutButton/SignOutButton';
 
 export const Container = styled.div`
   position: fixed;
@@ -25,5 +26,9 @@ export const Container = styled.div`
 
   ${StyledCheckbox} {
     margin-bottom: 20px;
+  }
+
+  ${SignOutButton} {
+    margin-top: 34px;
   }
 `;

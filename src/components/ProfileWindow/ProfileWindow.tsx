@@ -17,6 +17,8 @@ import { FormHeader } from 'components/ProfileWindow/components/FormHeader/FormH
 import { getUserDocRef } from 'src/services/firebase/refs';
 import { StyledInput } from 'components/ProfileWindow/components/StyledInput/StyledInput';
 import { StyledCheckbox } from 'components/ProfileWindow/components/StyledCheckbox/StyledCheckbox';
+import { SignOutButton } from 'components/ProfileWindow/components/SignOutButton/SignOutButton';
+import { logOut } from 'src/services/firebase/auth';
 
 interface ProfileWindowProps {
   toggleProfileWindowState: () => void;
@@ -84,6 +86,11 @@ export const ProfileWindow: FC<ProfileWindowProps> = ({
     }
   };
 
+  const handleSignOut = () => {
+    logOut();
+    toggleProfileWindowState();
+  };
+
   return (
     <Container ref={containerRef} onClick={(e) => handleContainerClick(e)}>
       {loading && <Loader />}
@@ -114,6 +121,9 @@ export const ProfileWindow: FC<ProfileWindowProps> = ({
             tickHandler={() => setIsPublicInput(!isPublicInput)}
           />
           <Button>Save</Button>
+          <SignOutButton as={'button'} onClick={() => handleSignOut()}>
+            Sign out
+          </SignOutButton>
         </Form>
       )}
     </Container>
