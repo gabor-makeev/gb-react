@@ -19,6 +19,7 @@ import { StyledInput } from 'components/ProfileWindow/components/StyledInput/Sty
 import { StyledCheckbox } from 'components/ProfileWindow/components/StyledCheckbox/StyledCheckbox';
 import { SignOutButton } from 'components/ProfileWindow/components/SignOutButton/SignOutButton';
 import { logOut } from 'src/services/firebase/auth';
+import { ErrorNotification } from 'components/global/ErrorNotification/ErrorNotification';
 
 interface ProfileWindowProps {
   toggleProfileWindowState: () => void;
@@ -30,6 +31,7 @@ export const ProfileWindow: FC<ProfileWindowProps> = ({
   const [nameInput, setNameInput] = useState('');
   const [isPublicInput, setIsPublicInput] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const [userProperties, setUserProperties] = useState<UserProperties>({
     chats: [],
     createdAt: Timestamp.now(),
@@ -58,25 +60,36 @@ export const ProfileWindow: FC<ProfileWindowProps> = ({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (nameInput) {
-      setDoc(
-        getUserDocRef(userEmail),
-        {
-          name: nameInput,
-        },
-        { merge: true }
-      );
-      setNameInput('');
-    }
+    try {
+      setLoading(true);
 
-    if (isPublicInput !== userProperties.isPublic) {
-      setDoc(
-        getUserDocRef(userEmail),
-        {
-          isPublic: isPublicInput,
-        },
-        { merge: true }
-      );
+      if (nameInput) {
+        setDoc(
+          getUserDocRef(userEmail),
+          {
+            name: nameInput,
+          },
+          { merge: true }
+        );
+        setNameInput('');
+      }
+
+      if (isPublicInput !== userProperties.isPublic) {
+        setDoc(
+          getUserDocRef(userEmail),
+          {
+            isPublic: isPublicInput,
+          },
+          { merge: true }
+        );
+      }
+    } catch (err) {
+      setError((err as Error).message);
+      setTimeout(() => {
+        setError('');
+      }, 3000);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -94,6 +107,7 @@ export const ProfileWindow: FC<ProfileWindowProps> = ({
   return (
     <Container ref={containerRef} onClick={(e) => handleContainerClick(e)}>
       {loading && <Loader />}
+      {error && <ErrorNotification>{error}</ErrorNotification>}
       {!loading && (
         <Form onSubmit={handleSubmit}>
           <FormHeader>
