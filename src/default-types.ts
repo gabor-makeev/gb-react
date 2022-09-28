@@ -3,7 +3,7 @@ import { Timestamp } from 'firebase/firestore';
 export interface NavigationItem {
   id: number;
   name: string;
-  path: string;
+  path?: string;
 }
 
 export interface FirebaseChat {

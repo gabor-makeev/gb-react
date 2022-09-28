@@ -23,7 +23,10 @@ export const Header: FC<HeaderProps> = ({
     <header className={style.header}>
       <div className={style['header__container']}>
         <Logo />
-        <Menu navigations={navigations} />
+        <Menu
+          navigations={navigations}
+          toggleProfileWindowState={toggleProfileWindowState}
+        />
         {isLoggedIn ? (
           <ProfileButton handleOnClick={toggleProfileWindowState} />
         ) : (
