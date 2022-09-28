@@ -11,6 +11,7 @@ interface LinkWithSvgProps {
   svgStroked?: boolean;
   svgFilled?: boolean;
   isButton?: boolean;
+  handleOnClick?: () => void;
 }
 
 export const LinkWithSvg: FC<LinkWithSvgProps> = ({
@@ -20,6 +21,7 @@ export const LinkWithSvg: FC<LinkWithSvgProps> = ({
   svgStroked = false,
   svgFilled = false,
   isButton = false,
+  handleOnClick,
 }) => {
   const linkWithSvgChildren = (
     <>
@@ -35,10 +37,17 @@ export const LinkWithSvg: FC<LinkWithSvgProps> = ({
     $svgFilled: svgFilled,
   };
 
+  const buttonWithSvgProps = Object.assign(
+    {
+      ...(handleOnClick && { onClick: () => handleOnClick() }),
+    },
+    linkWithSvgProps
+  );
+
   return (
     <>
       {isButton && (
-        <Button {...linkWithSvgProps} as={'button'}>
+        <Button {...buttonWithSvgProps} as={'button'}>
           {linkWithSvgChildren}
         </Button>
       )}

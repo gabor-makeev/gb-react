@@ -25,7 +25,7 @@ export const Header: FC<HeaderProps> = ({
         <Logo />
         <Menu navigations={navigations} />
         {isLoggedIn ? (
-          <ProfileButton toggleProfileWindowState={toggleProfileWindowState} />
+          <ProfileButton handleOnClick={toggleProfileWindowState} />
         ) : (
           <LogInLink />
         )}

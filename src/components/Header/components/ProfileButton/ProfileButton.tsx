@@ -3,17 +3,18 @@ import { LinkWithSvg } from 'components/Header/components/LinkWithSvg/LinkWithSv
 import { FC } from 'react';
 
 interface ProfileButtonProps {
-  toggleProfileWindowState: () => void;
+  handleOnClick: () => void;
 }
 
-export const ProfileButton: FC<ProfileButtonProps> = ({
-  toggleProfileWindowState,
-}) => {
+export const ProfileButton: FC<ProfileButtonProps> = ({ handleOnClick }) => {
   return (
-    <div onClick={() => toggleProfileWindowState()}>
-      <LinkWithSvg svg={profileSvg} svgFilled isButton>
-        Profile
-      </LinkWithSvg>
-    </div>
+    <LinkWithSvg
+      svg={profileSvg}
+      handleOnClick={handleOnClick}
+      svgFilled
+      isButton
+    >
+      Profile
+    </LinkWithSvg>
   );
 };
