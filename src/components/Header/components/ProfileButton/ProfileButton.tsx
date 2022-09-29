@@ -1,6 +1,6 @@
 import { profileSvg } from 'svg/profileSvg';
-import { LinkWithSvg } from 'components/Header/components/LinkWithSvg/LinkWithSvg';
 import { FC } from 'react';
+import { HeaderButtonLink } from 'components/Header/components/HeaderButtonLink/HeaderButtonLink';
 
 interface ProfileButtonProps {
   handleOnClick: () => void;
@@ -8,13 +8,13 @@ interface ProfileButtonProps {
 
 export const ProfileButton: FC<ProfileButtonProps> = ({ handleOnClick }) => {
   return (
-    <LinkWithSvg
+    <HeaderButtonLink
       svg={profileSvg}
       handleOnClick={handleOnClick}
       svgFilled
       isButton
     >
       Profile
-    </LinkWithSvg>
+    </HeaderButtonLink>
   );
 };

@@ -12,6 +12,7 @@ interface LinkWithSvgProps {
   svgFilled?: boolean;
   isButton?: boolean;
   handleOnClick?: () => void;
+  className?: string;
 }
 
 export const LinkWithSvg: FC<LinkWithSvgProps> = ({
@@ -22,6 +23,7 @@ export const LinkWithSvg: FC<LinkWithSvgProps> = ({
   svgFilled = false,
   isButton = false,
   handleOnClick,
+  className,
 }) => {
   const linkWithSvgChildren = (
     <>
@@ -35,6 +37,7 @@ export const LinkWithSvg: FC<LinkWithSvgProps> = ({
   const linkWithSvgProps = {
     $svgStroked: svgStroked,
     $svgFilled: svgFilled,
+    className,
   };
 
   const buttonWithSvgProps = Object.assign(

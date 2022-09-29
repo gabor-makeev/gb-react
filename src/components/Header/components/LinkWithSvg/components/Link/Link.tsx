@@ -34,8 +34,4 @@ export const Link = styled(NavLink)`
       }}
     }
   }
-
-  @media (max-width: 768px) {
-    display: none;
-  }
 `;
