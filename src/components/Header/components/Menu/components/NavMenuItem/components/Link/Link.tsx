@@ -32,6 +32,8 @@ export const Link = styled(NavLink)<LinkProps>`
       return css`
         background-color: transparent;
         border: none;
+        cursor: pointer;
+        font: inherit;
       `;
     }
   }};
