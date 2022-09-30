@@ -1,4 +1,13 @@
 import styled from 'styled-components';
-import { Checkbox } from 'components/global/Checkbox/Checkbox';
+import { LabledCheckbox } from 'components/global/LabledCheckbox/LabledCheckbox';
+import { EditableInputCss } from 'components/global/css/EditableInputCss';
 
-export const StyledCheckbox = styled(Checkbox)``;
+interface StyledCheckboxProps {
+  $isEdited: boolean;
+}
+
+export const StyledCheckbox = styled(LabledCheckbox)<StyledCheckboxProps>`
+  ${({ $isEdited }) => {
+    if ($isEdited) return EditableInputCss;
+  }}
+`;

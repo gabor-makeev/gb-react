@@ -128,10 +128,12 @@ export const ProfileWindow: FC<ProfileWindowProps> = ({
             svg={nameInputSvg}
             labelText={'Name'}
             placeholder={userProperties.name}
+            $isEdited={!!nameInput && nameInput !== userProperties.name}
           />
           <StyledCheckbox
             labelText={'Public'}
             isChecked={isPublicInput}
+            $isEdited={isPublicInput !== userProperties.isPublic}
             tickHandler={() => setIsPublicInput(!isPublicInput)}
           />
           <Button>Save</Button>
