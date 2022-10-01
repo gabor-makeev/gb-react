@@ -2,7 +2,7 @@ import React, { FC, useEffect, useRef, useState } from 'react';
 import { Container } from 'components/ProfileWindow/components/Container/Container';
 import { Form } from 'components/ProfileWindow/components/Form/Form';
 import { Button } from 'components/global/Button/Button';
-import { InputTypes } from 'components/global/Input/Input';
+import { Input, InputTypes } from 'components/global/Input/Input';
 import { nameInputSvg } from 'svg/nameInputSvg';
 import { subscribeToUserProperties } from 'src/services/firebase/users';
 import { UserProperties } from 'src/default-types';
@@ -15,8 +15,7 @@ import { selectIsAuth } from 'store/profile/selectors';
 import { Loader } from 'components/global/Loader/Loader';
 import { FormHeader } from 'components/ProfileWindow/components/FormHeader/FormHeader';
 import { getUserDocRef } from 'src/services/firebase/refs';
-import { StyledInput } from 'components/ProfileWindow/components/StyledInput/StyledInput';
-import { StyledCheckbox } from 'components/ProfileWindow/components/StyledCheckbox/StyledCheckbox';
+import { LabledCheckbox } from 'components/global/LabledCheckbox/LabledCheckbox';
 import { SignOutButton } from 'components/ProfileWindow/components/SignOutButton/SignOutButton';
 import { logOut } from 'src/services/firebase/auth';
 import { ErrorNotification } from 'components/global/ErrorNotification/ErrorNotification';
@@ -121,19 +120,19 @@ export const ProfileWindow: FC<ProfileWindowProps> = ({
               Your email — <BoldText>{userEmail}</BoldText>
             </Text>
           </FormHeader>
-          <StyledInput
+          <Input
             inputValue={nameInput}
             changeHandler={setNameInput}
             inputType={InputTypes.text}
             svg={nameInputSvg}
             labelText={'Name'}
             placeholder={userProperties.name}
-            $isEdited={!!nameInput && nameInput !== userProperties.name}
+            isEdited={!!nameInput && nameInput !== userProperties.name}
           />
-          <StyledCheckbox
+          <LabledCheckbox
             labelText={'Public'}
             isChecked={isPublicInput}
-            $isEdited={isPublicInput !== userProperties.isPublic}
+            isEdited={isPublicInput !== userProperties.isPublic}
             tickHandler={() => setIsPublicInput(!isPublicInput)}
           />
           <Button>Save</Button>

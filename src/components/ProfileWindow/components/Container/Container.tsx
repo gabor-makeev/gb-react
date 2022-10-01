@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { StyledInput } from 'components/ProfileWindow/components/StyledInput/StyledInput';
 import { FormHeader } from 'components/ProfileWindow/components/FormHeader/FormHeader';
-import { StyledCheckbox } from 'components/ProfileWindow/components/StyledCheckbox/StyledCheckbox';
 import { SignOutButton } from 'components/ProfileWindow/components/SignOutButton/SignOutButton';
+import { Container as InputContainer } from 'components/global/Input/components/Container/Container';
+import { Container as CheckboxContainer } from 'components/global/LabledCheckbox/components/Container/Container';
 
 export const Container = styled.div`
   position: fixed;
@@ -20,11 +20,11 @@ export const Container = styled.div`
     margin-bottom: 40px;
   }
 
-  ${StyledInput} {
+  ${InputContainer} {
     margin-bottom: 20px;
   }
 
-  ${StyledCheckbox} {
+  ${CheckboxContainer} {
     margin-bottom: 20px;
   }
 

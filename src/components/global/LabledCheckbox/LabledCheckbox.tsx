@@ -8,6 +8,7 @@ interface CheckboxProps {
   labelText?: string;
   isChecked?: boolean;
   tickHandler: () => void;
+  isEdited?: boolean;
   className?: string;
 }
 
@@ -15,12 +16,17 @@ export const LabledCheckbox: FC<CheckboxProps> = ({
   labelText,
   isChecked = false,
   tickHandler,
+  isEdited,
   className,
 }) => {
   return (
     <Container className={className} $isChecked={isChecked}>
       {labelText && (
-        <Label htmlFor={'checkbox'} onClick={() => tickHandler()}>
+        <Label
+          htmlFor={'checkbox'}
+          onClick={() => tickHandler()}
+          $isEdited={isEdited}
+        >
           {labelText}
         </Label>
       )}

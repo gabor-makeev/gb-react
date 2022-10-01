@@ -19,6 +19,7 @@ interface InputProps {
   labelText?: string;
   svg?: JSX.Element;
   placeholder?: string;
+  isEdited?: boolean;
   className?: string;
 }
 
@@ -29,6 +30,7 @@ export const Input: FC<InputProps> = ({
   labelText,
   svg,
   placeholder,
+  isEdited,
   className,
 }) => {
   const uniqueInputId = nanoid();
@@ -46,7 +48,11 @@ export const Input: FC<InputProps> = ({
 
   return (
     <Container className={className}>
-      {labelText && <Label htmlFor={uniqueInputId}>{labelText}</Label>}
+      {labelText && (
+        <Label htmlFor={uniqueInputId} $isEdited={isEdited}>
+          {labelText}
+        </Label>
+      )}
       <FieldContainer>
         {svg && (
           <label htmlFor={uniqueInputId}>
