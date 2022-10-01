@@ -5,7 +5,7 @@ interface CheckboxProps {
   $isChecked: boolean;
 }
 
-export const Checkbox = styled.div<CheckboxProps>`
+export const Field = styled.div<CheckboxProps>`
   content: url('${Checkmark}');
   display: flex;
   justify-content: center;

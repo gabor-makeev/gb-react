@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { Checkbox } from 'components/global/LabledCheckbox/components/Checkbox/Checkbox';
+import { Field } from 'components/global/Checkbox/components/Field/Field';
 import { Label } from 'components/global/Label/Label';
 
 interface ContainerProps {
@@ -12,7 +12,7 @@ export const Container = styled.div<ContainerProps>`
   align-items: flex-start;
   gap: 6px;
 
-  ${Label}:hover ~ ${Checkbox} {
+  ${Label}:hover ~ ${Field} {
     ${({ $isChecked }) => {
       if (!$isChecked) {
         return css`

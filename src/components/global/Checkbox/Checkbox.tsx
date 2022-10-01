@@ -1,7 +1,7 @@
-import { Container } from 'components/global/LabledCheckbox/components/Container/Container';
-import { Input } from 'components/global/LabledCheckbox/components/Input/Input';
+import { Container } from 'components/global/Checkbox/components/Container/Container';
+import { Input } from 'components/global/Checkbox/components/Input/Input';
 import { FC } from 'react';
-import { Checkbox } from 'components/global/LabledCheckbox/components/Checkbox/Checkbox';
+import { Field } from 'components/global/Checkbox/components/Field/Field';
 import { Label } from 'components/global/Label/Label';
 
 interface CheckboxProps {
@@ -12,7 +12,7 @@ interface CheckboxProps {
   className?: string;
 }
 
-export const LabledCheckbox: FC<CheckboxProps> = ({
+export const Checkbox: FC<CheckboxProps> = ({
   labelText,
   isChecked = false,
   tickHandler,
@@ -30,7 +30,7 @@ export const LabledCheckbox: FC<CheckboxProps> = ({
           {labelText}
         </Label>
       )}
-      <Checkbox $isChecked={isChecked} onClick={() => tickHandler()} />
+      <Field $isChecked={isChecked} onClick={() => tickHandler()} />
       <Input id={'checkbox'} />
     </Container>
   );

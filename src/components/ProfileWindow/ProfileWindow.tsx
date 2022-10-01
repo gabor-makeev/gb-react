@@ -15,7 +15,7 @@ import { selectIsAuth } from 'store/profile/selectors';
 import { Loader } from 'components/global/Loader/Loader';
 import { FormHeader } from 'components/ProfileWindow/components/FormHeader/FormHeader';
 import { getUserDocRef } from 'src/services/firebase/refs';
-import { LabledCheckbox } from 'components/global/LabledCheckbox/LabledCheckbox';
+import { Checkbox } from 'components/global/Checkbox/Checkbox';
 import { SignOutButton } from 'components/ProfileWindow/components/SignOutButton/SignOutButton';
 import { logOut } from 'src/services/firebase/auth';
 import { ErrorNotification } from 'components/global/ErrorNotification/ErrorNotification';
@@ -129,7 +129,7 @@ export const ProfileWindow: FC<ProfileWindowProps> = ({
             placeholder={userProperties.name}
             isEdited={!!nameInput && nameInput !== userProperties.name}
           />
-          <LabledCheckbox
+          <Checkbox
             labelText={'Public'}
             isChecked={isPublicInput}
             isEdited={isPublicInput !== userProperties.isPublic}

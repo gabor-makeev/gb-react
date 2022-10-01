@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { FormHeader } from 'components/ProfileWindow/components/FormHeader/FormHeader';
 import { SignOutButton } from 'components/ProfileWindow/components/SignOutButton/SignOutButton';
 import { Container as InputContainer } from 'components/global/Input/components/Container/Container';
-import { Container as CheckboxContainer } from 'components/global/LabledCheckbox/components/Container/Container';
+import { Container as CheckboxContainer } from 'components/global/Checkbox/components/Container/Container';
 
 export const Container = styled.div`
   position: fixed;
