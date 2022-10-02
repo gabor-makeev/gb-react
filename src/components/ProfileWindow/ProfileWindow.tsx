@@ -27,8 +27,6 @@ interface ProfileWindowProps {
 export const ProfileWindow: FC<ProfileWindowProps> = ({
   toggleProfileWindowState,
 }) => {
-  const [nameInput, setNameInput] = useState('');
-  const [isPublicInput, setIsPublicInput] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [userProperties, setUserProperties] = useState<UserProperties>({
@@ -38,14 +36,27 @@ export const ProfileWindow: FC<ProfileWindowProps> = ({
     name: '',
     email: '',
   });
+  const [formData, setFormData] = useState({
+    name: '',
+    isPublic: userProperties.isPublic,
+  });
 
   const containerRef = useRef<HTMLDivElement>(null);
   const isAuth = useSelector(selectIsAuth);
   const userEmail = getAuth().currentUser?.email as string;
 
+  const updateFormData = (newData: { name?: string; isPublic?: boolean }) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      ...newData,
+    }));
+  };
+
   const handleSetUserProperties = (userProperties: UserProperties) => {
     setLoading(false);
-    setIsPublicInput(userProperties.isPublic);
+    updateFormData({
+      isPublic: userProperties.isPublic,
+    });
     setUserProperties(userProperties);
   };
 
@@ -62,22 +73,24 @@ export const ProfileWindow: FC<ProfileWindowProps> = ({
     try {
       setLoading(true);
 
-      if (nameInput) {
+      if (formData.name) {
         setDoc(
           getUserDocRef(userEmail),
           {
-            name: nameInput,
+            name: formData.name,
           },
           { merge: true }
         );
-        setNameInput('');
+        updateFormData({
+          name: '',
+        });
       }
 
-      if (isPublicInput !== userProperties.isPublic) {
+      if (formData.isPublic !== userProperties.isPublic) {
         setDoc(
           getUserDocRef(userEmail),
           {
-            isPublic: isPublicInput,
+            isPublic: formData.isPublic,
           },
           { merge: true }
         );
@@ -121,19 +134,21 @@ export const ProfileWindow: FC<ProfileWindowProps> = ({
             </Text>
           </FormHeader>
           <Input
-            inputValue={nameInput}
-            changeHandler={setNameInput}
+            inputValue={formData.name}
+            changeHandler={(newInputValue) =>
+              updateFormData({ name: newInputValue })
+            }
             inputType={InputTypes.text}
             svg={nameInputSvg}
             labelText={'Name'}
             placeholder={userProperties.name}
-            isEdited={!!nameInput && nameInput !== userProperties.name}
+            isEdited={!!formData.name && formData.name !== userProperties.name}
           />
           <Checkbox
             labelText={'Public'}
-            isChecked={isPublicInput}
-            isEdited={isPublicInput !== userProperties.isPublic}
-            tickHandler={() => setIsPublicInput(!isPublicInput)}
+            isChecked={formData.isPublic}
+            isEdited={formData.isPublic !== userProperties.isPublic}
+            tickHandler={() => updateFormData({ isPublic: !formData.isPublic })}
           />
           <Button>Save</Button>
           <SignOutButton as={'button'} onClick={() => handleSignOut()}>
