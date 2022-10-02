@@ -8,9 +8,13 @@ import { selectIsAuth } from 'store/profile/selectors';
 
 interface MenuProps {
   navigations: NavigationItem[];
+  toggleProfileWindowState: () => void;
 }
 
-export const Menu: FC<MenuProps> = ({ navigations }) => {
+export const Menu: FC<MenuProps> = ({
+  navigations,
+  toggleProfileWindowState,
+}) => {
   const [mobileMenuState, setMobileMenuState] = useState(false);
   const isAuth = useSelector(selectIsAuth);
   const navMenuRef = useRef<HTMLUListElement>(null);
@@ -39,6 +43,13 @@ export const Menu: FC<MenuProps> = ({ navigations }) => {
     setMobileMenuState(!mobileMenuState);
   }, [mobileMenuState]);
 
+  const handleMenuItemClick = (navigation: NavigationItem) => {
+    toggleMobileMenu();
+    if (navigation.name.toLowerCase() === 'profile') {
+      toggleProfileWindowState();
+    }
+  };
+
   useEffect(() => {
     window.addEventListener('resize', () => {
       if (window.innerWidth > 768 && mobileMenuState) {
@@ -66,8 +77,9 @@ export const Menu: FC<MenuProps> = ({ navigations }) => {
           return (
             <NavMenuItem
               navigation={navigation}
-              handleClick={toggleMobileMenu}
+              handleClick={() => handleMenuItemClick(navigation)}
               key={navigation.id}
+              isButton={!navigation.path}
             />
           );
         })}

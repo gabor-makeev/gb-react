@@ -11,7 +11,6 @@ export const NAVIGATION = [
   {
     id: 2,
     name: 'Profile',
-    path: '/profile',
   },
   {
     id: 3,

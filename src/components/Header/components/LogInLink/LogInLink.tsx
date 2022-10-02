@@ -1,10 +1,10 @@
 import { signInSvg } from 'svg/signInSvg';
-import { LinkWithSvg } from 'components/Header/components/LinkWithSvg/LinkWithSvg';
+import { HeaderButtonLink } from 'components/Header/components/HeaderButtonLink/HeaderButtonLink';
 
 export const LogInLink = () => {
   return (
-    <LinkWithSvg to={'/signin'} svg={signInSvg} svgStroked>
+    <HeaderButtonLink to={'/signin'} svg={signInSvg} svgStroked>
       Log in
-    </LinkWithSvg>
+    </HeaderButtonLink>
   );
 };

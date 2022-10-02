@@ -6,11 +6,13 @@ import { ListItem } from 'components/Header/components/Menu/components/NavMenuIt
 interface NavMenuItemProps {
   navigation: NavigationItem;
   handleClick: () => void;
+  isButton?: boolean;
 }
 
 export const NavMenuItem: FC<NavMenuItemProps> = ({
   navigation,
   handleClick,
+  isButton = false,
 }) => {
   return (
     <ListItem
@@ -18,13 +20,21 @@ export const NavMenuItem: FC<NavMenuItemProps> = ({
       onClick={() => handleClick()}
       $name={navigation.name.toLowerCase()}
     >
-      <Link
-        to={navigation.path}
-        $name={navigation.name.toLowerCase()}
-        className={({ isActive }) => (isActive ? 'active' : '')}
-      >
-        {navigation.name}
-      </Link>
+      {isButton ? (
+        <Link as={'button'} $name={navigation.name.toLowerCase()}>
+          {navigation.name}
+        </Link>
+      ) : (
+        navigation.path && (
+          <Link
+            to={navigation.path}
+            $name={navigation.name.toLowerCase()}
+            className={({ isActive }) => (isActive ? 'active' : '')}
+          >
+            {navigation.name}
+          </Link>
+        )
+      )}
     </ListItem>
   );
 };

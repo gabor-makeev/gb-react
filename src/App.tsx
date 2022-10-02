@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { BasePageTemplate } from 'src/templates/BasePageTemplate/BasePageTemplate';
 import { Main } from 'src/pages/Main/Main';
-import { Profile } from 'src/pages/Profile/Profile';
 import { Messenger } from 'src/pages/Messenger/Messenger';
 import { FC, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -32,10 +31,6 @@ export const App: FC = () => {
       <Routes>
         <Route path="/" element={<BasePageTemplate />}>
           <Route index element={<Main />} />
-          <Route
-            path="profile"
-            element={<PrivateRoute component={<Profile />} />}
-          />
           <Route
             path="signin"
             element={<PublicRoute component={<SignIn />} />}
