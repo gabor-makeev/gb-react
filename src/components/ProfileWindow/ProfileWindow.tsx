@@ -6,7 +6,7 @@ import { Input, InputTypes } from 'components/global/Input/Input';
 import { nameInputSvg } from 'svg/nameInputSvg';
 import { subscribeToUserProperties } from 'src/services/firebase/users';
 import { UserProperties } from 'src/default-types';
-import { setDoc, Timestamp } from 'firebase/firestore';
+import { Timestamp } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { Text } from 'components/global/Text/Text';
 import { BoldText } from 'components/global/Text/BoldText/BoldText';
@@ -14,11 +14,14 @@ import { useSelector } from 'react-redux';
 import { selectIsAuth } from 'store/profile/selectors';
 import { Loader } from 'components/global/Loader/Loader';
 import { FormHeader } from 'components/ProfileWindow/components/FormHeader/FormHeader';
-import { getUserDocRef } from 'src/services/firebase/refs';
 import { Checkbox } from 'components/global/Checkbox/Checkbox';
 import { SignOutButton } from 'components/ProfileWindow/components/SignOutButton/SignOutButton';
 import { logOut } from 'src/services/firebase/auth';
 import { ErrorNotification } from 'components/global/ErrorNotification/ErrorNotification';
+import {
+  UserPropertyType,
+  UserRepository,
+} from 'src/services/firebase/UserRepository/UserRepository';
 
 interface ProfileWindowProps {
   toggleProfileWindowState: () => void;
@@ -74,12 +77,10 @@ export const ProfileWindow: FC<ProfileWindowProps> = ({
       setLoading(true);
 
       if (formData.name) {
-        setDoc(
-          getUserDocRef(userEmail),
-          {
-            name: formData.name,
-          },
-          { merge: true }
+        UserRepository.setUserProperty(
+          userEmail,
+          UserPropertyType.name,
+          formData.name
         );
         updateFormData({
           name: '',
@@ -87,12 +88,10 @@ export const ProfileWindow: FC<ProfileWindowProps> = ({
       }
 
       if (formData.isPublic !== userProperties.isPublic) {
-        setDoc(
-          getUserDocRef(userEmail),
-          {
-            isPublic: formData.isPublic,
-          },
-          { merge: true }
+        UserRepository.setUserProperty(
+          userEmail,
+          UserPropertyType.isPublic,
+          formData.isPublic
         );
       }
     } catch (err) {

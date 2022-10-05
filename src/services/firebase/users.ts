@@ -6,7 +6,6 @@ import {
   onSnapshot,
   query,
   setDoc,
-  Timestamp,
   where,
   documentId,
 } from 'firebase/firestore';
@@ -15,15 +14,7 @@ import { removeMessagesByChat } from 'src/services/firebase/messages';
 import { getAuth } from 'firebase/auth';
 import { firestoreDatabase } from 'src/services/firebase/firebase';
 
-export const addUser = async (userEmail: string, name: string) => {
-  await setDoc(getUserDocRef(userEmail), {
-    name,
-    createdAt: Timestamp.now(),
-    isPublic: false,
-    chats: [],
-  });
-};
-
+// TODO: implement getUsersByName() within UserRepository class
 export const getUsersByName = async (name: string) => {
   const authUserEmail = getAuth().currentUser?.email;
   const usersRef = collection(firestoreDatabase, 'users');
@@ -46,6 +37,7 @@ export const getUsersByName = async (name: string) => {
   return users;
 };
 
+// TODO: implement getUserProperties() within UserRepository class
 export const getUserProperties = async (
   userEmail: string
 ): Promise<UserProperties> => {
@@ -53,6 +45,7 @@ export const getUserProperties = async (
   return userDoc.data() as UserProperties;
 };
 
+// TODO: implement subscribeToUserProperties() within UserRepository class
 export const subscribeToUserProperties = (
   cb: (userProperties: UserProperties) => void
 ) => {
@@ -67,6 +60,7 @@ export const subscribeToUserProperties = (
   );
 };
 
+// TODO: implement getUserChats() within UserRepository class
 export const getUserChats = async (
   userEmail: string
 ): Promise<FirebaseChats> => {
@@ -74,6 +68,7 @@ export const getUserChats = async (
   return await userDoc.data()?.chats;
 };
 
+// TODO: implement getUserChatByChatId() within UserRepository class
 export const getUserChatByChatId = async (
   userEmail: string,
   chatId: string
@@ -92,6 +87,7 @@ export const getUserChatByChatId = async (
   return targetChat;
 };
 
+// TODO: implement getUserChatByToUserEmail() within UserRepository class
 export const getUserChatByToUserEmail = async (
   userEmail: string,
   toUserEmail: string
@@ -110,6 +106,7 @@ export const getUserChatByToUserEmail = async (
   return targetChat;
 };
 
+// TODO: implement addUserChat() within UserRepository class
 export const addUserChat = async (
   userEmail: string,
   targetChat: FirebaseChat
@@ -129,6 +126,7 @@ export const addUserChat = async (
   }
 };
 
+// TODO: implement removeUserChat() within UserRepository class
 export const removeUserChat = async (
   userEmail: string,
   targetChat: FirebaseChat

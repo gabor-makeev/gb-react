@@ -5,14 +5,20 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
-import { addUser } from 'src/services/firebase/users';
+import { UserRepository } from 'src/services/firebase/UserRepository/UserRepository';
+import { Timestamp } from 'firebase/firestore';
 
 export const firebaseAuth = getAuth(app);
 
 export const signUp = async (name: string, email: string, password: string) => {
   await createUserWithEmailAndPassword(firebaseAuth, email, password);
 
-  await addUser(email, name);
+  await UserRepository.setUserProperties(email, {
+    name,
+    createdAt: Timestamp.now(),
+    isPublic: false,
+    chats: [],
+  });
 };
 
 export const logIn = async (email: string, password: string) =>
