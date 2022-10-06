@@ -5,10 +5,7 @@ import { getAuth } from 'firebase/auth';
 import { MessageSendingForm } from 'components/MessagesWindow/components/MessageSendingForm/MessageSendingForm';
 import { MessageList } from 'components/MessagesWindow/components/MessageList/MessageList';
 import { Messages } from 'src/default-types';
-import {
-  getUserChatByChatId,
-  getUserProperties,
-} from 'src/services/firebase/users';
+import { getUserChatByChatId } from 'src/services/firebase/users';
 import {
   addMessage,
   createFirebaseMessageObject,
@@ -16,6 +13,7 @@ import {
 } from 'src/services/firebase/messages';
 import classNames from 'classnames';
 import { MessagesWindowHeader } from 'components/MessagesWindow/components/MessagesWindowHeader/MessagesWindowHeader';
+import { UserRepository } from 'src/services/firebase/UserRepository/UserRepository';
 
 export const MessagesWindow: FC = () => {
   const [messages, setMessages] = useState<Messages>([]);
@@ -33,7 +31,7 @@ export const MessagesWindow: FC = () => {
   });
 
   useEffect(() => {
-    getUserProperties(userEmail).then((data) => {
+    UserRepository.getUserProperties(userEmail).then((data) => {
       setUserName(data?.name);
     });
   }, []);

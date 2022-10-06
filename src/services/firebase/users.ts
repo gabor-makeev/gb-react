@@ -37,14 +37,6 @@ export const getUsersByName = async (name: string) => {
   return users;
 };
 
-// TODO: implement getUserProperties() within UserRepository class
-export const getUserProperties = async (
-  userEmail: string
-): Promise<UserProperties> => {
-  const userDoc = await getDoc(getUserDocRef(userEmail));
-  return userDoc.data() as UserProperties;
-};
-
 // TODO: implement subscribeToUserProperties() within UserRepository class
 export const subscribeToUserProperties = (
   cb: (userProperties: UserProperties) => void

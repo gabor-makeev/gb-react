@@ -1,4 +1,4 @@
-import { doc, setDoc, Timestamp } from 'firebase/firestore';
+import { doc, getDoc, setDoc, Timestamp } from 'firebase/firestore';
 import { firestoreDatabase } from 'src/services/firebase/firebase';
 import { FirebaseChats } from 'src/default-types';
 
@@ -38,5 +38,13 @@ export class UserRepository {
   ) => {
     const docRef = UserRepository.getDocRef(userEmail);
     await setDoc(docRef, userProperties);
+  };
+
+  public static getUserProperties = async (userEmail: string) => {
+    const docRef = UserRepository.getDocRef(userEmail);
+    const doc = await getDoc(docRef);
+    const userProperties = await doc.data();
+
+    return userProperties;
   };
 }
