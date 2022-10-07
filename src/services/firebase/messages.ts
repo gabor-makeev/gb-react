@@ -67,9 +67,7 @@ export const getMessagesByChatId = async (chatId: string) => {
 
 export const addMessage = async (message: FirebaseMessage) => {
   const authUserEmail = getAuth().currentUser?.email as string;
-  const authUserProperties = await UserRepository.getUserProperties(
-    authUserEmail
-  );
+  const authUserProperties = await UserRepository.getUser(authUserEmail);
   const chat = await getUserChatByChatId(authUserEmail, message.chatId);
 
   if (chat && !(await getMessagesByChatId(chat.id)).length) {

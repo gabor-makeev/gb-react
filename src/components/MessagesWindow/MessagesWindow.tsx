@@ -31,7 +31,7 @@ export const MessagesWindow: FC = () => {
   });
 
   useEffect(() => {
-    UserRepository.getUserProperties(userEmail).then((data) => {
+    UserRepository.getUser(userEmail).then((data) => {
       setUserName(data?.name);
     });
   }, []);

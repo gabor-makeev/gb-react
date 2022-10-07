@@ -40,11 +40,11 @@ export class UserRepository {
     await setDoc(docRef, userProperties);
   };
 
-  public static getUserProperties = async (userEmail: string) => {
+  public static getUser = async (userEmail: string) => {
     const docRef = UserRepository.getDocRef(userEmail);
     const doc = await getDoc(docRef);
-    const userProperties = await doc.data();
+    const userData = await doc.data();
 
-    return userProperties;
+    return userData;
   };
 }
