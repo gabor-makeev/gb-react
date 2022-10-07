@@ -1,41 +1,8 @@
 import { getUserDocRef } from 'src/services/firebase/refs';
-import {
-  collection,
-  getDoc,
-  getDocs,
-  onSnapshot,
-  query,
-  setDoc,
-  where,
-  documentId,
-} from 'firebase/firestore';
+import { getDoc, onSnapshot, setDoc } from 'firebase/firestore';
 import { FirebaseChat, FirebaseChats, UserProperties } from 'src/default-types';
 import { removeMessagesByChat } from 'src/services/firebase/messages';
 import { getAuth } from 'firebase/auth';
-import { firestoreDatabase } from 'src/services/firebase/firebase';
-
-// TODO: implement getUsersByName() within UserRepository class
-export const getUsersByName = async (name: string) => {
-  const authUserEmail = getAuth().currentUser?.email;
-  const usersRef = collection(firestoreDatabase, 'users');
-
-  const usersQuery = query(
-    usersRef,
-    where('name', '==', name),
-    where(documentId(), '!=', authUserEmail)
-  );
-
-  const users: UserProperties[] = [];
-  const usersDocs = await getDocs(usersQuery);
-
-  usersDocs.forEach((usersDoc) => {
-    users.push(
-      Object.assign(usersDoc.data(), { email: usersDoc.id }) as UserProperties
-    );
-  });
-
-  return users;
-};
 
 // TODO: implement subscribeToUserProperties() within UserRepository class
 export const subscribeToUserProperties = (

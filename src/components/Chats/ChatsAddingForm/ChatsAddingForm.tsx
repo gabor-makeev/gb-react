@@ -1,9 +1,6 @@
 import React, { FC, useState } from 'react';
 import style from './ChatsAddingForm.module.scss';
-import {
-  getUserChatByToUserEmail,
-  getUsersByName,
-} from 'src/services/firebase/users';
+import { getUserChatByToUserEmail } from 'src/services/firebase/users';
 import { useDispatch } from 'react-redux';
 import { addChat } from 'store/chats/slice';
 import { Timestamp } from 'firebase/firestore';
@@ -12,6 +9,7 @@ import { getAuth } from 'firebase/auth';
 import { UserProperties } from 'src/default-types';
 import { SearchField } from 'components/Chats/ChatsAddingForm/components/SearchField/SearchField';
 import { SearchResults } from 'components/Chats/ChatsAddingForm/components/SearchResults/SearchResults';
+import { UserRepository } from 'src/services/firebase/UserRepository/UserRepository';
 
 interface ChatsAddingFormProps {
   toggleIsChatsAddingFormVisible: () => void;
@@ -28,7 +26,9 @@ export const ChatsAddingForm: FC<ChatsAddingFormProps> = ({
 
   const handleInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
-    setContacts(await getUsersByName(e.target.value));
+    const users = await UserRepository.getUsersByName(e.target.value);
+    const filteredUsers = users.filter((user) => user.email !== userEmail);
+    setContacts(filteredUsers);
   };
 
   const onContactClick = async (contact: UserProperties) => {
