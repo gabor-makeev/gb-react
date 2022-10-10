@@ -38,10 +38,12 @@ export class UserRepository {
     return collection(firestoreDatabase, UserRepository.path);
   };
 
-  public static getUser = async (userEmail: string) => {
+  public static getUser = async (
+    userEmail: string
+  ): Promise<IUserProperties> => {
     const docRef = UserRepository.getUserDocRef(userEmail);
     const doc = await getDoc(docRef);
-    const userData = await doc.data();
+    const userData = (await doc.data()) as IUserProperties;
 
     return userData;
   };
