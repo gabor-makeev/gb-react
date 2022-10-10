@@ -1,15 +1,11 @@
 import { getUserDocRef } from 'src/services/firebase/refs';
-import { getDoc, setDoc } from 'firebase/firestore';
+import { getDoc } from 'firebase/firestore';
 import { FirebaseChat, FirebaseChats } from 'src/default-types';
 import { removeMessagesByChat } from 'src/services/firebase/messages';
-
-// TODO: implement getUserChats() within UserRepository class
-export const getUserChats = async (
-  userEmail: string
-): Promise<FirebaseChats> => {
-  const userDoc = await getDoc(getUserDocRef(userEmail));
-  return await userDoc.data()?.chats;
-};
+import {
+  UserPropertyType,
+  UserRepository,
+} from 'src/services/firebase/UserRepository/UserRepository';
 
 // TODO: implement getUserChatByChatId() within UserRepository class
 export const getUserChatByChatId = async (
@@ -57,14 +53,14 @@ export const addUserChat = async (
   const targetChatExists = await getUserChatByChatId(userEmail, targetChat.id);
 
   if (!targetChatExists) {
-    const chats = await getUserChats(userEmail);
+    const userData = await UserRepository.getUser(userEmail);
+    const userChats = userData.chats;
+    const updatedUserChats = [...userChats, targetChat];
 
-    setDoc(
-      getUserDocRef(userEmail),
-      {
-        chats: [...chats, targetChat],
-      },
-      { merge: true }
+    await UserRepository.setUserProperty(
+      userEmail,
+      UserPropertyType.chats,
+      updatedUserChats
     );
   }
 };
@@ -74,21 +70,19 @@ export const removeUserChat = async (
   userEmail: string,
   targetChat: FirebaseChat
 ) => {
-  const chats = await getUserChats(userEmail);
+  const userData = await UserRepository.getUser(userEmail);
+  const userChats = userData.chats;
 
-  chats.forEach((chat, idx) => {
+  userChats.forEach((chat, idx) => {
     if (chat.id === targetChat.id) {
-      chats.splice(idx, 1);
+      userChats.splice(idx, 1);
     }
   });
 
-  setDoc(
-    getUserDocRef(userEmail),
-    {
-      chats,
-    },
-    { merge: true }
+  await UserRepository.setUserProperty(
+    userEmail,
+    UserPropertyType.chats,
+    userChats
   );
-
-  removeMessagesByChat(targetChat);
+  await removeMessagesByChat(targetChat);
 };
