@@ -3,6 +3,7 @@ import {
   doc,
   getDoc,
   getDocs,
+  onSnapshot,
   query,
   setDoc,
   Timestamp,
@@ -61,6 +62,16 @@ export class UserRepository {
     });
 
     return users;
+  };
+
+  public static subscribeToUser = (
+    userEmail: string,
+    cb: (userData: IUserProperties) => void
+  ) => {
+    return onSnapshot(UserRepository.getUserDocRef(userEmail), async (doc) => {
+      const userData = (await doc.data()) as IUserProperties;
+      cb(userData);
+    });
   };
 
   public static setUserProperty = async <P extends keyof UserProperties>(

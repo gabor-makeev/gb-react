@@ -4,7 +4,6 @@ import { Form } from 'components/ProfileWindow/components/Form/Form';
 import { Button } from 'components/global/Button/Button';
 import { Input, InputTypes } from 'components/global/Input/Input';
 import { nameInputSvg } from 'svg/nameInputSvg';
-import { subscribeToUserProperties } from 'src/services/firebase/users';
 import { UserProperties } from 'src/default-types';
 import { Timestamp } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
@@ -66,7 +65,7 @@ export const ProfileWindow: FC<ProfileWindowProps> = ({
   useEffect(() => {
     setLoading(true);
     if (getAuth().currentUser) {
-      return subscribeToUserProperties(handleSetUserProperties);
+      return UserRepository.subscribeToUser(userEmail, handleSetUserProperties);
     }
   }, [isAuth]);
 

@@ -1,23 +1,7 @@
 import { getUserDocRef } from 'src/services/firebase/refs';
-import { getDoc, onSnapshot, setDoc } from 'firebase/firestore';
-import { FirebaseChat, FirebaseChats, UserProperties } from 'src/default-types';
+import { getDoc, setDoc } from 'firebase/firestore';
+import { FirebaseChat, FirebaseChats } from 'src/default-types';
 import { removeMessagesByChat } from 'src/services/firebase/messages';
-import { getAuth } from 'firebase/auth';
-
-// TODO: implement subscribeToUserProperties() within UserRepository class
-export const subscribeToUserProperties = (
-  cb: (userProperties: UserProperties) => void
-) => {
-  return onSnapshot(
-    getUserDocRef(getAuth().currentUser?.email as string),
-    async (doc) => {
-      const dataSnapshot = await doc.data();
-      if (dataSnapshot) {
-        cb(dataSnapshot as UserProperties);
-      }
-    }
-  );
-};
 
 // TODO: implement getUserChats() within UserRepository class
 export const getUserChats = async (
