@@ -5,7 +5,6 @@ import { getAuth } from 'firebase/auth';
 import { MessageSendingForm } from 'components/MessagesWindow/components/MessageSendingForm/MessageSendingForm';
 import { MessageList } from 'components/MessagesWindow/components/MessageList/MessageList';
 import { Messages } from 'src/default-types';
-import { getUserChatByChatId } from 'src/services/firebase/users';
 import {
   addMessage,
   createFirebaseMessageObject,
@@ -38,17 +37,21 @@ export const MessagesWindow: FC = () => {
 
   useEffect(() => {
     if (chatId) {
-      getUserChatByChatId(userEmail, chatId).then((data) => {
-        setChatName(data ? data.name : chatName);
-      });
+      UserRepository.getUser(userEmail).then(async (userData) => {
+        const [chat] = userData.chats.filter((chat) => chat.id === chatId);
 
-      return subscribeToMessagesByChatId(chatId, setMessages);
+        if (chat) {
+          setChatName(chat.name);
+          return subscribeToMessagesByChatId(chatId, setMessages);
+        }
+      });
     }
   }, [chatId, chatName, userEmail]);
 
   if (chatId) {
-    getUserChatByChatId(userEmail, chatId).then((data?) => {
-      if (!data) {
+    UserRepository.getUser(userEmail).then((userData) => {
+      const [chat] = userData.chats.filter((chat) => chat.id === chatId);
+      if (!chat) {
         navigate('/messenger', { replace: true });
       }
     });

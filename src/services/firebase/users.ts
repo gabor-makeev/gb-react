@@ -7,25 +7,6 @@ import {
   UserRepository,
 } from 'src/services/firebase/UserRepository/UserRepository';
 
-// TODO: implement getUserChatByChatId() within UserRepository class
-export const getUserChatByChatId = async (
-  userEmail: string,
-  chatId: string
-): Promise<FirebaseChat | null> => {
-  const userDoc = await getDoc(getUserDocRef(userEmail));
-  const chats = (await userDoc.data()?.chats) as FirebaseChats;
-
-  let targetChat = null;
-
-  chats.forEach((chat) => {
-    if (chat.id === chatId) {
-      targetChat = chat;
-    }
-  });
-
-  return targetChat;
-};
-
 // TODO: implement getUserChatByToUserEmail() within UserRepository class
 export const getUserChatByToUserEmail = async (
   userEmail: string,
@@ -50,10 +31,12 @@ export const addUserChat = async (
   userEmail: string,
   targetChat: FirebaseChat
 ) => {
-  const targetChatExists = await getUserChatByChatId(userEmail, targetChat.id);
+  const userData = await UserRepository.getUser(userEmail);
+  const [targetChatExists] = userData.chats.filter(
+    (chat) => chat.id === targetChat.id
+  );
 
   if (!targetChatExists) {
-    const userData = await UserRepository.getUser(userEmail);
     const userChats = userData.chats;
     const updatedUserChats = [...userChats, targetChat];
 
