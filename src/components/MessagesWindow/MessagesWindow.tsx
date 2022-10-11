@@ -12,7 +12,7 @@ import {
 } from 'src/services/firebase/messages';
 import classNames from 'classnames';
 import { MessagesWindowHeader } from 'components/MessagesWindow/components/MessagesWindowHeader/MessagesWindowHeader';
-import { UserRepository } from 'src/services/firebase/UserRepository/UserRepository';
+import { UserRepository } from 'src/services/firebase/Repository/UserRepository/UserRepository';
 
 export const MessagesWindow: FC = () => {
   const [messages, setMessages] = useState<Messages>([]);

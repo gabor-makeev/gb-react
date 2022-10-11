@@ -5,7 +5,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
-import { UserRepository } from 'src/services/firebase/UserRepository/UserRepository';
+import { UserRepository } from 'src/services/firebase/Repository/UserRepository/UserRepository';
 import { Timestamp } from 'firebase/firestore';
 
 export const firebaseAuth = getAuth(app);

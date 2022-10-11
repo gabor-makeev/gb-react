@@ -13,7 +13,7 @@ import {
 import { firestoreDatabase } from 'src/services/firebase/firebase';
 import { FirebaseChat, FirebaseMessage, Messages } from 'src/default-types';
 import { addUserChat } from 'src/services/firebase/users';
-import { UserRepository } from 'src/services/firebase/UserRepository/UserRepository';
+import { UserRepository } from 'src/services/firebase/Repository/UserRepository/UserRepository';
 
 export const messagesRef = collection(firestoreDatabase, 'messages');
 

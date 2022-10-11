@@ -20,7 +20,7 @@ import { ErrorNotification } from 'components/global/ErrorNotification/ErrorNoti
 import {
   UserPropertyType,
   UserRepository,
-} from 'src/services/firebase/UserRepository/UserRepository';
+} from 'src/services/firebase/Repository/UserRepository/UserRepository';
 
 interface ProfileWindowProps {
   toggleProfileWindowState: () => void;

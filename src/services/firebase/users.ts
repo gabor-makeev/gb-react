@@ -3,7 +3,7 @@ import { removeMessagesByChat } from 'src/services/firebase/messages';
 import {
   UserPropertyType,
   UserRepository,
-} from 'src/services/firebase/UserRepository/UserRepository';
+} from 'src/services/firebase/Repository/UserRepository/UserRepository';
 
 // TODO: implement addUserChat() within UserRepository class
 export const addUserChat = async (

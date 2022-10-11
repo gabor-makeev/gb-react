@@ -8,7 +8,7 @@ import { getAuth } from 'firebase/auth';
 import { UserProperties } from 'src/default-types';
 import { SearchField } from 'components/Chats/ChatsAddingForm/components/SearchField/SearchField';
 import { SearchResults } from 'components/Chats/ChatsAddingForm/components/SearchResults/SearchResults';
-import { UserRepository } from 'src/services/firebase/UserRepository/UserRepository';
+import { UserRepository } from 'src/services/firebase/Repository/UserRepository/UserRepository';
 
 interface ChatsAddingFormProps {
   toggleIsChatsAddingFormVisible: () => void;
