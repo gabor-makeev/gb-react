@@ -1,30 +1,9 @@
-import { getUserDocRef } from 'src/services/firebase/refs';
-import { getDoc } from 'firebase/firestore';
-import { FirebaseChat, FirebaseChats } from 'src/default-types';
+import { FirebaseChat } from 'src/default-types';
 import { removeMessagesByChat } from 'src/services/firebase/messages';
 import {
   UserPropertyType,
   UserRepository,
 } from 'src/services/firebase/UserRepository/UserRepository';
-
-// TODO: implement getUserChatByToUserEmail() within UserRepository class
-export const getUserChatByToUserEmail = async (
-  userEmail: string,
-  toUserEmail: string
-): Promise<FirebaseChat | null> => {
-  const userDoc = await getDoc(getUserDocRef(userEmail));
-  const chats = (await userDoc.data()?.chats) as FirebaseChats;
-
-  let targetChat = null;
-
-  chats.forEach((chat) => {
-    if (chat.toUserEmail === toUserEmail) {
-      targetChat = chat;
-    }
-  });
-
-  return targetChat;
-};
 
 // TODO: implement addUserChat() within UserRepository class
 export const addUserChat = async (

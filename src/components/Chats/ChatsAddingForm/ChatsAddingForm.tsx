@@ -1,6 +1,5 @@
 import React, { FC, useState } from 'react';
 import style from './ChatsAddingForm.module.scss';
-import { getUserChatByToUserEmail } from 'src/services/firebase/users';
 import { useDispatch } from 'react-redux';
 import { addChat } from 'store/chats/slice';
 import { Timestamp } from 'firebase/firestore';
@@ -32,14 +31,15 @@ export const ChatsAddingForm: FC<ChatsAddingFormProps> = ({
   };
 
   const onContactClick = async (contact: UserProperties) => {
-    const authUserChatWithContact = await getUserChatByToUserEmail(
-      userEmail,
-      contact.email
+    const authUserData = await UserRepository.getUser(userEmail);
+    const contactUserData = await UserRepository.getUser(contact.email);
+
+    const [authUserChatWithContact] = authUserData.chats.filter(
+      (chat) => chat.toUserEmail === contact.email
     );
 
-    const contactChatWithAuthUser = await getUserChatByToUserEmail(
-      contact.email,
-      userEmail
+    const [contactChatWithAuthUser] = contactUserData.chats.filter(
+      (chat) => chat.toUserEmail === userEmail
     );
 
     const newChatId = nanoid();
