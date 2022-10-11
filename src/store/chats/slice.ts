@@ -1,10 +1,9 @@
-import { Chat, Chats, FirebaseChats, FirebaseMessage } from 'src/default-types';
+import { Chats, FirebaseChats, FirebaseMessage } from 'src/default-types';
 import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Dispatch } from 'redux';
 import { onSnapshot } from 'firebase/firestore';
 import { getUserDocRef } from 'src/services/firebase/refs';
 import { getAuth } from 'firebase/auth';
-import { removeUserChat } from 'src/services/firebase/users';
 
 interface ChatsState {
   content: Chats;
@@ -21,14 +20,6 @@ export const chatsSlice = createSlice({
     },
   },
 });
-
-export const deleteChat = (chat: Chat) => async () => {
-  const user = getAuth().currentUser;
-
-  if (user?.email) {
-    await removeUserChat(user?.email, chat);
-  }
-};
 
 export const sendMessageWithBotReply = createAction<FirebaseMessage>(
   'chats/sendMessageWithBotReply'

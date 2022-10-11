@@ -2,11 +2,13 @@ import React, { FC, useEffect } from 'react';
 import style from './ChatsWindow.module.scss';
 import { ChatList } from 'components/Chats/ChatsWindow/components/ChatList/ChatList';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteChat, initChatsTracking } from 'store/chats/slice';
+import { initChatsTracking } from 'store/chats/slice';
 import { selectChats } from 'store/chats/selectors';
 import { Chat } from 'src/default-types';
 import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
+import { getAuth } from 'firebase/auth';
+import { UserService } from 'src/services/firebase/Service/UserService/UserService';
 
 interface ChatsWindowProps {
   toggleIsChatsAddingFormVisible: () => void;
@@ -24,7 +26,8 @@ export const ChatsWindow: FC<ChatsWindowProps> = ({
   });
 
   const onDeleteChat = (chat: Chat) => {
-    dispatch(deleteChat(chat));
+    const userEmail = getAuth().currentUser?.email as string;
+    UserService.removeChat(userEmail, chat);
   };
 
   useEffect(() => {
