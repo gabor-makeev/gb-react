@@ -1,7 +1,5 @@
 import React, { FC, useState } from 'react';
 import style from './ChatsAddingForm.module.scss';
-import { useDispatch } from 'react-redux';
-import { addChat } from 'store/chats/slice';
 import { Timestamp } from 'firebase/firestore';
 import { nanoid } from 'nanoid';
 import { getAuth } from 'firebase/auth';
@@ -9,6 +7,7 @@ import { UserProperties } from 'src/default-types';
 import { SearchField } from 'components/Chats/ChatsAddingForm/components/SearchField/SearchField';
 import { SearchResults } from 'components/Chats/ChatsAddingForm/components/SearchResults/SearchResults';
 import { UserRepository } from 'src/services/firebase/Repository/UserRepository/UserRepository';
+import { UserService } from 'src/services/firebase/Service/UserService/UserService';
 
 interface ChatsAddingFormProps {
   toggleIsChatsAddingFormVisible: () => void;
@@ -20,7 +19,6 @@ export const ChatsAddingForm: FC<ChatsAddingFormProps> = ({
   const [input, setInput] = useState('');
   const [contacts, setContacts] = useState<UserProperties[]>([]);
 
-  const dispatch = useDispatch<any>();
   const userEmail = getAuth().currentUser?.email as string;
 
   const handleInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,14 +43,12 @@ export const ChatsAddingForm: FC<ChatsAddingFormProps> = ({
     const newChatId = nanoid();
 
     if (!authUserChatWithContact) {
-      dispatch(
-        addChat({
-          name: contact.name,
-          toUserEmail: contact.email,
-          createdAt: Timestamp.now().toMillis(),
-          id: contactChatWithAuthUser ? contactChatWithAuthUser.id : newChatId,
-        })
-      );
+      UserService.addChat(userEmail, {
+        name: contact.name,
+        toUserEmail: contact.email,
+        createdAt: Timestamp.now().toMillis(),
+        id: contactChatWithAuthUser ? contactChatWithAuthUser.id : newChatId,
+      });
     }
   };
 

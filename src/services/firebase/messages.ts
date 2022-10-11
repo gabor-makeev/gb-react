@@ -12,8 +12,8 @@ import {
 } from 'firebase/firestore';
 import { firestoreDatabase } from 'src/services/firebase/firebase';
 import { FirebaseChat, FirebaseMessage, Messages } from 'src/default-types';
-import { addUserChat } from 'src/services/firebase/users';
 import { UserRepository } from 'src/services/firebase/Repository/UserRepository/UserRepository';
+import { UserService } from 'src/services/firebase/Service/UserService/UserService';
 
 export const messagesRef = collection(firestoreDatabase, 'messages');
 
@@ -73,7 +73,7 @@ export const addMessage = async (message: FirebaseMessage) => {
   );
 
   if (chat && !(await getMessagesByChatId(chat.id)).length) {
-    await addUserChat(chat.toUserEmail, {
+    await UserService.addChat(chat.toUserEmail, {
       name: authUserProperties?.name,
       toUserEmail: authUserEmail,
       createdAt: Timestamp.now().toMillis(),

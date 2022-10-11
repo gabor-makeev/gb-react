@@ -5,28 +5,6 @@ import {
   UserRepository,
 } from 'src/services/firebase/Repository/UserRepository/UserRepository';
 
-// TODO: implement addUserChat() within UserRepository class
-export const addUserChat = async (
-  userEmail: string,
-  targetChat: FirebaseChat
-) => {
-  const userData = await UserRepository.getUser(userEmail);
-  const [targetChatExists] = userData.chats.filter(
-    (chat) => chat.id === targetChat.id
-  );
-
-  if (!targetChatExists) {
-    const userChats = userData.chats;
-    const updatedUserChats = [...userChats, targetChat];
-
-    await UserRepository.setUserProperty(
-      userEmail,
-      UserPropertyType.chats,
-      updatedUserChats
-    );
-  }
-};
-
 // TODO: implement removeUserChat() within UserRepository class
 export const removeUserChat = async (
   userEmail: string,
