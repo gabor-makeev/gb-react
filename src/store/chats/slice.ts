@@ -1,9 +1,8 @@
 import { Chats, FirebaseChats, FirebaseMessage } from 'src/default-types';
 import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Dispatch } from 'redux';
-import { onSnapshot } from 'firebase/firestore';
-import { getUserDocRef } from 'src/services/firebase/refs';
 import { getAuth } from 'firebase/auth';
+import { UserRepository } from 'src/services/firebase/Repository/UserRepository/UserRepository';
 
 interface ChatsState {
   content: Chats;
@@ -29,12 +28,8 @@ export const initChatsTracking = () => (dispatch: Dispatch) => {
   const user = getAuth().currentUser;
 
   if (user?.email) {
-    onSnapshot(getUserDocRef(user?.email), async (doc) => {
-      const dataSnapshot = await doc.data();
-
-      if (dataSnapshot) {
-        dispatch(chatsSlice.actions.setChats(dataSnapshot.chats));
-      }
+    UserRepository.subscribeToUser(user?.email, (userData) => {
+      dispatch(chatsSlice.actions.setChats(userData.chats));
     });
   }
 };
