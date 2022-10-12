@@ -15,12 +15,12 @@ import { Loader } from 'components/global/Loader/Loader';
 import { FormHeader } from 'components/ProfileWindow/components/FormHeader/FormHeader';
 import { Checkbox } from 'components/global/Checkbox/Checkbox';
 import { SignOutButton } from 'components/ProfileWindow/components/SignOutButton/SignOutButton';
-import { logOut } from 'src/services/firebase/auth';
 import { ErrorNotification } from 'components/global/ErrorNotification/ErrorNotification';
 import {
   UserPropertyType,
   UserRepository,
 } from 'src/services/firebase/Repository/UserRepository/UserRepository';
+import { AuthService } from 'src/services/firebase/Service/AuthService/AuthService';
 
 interface ProfileWindowProps {
   toggleProfileWindowState: () => void;
@@ -110,7 +110,7 @@ export const ProfileWindow: FC<ProfileWindowProps> = ({
   };
 
   const handleSignOut = () => {
-    logOut();
+    AuthService.logOut();
     toggleProfileWindowState();
   };
 

@@ -1,6 +1,5 @@
 import React, { FC, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { logIn } from 'src/services/firebase/auth';
 import { Loader } from 'components/global/Loader/Loader';
 import { ErrorNotification } from 'components/global/ErrorNotification/ErrorNotification';
 import { Container } from 'components/global/AccessPage/Container/Container';
@@ -14,6 +13,7 @@ import { Heading } from 'components/global/Heading/Heading';
 import { Text } from 'components/global/Text/Text';
 import { BoldText } from 'components/global/Text/BoldText/BoldText';
 import { Link } from 'components/global/Link/Link';
+import { AuthService } from 'src/services/firebase/Service/AuthService/AuthService';
 
 export const SignIn: FC = () => {
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ export const SignIn: FC = () => {
     try {
       setLoading(true);
       setError('');
-      await logIn(email, password);
+      await AuthService.logIn(email, password);
       navigate('/messenger', { replace: true });
     } catch (err) {
       setError((err as Error).message);

@@ -8,14 +8,14 @@ import { SignIn } from 'src/pages/SignIn/SignIn';
 import { PrivateRoute } from 'components/PrivateRoute';
 import { PublicRoute } from 'components/PublicRoute';
 import { SignUp } from 'src/pages/SignUp/SignUp';
-import { firebaseAuth } from 'src/services/firebase/auth';
 import { setAuth } from 'store/profile/slice';
+import { AuthService } from 'src/services/firebase/Service/AuthService/AuthService';
 
 export const App: FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const unsubscribe = firebaseAuth.onAuthStateChanged((user) => {
+    const unsubscribe = AuthService.firebaseAuth.onAuthStateChanged((user) => {
       if (user) {
         dispatch(setAuth(true));
       } else {
