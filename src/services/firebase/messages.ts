@@ -28,20 +28,6 @@ export const getMessagesQueryByChatId = (chatId: string) => {
   );
 };
 
-export const createFirebaseMessageObject = (
-  chatId: string,
-  body: string,
-  userName: string
-): FirebaseMessage => {
-  return {
-    body,
-    chatId,
-    userName,
-    createdAt: Timestamp.now().toMillis(),
-    userEmail: getAuth().currentUser?.email as string,
-  };
-};
-
 export const addMessage = async (message: FirebaseMessage) => {
   const authUserEmail = getAuth().currentUser?.email as string;
   const authUserProperties = await UserRepository.getUser(authUserEmail);

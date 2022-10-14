@@ -5,10 +5,7 @@ import { getAuth } from 'firebase/auth';
 import { MessageSendingForm } from 'components/MessagesWindow/components/MessageSendingForm/MessageSendingForm';
 import { MessageList } from 'components/MessagesWindow/components/MessageList/MessageList';
 import { Messages } from 'src/default-types';
-import {
-  addMessage,
-  createFirebaseMessageObject,
-} from 'src/services/firebase/messages';
+import { addMessage } from 'src/services/firebase/messages';
 import classNames from 'classnames';
 import { MessagesWindowHeader } from 'components/MessagesWindow/components/MessagesWindowHeader/MessagesWindowHeader';
 import { UserRepository } from 'src/services/firebase/Repository/UserRepository/UserRepository';
@@ -16,6 +13,7 @@ import {
   MessageRepository,
   FirebaseMessageType,
 } from 'src/services/firebase/Repository/MessageRepository/MessageRepository';
+import { Timestamp } from 'firebase/firestore';
 
 export const MessagesWindow: FC = () => {
   const [messages, setMessages] = useState<Messages>([]);
@@ -70,13 +68,13 @@ export const MessagesWindow: FC = () => {
     if (chatId) {
       setMessageSendingFormInputValue('');
 
-      await addMessage(
-        createFirebaseMessageObject(
-          chatId,
-          messageSendingFormInputValue,
-          userName
-        )
-      );
+      await addMessage({
+        chatId,
+        body: messageSendingFormInputValue,
+        userName,
+        createdAt: Timestamp.now().toMillis(),
+        userEmail,
+      });
     }
   };
 
