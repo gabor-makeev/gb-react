@@ -5,7 +5,6 @@ import { getAuth } from 'firebase/auth';
 import { MessageSendingForm } from 'components/MessagesWindow/components/MessageSendingForm/MessageSendingForm';
 import { MessageList } from 'components/MessagesWindow/components/MessageList/MessageList';
 import { Messages } from 'src/default-types';
-import { addMessage } from 'src/services/firebase/messages';
 import classNames from 'classnames';
 import { MessagesWindowHeader } from 'components/MessagesWindow/components/MessagesWindowHeader/MessagesWindowHeader';
 import { UserRepository } from 'src/services/firebase/Repository/UserRepository/UserRepository';
@@ -14,6 +13,7 @@ import {
   FirebaseMessageType,
 } from 'src/services/firebase/Repository/MessageRepository/MessageRepository';
 import { Timestamp } from 'firebase/firestore';
+import { MessageService } from 'src/services/firebase/Service/MessageService/MessageService';
 
 export const MessagesWindow: FC = () => {
   const [messages, setMessages] = useState<Messages>([]);
@@ -68,7 +68,7 @@ export const MessagesWindow: FC = () => {
     if (chatId) {
       setMessageSendingFormInputValue('');
 
-      await addMessage({
+      await MessageService.sendMessage({
         chatId,
         body: messageSendingFormInputValue,
         userName,

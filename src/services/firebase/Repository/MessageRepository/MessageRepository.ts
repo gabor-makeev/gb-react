@@ -7,6 +7,7 @@ import {
   QuerySnapshot,
   QueryConstraint,
   where,
+  addDoc,
 } from 'firebase/firestore';
 import { firestoreDatabase } from 'src/services/firebase/firebase';
 import { FirebaseMessage, Message } from 'src/default-types';
@@ -90,5 +91,9 @@ export class MessageRepository {
         )
       );
     });
+  };
+
+  public static addMessage = async (message: FirebaseMessage) => {
+    await addDoc(MessageRepository.getMessagesCollection(), message);
   };
 }
