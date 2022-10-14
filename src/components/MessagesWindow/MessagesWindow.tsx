@@ -8,11 +8,14 @@ import { Messages } from 'src/default-types';
 import {
   addMessage,
   createFirebaseMessageObject,
-  subscribeToMessagesByChatId,
 } from 'src/services/firebase/messages';
 import classNames from 'classnames';
 import { MessagesWindowHeader } from 'components/MessagesWindow/components/MessagesWindowHeader/MessagesWindowHeader';
 import { UserRepository } from 'src/services/firebase/Repository/UserRepository/UserRepository';
+import {
+  MessageRepository,
+  FirebaseMessageType,
+} from 'src/services/firebase/Repository/MessageRepository/MessageRepository';
 
 export const MessagesWindow: FC = () => {
   const [messages, setMessages] = useState<Messages>([]);
@@ -42,7 +45,11 @@ export const MessagesWindow: FC = () => {
 
         if (chat) {
           setChatName(chat.name);
-          return subscribeToMessagesByChatId(chatId, setMessages);
+          return MessageRepository.subscribeToMessagesByProperty(
+            FirebaseMessageType.chatId,
+            chat.id,
+            setMessages
+          );
         }
       });
     }

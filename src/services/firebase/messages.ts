@@ -4,16 +4,19 @@ import {
   collection,
   deleteDoc,
   getDocs,
-  onSnapshot,
   orderBy,
   query,
   Timestamp,
   where,
 } from 'firebase/firestore';
 import { firestoreDatabase } from 'src/services/firebase/firebase';
-import { FirebaseChat, FirebaseMessage, Messages } from 'src/default-types';
+import { FirebaseChat, FirebaseMessage } from 'src/default-types';
 import { UserRepository } from 'src/services/firebase/Repository/UserRepository/UserRepository';
 import { UserService } from 'src/services/firebase/Service/UserService/UserService';
+import {
+  MessageRepository,
+  FirebaseMessageType,
+} from 'src/services/firebase/Repository/MessageRepository/MessageRepository';
 
 export const messagesRef = collection(firestoreDatabase, 'messages');
 
@@ -39,32 +42,6 @@ export const createFirebaseMessageObject = (
   };
 };
 
-export const subscribeToMessagesByChatId = (
-  chatId: string,
-  cb: (messages: Messages) => void
-) => {
-  return onSnapshot(getMessagesQueryByChatId(chatId), (querySnapshot) => {
-    const messages: Messages = [];
-    querySnapshot.forEach((message) => {
-      const firebaseMessage = message.data() as FirebaseMessage;
-      messages.push(Object.assign(firebaseMessage, { id: message.id }));
-    });
-
-    cb(messages);
-  });
-};
-
-export const getMessagesByChatId = async (chatId: string) => {
-  const messages: FirebaseMessage[] = [];
-  const firestoreMessages = await getDocs(getMessagesQueryByChatId(chatId));
-
-  firestoreMessages.forEach((firestoreMessage) => {
-    messages.push(firestoreMessage.data() as FirebaseMessage);
-  });
-
-  return messages;
-};
-
 export const addMessage = async (message: FirebaseMessage) => {
   const authUserEmail = getAuth().currentUser?.email as string;
   const authUserProperties = await UserRepository.getUser(authUserEmail);
@@ -72,7 +49,15 @@ export const addMessage = async (message: FirebaseMessage) => {
     (chat) => chat.id === message.chatId
   );
 
-  if (chat && !(await getMessagesByChatId(chat.id)).length) {
+  if (
+    chat &&
+    !(
+      await MessageRepository.getMessagesByProperty(
+        FirebaseMessageType.chatId,
+        chat.id
+      )
+    ).length
+  ) {
     await UserService.addChat(chat.toUserEmail, {
       name: authUserProperties?.name,
       toUserEmail: authUserEmail,
