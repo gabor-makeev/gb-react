@@ -3,7 +3,10 @@ import {
   UserPropertyType,
   UserRepository,
 } from 'src/services/firebase/Repository/UserRepository/UserRepository';
-import { removeMessagesByChat } from 'src/services/firebase/messages';
+import {
+  FirebaseMessageType,
+  MessageRepository,
+} from 'src/services/firebase/Repository/MessageRepository/MessageRepository';
 
 export class UserService {
   public static addChat = async (userEmail: string, newChat: FirebaseChat) => {
@@ -39,6 +42,10 @@ export class UserService {
       UserPropertyType.chats,
       userChats
     );
-    await removeMessagesByChat(targetChat);
+
+    await MessageRepository.removeMessagesByProperty(
+      FirebaseMessageType.chatId,
+      targetChat.id
+    );
   };
 }

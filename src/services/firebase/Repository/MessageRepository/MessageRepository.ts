@@ -8,6 +8,7 @@ import {
   QueryConstraint,
   where,
   addDoc,
+  writeBatch,
 } from 'firebase/firestore';
 import { firestoreDatabase } from 'src/services/firebase/firebase';
 import { FirebaseMessage, Message } from 'src/default-types';
@@ -30,6 +31,10 @@ type FirebaseMessageProperties = {
 
 export class MessageRepository {
   protected static path = 'messages';
+
+  protected static getWriteBatch = () => {
+    return writeBatch(firestoreDatabase);
+  };
 
   protected static getMessagesCollection = () => {
     return collection(firestoreDatabase, MessageRepository.path);
@@ -95,5 +100,24 @@ export class MessageRepository {
 
   public static addMessage = async (message: FirebaseMessage) => {
     await addDoc(MessageRepository.getMessagesCollection(), message);
+  };
+
+  public static removeMessagesByProperty = async <
+    P extends keyof FirebaseMessageProperties
+  >(
+    property: P,
+    value: FirebaseMessageProperties[P]
+  ) => {
+    const batch = MessageRepository.getWriteBatch();
+    const query = await MessageRepository.getMessagesQuery(
+      where(property, '==', value)
+    );
+    const messagesSnapshot = await getDocs(query);
+
+    messagesSnapshot.forEach((messageSnapshot) =>
+      batch.delete(messageSnapshot.ref)
+    );
+
+    await batch.commit();
   };
 }
