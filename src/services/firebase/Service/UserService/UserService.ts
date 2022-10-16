@@ -1,15 +1,16 @@
-import { FirebaseChat } from 'src/default-types';
+import { UserRepository } from 'src/services/firebase/Repository/UserRepository/UserRepository';
+import { MessageRepository } from 'src/services/firebase/Repository/MessageRepository/MessageRepository';
 import {
-  UserPropertyType,
-  UserRepository,
-} from 'src/services/firebase/Repository/UserRepository/UserRepository';
-import {
-  FirebaseMessageType,
-  MessageRepository,
-} from 'src/services/firebase/Repository/MessageRepository/MessageRepository';
+  EFirebaseMessageProperty,
+  EFirebaseUserProperty,
+  IFirebaseUserChat,
+} from 'src/default-types';
 
 export class UserService {
-  public static addChat = async (userEmail: string, newChat: FirebaseChat) => {
+  public static addChat = async (
+    userEmail: string,
+    newChat: IFirebaseUserChat
+  ) => {
     const userData = await UserRepository.getUser(userEmail);
     const newChatExists = userData.chats.find((chat) => chat.id === newChat.id);
 
@@ -18,7 +19,7 @@ export class UserService {
 
       await UserRepository.setUserProperty(
         userEmail,
-        UserPropertyType.chats,
+        EFirebaseUserProperty.chats,
         updatedUserChats
       );
     }
@@ -26,7 +27,7 @@ export class UserService {
 
   public static removeChat = async (
     userEmail: string,
-    targetChat: FirebaseChat
+    targetChat: IFirebaseUserChat
   ) => {
     const userData = await UserRepository.getUser(userEmail);
     const userChats = userData.chats;
@@ -39,12 +40,12 @@ export class UserService {
 
     await UserRepository.setUserProperty(
       userEmail,
-      UserPropertyType.chats,
+      EFirebaseUserProperty.chats,
       userChats
     );
 
     await MessageRepository.removeMessagesByProperty(
-      FirebaseMessageType.chatId,
+      EFirebaseMessageProperty.chatId,
       targetChat.id
     );
   };

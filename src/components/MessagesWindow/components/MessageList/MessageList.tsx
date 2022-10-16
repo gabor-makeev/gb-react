@@ -1,13 +1,13 @@
 import { FC, useEffect, useRef } from 'react';
 import style from './MessageList.module.scss';
 import { MessageItem } from './components/MessageItem/MessageItem';
-import { Message } from 'src/default-types';
 import classNames from 'classnames';
 import { MUIStyledMessageList } from '../../../MUIStyledComponents/MUIStyledMessageList';
+import { IClientMessage } from 'src/default-types';
 
 interface MessageListProps {
   userEmail: string;
-  messages: Message[];
+  messages: IClientMessage[];
   gapType?: string;
   backgroundColor?: string;
 }

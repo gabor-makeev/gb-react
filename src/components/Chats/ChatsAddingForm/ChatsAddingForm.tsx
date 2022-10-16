@@ -3,11 +3,11 @@ import style from './ChatsAddingForm.module.scss';
 import { Timestamp } from 'firebase/firestore';
 import { nanoid } from 'nanoid';
 import { getAuth } from 'firebase/auth';
-import { UserProperties } from 'src/default-types';
 import { SearchField } from 'components/Chats/ChatsAddingForm/components/SearchField/SearchField';
 import { SearchResults } from 'components/Chats/ChatsAddingForm/components/SearchResults/SearchResults';
 import { UserRepository } from 'src/services/firebase/Repository/UserRepository/UserRepository';
 import { UserService } from 'src/services/firebase/Service/UserService/UserService';
+import { IClientUser } from 'src/default-types';
 
 interface ChatsAddingFormProps {
   toggleIsChatsAddingFormVisible: () => void;
@@ -17,7 +17,7 @@ export const ChatsAddingForm: FC<ChatsAddingFormProps> = ({
   toggleIsChatsAddingFormVisible,
 }) => {
   const [input, setInput] = useState('');
-  const [contacts, setContacts] = useState<UserProperties[]>([]);
+  const [contacts, setContacts] = useState<IClientUser[]>([]);
 
   const userEmail = getAuth().currentUser?.email as string;
 
@@ -28,7 +28,7 @@ export const ChatsAddingForm: FC<ChatsAddingFormProps> = ({
     setContacts(filteredUsers);
   };
 
-  const onContactClick = async (contact: UserProperties) => {
+  const onContactClick = async (contact: IClientUser) => {
     const authUserData = await UserRepository.getUser(userEmail);
     const contactUserData = await UserRepository.getUser(contact.email);
 

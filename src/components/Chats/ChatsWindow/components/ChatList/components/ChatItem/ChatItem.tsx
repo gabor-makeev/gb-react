@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import style from './ChatItem.module.scss';
 import { NavLink } from 'react-router-dom';
-import { Chat } from 'src/default-types';
+import { IFirebaseUserChat } from 'src/default-types';
 
 interface ChatItemProps {
-  chat: Chat;
+  chat: IFirebaseUserChat;
   deleteChat: () => void;
 }
 

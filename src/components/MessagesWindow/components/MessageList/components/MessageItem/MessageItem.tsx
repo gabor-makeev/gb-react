@@ -1,12 +1,12 @@
 import { FC } from 'react';
 import classNames from 'classnames';
 import style from './MessageItem.module.scss';
-import { Message } from 'src/default-types';
 import { DateTimeFormatter } from 'src/utils/DateTimeFormatter/DateTimeFormatter';
+import { IClientMessage } from 'src/default-types';
 
 interface MessageItemProps {
   userEmail: string;
-  message: Message;
+  message: IClientMessage;
 }
 
 export const MessageItem: FC<MessageItemProps> = ({ userEmail, message }) => {

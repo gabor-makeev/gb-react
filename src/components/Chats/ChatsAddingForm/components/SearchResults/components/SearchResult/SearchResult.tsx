@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
-import { UserProperties } from 'src/default-types';
 import style from './SearchResult.module.scss';
+import { IClientUser } from 'src/default-types';
 
 interface SearchResultProps {
-  contact: UserProperties;
-  onContactClick: (contact: UserProperties) => void;
+  contact: IClientUser;
+  onContactClick: (contact: IClientUser) => void;
 }
 
 export const SearchResult: FC<SearchResultProps> = ({

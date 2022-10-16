@@ -6,26 +6,10 @@ import {
   onSnapshot,
   query,
   setDoc,
-  Timestamp,
   where,
 } from 'firebase/firestore';
 import { firestoreDatabase } from 'src/services/firebase/firebase';
-import { FirebaseChats } from 'src/default-types';
-import { UserProperties as IUserProperties } from 'src/default-types';
-
-export enum UserPropertyType {
-  chats = 'chats',
-  createdAt = 'createdAt',
-  isPublic = 'isPublic',
-  name = 'name',
-}
-
-type UserProperties = {
-  [UserPropertyType.chats]: FirebaseChats;
-  [UserPropertyType.createdAt]: Timestamp;
-  [UserPropertyType.isPublic]: boolean;
-  [UserPropertyType.name]: string;
-};
+import { IClientUser, IFirebaseUser } from 'src/default-types';
 
 export class UserRepository {
   protected static path = 'users';
@@ -38,12 +22,10 @@ export class UserRepository {
     return collection(firestoreDatabase, UserRepository.path);
   };
 
-  public static getUser = async (
-    userEmail: string
-  ): Promise<IUserProperties> => {
+  public static getUser = async (userEmail: string): Promise<IFirebaseUser> => {
     const docRef = UserRepository.getUserDocRef(userEmail);
     const doc = await getDoc(docRef);
-    const userData = (await doc.data()) as IUserProperties;
+    const userData = (await doc.data()) as IFirebaseUser;
 
     return userData;
   };
@@ -54,12 +36,12 @@ export class UserRepository {
       where('name', '==', name)
     );
 
-    const users: IUserProperties[] = [];
+    const users: IClientUser[] = [];
     const usersDocs = await getDocs(usersQuery);
 
     usersDocs.forEach((userDoc) => {
       users.push(
-        Object.assign(userDoc.data(), { email: userDoc.id }) as IUserProperties
+        Object.assign(userDoc.data(), { email: userDoc.id }) as IClientUser
       );
     });
 
@@ -68,18 +50,18 @@ export class UserRepository {
 
   public static subscribeToUser = (
     userEmail: string,
-    cb: (userData: IUserProperties) => void
+    cb: (userData: IFirebaseUser) => void
   ) => {
     return onSnapshot(UserRepository.getUserDocRef(userEmail), async (doc) => {
-      const userData = (await doc.data()) as IUserProperties;
+      const userData = (await doc.data()) as IFirebaseUser;
       cb(userData);
     });
   };
 
-  public static setUserProperty = async <P extends keyof UserProperties>(
+  public static setUserProperty = async <P extends keyof IFirebaseUser>(
     userEmail: string,
     property: P,
-    value: UserProperties[P]
+    value: IFirebaseUser[P]
   ) => {
     const docRef = UserRepository.getUserDocRef(userEmail);
     await setDoc(docRef, { [property]: value }, { merge: true });
@@ -87,7 +69,7 @@ export class UserRepository {
 
   public static setUserProperties = async (
     userEmail: string,
-    userProperties: UserProperties
+    userProperties: IFirebaseUser
   ) => {
     const docRef = UserRepository.getUserDocRef(userEmail);
     await setDoc(docRef, userProperties);

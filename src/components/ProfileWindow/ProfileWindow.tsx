@@ -4,7 +4,7 @@ import { Form } from 'components/ProfileWindow/components/Form/Form';
 import { Button } from 'components/global/Button/Button';
 import { Input, InputTypes } from 'components/global/Input/Input';
 import { nameInputSvg } from 'svg/nameInputSvg';
-import { UserProperties } from 'src/default-types';
+import { EFirebaseUserProperty, IFirebaseUser } from 'src/default-types';
 import { Timestamp } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { Text } from 'components/global/Text/Text';
@@ -16,10 +16,7 @@ import { FormHeader } from 'components/ProfileWindow/components/FormHeader/FormH
 import { Checkbox } from 'components/global/Checkbox/Checkbox';
 import { SignOutButton } from 'components/ProfileWindow/components/SignOutButton/SignOutButton';
 import { ErrorNotification } from 'components/global/ErrorNotification/ErrorNotification';
-import {
-  UserPropertyType,
-  UserRepository,
-} from 'src/services/firebase/Repository/UserRepository/UserRepository';
+import { UserRepository } from 'src/services/firebase/Repository/UserRepository/UserRepository';
 import { AuthService } from 'src/services/firebase/Service/AuthService/AuthService';
 
 interface ProfileWindowProps {
@@ -31,12 +28,11 @@ export const ProfileWindow: FC<ProfileWindowProps> = ({
 }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [userProperties, setUserProperties] = useState<UserProperties>({
+  const [userProperties, setUserProperties] = useState<IFirebaseUser>({
     chats: [],
     createdAt: Timestamp.now(),
     isPublic: false,
     name: '',
-    email: '',
   });
   const [formData, setFormData] = useState({
     name: '',
@@ -54,7 +50,7 @@ export const ProfileWindow: FC<ProfileWindowProps> = ({
     }));
   };
 
-  const handleSetUserProperties = (userProperties: UserProperties) => {
+  const handleSetUserProperties = (userProperties: IFirebaseUser) => {
     setLoading(false);
     updateFormData({
       isPublic: userProperties.isPublic,
@@ -78,7 +74,7 @@ export const ProfileWindow: FC<ProfileWindowProps> = ({
       if (formData.name) {
         UserRepository.setUserProperty(
           userEmail,
-          UserPropertyType.name,
+          EFirebaseUserProperty.name,
           formData.name
         );
         updateFormData({
@@ -89,7 +85,7 @@ export const ProfileWindow: FC<ProfileWindowProps> = ({
       if (formData.isPublic !== userProperties.isPublic) {
         UserRepository.setUserProperty(
           userEmail,
-          UserPropertyType.isPublic,
+          EFirebaseUserProperty.isPublic,
           formData.isPublic
         );
       }

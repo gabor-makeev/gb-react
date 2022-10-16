@@ -1,19 +1,19 @@
 import { call, takeLatest } from 'redux-saga/effects';
-import { Authors, FirebaseMessage } from '../default-types';
+import { Authors, IFirebaseMessage } from '../default-types';
 import { sendMessageWithBotReply } from './chats/slice';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { Timestamp } from 'firebase/firestore';
 import { MessageService } from 'src/services/firebase/Service/MessageService/MessageService';
 
 export function* addMessageWithBotReply(
-  action: PayloadAction<FirebaseMessage>
+  action: PayloadAction<IFirebaseMessage>
 ) {
   yield call(asyncAddMessageWithBotReply, action.payload);
 }
 
 let timeout: NodeJS.Timeout;
 
-const asyncAddMessageWithBotReply = async (message: FirebaseMessage) => {
+const asyncAddMessageWithBotReply = async (message: IFirebaseMessage) => {
   clearTimeout(timeout);
 
   await MessageService.sendMessage(message);
@@ -25,6 +25,7 @@ const asyncAddMessageWithBotReply = async (message: FirebaseMessage) => {
         body: 'Messaging is not available...',
         chatId: message.chatId,
         userName: Authors.BOT,
+        userEmail: '',
       });
     }, 1500);
   }

@@ -1,11 +1,11 @@
-import { Chats, FirebaseChats, FirebaseMessage } from 'src/default-types';
 import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Dispatch } from 'redux';
 import { getAuth } from 'firebase/auth';
 import { UserRepository } from 'src/services/firebase/Repository/UserRepository/UserRepository';
+import { IFirebaseMessage, IFirebaseUserChat } from 'src/default-types';
 
 interface ChatsState {
-  content: Chats;
+  content: IFirebaseUserChat[];
 }
 
 const initialState: ChatsState = { content: [] };
@@ -14,13 +14,13 @@ export const chatsSlice = createSlice({
   name: 'chats',
   initialState,
   reducers: {
-    setChats: (state, action: PayloadAction<FirebaseChats>) => {
+    setChats: (state, action: PayloadAction<IFirebaseUserChat[]>) => {
       state.content = action.payload;
     },
   },
 });
 
-export const sendMessageWithBotReply = createAction<FirebaseMessage>(
+export const sendMessageWithBotReply = createAction<IFirebaseMessage>(
   'chats/sendMessageWithBotReply'
 );
 

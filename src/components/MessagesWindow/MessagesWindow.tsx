@@ -4,19 +4,16 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { getAuth } from 'firebase/auth';
 import { MessageSendingForm } from 'components/MessagesWindow/components/MessageSendingForm/MessageSendingForm';
 import { MessageList } from 'components/MessagesWindow/components/MessageList/MessageList';
-import { Messages } from 'src/default-types';
+import { EFirebaseMessageProperty, IClientMessage } from 'src/default-types';
 import classNames from 'classnames';
 import { MessagesWindowHeader } from 'components/MessagesWindow/components/MessagesWindowHeader/MessagesWindowHeader';
 import { UserRepository } from 'src/services/firebase/Repository/UserRepository/UserRepository';
-import {
-  MessageRepository,
-  FirebaseMessageType,
-} from 'src/services/firebase/Repository/MessageRepository/MessageRepository';
+import { MessageRepository } from 'src/services/firebase/Repository/MessageRepository/MessageRepository';
 import { Timestamp } from 'firebase/firestore';
 import { MessageService } from 'src/services/firebase/Service/MessageService/MessageService';
 
 export const MessagesWindow: FC = () => {
-  const [messages, setMessages] = useState<Messages>([]);
+  const [messages, setMessages] = useState<IClientMessage[]>([]);
   const [userName, setUserName] = useState('');
   const [chatName, setChatName] = useState('');
   const [messageSendingFormInputValue, setMessageSendingFormInputValue] =
@@ -44,7 +41,7 @@ export const MessagesWindow: FC = () => {
         if (chat) {
           setChatName(chat.name);
           return MessageRepository.subscribeToMessagesByProperty(
-            FirebaseMessageType.chatId,
+            EFirebaseMessageProperty.chatId,
             chat.id,
             setMessages
           );

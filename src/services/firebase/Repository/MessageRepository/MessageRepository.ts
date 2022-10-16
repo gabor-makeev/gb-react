@@ -11,23 +11,11 @@ import {
   writeBatch,
 } from 'firebase/firestore';
 import { firestoreDatabase } from 'src/services/firebase/firebase';
-import { FirebaseMessage, Message } from 'src/default-types';
-
-export enum FirebaseMessageType {
-  body = 'body',
-  chatId = 'chatId',
-  createdAt = 'createdAt',
-  userEmail = 'userEmail',
-  userName = 'userName',
-}
-
-type FirebaseMessageProperties = {
-  [FirebaseMessageType.body]: string;
-  [FirebaseMessageType.chatId]: string;
-  [FirebaseMessageType.createdAt]: number;
-  [FirebaseMessageType.userEmail]: string;
-  [FirebaseMessageType.userName]: string;
-};
+import {
+  EFirebaseMessageProperty,
+  IClientMessage,
+  IFirebaseMessage,
+} from 'src/default-types';
 
 export class MessageRepository {
   protected static path = 'messages';
@@ -43,18 +31,18 @@ export class MessageRepository {
   protected static getMessagesQuery = (...constraints: QueryConstraint[]) => {
     return query(
       MessageRepository.getMessagesCollection(),
-      ...[orderBy(FirebaseMessageType.createdAt), ...constraints]
+      ...[orderBy(EFirebaseMessageProperty.createdAt), ...constraints]
     );
   };
 
   protected static getMessagesFromMessagesQuerySnapshot = (
     firebaseMessages: QuerySnapshot
   ) => {
-    const messages: Message[] = [];
+    const messages: IClientMessage[] = [];
 
     firebaseMessages.forEach((firebaseMessage) =>
       messages.push(
-        Object.assign(firebaseMessage.data() as FirebaseMessage, {
+        Object.assign(firebaseMessage.data() as IFirebaseMessage, {
           id: firebaseMessage.id,
         })
       )
@@ -64,10 +52,10 @@ export class MessageRepository {
   };
 
   public static getMessagesByProperty = async <
-    P extends keyof FirebaseMessageProperties
+    P extends keyof IFirebaseMessage
   >(
     property: P,
-    value: FirebaseMessageProperties[P]
+    value: IFirebaseMessage[P]
   ) => {
     const query = MessageRepository.getMessagesQuery(
       where(property, '==', value)
@@ -79,11 +67,11 @@ export class MessageRepository {
   };
 
   public static subscribeToMessagesByProperty = async <
-    P extends keyof FirebaseMessageProperties
+    P extends keyof IFirebaseMessage
   >(
     property: P,
-    value: FirebaseMessageProperties[P],
-    cb: (messages: Message[]) => void
+    value: IFirebaseMessage[P],
+    cb: (messages: IClientMessage[]) => void
   ) => {
     const query = MessageRepository.getMessagesQuery(
       where(property, '==', value)
@@ -98,15 +86,15 @@ export class MessageRepository {
     });
   };
 
-  public static addMessage = async (message: FirebaseMessage) => {
+  public static addMessage = async (message: IFirebaseMessage) => {
     await addDoc(MessageRepository.getMessagesCollection(), message);
   };
 
   public static removeMessagesByProperty = async <
-    P extends keyof FirebaseMessageProperties
+    P extends keyof IFirebaseMessage
   >(
     property: P,
-    value: FirebaseMessageProperties[P]
+    value: IFirebaseMessage[P]
   ) => {
     const batch = MessageRepository.getWriteBatch();
     const query = await MessageRepository.getMessagesQuery(
