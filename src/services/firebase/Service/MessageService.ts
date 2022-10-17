@@ -3,9 +3,9 @@ import {
   IFirebaseMessage,
   IFirebaseUserChat,
 } from 'src/default-types';
-import { MessageRepository } from 'src/services/firebase/Repository/MessageRepository/MessageRepository';
-import { UserRepository } from 'src/services/firebase/Repository/UserRepository/UserRepository';
-import { UserService } from 'src/services/firebase/Service/UserService/UserService';
+import { MessageRepository } from 'src/services/firebase/Repository/MessageRepository';
+import { UserRepository } from 'src/services/firebase/Repository/UserRepository';
+import { UserService } from 'src/services/firebase/Service/UserService';
 import { Timestamp } from 'firebase/firestore';
 
 export class MessageService {

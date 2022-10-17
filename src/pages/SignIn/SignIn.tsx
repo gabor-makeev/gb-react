@@ -13,7 +13,7 @@ import { Heading } from 'components/global/Heading/Heading';
 import { Text } from 'components/global/Text/Text';
 import { BoldText } from 'components/global/Text/BoldText/BoldText';
 import { Link } from 'components/global/Link/Link';
-import { AuthService } from 'src/services/firebase/Service/AuthService/AuthService';
+import { AuthService } from 'src/services/firebase/Service/AuthService';
 
 export const SignIn: FC = () => {
   const navigate = useNavigate();

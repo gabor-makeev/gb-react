@@ -15,7 +15,7 @@ import { Button } from 'components/global/Button/Button';
 import { Link } from 'components/global/Link/Link';
 import { Loader } from 'components/global/Loader/Loader';
 import { ErrorNotification } from 'components/global/ErrorNotification/ErrorNotification';
-import { AuthService } from 'src/services/firebase/Service/AuthService/AuthService';
+import { AuthService } from 'src/services/firebase/Service/AuthService';
 
 export const SignUp: FC = () => {
   const navigate = useNavigate();

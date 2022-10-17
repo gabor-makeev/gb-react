@@ -7,10 +7,10 @@ import { MessageList } from 'components/MessagesWindow/components/MessageList/Me
 import { EFirebaseMessageProperty, IClientMessage } from 'src/default-types';
 import classNames from 'classnames';
 import { MessagesWindowHeader } from 'components/MessagesWindow/components/MessagesWindowHeader/MessagesWindowHeader';
-import { UserRepository } from 'src/services/firebase/Repository/UserRepository/UserRepository';
-import { MessageRepository } from 'src/services/firebase/Repository/MessageRepository/MessageRepository';
+import { UserRepository } from 'src/services/firebase/Repository/UserRepository';
+import { MessageRepository } from 'src/services/firebase/Repository/MessageRepository';
 import { Timestamp } from 'firebase/firestore';
-import { MessageService } from 'src/services/firebase/Service/MessageService/MessageService';
+import { MessageService } from 'src/services/firebase/Service/MessageService';
 
 export const MessagesWindow: FC = () => {
   const [messages, setMessages] = useState<IClientMessage[]>([]);

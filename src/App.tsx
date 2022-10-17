@@ -9,7 +9,7 @@ import { PrivateRoute } from 'components/PrivateRoute';
 import { PublicRoute } from 'components/PublicRoute';
 import { SignUp } from 'src/pages/SignUp/SignUp';
 import { setAuth } from 'store/profile/slice';
-import { AuthService } from 'src/services/firebase/Service/AuthService/AuthService';
+import { AuthService } from 'src/services/firebase/Service/AuthService';
 
 export const App: FC = () => {
   const dispatch = useDispatch();

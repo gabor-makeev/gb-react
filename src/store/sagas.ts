@@ -3,7 +3,7 @@ import { Authors, IFirebaseMessage } from '../default-types';
 import { sendMessageWithBotReply } from './chats/slice';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { Timestamp } from 'firebase/firestore';
-import { MessageService } from 'src/services/firebase/Service/MessageService/MessageService';
+import { MessageService } from 'src/services/firebase/Service/MessageService';
 
 export function* addMessageWithBotReply(
   action: PayloadAction<IFirebaseMessage>

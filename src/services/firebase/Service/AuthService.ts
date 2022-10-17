@@ -5,7 +5,7 @@ import {
   signOut,
 } from 'firebase/auth';
 import { app } from 'src/services/firebase/firebase';
-import { UserRepository } from 'src/services/firebase/Repository/UserRepository/UserRepository';
+import { UserRepository } from 'src/services/firebase/Repository/UserRepository';
 import { Timestamp } from 'firebase/firestore';
 
 export class AuthService {

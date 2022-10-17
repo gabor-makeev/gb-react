@@ -5,8 +5,8 @@ import { nanoid } from 'nanoid';
 import { getAuth } from 'firebase/auth';
 import { SearchField } from 'components/Chats/ChatsAddingForm/components/SearchField/SearchField';
 import { SearchResults } from 'components/Chats/ChatsAddingForm/components/SearchResults/SearchResults';
-import { UserRepository } from 'src/services/firebase/Repository/UserRepository/UserRepository';
-import { UserService } from 'src/services/firebase/Service/UserService/UserService';
+import { UserRepository } from 'src/services/firebase/Repository/UserRepository';
+import { UserService } from 'src/services/firebase/Service/UserService';
 import { IClientUser } from 'src/default-types';
 
 interface ChatsAddingFormProps {

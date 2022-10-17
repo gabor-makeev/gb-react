@@ -1,5 +1,5 @@
-import { UserRepository } from 'src/services/firebase/Repository/UserRepository/UserRepository';
-import { MessageRepository } from 'src/services/firebase/Repository/MessageRepository/MessageRepository';
+import { UserRepository } from 'src/services/firebase/Repository/UserRepository';
+import { MessageRepository } from 'src/services/firebase/Repository/MessageRepository';
 import {
   EFirebaseMessageProperty,
   EFirebaseUserProperty,

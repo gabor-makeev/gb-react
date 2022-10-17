@@ -16,8 +16,8 @@ import { FormHeader } from 'components/ProfileWindow/components/FormHeader/FormH
 import { Checkbox } from 'components/global/Checkbox/Checkbox';
 import { SignOutButton } from 'components/ProfileWindow/components/SignOutButton/SignOutButton';
 import { ErrorNotification } from 'components/global/ErrorNotification/ErrorNotification';
-import { UserRepository } from 'src/services/firebase/Repository/UserRepository/UserRepository';
-import { AuthService } from 'src/services/firebase/Service/AuthService/AuthService';
+import { UserRepository } from 'src/services/firebase/Repository/UserRepository';
+import { AuthService } from 'src/services/firebase/Service/AuthService';
 
 interface ProfileWindowProps {
   toggleProfileWindowState: () => void;

@@ -7,7 +7,7 @@ import { selectChats } from 'store/chats/selectors';
 import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
 import { getAuth } from 'firebase/auth';
-import { UserService } from 'src/services/firebase/Service/UserService/UserService';
+import { UserService } from 'src/services/firebase/Service/UserService';
 import { IFirebaseUserChat } from 'src/default-types';
 
 interface ChatsWindowProps {

@@ -1,7 +1,7 @@
 import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Dispatch } from 'redux';
 import { getAuth } from 'firebase/auth';
-import { UserRepository } from 'src/services/firebase/Repository/UserRepository/UserRepository';
+import { UserRepository } from 'src/services/firebase/Repository/UserRepository';
 import { IFirebaseMessage, IFirebaseUserChat } from 'src/default-types';
 
 interface ChatsState {
