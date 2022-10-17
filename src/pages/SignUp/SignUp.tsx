@@ -1,5 +1,4 @@
 import React, { FC, useState } from 'react';
-import { signUp } from 'src/services/firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { Container } from 'components/global/AccessPage/Container/Container';
 import { Form } from 'components/global/AccessPage/Form/Form';
@@ -16,6 +15,7 @@ import { Button } from 'components/global/Button/Button';
 import { Link } from 'components/global/Link/Link';
 import { Loader } from 'components/global/Loader/Loader';
 import { ErrorNotification } from 'components/global/ErrorNotification/ErrorNotification';
+import { AuthService } from 'src/services/firebase/Service/AuthService';
 
 export const SignUp: FC = () => {
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ export const SignUp: FC = () => {
     try {
       setLoading(true);
       setError('');
-      await signUp(name, email, password);
+      await AuthService.signUp(name, email, password);
       navigate('/signin', { replace: true });
     } catch (err) {
       setError((err as Error).message);

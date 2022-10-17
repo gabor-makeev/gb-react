@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import style from './SearchResults.module.scss';
-import { UserProperties } from 'src/default-types';
 import { SearchResult } from 'components/Chats/ChatsAddingForm/components/SearchResults/components/SearchResult/SearchResult';
+import { IClientUser } from 'src/default-types';
 
 interface SearchResultsProps {
-  contacts: UserProperties[];
-  onContactClick: (contact: UserProperties) => void;
+  contacts: IClientUser[];
+  onContactClick: (contact: IClientUser) => void;
 }
 
 export const SearchResults: FC<SearchResultsProps> = ({

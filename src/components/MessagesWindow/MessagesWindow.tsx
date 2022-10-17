@@ -4,21 +4,16 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { getAuth } from 'firebase/auth';
 import { MessageSendingForm } from 'components/MessagesWindow/components/MessageSendingForm/MessageSendingForm';
 import { MessageList } from 'components/MessagesWindow/components/MessageList/MessageList';
-import { Messages } from 'src/default-types';
-import {
-  getUserChatByChatId,
-  getUserProperties,
-} from 'src/services/firebase/users';
-import {
-  addMessage,
-  createFirebaseMessageObject,
-  subscribeToMessagesByChatId,
-} from 'src/services/firebase/messages';
+import { EFirebaseMessageProperty, IClientMessage } from 'src/default-types';
 import classNames from 'classnames';
 import { MessagesWindowHeader } from 'components/MessagesWindow/components/MessagesWindowHeader/MessagesWindowHeader';
+import { UserRepository } from 'src/services/firebase/Repository/UserRepository';
+import { MessageRepository } from 'src/services/firebase/Repository/MessageRepository';
+import { Timestamp } from 'firebase/firestore';
+import { MessageService } from 'src/services/firebase/Service/MessageService';
 
 export const MessagesWindow: FC = () => {
-  const [messages, setMessages] = useState<Messages>([]);
+  const [messages, setMessages] = useState<IClientMessage[]>([]);
   const [userName, setUserName] = useState('');
   const [chatName, setChatName] = useState('');
   const [messageSendingFormInputValue, setMessageSendingFormInputValue] =
@@ -33,24 +28,32 @@ export const MessagesWindow: FC = () => {
   });
 
   useEffect(() => {
-    getUserProperties(userEmail).then((data) => {
+    UserRepository.getUser(userEmail).then((data) => {
       setUserName(data?.name);
     });
   }, []);
 
   useEffect(() => {
     if (chatId) {
-      getUserChatByChatId(userEmail, chatId).then((data) => {
-        setChatName(data ? data.name : chatName);
-      });
+      UserRepository.getUser(userEmail).then(async (userData) => {
+        const [chat] = userData.chats.filter((chat) => chat.id === chatId);
 
-      return subscribeToMessagesByChatId(chatId, setMessages);
+        if (chat) {
+          setChatName(chat.name);
+          return MessageRepository.subscribeToMessagesByProperty(
+            EFirebaseMessageProperty.chatId,
+            chat.id,
+            setMessages
+          );
+        }
+      });
     }
   }, [chatId, chatName, userEmail]);
 
   if (chatId) {
-    getUserChatByChatId(userEmail, chatId).then((data?) => {
-      if (!data) {
+    UserRepository.getUser(userEmail).then((userData) => {
+      const [chat] = userData.chats.filter((chat) => chat.id === chatId);
+      if (!chat) {
         navigate('/messenger', { replace: true });
       }
     });
@@ -62,13 +65,13 @@ export const MessagesWindow: FC = () => {
     if (chatId) {
       setMessageSendingFormInputValue('');
 
-      await addMessage(
-        createFirebaseMessageObject(
-          chatId,
-          messageSendingFormInputValue,
-          userName
-        )
-      );
+      await MessageService.sendMessage({
+        chatId,
+        body: messageSendingFormInputValue,
+        userName,
+        createdAt: Timestamp.now().toMillis(),
+        userEmail,
+      });
     }
   };
 

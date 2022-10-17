@@ -1,4 +1,4 @@
-import { Authors, Messages } from './default-types';
+import { Authors, IClientMessage } from './default-types';
 
 export const api = 'https://api.spaceflightnewsapi.net/v3/articles';
 
@@ -44,5 +44,5 @@ export const DUMMY_CONTENT = {
       userName: Authors.USER,
       createdAt: 875300400000,
     },
-  ] as Messages,
+  ] as IClientMessage[],
 };

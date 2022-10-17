@@ -4,9 +4,8 @@ import { Form } from 'components/ProfileWindow/components/Form/Form';
 import { Button } from 'components/global/Button/Button';
 import { Input, InputTypes } from 'components/global/Input/Input';
 import { nameInputSvg } from 'svg/nameInputSvg';
-import { subscribeToUserProperties } from 'src/services/firebase/users';
-import { UserProperties } from 'src/default-types';
-import { setDoc, Timestamp } from 'firebase/firestore';
+import { EFirebaseUserProperty, IFirebaseUser } from 'src/default-types';
+import { Timestamp } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { Text } from 'components/global/Text/Text';
 import { BoldText } from 'components/global/Text/BoldText/BoldText';
@@ -14,11 +13,11 @@ import { useSelector } from 'react-redux';
 import { selectIsAuth } from 'store/profile/selectors';
 import { Loader } from 'components/global/Loader/Loader';
 import { FormHeader } from 'components/ProfileWindow/components/FormHeader/FormHeader';
-import { getUserDocRef } from 'src/services/firebase/refs';
 import { Checkbox } from 'components/global/Checkbox/Checkbox';
 import { SignOutButton } from 'components/ProfileWindow/components/SignOutButton/SignOutButton';
-import { logOut } from 'src/services/firebase/auth';
 import { ErrorNotification } from 'components/global/ErrorNotification/ErrorNotification';
+import { UserRepository } from 'src/services/firebase/Repository/UserRepository';
+import { AuthService } from 'src/services/firebase/Service/AuthService';
 
 interface ProfileWindowProps {
   toggleProfileWindowState: () => void;
@@ -29,12 +28,11 @@ export const ProfileWindow: FC<ProfileWindowProps> = ({
 }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [userProperties, setUserProperties] = useState<UserProperties>({
+  const [userProperties, setUserProperties] = useState<IFirebaseUser>({
     chats: [],
     createdAt: Timestamp.now(),
     isPublic: false,
     name: '',
-    email: '',
   });
   const [formData, setFormData] = useState({
     name: '',
@@ -52,7 +50,7 @@ export const ProfileWindow: FC<ProfileWindowProps> = ({
     }));
   };
 
-  const handleSetUserProperties = (userProperties: UserProperties) => {
+  const handleSetUserProperties = (userProperties: IFirebaseUser) => {
     setLoading(false);
     updateFormData({
       isPublic: userProperties.isPublic,
@@ -63,7 +61,7 @@ export const ProfileWindow: FC<ProfileWindowProps> = ({
   useEffect(() => {
     setLoading(true);
     if (getAuth().currentUser) {
-      return subscribeToUserProperties(handleSetUserProperties);
+      return UserRepository.subscribeToUser(userEmail, handleSetUserProperties);
     }
   }, [isAuth]);
 
@@ -74,12 +72,10 @@ export const ProfileWindow: FC<ProfileWindowProps> = ({
       setLoading(true);
 
       if (formData.name) {
-        setDoc(
-          getUserDocRef(userEmail),
-          {
-            name: formData.name,
-          },
-          { merge: true }
+        UserRepository.setUserProperty(
+          userEmail,
+          EFirebaseUserProperty.name,
+          formData.name
         );
         updateFormData({
           name: '',
@@ -87,12 +83,10 @@ export const ProfileWindow: FC<ProfileWindowProps> = ({
       }
 
       if (formData.isPublic !== userProperties.isPublic) {
-        setDoc(
-          getUserDocRef(userEmail),
-          {
-            isPublic: formData.isPublic,
-          },
-          { merge: true }
+        UserRepository.setUserProperty(
+          userEmail,
+          EFirebaseUserProperty.isPublic,
+          formData.isPublic
         );
       }
     } catch (err) {
@@ -112,7 +106,7 @@ export const ProfileWindow: FC<ProfileWindowProps> = ({
   };
 
   const handleSignOut = () => {
-    logOut();
+    AuthService.logOut();
     toggleProfileWindowState();
   };
 
