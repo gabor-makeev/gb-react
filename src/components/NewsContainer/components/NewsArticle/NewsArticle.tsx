@@ -2,6 +2,7 @@ import { FC } from 'react';
 import style from './NewsArticle.module.scss';
 import { Article } from 'src/default-types';
 import classNames from 'classnames';
+import { HeadlineContainer } from 'components/NewsContainer/components/NewsArticle/components/HeadlineContainer/HeadlineContainer';
 
 export enum articleVariant {
   default = 'default',
@@ -34,7 +35,7 @@ export const NewsArticle: FC<NewsArticleProps> = ({
 
   return (
     <div className={cardClassNames}>
-      <div className={style['card-headline']}>
+      <HeadlineContainer>
         <div className={style['card-headline__date']}>
           {`${publishedAtDay}-${publishedAtMonth}-${publishedAtDate.getFullYear()}`}
         </div>
@@ -42,7 +43,7 @@ export const NewsArticle: FC<NewsArticleProps> = ({
         <p className={style['card-headline__summary']}>{article.summary}</p>
         <button className={style['card-headline__button']}>Read More...</button>
         <hr className={style['card-headline__hr']} />
-      </div>
+      </HeadlineContainer>
       <div className={style['card-image']}>
         <img src={article.imageUrl} alt={article.title} />
       </div>
