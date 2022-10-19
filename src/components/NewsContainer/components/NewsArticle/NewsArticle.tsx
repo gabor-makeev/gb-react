@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import { HeadlineContainer } from 'components/NewsContainer/components/NewsArticle/components/HeadlineContainer/HeadlineContainer';
 import { ArticleDate } from 'components/NewsContainer/components/NewsArticle/components/ArticleDate/ArticleDate';
 import { ArticleTitle } from 'components/NewsContainer/components/NewsArticle/components/ArticleTitle/ArticleTitle';
+import { ArticleSummary } from 'components/NewsContainer/components/NewsArticle/components/ArticleSummary/ArticleSummary';
 
 export enum articleVariant {
   default = 'default',
@@ -42,7 +43,7 @@ export const NewsArticle: FC<NewsArticleProps> = ({
           {`${publishedAtDay}-${publishedAtMonth}-${publishedAtDate.getFullYear()}`}
         </ArticleDate>
         <ArticleTitle>{article.title}</ArticleTitle>
-        <p className={style['card-headline__summary']}>{article.summary}</p>
+        <ArticleSummary>{article.summary}</ArticleSummary>
         <button className={style['card-headline__button']}>Read More...</button>
         <hr className={style['card-headline__hr']} />
       </HeadlineContainer>
