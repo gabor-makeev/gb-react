@@ -9,6 +9,7 @@ import { ArticleSummary } from 'components/NewsContainer/components/NewsArticle/
 import { Button } from 'components/NewsContainer/components/NewsArticle/components/Button/Button';
 import { Hr } from 'components/NewsContainer/components/NewsArticle/components/Hr/Hr';
 import { ImageContainer } from 'components/NewsContainer/components/NewsArticle/components/ImageContainer/ImageContainer';
+import { Container } from 'components/NewsContainer/components/NewsArticle/components/Container/Container';
 
 export enum articleVariant {
   default = 'default',
@@ -40,7 +41,7 @@ export const NewsArticle: FC<NewsArticleProps> = ({
       : publishedAtDate.getUTCMonth();
 
   return (
-    <div className={cardClassNames}>
+    <Container>
       <HeadlineContainer>
         <ArticleDate>
           {`${publishedAtDay}-${publishedAtMonth}-${publishedAtDate.getFullYear()}`}
@@ -53,6 +54,6 @@ export const NewsArticle: FC<NewsArticleProps> = ({
       <ImageContainer>
         <img src={article.imageUrl} alt={article.title} />
       </ImageContainer>
-    </div>
+    </Container>
   );
 };
