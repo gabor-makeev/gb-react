@@ -7,6 +7,7 @@ import { ArticleDate } from 'components/NewsContainer/components/NewsArticle/com
 import { ArticleTitle } from 'components/NewsContainer/components/NewsArticle/components/ArticleTitle/ArticleTitle';
 import { ArticleSummary } from 'components/NewsContainer/components/NewsArticle/components/ArticleSummary/ArticleSummary';
 import { Button } from 'components/NewsContainer/components/NewsArticle/components/Button/Button';
+import { Hr } from 'components/NewsContainer/components/NewsArticle/components/Hr/Hr';
 
 export enum articleVariant {
   default = 'default',
@@ -46,7 +47,7 @@ export const NewsArticle: FC<NewsArticleProps> = ({
         <ArticleTitle>{article.title}</ArticleTitle>
         <ArticleSummary>{article.summary}</ArticleSummary>
         <Button>Read More...</Button>
-        <hr className={style['card-headline__hr']} />
+        <Hr />
       </HeadlineContainer>
       <div className={style['card-image']}>
         <img src={article.imageUrl} alt={article.title} />
