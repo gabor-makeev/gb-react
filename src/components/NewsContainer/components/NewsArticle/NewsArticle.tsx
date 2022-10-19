@@ -1,7 +1,5 @@
 import { FC } from 'react';
-import style from './NewsArticle.module.scss';
 import { Article } from 'src/default-types';
-import classNames from 'classnames';
 import { HeadlineContainer } from 'components/NewsContainer/components/NewsArticle/components/HeadlineContainer/HeadlineContainer';
 import { ArticleDate } from 'components/NewsContainer/components/NewsArticle/components/ArticleDate/ArticleDate';
 import { ArticleTitle } from 'components/NewsContainer/components/NewsArticle/components/ArticleTitle/ArticleTitle';
@@ -10,6 +8,7 @@ import { Button } from 'components/NewsContainer/components/NewsArticle/componen
 import { Hr } from 'components/NewsContainer/components/NewsArticle/components/Hr/Hr';
 import { ImageContainer } from 'components/NewsContainer/components/NewsArticle/components/ImageContainer/ImageContainer';
 import { Container } from 'components/NewsContainer/components/NewsArticle/components/Container/Container';
+import { AlternativeContainer } from 'components/NewsContainer/components/NewsArticle/components/AlternativeContainer/AlternativeContainer';
 
 export enum articleVariant {
   default = 'default',
@@ -25,9 +24,8 @@ export const NewsArticle: FC<NewsArticleProps> = ({
   article,
   variant = '',
 }) => {
-  const cardClassNames = classNames(style.card, {
-    [style['card__alternative']]: variant === 'alternative',
-  });
+  const ActiveContainer =
+    variant === 'alternative' ? AlternativeContainer : Container;
 
   const publishedAtDate = new Date(article.publishedAt);
   const publishedAtDay =
@@ -41,7 +39,7 @@ export const NewsArticle: FC<NewsArticleProps> = ({
       : publishedAtDate.getUTCMonth();
 
   return (
-    <Container>
+    <ActiveContainer>
       <HeadlineContainer>
         <ArticleDate>
           {`${publishedAtDay}-${publishedAtMonth}-${publishedAtDate.getFullYear()}`}
@@ -54,6 +52,6 @@ export const NewsArticle: FC<NewsArticleProps> = ({
       <ImageContainer>
         <img src={article.imageUrl} alt={article.title} />
       </ImageContainer>
-    </Container>
+    </ActiveContainer>
   );
 };
