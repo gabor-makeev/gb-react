@@ -1,7 +1,14 @@
 import { FC } from 'react';
-import style from './NewsArticle.module.scss';
 import { Article } from 'src/default-types';
-import classNames from 'classnames';
+import { HeadlineContainer } from 'components/NewsContainer/components/NewsArticle/components/HeadlineContainer/HeadlineContainer';
+import { ArticleDate } from 'components/NewsContainer/components/NewsArticle/components/ArticleDate/ArticleDate';
+import { ArticleTitle } from 'components/NewsContainer/components/NewsArticle/components/ArticleTitle/ArticleTitle';
+import { ArticleSummary } from 'components/NewsContainer/components/NewsArticle/components/ArticleSummary/ArticleSummary';
+import { Button } from 'components/NewsContainer/components/NewsArticle/components/Button/Button';
+import { Hr } from 'components/NewsContainer/components/NewsArticle/components/Hr/Hr';
+import { ImageContainer } from 'components/NewsContainer/components/NewsArticle/components/ImageContainer/ImageContainer';
+import { Container } from 'components/NewsContainer/components/NewsArticle/components/Container/Container';
+import { AlternativeContainer } from 'components/NewsContainer/components/NewsArticle/components/AlternativeContainer/AlternativeContainer';
 
 export enum articleVariant {
   default = 'default',
@@ -17,9 +24,8 @@ export const NewsArticle: FC<NewsArticleProps> = ({
   article,
   variant = '',
 }) => {
-  const cardClassNames = classNames(style.card, {
-    [style['card__alternative']]: variant === 'alternative',
-  });
+  const ActiveContainer =
+    variant === 'alternative' ? AlternativeContainer : Container;
 
   const publishedAtDate = new Date(article.publishedAt);
   const publishedAtDay =
@@ -33,19 +39,19 @@ export const NewsArticle: FC<NewsArticleProps> = ({
       : publishedAtDate.getUTCMonth();
 
   return (
-    <div className={cardClassNames}>
-      <div className={style['card-headline']}>
-        <div className={style['card-headline__date']}>
+    <ActiveContainer>
+      <HeadlineContainer>
+        <ArticleDate>
           {`${publishedAtDay}-${publishedAtMonth}-${publishedAtDate.getFullYear()}`}
-        </div>
-        <h3 className={style['card-headline__title']}>{article.title}</h3>
-        <p className={style['card-headline__summary']}>{article.summary}</p>
-        <button className={style['card-headline__button']}>Read More...</button>
-        <hr className={style['card-headline__hr']} />
-      </div>
-      <div className={style['card-image']}>
+        </ArticleDate>
+        <ArticleTitle>{article.title}</ArticleTitle>
+        <ArticleSummary>{article.summary}</ArticleSummary>
+        <Button>Read More...</Button>
+        <Hr />
+      </HeadlineContainer>
+      <ImageContainer>
         <img src={article.imageUrl} alt={article.title} />
-      </div>
-    </div>
+      </ImageContainer>
+    </ActiveContainer>
   );
 };
