@@ -6,7 +6,6 @@ import {
   CircularProgress,
   Container,
 } from '@mui/material';
-import style from './NewsContainer.module.scss';
 import {
   articleVariant,
   NewsArticle,
@@ -18,6 +17,7 @@ import {
   selectLoading,
 } from 'store/articles/selectors';
 import { fetchArticles } from 'store/articles/slice';
+import { Wrapper } from 'components/NewsContainer/components/Wrapper/Wrapper';
 
 export const NewsContainer: FC = () => {
   const dispatch = useDispatch() as any;
@@ -30,7 +30,7 @@ export const NewsContainer: FC = () => {
   }, []);
 
   return (
-    <div className={style.wrapper}>
+    <Wrapper>
       {(loading || error) && (
         <Container
           sx={{ display: 'flex', justifyContent: 'center', padding: '50px' }}
@@ -59,6 +59,6 @@ export const NewsContainer: FC = () => {
             }
           />
         ))}
-    </div>
+    </Wrapper>
   );
 };
