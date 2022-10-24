@@ -1,10 +1,11 @@
 import { FC } from 'react';
 import style from './Logo.module.scss';
 import { NavLink } from 'react-router-dom';
+import { BASE_URL } from 'src/constants';
 
 export const Logo: FC = () => {
   return (
-    <NavLink to={'/'}>
+    <NavLink to={BASE_URL}>
       <svg
         width="24px"
         height="24px"

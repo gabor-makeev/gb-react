@@ -11,6 +11,7 @@ import { UserRepository } from 'src/services/firebase/Repository/UserRepository'
 import { MessageRepository } from 'src/services/firebase/Repository/MessageRepository';
 import { Timestamp } from 'firebase/firestore';
 import { MessageService } from 'src/services/firebase/Service/MessageService';
+import { BASE_URL } from 'src/constants';
 
 export const MessagesWindow: FC = () => {
   const [messages, setMessages] = useState<IClientMessage[]>([]);
@@ -54,7 +55,7 @@ export const MessagesWindow: FC = () => {
     UserRepository.getUser(userEmail).then((userData) => {
       const [chat] = userData.chats.filter((chat) => chat.id === chatId);
       if (!chat) {
-        navigate('/messenger', { replace: true });
+        navigate(`${BASE_URL}messenger`, { replace: true });
       }
     });
   }

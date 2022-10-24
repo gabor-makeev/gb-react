@@ -10,6 +10,7 @@ import { PublicRoute } from 'components/PublicRoute';
 import { SignUp } from 'src/pages/SignUp/SignUp';
 import { setAuth } from 'store/profile/slice';
 import { AuthService } from 'src/services/firebase/Service/AuthService';
+import { BASE_URL } from 'src/constants';
 
 export const App: FC = () => {
   const dispatch = useDispatch();
@@ -29,17 +30,17 @@ export const App: FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<BasePageTemplate />}>
+        <Route path={BASE_URL} element={<BasePageTemplate />}>
           <Route index element={<Main />} />
           <Route
-            path="signin"
+            path={`${BASE_URL}signin`}
             element={<PublicRoute component={<SignIn />} />}
           />
           <Route
-            path="signup"
+            path={`${BASE_URL}signup`}
             element={<PublicRoute component={<SignUp />} />}
           />
-          <Route path="messenger" element={<PrivateRoute />}>
+          <Route path={`${BASE_URL}messenger`} element={<PrivateRoute />}>
             <Route index element={<Messenger />} />
             <Route path=":chatId" element={<Messenger />} />
           </Route>
