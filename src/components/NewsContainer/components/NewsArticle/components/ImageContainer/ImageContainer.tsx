@@ -6,4 +6,10 @@ export const ImageContainer = styled.div`
     height: 100%;
     object-fit: cover;
   }
+
+  @media (max-width: 768px) {
+    & > img {
+      width: 100%;
+    }
+  }
 `;
