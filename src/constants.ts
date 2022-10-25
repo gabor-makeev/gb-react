@@ -2,11 +2,18 @@ import { Authors, IClientMessage } from './default-types';
 
 export const api = 'https://api.spaceflightnewsapi.net/v3/articles';
 
+enum Url {
+  default = '/',
+  ghPages = '/gb-react/',
+}
+
+export const BASE_URL = Url.default;
+
 export const NAVIGATION = [
   {
     id: 1,
     name: 'Home',
-    path: '/',
+    path: BASE_URL,
   },
   {
     id: 2,
@@ -15,12 +22,12 @@ export const NAVIGATION = [
   {
     id: 3,
     name: 'Messenger',
-    path: '/messenger',
+    path: `${BASE_URL}messenger`,
   },
   {
     id: 4,
     name: 'Log in',
-    path: '/signin',
+    path: `${BASE_URL}signin`,
   },
 ];
 

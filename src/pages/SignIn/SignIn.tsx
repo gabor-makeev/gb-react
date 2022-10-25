@@ -14,6 +14,7 @@ import { Text } from 'components/global/Text/Text';
 import { BoldText } from 'components/global/Text/BoldText/BoldText';
 import { Link } from 'components/global/Link/Link';
 import { AuthService } from 'src/services/firebase/Service/AuthService';
+import { BASE_URL } from 'src/constants';
 
 export const SignIn: FC = () => {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ export const SignIn: FC = () => {
       setLoading(true);
       setError('');
       await AuthService.logIn(email, password);
-      navigate('/messenger', { replace: true });
+      navigate(`${BASE_URL}messenger`, { replace: true });
     } catch (err) {
       setError((err as Error).message);
 
@@ -74,7 +75,7 @@ export const SignIn: FC = () => {
             <Button>Sign in</Button>
             <span>
               <Text>Don’t have an account?</Text>
-              <Link to={'/signup'}>Sign up</Link>
+              <Link to={`${BASE_URL}signup`}>Sign up</Link>
             </span>
           </Form>
         </FormContainer>

@@ -16,6 +16,7 @@ import { Link } from 'components/global/Link/Link';
 import { Loader } from 'components/global/Loader/Loader';
 import { ErrorNotification } from 'components/global/ErrorNotification/ErrorNotification';
 import { AuthService } from 'src/services/firebase/Service/AuthService';
+import { BASE_URL } from 'src/constants';
 
 export const SignUp: FC = () => {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ export const SignUp: FC = () => {
       setLoading(true);
       setError('');
       await AuthService.signUp(name, email, password);
-      navigate('/signin', { replace: true });
+      navigate(`${BASE_URL}signin`, { replace: true });
     } catch (err) {
       setError((err as Error).message);
 
@@ -84,7 +85,7 @@ export const SignUp: FC = () => {
             <Button>Sign up</Button>
             <span>
               <Text>Already have an account?</Text>
-              <Link to={'/signin'}>Log in</Link>
+              <Link to={`${BASE_URL}signin`}>Log in</Link>
             </span>
           </Form>
         </FormContainer>
