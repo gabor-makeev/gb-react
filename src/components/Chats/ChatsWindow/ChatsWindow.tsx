@@ -4,11 +4,12 @@ import { ChatList } from 'components/Chats/ChatsWindow/components/ChatList/ChatL
 import { useDispatch, useSelector } from 'react-redux';
 import { initChatsTracking } from 'store/chats/slice';
 import { selectChats } from 'store/chats/selectors';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import classNames from 'classnames';
 import { getAuth } from 'firebase/auth';
 import { UserService } from 'src/services/firebase/Service/UserService';
 import { IFirebaseUserChat } from 'src/default-types';
+import { BASE_URL } from 'src/constants';
 
 interface ChatsWindowProps {
   toggleIsChatsAddingFormVisible: () => void;
@@ -18,6 +19,7 @@ export const ChatsWindow: FC<ChatsWindowProps> = ({
   toggleIsChatsAddingFormVisible,
 }) => {
   const { chatId } = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch<any>();
 
   const chats = useSelector(selectChats);
@@ -28,6 +30,9 @@ export const ChatsWindow: FC<ChatsWindowProps> = ({
   const onDeleteChat = (chat: IFirebaseUserChat) => {
     const userEmail = getAuth().currentUser?.email as string;
     UserService.removeChat(userEmail, chat);
+    if (chat.id === chatId) {
+      navigate(`${BASE_URL}messenger`, { replace: true });
+    }
   };
 
   useEffect(() => {
