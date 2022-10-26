@@ -48,6 +48,8 @@ export const MessagesWindow: FC = () => {
           );
         }
       });
+    } else {
+      setChatName('');
     }
   }, [chatId, chatName, userEmail]);
 
