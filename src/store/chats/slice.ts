@@ -28,7 +28,7 @@ export const initChatsTracking = () => (dispatch: Dispatch) => {
   const user = getAuth().currentUser;
 
   if (user?.email) {
-    UserRepository.subscribeToUser(user?.email, (userData) => {
+    return UserRepository.subscribeToUser(user?.email, (userData) => {
       dispatch(chatsSlice.actions.setChats(userData.chats));
     });
   }

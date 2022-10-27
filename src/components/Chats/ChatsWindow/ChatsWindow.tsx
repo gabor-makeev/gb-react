@@ -36,7 +36,7 @@ export const ChatsWindow: FC<ChatsWindowProps> = ({
   };
 
   useEffect(() => {
-    dispatch(initChatsTracking());
+    return dispatch(initChatsTracking());
   }, []);
 
   return (
