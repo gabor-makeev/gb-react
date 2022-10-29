@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
 import style from './SearchField.module.scss';
 
 interface SearchFieldProps {
@@ -10,6 +10,12 @@ export const SearchField: FC<SearchFieldProps> = ({
   inputValue,
   handleInputValueChange,
 }) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
   return (
     <label className={style['search-field']}>
       <svg
@@ -28,6 +34,7 @@ export const SearchField: FC<SearchFieldProps> = ({
         placeholder={'Enter the name of the user'}
         onChange={(e) => handleInputValueChange(e)}
         value={inputValue}
+        ref={inputRef}
       />
     </label>
   );
