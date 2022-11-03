@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import style from './ChatItem.module.scss';
 import { NavLink } from 'react-router-dom';
-import { IFirebaseUserChat } from 'src/default-types';
+import { IClientUserChat } from 'src/default-types';
 import { BASE_URL } from 'src/constants';
 
 interface ChatItemProps {
-  chat: IFirebaseUserChat;
+  chat: IClientUserChat;
   deleteChat: () => void;
 }
 
@@ -17,10 +17,10 @@ export const ChatItem: FC<ChatItemProps> = ({ chat, deleteChat }) => {
         to={`${BASE_URL}messenger/${chat.id}`}
       >
         <div className={style['contact-card__link__user-icon']}>
-          {chat.name[0]}
+          {chat.userName[0]}
         </div>
         <span className={style['contact-card__link__user-name']}>
-          {chat.name}
+          {chat.userName}
         </span>
       </NavLink>
       <button

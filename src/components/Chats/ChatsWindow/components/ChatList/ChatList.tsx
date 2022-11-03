@@ -1,11 +1,11 @@
 import style from './ChatList.module.scss';
 import { ChatItem } from './components/ChatItem/ChatItem';
 import { FC } from 'react';
-import { IFirebaseUserChat } from 'src/default-types';
+import { IClientUserChat } from 'src/default-types';
 
 interface ChatListProps {
-  chats: IFirebaseUserChat[];
-  deleteChat: (chat: IFirebaseUserChat) => void;
+  chats: IClientUserChat[];
+  deleteChat: (chat: IClientUserChat) => void;
 }
 
 export const ChatList: FC<ChatListProps> = ({ chats, deleteChat }) => {

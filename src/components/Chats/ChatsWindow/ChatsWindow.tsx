@@ -8,7 +8,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import classNames from 'classnames';
 import { getAuth } from 'firebase/auth';
 import { UserService } from 'src/services/firebase/Service/UserService';
-import { IFirebaseUserChat } from 'src/default-types';
+import { IClientUserChat } from 'src/default-types';
 import { BASE_URL } from 'src/constants';
 
 interface ChatsWindowProps {
@@ -27,7 +27,7 @@ export const ChatsWindow: FC<ChatsWindowProps> = ({
     [style['active-messaging__container']]: !!chatId,
   });
 
-  const onDeleteChat = (chat: IFirebaseUserChat) => {
+  const onDeleteChat = (chat: IClientUserChat) => {
     const userEmail = getAuth().currentUser?.email as string;
     UserService.removeChat(userEmail, chat);
     if (chat.id === chatId) {
