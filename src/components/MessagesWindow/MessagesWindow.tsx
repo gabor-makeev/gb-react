@@ -12,6 +12,8 @@ import { MessageRepository } from 'src/services/firebase/Repository/MessageRepos
 import { Timestamp } from 'firebase/firestore';
 import { MessageService } from 'src/services/firebase/Service/MessageService';
 import { BASE_URL } from 'src/constants';
+import { useSelector } from 'react-redux';
+import { selectChats } from 'store/chats/selectors';
 
 export const MessagesWindow: FC = () => {
   const [messages, setMessages] = useState<IClientMessage[]>([]);
@@ -23,6 +25,7 @@ export const MessagesWindow: FC = () => {
   const { chatId } = useParams();
   const navigate = useNavigate();
   const userEmail = getAuth().currentUser?.email as string;
+  const chats = useSelector(selectChats);
 
   const messagesWindowClasslist = classNames(style['messages-window'], {
     [style['active-messaging__messages-window']]: !!chatId,
@@ -36,22 +39,24 @@ export const MessagesWindow: FC = () => {
 
   useEffect(() => {
     if (chatId) {
-      UserRepository.getUser(userEmail).then(async (userData) => {
-        const [chat] = userData.chats.filter((chat) => chat.id === chatId);
+      const [chat] = chats.filter((chat) => chat.id === chatId);
+      if (chat) {
+        setChatName(chat.userName);
 
-        if (chat) {
-          setChatName(chat.name);
-          return MessageRepository.subscribeToMessagesByProperty(
+        const subscribeToMessages = async () => {
+          return await MessageRepository.subscribeToMessagesByProperty(
             EFirebaseMessageProperty.chatId,
             chat.id,
             setMessages
           );
-        }
-      });
+        };
+
+        subscribeToMessages();
+      }
     } else {
       setChatName('');
     }
-  }, [chatId, chatName, userEmail]);
+  }, [chatId, chats]);
 
   if (chatId) {
     UserRepository.getUser(userEmail).then((userData) => {
