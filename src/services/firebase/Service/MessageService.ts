@@ -26,7 +26,6 @@ export class MessageService {
 
     if (await MessageService.isChatEmpty(message.chatId)) {
       await UserService.addChat(chat.toUserEmail, {
-        name: message.userName,
         toUserEmail: message.userEmail as string,
         createdAt: Timestamp.now().toMillis(),
         id: message.chatId,
