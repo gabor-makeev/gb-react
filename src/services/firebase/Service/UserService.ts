@@ -3,7 +3,6 @@ import { MessageRepository } from 'src/services/firebase/Repository/MessageRepos
 import {
   EFirebaseMessageProperty,
   EFirebaseUserProperty,
-  IClientUserChat,
   IFirebaseUserChat,
 } from 'src/default-types';
 
@@ -49,27 +48,5 @@ export class UserService {
       EFirebaseMessageProperty.chatId,
       targetChat.id
     );
-  };
-
-  public static subscribeToChats = (
-    userEmail: string,
-    cb: (chats: IClientUserChat[]) => void
-  ) => {
-    return UserRepository.subscribeToUser(userEmail, async (userData) => {
-      const chats: IClientUserChat[] = [];
-
-      for (const firebaseChat of userData[EFirebaseUserProperty.chats]) {
-        const user = await UserRepository.getUser(firebaseChat.toUserEmail);
-
-        chats.push(
-          Object.assign(
-            { userName: user[EFirebaseUserProperty.name] },
-            firebaseChat
-          )
-        );
-      }
-
-      cb(chats);
-    });
   };
 }

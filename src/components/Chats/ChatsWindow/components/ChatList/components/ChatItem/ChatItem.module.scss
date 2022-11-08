@@ -10,15 +10,19 @@
   width: 100%;
 
   &__link {
+    font: inherit;
+    letter-spacing: inherit;
     display: flex;
     gap: 8px;
     background-color: $cadetGrey;
     width: 100%;
     padding: 4px 8px;
+    border: none;
     border-radius: 8px;
     text-decoration: none;
     color: $policeBlue;
     transition: 0.3s;
+    cursor: pointer;
     
     &:hover {
       background-color: $pastelBlue;

@@ -72,7 +72,3 @@ export interface IClientMessage extends IFirebaseMessage {
 export interface IClientUser extends IFirebaseUser {
   email: string;
 }
-
-export interface IClientUserChat extends IFirebaseUserChat {
-  userName: string;
-}
