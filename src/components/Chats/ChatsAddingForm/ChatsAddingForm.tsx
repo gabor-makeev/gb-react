@@ -44,7 +44,6 @@ export const ChatsAddingForm: FC<ChatsAddingFormProps> = ({
 
     if (!authUserChatWithContact) {
       UserService.addChat(userEmail, {
-        name: contact.name,
         toUserEmail: contact.email,
         createdAt: Timestamp.now().toMillis(),
         id: contactChatWithAuthUser ? contactChatWithAuthUser.id : newChatId,

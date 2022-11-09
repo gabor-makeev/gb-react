@@ -1,8 +1,11 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import style from './ChatItem.module.scss';
-import { NavLink } from 'react-router-dom';
-import { IFirebaseUserChat } from 'src/default-types';
+import { useNavigate } from 'react-router-dom';
+import { EFirebaseUserProperty, IFirebaseUserChat } from 'src/default-types';
 import { BASE_URL } from 'src/constants';
+import { UserRepository } from 'src/services/firebase/Repository/UserRepository';
+import { setActiveChatName } from 'store/chats/slice';
+import { useDispatch } from 'react-redux';
 
 interface ChatItemProps {
   chat: IFirebaseUserChat;
@@ -10,19 +13,34 @@ interface ChatItemProps {
 }
 
 export const ChatItem: FC<ChatItemProps> = ({ chat, deleteChat }) => {
+  const [toUserName, setToUserName] = useState<string>('');
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    return UserRepository.subscribeToUser(chat.toUserEmail, (userData) => {
+      setToUserName(userData[EFirebaseUserProperty.name]);
+    });
+  }, []);
+
+  const handleOnClick = () => {
+    dispatch(setActiveChatName(toUserName));
+    navigate(`${BASE_URL}messenger/${chat.id}`, { replace: true });
+  };
+
   return (
     <div className={style['contact-card']}>
-      <NavLink
+      <button
         className={style['contact-card__link']}
-        to={`${BASE_URL}messenger/${chat.id}`}
+        onClick={() => handleOnClick()}
       >
         <div className={style['contact-card__link__user-icon']}>
-          {chat.name[0]}
+          {toUserName[0]}
         </div>
         <span className={style['contact-card__link__user-name']}>
-          {chat.name}
+          {toUserName}
         </span>
-      </NavLink>
+      </button>
       <button
         className={style['contact-card__delete-button']}
         onClick={deleteChat}

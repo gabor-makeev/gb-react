@@ -8,8 +8,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import classNames from 'classnames';
 import { getAuth } from 'firebase/auth';
 import { UserService } from 'src/services/firebase/Service/UserService';
-import { IFirebaseUserChat } from 'src/default-types';
 import { BASE_URL } from 'src/constants';
+import { IFirebaseUserChat } from 'src/default-types';
 
 interface ChatsWindowProps {
   toggleIsChatsAddingFormVisible: () => void;

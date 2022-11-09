@@ -49,7 +49,6 @@ export enum EFirebaseUserProperty {
 }
 
 export interface IFirebaseUserChat {
-  name: string;
   toUserEmail: string;
   createdAt: number;
   id: string;
