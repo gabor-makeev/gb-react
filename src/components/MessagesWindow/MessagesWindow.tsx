@@ -88,7 +88,7 @@ export const MessagesWindow: FC = () => {
   return (
     <div className={messagesWindowClasslist}>
       <div className={style['messages-window__container']}>
-        {chatName && <MessagesWindowHeader chatName={chatName} />}
+        {chatId && chatName && <MessagesWindowHeader chatName={chatName} />}
         <MessageList
           messages={messages ? messages : []}
           userEmail={userEmail}
