@@ -62,7 +62,7 @@ export const ChatsAddingForm: FC<ChatsAddingFormProps> = ({
 
   return (
     <div className={style.container} onClick={(e) => handleContainerClick(e)}>
-      <form className={style.form}>
+      <form className={style.form} onSubmit={(e) => e.preventDefault()}>
         <SearchField
           inputValue={input}
           handleInputValueChange={handleInputChange}
