@@ -8,7 +8,7 @@ import { SignIn } from 'src/pages/SignIn/SignIn';
 import { PrivateRoute } from 'components/PrivateRoute';
 import { PublicRoute } from 'components/PublicRoute';
 import { SignUp } from 'src/pages/SignUp/SignUp';
-import { setAuth } from 'store/profile/slice';
+import { setAuth, setIsAuthLoading } from 'store/profile/slice';
 import { AuthService } from 'src/services/firebase/Service/AuthService';
 import { BASE_URL } from 'src/constants';
 
@@ -22,6 +22,7 @@ export const App: FC = () => {
       } else {
         dispatch(setAuth(false));
       }
+      dispatch(setIsAuthLoading(false));
     });
 
     return unsubscribe;
