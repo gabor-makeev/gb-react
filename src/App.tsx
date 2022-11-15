@@ -17,6 +17,8 @@ export const App: FC = () => {
 
   useEffect(() => {
     const unsubscribe = AuthService.firebaseAuth.onAuthStateChanged((user) => {
+      dispatch(setIsAuthLoading(true));
+
       if (user) {
         dispatch(setAuth(true));
       } else {
