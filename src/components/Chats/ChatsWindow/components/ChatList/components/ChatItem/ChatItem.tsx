@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import style from './ChatItem.module.scss';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { EFirebaseUserProperty, IFirebaseUserChat } from 'src/default-types';
 import { BASE_URL } from 'src/constants';
 import { UserRepository } from 'src/services/firebase/Repository/UserRepository';
@@ -16,6 +16,7 @@ export const ChatItem: FC<ChatItemProps> = ({ chat, deleteChat }) => {
   const [toUserName, setToUserName] = useState<string>('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { chatId } = useParams();
 
   useEffect(() => {
     return UserRepository.subscribeToUser(chat.toUserEmail, (userData) => {
@@ -23,8 +24,13 @@ export const ChatItem: FC<ChatItemProps> = ({ chat, deleteChat }) => {
     });
   }, []);
 
+  useEffect(() => {
+    if (chatId === chat.id) {
+      dispatch(setActiveChatName(toUserName));
+    }
+  }, [toUserName, chatId]);
+
   const handleOnClick = () => {
-    dispatch(setActiveChatName(toUserName));
     navigate(`${BASE_URL}messenger/${chat.id}`, { replace: true });
   };
 
