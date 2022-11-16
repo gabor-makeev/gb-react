@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import style from './MessagesWindowHeader.module.scss';
 import { NavLink } from 'react-router-dom';
+import { BASE_URL } from 'src/constants';
 
 interface MessagesWindowHeaderProps {
   chatName: string;
@@ -12,7 +13,7 @@ export const MessagesWindowHeader: FC<MessagesWindowHeaderProps> = ({
   return (
     <div className={style['messages-window-header']}>
       <NavLink
-        to={'/messenger'}
+        to={`${BASE_URL}messenger`}
         className={style['messages-window-header__backward-link']}
       >
         <svg
