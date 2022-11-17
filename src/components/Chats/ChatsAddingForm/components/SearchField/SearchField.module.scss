@@ -20,7 +20,7 @@
   }
 
   & > input {
-    @include fontProperties($laptopLargeTextFontSize, $laptopLargeTextFontWeight, $laptopLargeTextLineHeight, $laptopLargeTextLetterSpacing);
+    @include fontProperties($laptopInputFontSize, $laptopInputFontWeight, $laptopInputLineHeight, $laptopInputLetterSpacing);
     width: 100%;
     border: none;
     background-color: transparent;
@@ -37,7 +37,7 @@
 @media (max-width: $laptopScreenSize) {
   .search-field {
     & > input {
-      @include fontProperties($tabletLargeTextFontSize, $tabletLargeTextFontWeight, $tabletLargeTextLineHeight, $tabletLargeTextLetterSpacing);
+      @include fontProperties($tabletInputFontSize, $tabletInputFontWeight, $tabletInputLineHeight, $tabletInputLetterSpacing);
     }
   }
 }
@@ -45,7 +45,7 @@
 @media (max-width: $tabletScreenSize) {
   .search-field {
     & > input {
-      @include fontProperties($mobileLargeTextFontSize, $mobileLargeTextFontWeight, $mobileLargeTextLineHeight, $mobileLargeTextLetterSpacing);
+      @include fontProperties($mobileInputFontSize, $mobileInputFontWeight, $mobileInputLineHeight, $mobileInputLetterSpacing);
     }
   }
 }
